@@ -1,0 +1,20 @@
+[17:16:02.524] Global cache location '/Users/ckruse/Library/Caches/typescript/4.8', safe file path '/users/ckruse/.emacs.d/.local/etc/lsp/npm/typescript/lib/node_modules/typescript/lib/typingsafelist.json', types map path /users/ckruse/.emacs.d/.local/etc/lsp/npm/typescript/lib/node_modules/typescript/lib/typesmap.json
+[17:16:02.525] Processing cache location '/Users/ckruse/Library/Caches/typescript/4.8'
+[17:16:02.525] Trying to find '/Users/ckruse/Library/Caches/typescript/4.8/package.json'...
+[17:16:02.527] Loaded content of '/Users/ckruse/Library/Caches/typescript/4.8/package.json': {"private":true,"dependencies":{"types-registry":"^0.1.608"},"devDependencies":{"@types/react":"^18.0.18","@types/react-dom":"^18.0.6","@types/testing-library__jest-dom":"^5.14.5"}}
+[17:16:02.527] Loaded content of '/Users/ckruse/Library/Caches/typescript/4.8/package-lock.json'
+[17:16:02.535] Adding entry into typings cache: 'react' => '/Users/ckruse/Library/Caches/typescript/4.8/node_modules/@types/react/index.d.ts'
+[17:16:02.537] Adding entry into typings cache: 'react-dom' => '/Users/ckruse/Library/Caches/typescript/4.8/node_modules/@types/react-dom/index.d.ts'
+[17:16:02.538] Adding entry into typings cache: 'testing-library__jest-dom' => '/Users/ckruse/Library/Caches/typescript/4.8/node_modules/@types/testing-library__jest-dom/index.d.ts'
+[17:16:02.538] Finished processing cache location '/Users/ckruse/Library/Caches/typescript/4.8'
+[17:16:02.538] Process id: 2247
+[17:16:02.539] NPM location: /opt/homebrew/Cellar/node/18.8.0_1/bin/npm (explicit '--npmLocation' not  provided)
+[17:16:02.539] validateDefaultNpmLocation: false
+[17:16:02.539] Npm config file: /Users/ckruse/Library/Caches/typescript/4.8/package.json
+[17:16:02.539] Updating types-registry npm package...
+[17:16:02.539] Exec: /opt/homebrew/Cellar/node/18.8.0_1/bin/npm install --ignore-scripts types-registry@latest
+[17:16:02.543]     Failed. stdout:
+    stderr:
+    /bin/sh: /opt/homebrew/Cellar/node/18.8.0_1/bin/npm: No such file or directory
+    
+[17:16:02.543] Updated types-registry npm package

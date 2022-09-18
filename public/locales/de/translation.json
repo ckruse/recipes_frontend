@@ -1,0 +1,31 @@
+{
+  "save": "speichern",
+  "cancel": "abbrechen",
+  "show": "anzeigen",
+  "delete": "löschen",
+  "loading": "lade…",
+  "successfully_deleted": "Der Eintrag wurde erfolgreich gelöscht!",
+  "no_data": "keine Daten gefunden…",
+
+  "errors": {
+    "general": "Oops! Ein Fehler ist aufgetreten."
+  },
+
+  "datetime": {
+    "date_format": "d.M.yyyy",
+    "datetime_format": "d.M.yyyy H:mm",
+    "datetime_format_idx": "d.M.yyyy, H:mm 'Uhr'",
+    "datetime_format_yesterday_idx": "'gestern,' H:mm 'Uhr'",
+    "detailed_date_format": "EEEE, d. LLLL yyyy",
+    "detailed_datetime_format": "EEEE, d. LLLL yyyy, H:mm 'Uhr'",
+    "time_format": "H:mm",
+    "time_format_idx": "H:mm 'Uhr'",
+    "range": "{{start}} – {{stop}}",
+    "range_same_day_start_format": "H:mm",
+    "range_same_day_stop_format": "H:mm, d.M.yyyy",
+    "range_same_month_start_format": "d.",
+    "range_same_month_stop_format": "d.M.yyyy",
+    "range_start_format": "d.M.yyyy",
+    "range_stop_format": "d.M.yyyy"
+  }
+}

@@ -1,0 +1,93 @@
+@use "~bootstrap/scss/bootstrap" as bs;
+
+html,
+body,
+#root {
+  min-height: 100vh;
+}
+
+#root {
+  display: grid;
+  grid-template-rows: max-content 1fr max-content;
+}
+
+#site-header {
+  svg {
+    max-height: 2.5rem;
+  }
+
+  margin-bottom: 1rem;
+
+  .container {
+    display: grid;
+    grid-template-columns: 1fr max-content max-content;
+    grid-gap: 1rem;
+  }
+
+  .user-avatar {
+    border-radius: 50%;
+    max-height: 2.5rem;
+  }
+}
+
+#site-footer {
+  ul {
+    list-style-type: none;
+    padding-left: 0;
+
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    border-top: bs.$border-width bs.$border-style bs.$border-color;
+    padding-top: 0.5rem;
+    margin-top: 0.5rem;
+
+    a {
+      color: bs.$body-color;
+    }
+  }
+}
+
+.form-group {
+  margin-bottom: 1em;
+}
+
+.flash-message-list {
+  margin-top: 1em;
+}
+
+.form-actions {
+  margin-top: 2rem;
+  border-top: bs.$border-width bs.$border-style bs.$border-color;
+  padding-top: 1rem;
+
+  .btn + .btn {
+    margin-left: 0.5rem;
+  }
+}
+
+.spinner-expanded {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  // height: 100%;
+
+  & > div {
+    width: 20vw;
+    height: 20vw;
+  }
+}
+
+.action-column {
+  text-align: right;
+}
+
+.no-data {
+  font-style: italic;
+}
+
+tr.no-data {
+  padding-top: 1.5em;
+  padding-bottom: 1.5em;
+  text-align: center;
+}

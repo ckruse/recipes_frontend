@@ -1,0 +1,45 @@
+[20:34:48.978] Global cache location '/Users/ckruse/Library/Caches/typescript/4.8', safe file path '/users/ckruse/code/web/recipes/frontend/node_modules/typescript/lib/typingsafelist.json', types map path /users/ckruse/code/web/recipes/frontend/node_modules/typescript/lib/typesmap.json
+[20:34:48.979] Processing cache location '/Users/ckruse/Library/Caches/typescript/4.8'
+[20:34:48.979] Trying to find '/Users/ckruse/Library/Caches/typescript/4.8/package.json'...
+[20:34:48.981] Loaded content of '/Users/ckruse/Library/Caches/typescript/4.8/package.json': {"private":true,"dependencies":{"types-registry":"^0.1.608"},"devDependencies":{"@types/react":"^18.0.18","@types/react-dom":"^18.0.6","@types/testing-library__jest-dom":"^5.14.5"}}
+[20:34:48.981] Loaded content of '/Users/ckruse/Library/Caches/typescript/4.8/package-lock.json'
+[20:34:48.991] Adding entry into typings cache: 'react' => '/Users/ckruse/Library/Caches/typescript/4.8/node_modules/@types/react/index.d.ts'
+[20:34:48.993] Adding entry into typings cache: 'react-dom' => '/Users/ckruse/Library/Caches/typescript/4.8/node_modules/@types/react-dom/index.d.ts'
+[20:34:48.994] Adding entry into typings cache: 'testing-library__jest-dom' => '/Users/ckruse/Library/Caches/typescript/4.8/node_modules/@types/testing-library__jest-dom/index.d.ts'
+[20:34:48.994] Finished processing cache location '/Users/ckruse/Library/Caches/typescript/4.8'
+[20:34:48.994] Process id: 34971
+[20:34:48.994] NPM location: /opt/homebrew/Cellar/node/18.9.0/bin/npm (explicit '--npmLocation' not  provided)
+[20:34:48.994] validateDefaultNpmLocation: false
+[20:34:48.995] Npm config file: /Users/ckruse/Library/Caches/typescript/4.8/package.json
+[20:34:48.995] Updating types-registry npm package...
+[20:34:48.995] Exec: /opt/homebrew/Cellar/node/18.9.0/bin/npm install --ignore-scripts types-registry@latest
+[20:34:48.999]     Failed. stdout:
+    stderr:
+    /bin/sh: /opt/homebrew/Cellar/node/18.9.0/bin/npm: No such file or directory
+    
+[20:34:48.999] Updated types-registry npm package
+[20:37:46.978] Got install request {"projectName":"/dev/null/inferredProject1*","fileNames":[],"compilerOptions":{"module":1,"target":3,"jsx":1,"allowJs":true,"allowSyntheticDefaultImports":true,"allowNonTsExtensions":true,"noEmitForJsFiles":true},"typeAcquisition":{"enable":true,"include":[],"exclude":[]},"unresolvedImports":[],"projectRootPath":"/Users/ckruse/Code/web/recipes/frontend/src/features/Recipes","kind":"discover"}
+[20:37:46.983] Loaded safelist from types map file '/users/ckruse/code/web/recipes/frontend/node_modules/typescript/lib/typesmap.json'
+[20:37:46.983] Explicitly included types: []
+[20:37:46.983] Inferred typings from unresolved imports: []
+[20:37:46.983] Result: {"cachedTypingPaths":[],"newTypingNames":[],"filesToWatch":["/Users/ckruse/Code/web/recipes/frontend/src/features/Recipes/bower_components","/Users/ckruse/Code/web/recipes/frontend/src/features/Recipes/node_modules"]}
+[20:37:46.983] Finished typings discovery: {"cachedTypingPaths":[],"newTypingNames":[],"filesToWatch":["/Users/ckruse/Code/web/recipes/frontend/src/features/Recipes/bower_components","/Users/ckruse/Code/web/recipes/frontend/src/features/Recipes/node_modules"]}
+[20:37:46.984] DirectoryWatcher:: Added:: WatchInfo: /Users/ckruse/Code/web/recipes/frontend/src/features/Recipes/bower_components
+[20:37:46.984] DirectoryWatcher:: Added:: WatchInfo: /Users/ckruse/Code/web/recipes/frontend/src/features/Recipes/bower_components 1 undefined Project: /dev/null/inferredProject1* watcher already invoked: false
+[20:37:46.984] Elapsed:: 0.41916608810424805ms DirectoryWatcher:: Added:: WatchInfo: /Users/ckruse/Code/web/recipes/frontend/src/features/Recipes/bower_components 1 undefined Project: /dev/null/inferredProject1* watcher already invoked: false
+[20:37:46.984] DirectoryWatcher:: Added:: WatchInfo: /Users/ckruse/Code/web/recipes/frontend/src/features/Recipes/node_modules
+[20:37:46.984] DirectoryWatcher:: Added:: WatchInfo: /Users/ckruse/Code/web/recipes/frontend/src/features/Recipes/node_modules 1 undefined Project: /dev/null/inferredProject1* watcher already invoked: false
+[20:37:46.985] Elapsed:: 0.042875051498413086ms DirectoryWatcher:: Added:: WatchInfo: /Users/ckruse/Code/web/recipes/frontend/src/features/Recipes/node_modules 1 undefined Project: /dev/null/inferredProject1* watcher already invoked: false
+[20:37:46.985] Sending response:
+    {"projectName":"/dev/null/inferredProject1*","typeAcquisition":{"enable":true,"include":[],"exclude":[]},"compilerOptions":{"module":1,"target":3,"jsx":1,"allowJs":true,"allowSyntheticDefaultImports":true,"allowNonTsExtensions":true,"noEmitForJsFiles":true},"typings":[],"unresolvedImports":[],"kind":"action::set"}
+[20:37:46.985] Response has been sent.
+[20:37:46.985] No new typings were requested as a result of typings discovery
+[20:39:09.741] Got install request {"projectName":"/dev/null/inferredProject1*","fileNames":[],"compilerOptions":{"module":1,"target":3,"jsx":1,"allowJs":true,"allowSyntheticDefaultImports":true,"allowNonTsExtensions":true,"noEmitForJsFiles":true},"typeAcquisition":{"enable":true,"include":[],"exclude":[]},"unresolvedImports":[],"projectRootPath":"/Users/ckruse/Code/web/recipes/frontend/src/features/Recipes","kind":"discover"}
+[20:39:09.741] Explicitly included types: []
+[20:39:09.742] Inferred typings from unresolved imports: []
+[20:39:09.742] Result: {"cachedTypingPaths":[],"newTypingNames":[],"filesToWatch":["/Users/ckruse/Code/web/recipes/frontend/src/features/Recipes/bower_components","/Users/ckruse/Code/web/recipes/frontend/src/features/Recipes/node_modules"]}
+[20:39:09.742] Finished typings discovery: {"cachedTypingPaths":[],"newTypingNames":[],"filesToWatch":["/Users/ckruse/Code/web/recipes/frontend/src/features/Recipes/bower_components","/Users/ckruse/Code/web/recipes/frontend/src/features/Recipes/node_modules"]}
+[20:39:09.742] Sending response:
+    {"projectName":"/dev/null/inferredProject1*","typeAcquisition":{"enable":true,"include":[],"exclude":[]},"compilerOptions":{"module":1,"target":3,"jsx":1,"allowJs":true,"allowSyntheticDefaultImports":true,"allowNonTsExtensions":true,"noEmitForJsFiles":true},"typings":[],"unresolvedImports":[],"kind":"action::set"}
+[20:39:09.742] Response has been sent.
+[20:39:09.742] No new typings were requested as a result of typings discovery

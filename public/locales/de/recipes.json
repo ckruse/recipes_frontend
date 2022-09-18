@@ -1,0 +1,34 @@
+{
+  "fieldnames": {
+    "name": "Name",
+    "description": "Beschreibung",
+    "tags": "Tags",
+    "inserted_at": "erstellt",
+    "updated_at": "aktualisiert"
+  },
+
+  "new": {
+    "title": "neues Rezept",
+    "success": "Das Rezept wurde erfolgreich angelegt!"
+  },
+
+  "edit": {
+    "title": "Rezept „{{name}}“ bearbeiten",
+    "success": "Das Rezept wurde erfolgreich gespeichert!"
+  },
+
+  "form": {
+    "tags_placeholder": "Tags auswählen oder hinzufügen…",
+    "no_tags_found": "Keine Tags gefunden!",
+    "create_tag": "Tag „{{tag}}“ erstellen…"
+  },
+
+  "show": {
+    "title": "Rezept „{{name}}“"
+  },
+
+  "list": {
+    "title": "Rezepte",
+    "deleted": "Das Rezept wurde erfolgreich gelöscht!"
+  }
+}

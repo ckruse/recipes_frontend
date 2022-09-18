@@ -1,0 +1,12 @@
+{
+  "title": "WWWTech: Rezepte",
+  "search": "Suche",
+  "search...": "suchen…",
+
+  "loginModal": {
+    "title": "Anmeldung",
+    "login": "anmelden",
+    "email": "Email-Adresse",
+    "password": "Passwort"
+  }
+}
