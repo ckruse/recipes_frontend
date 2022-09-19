@@ -1,0 +1,32 @@
+{
+  "fieldnames": {
+    "name": "Name",
+    "reference": "Einheit",
+    "calories": "Kalorien",
+    "alc": "Alokohol",
+    "carbs": "Kohlenhydrate",
+    "fat": "Fett",
+    "proteins": "Proteine",
+    "inserted_at": "erstellt",
+    "updated_at": "aktualisiert"
+  },
+
+  "list": {
+    "title": "Zutaten",
+    "deleted": "Die Zutat wurde erfolgreich gelöscht!"
+  },
+
+  "new": {
+    "title": "Neue Zutat",
+    "success": "Die Zutat wurde erfolgreich erstellt!"
+  },
+
+  "edit": {
+    "title": "Zutat „{{name}}“ bearbeiten",
+    "success": "Die Zutat wurde erfolgreich aktualisiert!"
+  },
+
+  "show": {
+    "title": "Zutat „{{name}}“"
+  }
+}

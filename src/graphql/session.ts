@@ -3,17 +3,31 @@ import { gql } from "@apollo/client";
 export const LOGIN_MUTATION = gql`
   mutation login($email: String!, $password: String!) {
     login(email: $email, password: $password) {
-      token
+      successful
+      messages {
+        field
+        message
+        template
+        code
+        options {
+          key
+          value
+        }
+      }
 
-      user {
-        id
-        email
-        name
-        role
+      result {
+        token
 
-        avatar {
-          original
-          thumb
+        user {
+          id
+          email
+          name
+          role
+
+          avatar {
+            original
+            thumb
+          }
         }
       }
     }
@@ -23,17 +37,31 @@ export const LOGIN_MUTATION = gql`
 export const REFRESH_MUTATION = gql`
   mutation refresh($token: String!) {
     refresh(token: $token) {
-      token
+      successful
+      messages {
+        field
+        message
+        template
+        code
+        options {
+          key
+          value
+        }
+      }
 
-      user {
-        id
-        email
-        name
-        role
+      result {
+        token
 
-        avatar {
-          original
-          thumb
+        user {
+          id
+          email
+          name
+          role
+
+          avatar {
+            original
+            thumb
+          }
         }
       }
     }

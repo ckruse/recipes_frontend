@@ -4,3 +4,4 @@ export * from "./Button";
 export * from "./ConfirmButton";
 export * from "./DeleteButton";
 export * from "./ShowButton";
+export * from "./EditButton";

@@ -2,12 +2,12 @@ import { Table } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
-import { ActionColumn, DeleteButton, NoDataTd, ShowButton } from "../../components";
+import { ActionColumn, DeleteButton, EditButton, NoDataTd, ShowButton } from "../../components";
 import { indexDate } from "../../dateUtils";
 import { RECIPE_DELETE_MUTATION, RECIPES_COUNT_QUERY, RECIPES_QUERY } from "../../graphql/recipes";
 import { useAppSelector, useList } from "../../hooks";
 import { TRecipe } from "../../types";
-import { showRecipePath } from "../../urls";
+import { editRecipePath, showRecipePath } from "../../urls";
 import MetaList from "../MetaList";
 
 export default function List() {
@@ -50,6 +50,9 @@ export default function List() {
                   <ShowButton as={Link} to={showRecipePath(recipe)}>
                     {t("translation:show")}
                   </ShowButton>
+                  <EditButton as={Link} to={editRecipePath(recipe)}>
+                    {t("translation:edit")}
+                  </EditButton>
                   <DeleteButton onClick={() => deleteItem(recipe)}>{t("translation:delete")}</DeleteButton>
                 </ActionColumn>
               </tr>

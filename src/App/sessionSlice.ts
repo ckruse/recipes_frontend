@@ -3,6 +3,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import { getAuthorizationToken, removeAuthorizationToken, setAuthorizationToken } from "../authenticationToken";
 import { REFRESH_MUTATION } from "../graphql/session";
+import { MutationError } from "../handleError";
 import { AppThunk, RootState } from "../store";
 import { Nullable, TUser } from "../types";
 import { IRefreshMutation } from "../types/session";
@@ -58,15 +59,15 @@ export const refreshUser =
         variables: { token: getAuthorizationToken() },
       });
 
-      if (!data?.refresh) {
-        throw new Error();
+      if (!data?.refresh.successful) {
+        throw new MutationError(data?.refresh);
       }
 
-      dispatch(setUser(data.refresh.user));
-      dispatch(setToken(data.refresh.token));
-      setAuthorizationToken(data.refresh.token);
+      dispatch(setUser(data.refresh.result.user));
+      dispatch(setToken(data.refresh.result.token));
+      setAuthorizationToken(data.refresh.result.token);
     } catch (e) {
-      console.log(e);
+      console.error(e);
 
       dispatch(setUser(null));
       removeAuthorizationToken();

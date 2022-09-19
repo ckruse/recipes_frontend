@@ -5,8 +5,8 @@ import { Form as BsForm, Button, Modal } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 
 import { setAuthorizationToken } from "../authenticationToken";
+import { FormGroup } from "../components";
 import { Input } from "../components/Form";
-import FormGroup from "../components/FormGroup";
 import { LOGIN_MUTATION } from "../graphql/session";
 import { useAppDispatch, useAppSelector } from "../hooks";
 import { ILoginMutation } from "../types/session";
@@ -31,12 +31,12 @@ export default function LoginModal() {
       setSubmitting(true);
       const { data } = await loginMutation({ variables: values });
 
-      if (!data?.login) {
+      if (!data?.login.successful) {
         return;
       }
 
-      dispatch(setUser(data.login.user));
-      setAuthorizationToken(data.login.token);
+      dispatch(setUser(data.login.result.user));
+      setAuthorizationToken(data.login.result.token);
       dispatch(toggleShowLogin());
     } catch (e) {
       console.log(e);

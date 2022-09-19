@@ -1,16 +1,16 @@
 export type Nullable<T> = T | null;
 export type Nilable<T> = T | null | undefined;
 
-export type MutationResultType<T = any> = MutationSuccessResultType<T> | MutationErrorResultType;
+export type TMutationResult<T = any> = TMutationSuccessResult<T> | TMutationErrorResult;
 
-type MutationSuccessResultType<T> = {
+type TMutationSuccessResult<T> = {
   successful: true;
   messages: [];
 
   result: T;
 };
 
-type MutationErrorResultType = {
+type TMutationErrorResult = {
   successful: false;
   messages: {
     field: string;
@@ -29,3 +29,4 @@ type MutationErrorResultType = {
 export * from "./users";
 export * from "./recipes";
 export * from "./tags";
+export * from "./ingredients";

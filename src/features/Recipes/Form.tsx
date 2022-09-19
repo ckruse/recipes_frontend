@@ -9,10 +9,9 @@ import { Link } from "react-router-dom";
 import { ActionMeta, MultiValue } from "react-select";
 import Select from "react-select/creatable";
 
+import { FormActions, FormGroup } from "../../components";
 import { CancelButton, SaveButton } from "../../components/Buttons";
 import { Input, Textarea } from "../../components/Form";
-import FormActions from "../../components/FormActions";
-import FormGroup from "../../components/FormGroup";
 import { TAG_MUTATION, TAGS_QUERY } from "../../graphql/tags";
 import { useDebounce } from "../../hooks";
 import { TagMutationInterface, TagsDataInterface, TRecipe } from "../../types";

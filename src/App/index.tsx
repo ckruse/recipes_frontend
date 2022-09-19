@@ -4,6 +4,7 @@ import { Link, Route, Routes } from "react-router-dom";
 
 import { Button } from "../components";
 import Flash from "../features/Flash";
+import IngredientsInterface from "../features/Ingredients";
 import RecipesInterface from "../features/Recipes";
 import { useAppDispatch, useAppSelector, useTitle } from "../hooks";
 import { ReactComponent as Logo } from "../logo.svg";
@@ -54,6 +55,7 @@ function App() {
 
         <Routes>
           <Route path="/recipes/*" element={<RecipesInterface />} />
+          <Route path="/ingredients/*" element={<IngredientsInterface />} />
         </Routes>
 
         <LoginModal />

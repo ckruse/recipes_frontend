@@ -2,10 +2,12 @@
   "save": "speichern",
   "cancel": "abbrechen",
   "show": "anzeigen",
+  "edit": "bearbeiten",
   "delete": "löschen",
   "loading": "lade…",
   "successfully_deleted": "Der Eintrag wurde erfolgreich gelöscht!",
   "no_data": "keine Daten gefunden…",
+  "choose…": "wählen…",
 
   "errors": {
     "general": "Oops! Ein Fehler ist aufgetreten."
