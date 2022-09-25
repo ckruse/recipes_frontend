@@ -12,9 +12,9 @@ import Select from "react-select/creatable";
 import { FormActions, FormGroup } from "../../components";
 import { CancelButton, SaveButton } from "../../components/Buttons";
 import { Input, Textarea } from "../../components/Form";
-import { TAG_MUTATION, TAGS_QUERY } from "../../graphql/tags";
+import { TAG_CREATE_MUTATION, TAGS_QUERY } from "../../graphql/tags";
 import { useDebounce } from "../../hooks";
-import { TagMutationInterface, TagsDataInterface, TRecipe } from "../../types";
+import { TagCreateMutationInterface, TagsDataInterface, TRecipe } from "../../types";
 import { recipesPath } from "../../urls";
 
 type PropsType = {
@@ -22,18 +22,18 @@ type PropsType = {
   onSave: (recipe: ValuesInterface, helpers: FormikHelpers<ValuesInterface>) => void;
 };
 
-type OptionType = { value: string; label: string };
+type OptionType = { value: number; label: string };
 
 export interface ValuesInterface {
   name: string;
   description: string;
-  tags: { id: string; name: string }[];
+  tags: { id: number; tag: string }[];
 }
 
 const initialValues = (recipe?: TRecipe): ValuesInterface => ({
   name: recipe?.name || "",
   description: recipe?.description || "",
-  tags: recipe?.tags.map((tag) => ({ id: tag.id, name: tag.name })) || [],
+  tags: recipe?.tags.map((tag) => ({ id: tag.id, tag: tag.tag })) || [],
 });
 
 export default function RecipesForm({ recipe, onSave }: PropsType) {
@@ -41,7 +41,7 @@ export default function RecipesForm({ recipe, onSave }: PropsType) {
   const debouncedSearch = useDebounce(search, 200);
   const { t } = useTranslation(["recipes", "translation"]);
 
-  const [mutateTag] = useMutation<TagMutationInterface>(TAG_MUTATION);
+  const [mutateTag] = useMutation<TagCreateMutationInterface>(TAG_CREATE_MUTATION);
   const { data, loading } = useQuery<TagsDataInterface>(TAGS_QUERY, {
     variables: { search: debouncedSearch, limit: 50, offset: 0 },
     skip: !search,
@@ -52,27 +52,24 @@ export default function RecipesForm({ recipe, onSave }: PropsType) {
       {({ values, setFieldValue }) => {
         async function onSelect(value: MultiValue<OptionType>, actionMeta: ActionMeta<OptionType>) {
           if (actionMeta.action === "create-option") {
-            const { data } = await mutateTag({ variables: { tag: { name: actionMeta.option.label } } });
+            const { data } = await mutateTag({ variables: { name: actionMeta.option.label } });
 
-            if (!data?.mutateTag.successful) {
+            if (!data?.createTag) {
               // TODO: handle error
               return;
             }
 
-            setFieldValue("tags", [
-              ...values.tags,
-              { id: data.mutateTag.result.id, label: data.mutateTag.result.name },
-            ]);
+            setFieldValue("tags", [...values.tags, { id: data.createTag.id, tag: data.createTag.tag }]);
           } else {
             setFieldValue(
               "tags",
-              value.map((tag) => ({ id: tag.value, name: tag.label }))
+              value.map((tag) => ({ id: tag.value, tag: tag.label }))
             );
           }
         }
 
-        const tagValues: OptionType[] = values.tags.map((tag) => ({ value: tag.id, label: tag.name }));
-        const options: OptionType[] = data?.tags.map((tag) => ({ value: tag.id, label: tag.name })) || [];
+        const tagValues: OptionType[] = values.tags.map((tag) => ({ value: tag.id, label: tag.tag }));
+        const options: OptionType[] = data?.tags.map((tag) => ({ value: tag.id, label: tag.tag })) || [];
 
         return (
           <Form>

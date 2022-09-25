@@ -2,7 +2,7 @@ import { Table } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
-import { ActionColumn, DeleteButton, EditButton, ShowButton } from "../../components";
+import { ActionColumn, DeleteButton, EditButton, NoDataTd, ShowButton } from "../../components";
 import { indexDate } from "../../dateUtils";
 import { INGREDIENT_DELETE_MUTATION, INGREDIENTS_COUNT_QUERY, INGREDIENTS_QUERY } from "../../graphql/ingredients";
 import { useAppSelector, useList } from "../../hooks";
@@ -42,6 +42,8 @@ export default function List() {
           </thead>
 
           <tbody>
+            <NoDataTd data={ingredients} />
+
             {ingredients.map((ingredient) => (
               <tr key={ingredient.id}>
                 <td>{ingredient.name}</td>

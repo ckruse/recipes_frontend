@@ -1,9 +1,13 @@
 import { ApolloClient, NormalizedCacheObject } from "@apollo/client";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
+import { t } from "i18next";
+
 import { getAuthorizationToken, removeAuthorizationToken, setAuthorizationToken } from "../authenticationToken";
+import { addErrorFlash } from "../features/Flash/flashSlice";
 import { REFRESH_MUTATION } from "../graphql/session";
 import { MutationError } from "../handleError";
+import i18n from "../i18n";
 import { AppThunk, RootState } from "../store";
 import { Nullable, TUser } from "../types";
 import { IRefreshMutation } from "../types/session";
@@ -53,25 +57,28 @@ export const refreshUser =
   async (dispatch) => {
     dispatch(setLoading(true));
 
+    await i18n.loadNamespaces(["root"]);
+
     try {
       const { data } = await client.mutate<IRefreshMutation>({
         mutation: REFRESH_MUTATION,
         variables: { token: getAuthorizationToken() },
       });
 
-      if (!data?.refresh.successful) {
-        throw new MutationError(data?.refresh);
+      if (!data?.refresh) {
+        // TODO: handle error
+        return;
       }
 
-      dispatch(setUser(data.refresh.result.user));
-      dispatch(setToken(data.refresh.result.token));
-      setAuthorizationToken(data.refresh.result.token);
+      dispatch(setUser(data.refresh.user));
+      dispatch(setToken(data.refresh.token));
+      setAuthorizationToken(data.refresh.token);
     } catch (e) {
       console.error(e);
 
       dispatch(setUser(null));
       removeAuthorizationToken();
-      // dispatch(addErrorFlash("Die Autorisierung ist fehlgeschlagen, bitte melden Sie sich neu an!"));
+      dispatch(addErrorFlash(t("root:authorization_failed")));
     }
 
     dispatch(setLoading(false));

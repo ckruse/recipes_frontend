@@ -36,7 +36,7 @@ export function Pages({ page, count, perPage = 25, setPage, bridge = 10 }: Props
   const noPages = getNoPages(startPage, bridge, totalPages);
 
   return (
-    <Pagination className="ACD-pagination">
+    <Pagination>
       <Pagination.First disabled={page <= 0} onClick={() => setPage(0)} />
       <Pagination.Prev disabled={page <= 0} onClick={() => setPage(prevPage)} />
 

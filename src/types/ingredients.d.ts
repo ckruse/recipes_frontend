@@ -1,7 +1,5 @@
-import { TMutationResult } from ".";
-
 export type TIngredient = {
-  id: string;
+  id: number;
   name: string;
   reference: "G" | "ML";
   alc: number;
@@ -17,6 +15,10 @@ export interface IIngredientQueryResult {
   ingredient: TIngredient;
 }
 
-export interface IIngredientMutation {
-  mutateIngredient: TMutationResult<TIngredient>;
+export interface IIngredientCreateMutation {
+  createIngredient: TIngredient;
+}
+
+export interface IIngredientUpdateMutation {
+  updateIngredient: TIngredient;
 }

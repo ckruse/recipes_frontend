@@ -56,6 +56,7 @@ function App() {
         <Routes>
           <Route path="/recipes/*" element={<RecipesInterface />} />
           <Route path="/ingredients/*" element={<IngredientsInterface />} />
+          <Route path="/" element={<h1>Root</h1>} />
         </Routes>
 
         <LoginModal />

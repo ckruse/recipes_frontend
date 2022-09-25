@@ -11,7 +11,7 @@ export const RECIPE_FRAGMENT = gql`
 
     tags {
       id
-      name
+      tag
       insertedAt
       updatedAt
     }
@@ -43,24 +43,19 @@ export const RECIPE_QUERY = gql`
   ${RECIPE_FRAGMENT}
 `;
 
-export const RECIPE_MUTATION = gql`
-  mutation mutateRecipe($id: ID, $recipe: RecipeInput!) {
-    mutateRecipe(id: $id, recipe: $recipe) {
-      successful
-      messages {
-        field
-        message
-        template
-        code
-        options {
-          key
-          value
-        }
-      }
+export const RECIPE_CREATE_MUTATION = gql`
+  mutation createRecipe($recipe: RecipeInput!) {
+    createRecipe(recipe: $recipe) {
+      ...RecipeFragment
+    }
+  }
+  ${RECIPE_FRAGMENT}
+`;
 
-      result {
-        ...RecipeFragment
-      }
+export const RECIPE_UPDATE_MUTATION = gql`
+  mutation updateRecipe($id: ID!, $recipe: RecipeInput!) {
+    updateRecipe(id: $id, recipe: $recipe) {
+      ...RecipeFragment
     }
   }
   ${RECIPE_FRAGMENT}
@@ -68,22 +63,6 @@ export const RECIPE_MUTATION = gql`
 
 export const RECIPE_DELETE_MUTATION = gql`
   mutation deleteRecipe($id: ID!) {
-    deleteRecipe(id: $id) {
-      successful
-      messages {
-        field
-        message
-        template
-        code
-        options {
-          key
-          value
-        }
-      }
-
-      result {
-        id
-      }
-    }
+    deleteRecipe(id: $id)
   }
 `;

@@ -31,12 +31,13 @@ export default function LoginModal() {
       setSubmitting(true);
       const { data } = await loginMutation({ variables: values });
 
-      if (!data?.login.successful) {
+      if (!data?.login) {
+        // TODO: handle error
         return;
       }
 
-      dispatch(setUser(data.login.result.user));
-      setAuthorizationToken(data.login.result.token);
+      dispatch(setUser(data.login.user));
+      setAuthorizationToken(data.login.token);
       dispatch(toggleShowLogin());
     } catch (e) {
       console.log(e);

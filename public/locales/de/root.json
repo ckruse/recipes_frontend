@@ -2,6 +2,7 @@
   "title": "WWWTech: Rezepte",
   "search": "Suche",
   "search...": "suchen…",
+  "authorization_failed": "Die Autorisierung ist fehlgeschlagen, bitte melden Sie sich neu an!",
 
   "loginModal": {
     "title": "Anmeldung",

@@ -39,24 +39,19 @@ export const INGREDIENT_QUERY = gql`
   ${INGREDEINT_FRAGMENT}
 `;
 
-export const INGREDIENT_MUTATION = gql`
-  mutation ingredientMutation($id: ID, $ingredient: IngredientInput!) {
-    mutateIngredient(id: $id, ingredient: $ingredient) {
-      successful
-      messages {
-        field
-        message
-        template
-        code
-        options {
-          key
-          value
-        }
-      }
+export const INGREDIENT_CREATE_MUTATION = gql`
+  mutation createIngredient($ingredient: IngredientInput!) {
+    createIngredient(ingredient: $ingredient) {
+      ...IngredientFragment
+    }
+  }
+  ${INGREDEINT_FRAGMENT}
+`;
 
-      result {
-        ...IngredientFragment
-      }
+export const INGREDIENT_UPDATE_MUTATION = gql`
+  mutation updateIngredient($id: ID!, $ingredient: IngredientInput!) {
+    updateIngredient(id: $id, ingredient: $ingredient) {
+      ...IngredientFragment
     }
   }
   ${INGREDEINT_FRAGMENT}
@@ -64,22 +59,6 @@ export const INGREDIENT_MUTATION = gql`
 
 export const INGREDIENT_DELETE_MUTATION = gql`
   mutation deleteIngredient($id: ID!) {
-    deleteIngredient(id: $id) {
-      successful
-      messages {
-        field
-        message
-        template
-        code
-        options {
-          key
-          value
-        }
-      }
-
-      result {
-        id
-      }
-    }
+    deleteIngredient(id: $id)
   }
 `;

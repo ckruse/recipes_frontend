@@ -3,66 +3,32 @@ import { gql } from "@apollo/client";
 export const LOGIN_MUTATION = gql`
   mutation login($email: String!, $password: String!) {
     login(email: $email, password: $password) {
-      successful
-      messages {
-        field
-        message
-        template
-        code
-        options {
-          key
-          value
-        }
-      }
+      token
 
-      result {
-        token
+      user {
+        id
+        email
+        name
+        role
 
-        user {
-          id
-          email
-          name
-          role
-
-          avatar {
-            original
-            thumb
-          }
-        }
+        avatar
       }
     }
   }
 `;
 
 export const REFRESH_MUTATION = gql`
-  mutation refresh($token: String!) {
-    refresh(token: $token) {
-      successful
-      messages {
-        field
-        message
-        template
-        code
-        options {
-          key
-          value
-        }
-      }
+  mutation refresh {
+    refresh {
+      token
 
-      result {
-        token
+      user {
+        id
+        email
+        name
+        role
 
-        user {
-          id
-          email
-          name
-          role
-
-          avatar {
-            original
-            thumb
-          }
-        }
+        avatar
       }
     }
   }

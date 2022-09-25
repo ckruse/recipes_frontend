@@ -11,7 +11,9 @@ import { IIngredientQueryResult } from "../../types";
 export default function Show() {
   const { id } = useParams<"id">();
   const { t } = useTranslation(["ingredients", "translation"]);
-  const { data } = useQuery<IIngredientQueryResult>(INGREDIENT_QUERY, { variables: { id } });
+  const { data } = useQuery<IIngredientQueryResult>(INGREDIENT_QUERY, {
+    variables: { id: parseInt(id || "0", 10) },
+  });
 
   useTitle(t("ingredients:show.title", { name: data?.ingredient.name || "…" }));
 

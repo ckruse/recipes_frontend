@@ -1,7 +1,7 @@
-import { Nullable, TMutationResult, TTag } from ".";
+import { Nullable, TTag } from ".";
 
 export type TRecipe = {
-  id: string;
+  id: number;
   name: string;
   description: Nullable<string>;
 
@@ -16,6 +16,10 @@ export interface IRecipeQueryResult {
   recipe: TRecipe;
 }
 
-export interface IRecipeMutation {
-  mutateRecipe: TMutationResult<TRecipe>;
+export interface IRecipeCreateMutation {
+  createRecipe: TRecipe;
+}
+
+export interface IRecipeUpdateMutation {
+  updateRecipe: TRecipe;
 }

@@ -4,11 +4,10 @@ import { FormikHelpers } from "formik";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
-import { RECIPE_MUTATION } from "../../graphql/recipes";
-import { MutationError } from "../../handleError";
+import { RECIPE_CREATE_MUTATION } from "../../graphql/recipes";
 import { useAppDispatch, useTitle } from "../../hooks";
 import useAuthRequired from "../../hooks/useAuthRequired";
-import { IRecipeMutation } from "../../types";
+import { IRecipeCreateMutation } from "../../types";
 import { editRecipePath } from "../../urls";
 import { addErrorFlash, addSuccessFlash } from "../Flash/flashSlice";
 import Form, { ValuesInterface } from "./Form";
@@ -17,7 +16,7 @@ export default function New() {
   const { t } = useTranslation(["recipes", "translation"]);
 
   const dispatch = useAppDispatch();
-  const [mutateRecipe] = useMutation<IRecipeMutation>(RECIPE_MUTATION);
+  const [mutateRecipe] = useMutation<IRecipeCreateMutation>(RECIPE_CREATE_MUTATION);
   const navigate = useNavigate();
 
   useTitle(t("recipes:new.title"));
@@ -36,12 +35,13 @@ export default function New() {
         },
       });
 
-      if (!data?.mutateRecipe.successful) {
-        throw new MutationError(data?.mutateRecipe);
+      if (!data?.createRecipe) {
+        // TODO: handle error
+        return;
       }
 
       dispatch(addSuccessFlash(t("recipes:new.success")));
-      navigate(editRecipePath(data.mutateRecipe.result));
+      navigate(editRecipePath(data.createRecipe));
     } catch (e) {
       setSubmitting(false);
       dispatch(addErrorFlash(t("translation:errors.general")));

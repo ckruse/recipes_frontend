@@ -2,7 +2,7 @@ import { ApolloClient, ApolloLink, HttpLink, InMemoryCache } from "@apollo/clien
 
 import { getAuthorizationToken } from "../authenticationToken";
 
-const URI = process.env.NODE_ENV === "production" ? "https://recipes.wwwtech.de" : "http://localhost:4000";
+const URI = process.env.NODE_ENV === "production" ? "https://recipes.wwwtech.de" : "http://localhost:8080";
 
 const httpLink = new HttpLink({ uri: `${URI}/graphql` });
 const authMiddleware = new ApolloLink((operation, forward) => {

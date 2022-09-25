@@ -11,13 +11,19 @@ import { IRecipeQueryResult } from "../../types";
 export default function Show() {
   const { id } = useParams<"id">();
   const { t } = useTranslation(["recipes", "translation"]);
-  const { data } = useQuery<IRecipeQueryResult>(RECIPE_QUERY, { variables: { id } });
+  const { data } = useQuery<IRecipeQueryResult>(RECIPE_QUERY, { variables: { id: parseInt(id || "0", 10) } });
 
   useTitle(t("recipes:show.title", { name: data?.recipe.name || "…" }));
 
   return (
     <>
       <h1>{t("recipes:show.title", { name: data?.recipe.name || "…" })}</h1>
+
+      <ul>
+        {data?.recipe.tags.map((tag) => (
+          <li key={tag.id}>{tag.tag}</li>
+        ))}
+      </ul>
 
       <ReactMarkdown>{data?.recipe.description || ""}</ReactMarkdown>
     </>

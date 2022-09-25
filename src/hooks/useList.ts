@@ -7,7 +7,6 @@ import { useTranslation } from "react-i18next";
 import { useAppDispatch } from ".";
 import { updateDeletion } from "../apolloClient/utils";
 import { addErrorFlash, addSuccessFlash } from "../features/Flash/flashSlice";
-import { MutationError } from "../handleError";
 
 type PropsTypeNoDelete<T> = {
   query: DocumentNode;
@@ -61,10 +60,10 @@ const DUMMY_MUTATION = gql`
   }
 `;
 
-export function useList<T extends { id: string }>(props: PropsTypeNoDelete<T>): ReturnTypeNoDelete<T>;
-export function useList<T extends { id: string }>(props: PropsTypeDelete<T>): ReturnTypeDelete<T>;
+export function useList<T extends { id: number }>(props: PropsTypeNoDelete<T>): ReturnTypeNoDelete<T>;
+export function useList<T extends { id: number }>(props: PropsTypeDelete<T>): ReturnTypeDelete<T>;
 
-export function useList<T extends { id: string }>({
+export function useList<T extends { id: number }>({
   query,
   countQuery,
   variables,
@@ -81,19 +80,7 @@ export function useList<T extends { id: string }>({
 
   const key = _.keys(data)[0];
 
-  const [deleteItemMutation] = useMutation(deleteMutation || DUMMY_MUTATION, {
-    update: (cache, { data }) => {
-      const item = _.values(data)[0];
-
-      if (item.successful === undefined) {
-        updateDeletion(cache, item.id, key);
-      } else {
-        if (item.result) {
-          updateDeletion(cache, item.result.id, key);
-        }
-      }
-    },
-  });
+  const [deleteItemMutation] = useMutation(deleteMutation || DUMMY_MUTATION);
 
   const items: T[] | undefined = _.values(data)[0];
   const count: number = _.values(countData)[0] || 0;
@@ -110,11 +97,14 @@ export function useList<T extends { id: string }>({
                   [deletionParameterName]: item.id,
                 };
 
-            const { data } = await deleteItemMutation({ variables });
+            const { data } = await deleteItemMutation({
+              variables,
+              update: (cache, { data }) => updateDeletion(cache, item.id, key),
+            });
             const val = _.values(data)[0];
 
-            if (!val?.successful) {
-              throw new MutationError(val);
+            if (!val) {
+              throw new Error("Deletion failed");
             }
 
             dispatch(addSuccessFlash(deletionMessage || t("translation:global.successfully_deleted")));
