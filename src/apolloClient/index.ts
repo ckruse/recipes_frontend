@@ -21,6 +21,14 @@ const authLink = authMiddleware.concat(httpLink);
 const client = new ApolloClient({
   link: authLink,
   cache: new InMemoryCache({}),
+  defaultOptions: {
+    watchQuery: {
+      fetchPolicy: "cache-and-network",
+    },
+    query: {
+      fetchPolicy: "network-only",
+    },
+  },
 });
 
 export default client;
