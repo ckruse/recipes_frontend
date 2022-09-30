@@ -1,7 +1,10 @@
+import { Suspense } from "react";
+
 import { Col, Row } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { Route, Routes } from "react-router-dom";
 
+import { Loading } from "../components";
 import Flash from "../features/Flash";
 import IngredientsInterface from "../features/Ingredients";
 import RecipesInterface from "../features/Recipes";
@@ -16,7 +19,7 @@ function App() {
   useTitle(t("root:title"));
 
   return (
-    <>
+    <Suspense fallback={<Loading expand />}>
       <Header />
 
       <main className="container-fluid" id="site-content">
@@ -26,17 +29,19 @@ function App() {
           <Col md={9} lg={10} className="main">
             <Flash />
 
-            <Routes>
-              <Route path="/recipes/*" element={<RecipesInterface />} />
-              <Route path="/ingredients/*" element={<IngredientsInterface />} />
-              <Route path="/" element={<h1>Root</h1>} />
-            </Routes>
+            <Suspense fallback={<Loading expand />}>
+              <Routes>
+                <Route path="/recipes/*" element={<RecipesInterface />} />
+                <Route path="/ingredients/*" element={<IngredientsInterface />} />
+                <Route path="/" element={<h1>Root</h1>} />
+              </Routes>
+            </Suspense>
           </Col>
         </Row>
 
         <LoginModal />
       </main>
-    </>
+    </Suspense>
   );
 }
 
