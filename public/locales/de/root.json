@@ -16,6 +16,8 @@
     "recipes": "Rezepte",
     "ingredients": "Zutaten",
     "legal_notice": "Impressum",
-    "home": "Home"
+    "home": "Home",
+    "new_recipe": "neues Rezept",
+    "new_ingredient": "neue Zutat"
   }
 }
