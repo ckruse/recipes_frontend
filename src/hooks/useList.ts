@@ -89,7 +89,6 @@ export function useList<T extends { id: number }>({
     deleteMutation === undefined
       ? undefined
       : async (item: T) => {
-          console.log(item);
           try {
             const variables = deletionParameters
               ? deletionParameters(item)
