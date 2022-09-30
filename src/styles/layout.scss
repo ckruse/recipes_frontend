@@ -12,16 +12,14 @@ body,
 }
 
 #site-header {
+  padding-left: bs.$container-padding-x;
+  padding-right: bs.$container-padding-x;
+  display: grid;
+  grid-template-columns: 1fr max-content max-content;
+  grid-gap: 1rem;
+
   svg {
     max-height: 2.5rem;
-  }
-
-  margin-bottom: 1rem;
-
-  .container {
-    display: grid;
-    grid-template-columns: 1fr max-content max-content;
-    grid-gap: 1rem;
   }
 
   .user-avatar {
@@ -30,22 +28,17 @@ body,
   }
 }
 
-#site-footer {
-  ul {
-    list-style-type: none;
+.sidebar {
+  padding-left: bs.$container-padding-x;
+  padding-right: bs.$container-padding-x;
+
+  .nav-link {
     padding-left: 0;
-
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    border-top: bs.$border-width bs.$border-style bs.$border-color;
-    padding-top: 0.5rem;
-    margin-top: 0.5rem;
-
-    a {
-      color: bs.$body-color;
-    }
   }
+}
+
+main .row {
+  height: 100%;
 }
 
 .form-group {

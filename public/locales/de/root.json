@@ -9,5 +9,12 @@
     "login": "anmelden",
     "email": "Email-Adresse",
     "password": "Passwort"
+  },
+
+  "sidebar": {
+    "recipes": "Rezepte",
+    "ingredients": "Zutaten",
+    "legal_notice": "Impressum",
+    "home": "Home"
   }
 }
