@@ -35,7 +35,7 @@ export default function Header() {
 
         {!user && (
           <Button variant="outline-primary" onClick={() => dispatch(toggleShowLogin())}>
-            Login
+            {t("root:login")}
           </Button>
         )}
       </div>
