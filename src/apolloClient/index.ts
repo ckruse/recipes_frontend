@@ -1,25 +1,11 @@
-import { ApolloClient, ApolloLink, HttpLink, InMemoryCache } from "@apollo/client";
-
-import { getAuthorizationToken } from "../authenticationToken";
+import { ApolloClient, HttpLink, InMemoryCache } from "@apollo/client";
 
 const URI = process.env.NODE_ENV === "production" ? "https://recipes.wwwtech.de" : "http://localhost:8080";
 
-const httpLink = new HttpLink({ uri: `${URI}/graphql` });
-const authMiddleware = new ApolloLink((operation, forward) => {
-  const token = getAuthorizationToken();
-
-  operation.setContext({
-    headers: {
-      authorization: token ? `Bearer ${token}` : "",
-    },
-  });
-  return forward(operation);
-});
-
-const authLink = authMiddleware.concat(httpLink);
+const httpLink = new HttpLink({ uri: `${URI}/graphql`, fetchOptions: { credentials: "include" } });
 
 const client = new ApolloClient({
-  link: authLink,
+  link: httpLink,
   cache: new InMemoryCache({}),
   defaultOptions: {
     watchQuery: {

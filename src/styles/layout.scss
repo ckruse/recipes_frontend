@@ -1,4 +1,5 @@
 @use "~bootstrap/scss/bootstrap" as bs;
+@use "sass:math";
 
 html,
 body,
@@ -14,8 +15,9 @@ body,
 #site-header {
   padding-left: bs.$container-padding-x;
   padding-right: bs.$container-padding-x;
+  margin-bottom: math.div(bs.$container-padding-x, 2);
   display: grid;
-  grid-template-columns: 1fr max-content max-content;
+  grid-template-columns: 1fr 1fr max-content max-content;
   grid-gap: 1rem;
 
   svg {
@@ -26,19 +28,34 @@ body,
     border-radius: 50%;
     max-height: 2.5rem;
   }
-}
 
-.sidebar {
-  padding-left: bs.$container-padding-x;
-  padding-right: bs.$container-padding-x;
+  .navbar-brand {
+    font-family: "Dancing Script", cursive;
+    font-size: 2rem;
+    padding: 0;
+  }
 
-  .nav-link {
-    padding-left: 0;
+  i {
+    vertical-align: bottom;
   }
 }
 
-main .row {
+#site-footer {
+  margin-top: math.div(bs.$container-padding-x, 2);
+  border-top: bs.$border-width bs.$border-style bs.$border-color;
+
+  display: flex;
+  justify-content: center;
+}
+
+.sub-nav {
+  margin-bottom: math.div(bs.$container-padding-x, 2);
+}
+
+main {
   height: 100%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .form-group {

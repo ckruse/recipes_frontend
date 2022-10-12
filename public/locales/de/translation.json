@@ -8,9 +8,12 @@
   "successfully_deleted": "Der Eintrag wurde erfolgreich gelöscht!",
   "no_data": "keine Daten gefunden…",
   "choose…": "wählen…",
+  "yes": "ja",
+  "no": "nein",
 
   "errors": {
-    "general": "Oops! Ein Fehler ist aufgetreten."
+    "general": "Oops! Ein Fehler ist aufgetreten.",
+    "permission": "Du hast keine Berechtigung, um diese Aktion auszuführen."
   },
 
   "datetime": {

@@ -10,17 +10,11 @@ import { BrowserRouter as Router } from "react-router-dom";
 
 import client from "./apolloClient";
 import App from "./App";
-import { refreshUser, setUser } from "./App/sessionSlice";
-import { getAuthorizationToken } from "./authenticationToken";
+import { refreshUser } from "./App/sessionSlice";
 import "./i18n";
 import { store } from "./store";
 
-const token = getAuthorizationToken();
-if (token) {
-  store.dispatch(refreshUser(client));
-} else {
-  store.dispatch(setUser(null));
-}
+store.dispatch(refreshUser(client));
 
 const container = document.getElementById("root")!;
 const root = createRoot(container);

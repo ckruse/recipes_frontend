@@ -5,6 +5,8 @@ import flashReducer from "./features/Flash/flashSlice";
 import metaListReducer from "./features/MetaList/metaListSlice";
 
 export const store = configureStore({
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware({ serializableCheck: false }),
+  devTools: process.env.NODE_ENV !== "production",
   reducer: {
     session: sessionReducer,
     flash: flashReducer,

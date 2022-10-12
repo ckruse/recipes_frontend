@@ -1,15 +1,9 @@
 import { TUser } from ".";
 
 export interface ILoginMutation {
-  login: {
-    token: string;
-    user: TUser;
-  };
+  login: TUser;
 }
 
 export interface IRefreshMutation {
-  refresh: {
-    token: string;
-    user: TUser;
-  };
+  refresh: TUser;
 }

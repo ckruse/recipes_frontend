@@ -1,0 +1,39 @@
+{
+  "field_names": {
+    "email": "Email",
+    "name": "Name",
+    "password": "Passwort",
+    "role": "Rolle",
+    "active": "aktiv",
+    "inserted_at": "erstellt",
+    "updated_at": "aktualisiert"
+  },
+
+  "list": {
+    "title": "Benutzer",
+    "deleted": "Der Benutzer wurde erfolgreich gelöscht!"
+  },
+
+  "new": {
+    "title": "neuer Benutzer",
+    "created": "Der Benutzer wurde erfolgreich erstellt!"
+  },
+
+  "edit": {
+    "title": "Benutzer „{{user}}“ bearbeiten",
+    "updated": "Der Benutzer wurde erfolgreich geändert!"
+  },
+
+  "show": {
+    "title": "Benutzer „{{user}}“"
+  },
+
+  "form": {
+    "active": "der Benutzer ist aktiv"
+  },
+
+  "roles": {
+    "ROOT": "Administrator",
+    "USER": "Benutzer"
+  }
+}

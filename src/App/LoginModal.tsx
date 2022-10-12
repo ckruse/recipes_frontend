@@ -4,7 +4,6 @@ import { Form, Formik, FormikHelpers } from "formik";
 import { Form as BsForm, Button, Modal } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 
-import { setAuthorizationToken } from "../authenticationToken";
 import { FormGroup } from "../components";
 import { Input } from "../components/Form";
 import { LOGIN_MUTATION } from "../graphql/session";
@@ -36,8 +35,7 @@ export default function LoginModal() {
         return;
       }
 
-      dispatch(setUser(data.login.user));
-      setAuthorizationToken(data.login.token);
+      dispatch(setUser(data.login));
       dispatch(toggleShowLogin());
     } catch (e) {
       console.log(e);

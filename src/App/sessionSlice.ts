@@ -1,13 +1,7 @@
 import { ApolloClient, NormalizedCacheObject } from "@apollo/client";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import { t } from "i18next";
-
-import { getAuthorizationToken, removeAuthorizationToken, setAuthorizationToken } from "../authenticationToken";
-import { addErrorFlash } from "../features/Flash/flashSlice";
 import { REFRESH_MUTATION } from "../graphql/session";
-import { MutationError } from "../handleError";
-import i18n from "../i18n";
 import { AppThunk, RootState } from "../store";
 import { Nullable, TUser } from "../types";
 import { IRefreshMutation } from "../types/session";
@@ -17,7 +11,7 @@ export interface SessionState {
   showLogin: boolean;
   checked: boolean;
   loading: boolean;
-  token: Nullable<string>;
+  subNav: Nullable<React.ReactNode>;
 }
 
 const initialState: SessionState = {
@@ -25,7 +19,7 @@ const initialState: SessionState = {
   showLogin: false,
   checked: false,
   loading: false,
-  token: null,
+  subNav: null,
 };
 
 export const sessionSlice = createSlice({
@@ -42,13 +36,16 @@ export const sessionSlice = createSlice({
     setLoading(state, action: PayloadAction<boolean>) {
       state.loading = action.payload;
     },
-    setToken(state, action: PayloadAction<string | null>) {
-      state.token = action.payload;
+    addSubnav(state, action: PayloadAction<React.ReactNode>) {
+      state.subNav = action.payload;
+    },
+    removeSubnav(state) {
+      state.subNav = null;
     },
   },
 });
 
-export const { setUser, toggleShowLogin, setLoading, setToken } = sessionSlice.actions;
+export const { setUser, toggleShowLogin, setLoading, addSubnav, removeSubnav } = sessionSlice.actions;
 
 export const selectSession = (state: RootState) => state.session;
 
@@ -57,12 +54,9 @@ export const refreshUser =
   async (dispatch) => {
     dispatch(setLoading(true));
 
-    await i18n.loadNamespaces(["root"]);
-
     try {
       const { data } = await client.mutate<IRefreshMutation>({
         mutation: REFRESH_MUTATION,
-        variables: { token: getAuthorizationToken() },
       });
 
       if (!data?.refresh) {
@@ -70,15 +64,10 @@ export const refreshUser =
         return;
       }
 
-      dispatch(setUser(data.refresh.user));
-      dispatch(setToken(data.refresh.token));
-      setAuthorizationToken(data.refresh.token);
+      dispatch(setUser(data.refresh));
     } catch (e) {
       console.error(e);
-
       dispatch(setUser(null));
-      removeAuthorizationToken();
-      dispatch(addErrorFlash(t("root:authorization_failed")));
     }
 
     dispatch(setLoading(false));
