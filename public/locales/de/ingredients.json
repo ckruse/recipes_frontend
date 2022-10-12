@@ -28,5 +28,9 @@
 
   "show": {
     "title": "Zutat „{{name}}“"
+  },
+  "units": {
+    "G": "Gramm",
+    "ML": "Milliliter"
   }
 }

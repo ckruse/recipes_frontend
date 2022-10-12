@@ -1,4 +1,5 @@
 import { Form, Formik, FormikHelpers } from "formik";
+import _ from "lodash";
 import { Form as BsForm } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
@@ -35,6 +36,10 @@ const initialValues = (ingredient: Nilable<TIngredient>): ValuesInterface => ({
 export default function IngredientForm({ ingredient, onSave }: TProps) {
   const { t } = useTranslation(["ingredients", "translation"]);
 
+  const referenceOptions = _(t("ingredients:units", { returnObjects: true }))
+    .map((label, unit) => ({ label, value: unit }))
+    .valueOf();
+
   return (
     <Formik initialValues={initialValues(ingredient)} onSubmit={onSave}>
       {({ isSubmitting }) => (
@@ -46,14 +51,7 @@ export default function IngredientForm({ ingredient, onSave }: TProps) {
 
           <FormGroup>
             <BsForm.Label htmlFor="reference">{t("ingredients:fieldnames.reference")}</BsForm.Label>
-            <Select
-              id="reference"
-              name="reference"
-              options={[
-                { value: "G", label: "Gramm" },
-                { value: "ML", label: "Milliliter" },
-              ]}
-            />
+            <Select id="reference" name="reference" options={referenceOptions} />
           </FormGroup>
 
           <FormGroup>
