@@ -4,9 +4,10 @@ import { FormikHelpers } from "formik";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
-import { INGREDIENT_CREATE_MUTATION } from "../../graphql/ingredients";
+import { INGREDIENT_MUTATION } from "../../graphql/ingredients";
+import { MutationError } from "../../handleError";
 import { useAppDispatch, useTitle } from "../../hooks";
-import { IIngredientCreateMutation } from "../../types";
+import { IIngredientMutation } from "../../types";
 import { showIngredientPath } from "../../urls";
 import { addErrorFlash, addSuccessFlash } from "../Flash/flashSlice";
 import Form, { ValuesInterface } from "./Form";
@@ -15,7 +16,7 @@ export default function New() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { t } = useTranslation(["ingredients", "translation"]);
-  const [mutateIngredient] = useMutation<IIngredientCreateMutation>(INGREDIENT_CREATE_MUTATION);
+  const [mutateIngredient] = useMutation<IIngredientMutation>(INGREDIENT_MUTATION);
 
   useTitle(t("ingredients:new.title"));
 
@@ -24,13 +25,12 @@ export default function New() {
       setSubmitting(true);
       const { data } = await mutateIngredient({ variables: { ingredient: values } });
 
-      if (!data?.createIngredient) {
-        // TODO: handle error
-        return;
+      if (!data?.mutateIngredient.successful) {
+        throw new MutationError(data?.mutateIngredient);
       }
 
       dispatch(addSuccessFlash(t("ingredients:new.success")));
-      navigate(showIngredientPath(data.createIngredient));
+      navigate(showIngredientPath(data.mutateIngredient.result));
     } catch (e) {
       setSubmitting(false);
       dispatch(addErrorFlash(t("translation:errors.general")));

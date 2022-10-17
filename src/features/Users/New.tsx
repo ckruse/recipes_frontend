@@ -4,9 +4,10 @@ import { FormikHelpers } from "formik";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
-import { USER_CREATE_MUTATION } from "../../graphql/users";
+import { USER_MUTATION } from "../../graphql/users";
+import { MutationError } from "../../handleError";
 import { useAppDispatch, useTitle } from "../../hooks";
-import { IUserCreateMutation } from "../../types";
+import { IUserMutation } from "../../types";
 import { editUserPath } from "../../urls";
 import { addErrorFlash, addSuccessFlash } from "../Flash/flashSlice";
 import Form, { TValues } from "./Form";
@@ -18,25 +19,21 @@ export default function New() {
 
   useTitle(t("users:new.title"));
 
-  const [userMutation] = useMutation<IUserCreateMutation>(USER_CREATE_MUTATION);
+  const [userMutation] = useMutation<IUserMutation>(USER_MUTATION);
 
   async function onSave(values: TValues, { setSubmitting }: FormikHelpers<TValues>) {
     try {
       setSubmitting(true);
       const { data } = await userMutation({ variables: { user: values } });
 
-      if (!data?.createUser) {
-        setSubmitting(false);
-        // TODO: handle error
-        dispatch(addErrorFlash(t("translation:errors.general")));
-        return;
+      if (!data?.mutateUser.successful) {
+        throw new MutationError(data?.mutateUser);
       }
 
       dispatch(addSuccessFlash(t("users:new.created")));
-      navigate(editUserPath(data.createUser));
+      navigate(editUserPath(data.mutateUser.result));
     } catch (e) {
       setSubmitting(false);
-      // TODO: handle error
       dispatch(addErrorFlash(t("translation:errors.general")));
       console.error(e);
     }

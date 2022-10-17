@@ -5,9 +5,10 @@ import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
 
 import { Loading } from "../../components";
-import { USER_GET_QUERY, USER_UPDATE_MUTATION } from "../../graphql/users";
+import { USER_GET_QUERY, USER_MUTATION } from "../../graphql/users";
+import { MutationError } from "../../handleError";
 import { useAppDispatch, useTitle } from "../../hooks";
-import { IUserData, IUserUpdateMutation } from "../../types";
+import { IUserData, IUserMutation } from "../../types";
 import { usersPath } from "../../urls";
 import { addErrorFlash, addSuccessFlash } from "../Flash/flashSlice";
 import Form, { TValues } from "./Form";
@@ -19,7 +20,7 @@ export default function Edit() {
   const navigate = useNavigate();
 
   const { data } = useQuery<IUserData>(USER_GET_QUERY, { variables: { id: parseInt(id || "0", 10) } });
-  const [userMutation] = useMutation<IUserUpdateMutation>(USER_UPDATE_MUTATION);
+  const [userMutation] = useMutation<IUserMutation>(USER_MUTATION);
 
   useTitle(t("users:edit.title", { user: data?.user.name || data?.user.email || "…" }));
 
@@ -29,17 +30,14 @@ export default function Edit() {
       const { data } = await userMutation({ variables: { id: parseInt(id || "0"), user: values } });
       setSubmitting(false);
 
-      if (!data?.updateUser) {
-        // TODO: handle error
-        dispatch(addErrorFlash(t("translation:errors.general")));
-        return;
+      if (!data?.mutateUser.successful) {
+        throw new MutationError(data?.mutateUser);
       }
 
       dispatch(addSuccessFlash(t("users:edit.updated")));
       navigate(usersPath());
     } catch (e) {
       setSubmitting(false);
-      // TODO: handle error
       dispatch(addErrorFlash(t("translation:errors.general")));
       console.error(e);
     }

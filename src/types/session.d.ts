@@ -1,9 +1,15 @@
-import { TUser } from ".";
+import { TMutationResult, TUser } from ".";
 
 export interface ILoginMutation {
-  login: TUser;
+  login: TMutationResult<{
+    token: string;
+    user: TUser;
+  }>;
 }
 
 export interface IRefreshMutation {
-  refresh: TUser;
+  refresh: TMutationResult<{
+    token: string;
+    user: TUser;
+  }>;
 }

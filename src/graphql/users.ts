@@ -40,23 +40,44 @@ export const USER_GET_QUERY = gql`
 
 export const USER_DELETE_MUTATION = gql`
   mutation deleteUser($id: ID!) {
-    deleteUser(id: $id)
-  }
-`;
+    deleteUser(id: $id) {
+      successful
+      messages {
+        field
+        message
+        template
+        code
+        options {
+          key
+          value
+        }
+      }
 
-export const USER_CREATE_MUTATION = gql`
-  mutation createUser($user: UserInput!) {
-    createUser(user: $user) {
-      ...UserFragment
+      result {
+        id
+      }
     }
   }
-  ${USER_FRAGMENT}
 `;
 
-export const USER_UPDATE_MUTATION = gql`
-  mutation updateUser($id: ID!, $user: UserInput!) {
-    updateUser(id: $id, user: $user) {
-      ...UserFragment
+export const USER_MUTATION = gql`
+  mutation mutateUser($user: UserInput!) {
+    mutateUser(user: $user) {
+      successful
+      messages {
+        field
+        message
+        template
+        code
+        options {
+          key
+          value
+        }
+      }
+
+      result {
+        ...UserFragment
+      }
     }
   }
   ${USER_FRAGMENT}

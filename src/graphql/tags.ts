@@ -12,14 +12,28 @@ export const TAGS_QUERY = gql`
   }
 `;
 
-export const TAG_CREATE_MUTATION = gql`
-  mutation createTag($name: String!) {
-    createTag(name: $name) {
-      id
-      tag
+export const TAG_MUTATION = gql`
+  mutation mutateTag($name: String!) {
+    mutateTag(name: $name) {
+      successful
+      messages {
+        field
+        message
+        template
+        code
+        options {
+          key
+          value
+        }
+      }
 
-      insertedAt
-      updatedAt
+      result {
+        id
+        tag
+
+        insertedAt
+        updatedAt
+      }
     }
   }
 `;

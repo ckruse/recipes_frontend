@@ -5,9 +5,10 @@ import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
 
 import { Loading } from "../../components";
-import { INGREDIENT_QUERY, INGREDIENT_UPDATE_MUTATION } from "../../graphql/ingredients";
+import { INGREDIENT_MUTATION, INGREDIENT_QUERY } from "../../graphql/ingredients";
+import { MutationError } from "../../handleError";
 import { useAppDispatch, useTitle } from "../../hooks";
-import { IIngredientQueryResult, IIngredientUpdateMutation } from "../../types";
+import { IIngredientMutation, IIngredientQueryResult } from "../../types";
 import { showIngredientPath } from "../../urls";
 import { addErrorFlash, addSuccessFlash } from "../Flash/flashSlice";
 import Form, { ValuesInterface } from "./Form";
@@ -19,7 +20,7 @@ export default function Edit() {
   const navigate = useNavigate();
 
   const { data } = useQuery<IIngredientQueryResult>(INGREDIENT_QUERY, { variables: { id: parseInt(id || "0", 10) } });
-  const [mutateRecipe] = useMutation<IIngredientUpdateMutation>(INGREDIENT_UPDATE_MUTATION);
+  const [mutateIngredient] = useMutation<IIngredientMutation>(INGREDIENT_MUTATION);
 
   useTitle(t("ingredients:edit.title", { name: data?.ingredient.name || "…" }));
 
@@ -27,20 +28,19 @@ export default function Edit() {
     try {
       setSubmitting(true);
 
-      const { data: iData } = await mutateRecipe({
+      const { data: iData } = await mutateIngredient({
         variables: {
           id: data!.ingredient.id,
           ingredient: values,
         },
       });
 
-      if (!iData?.updateIngredient) {
-        // TODO: handle error
-        return;
+      if (!iData?.mutateIngredient.successful) {
+        throw new MutationError(iData?.mutateIngredient);
       }
 
       dispatch(addSuccessFlash(t("ingredients:edit.success")));
-      navigate(showIngredientPath(iData.updateIngredient));
+      navigate(showIngredientPath(iData.mutateIngredient.result));
     } catch (e) {
       setSubmitting(false);
       dispatch(addErrorFlash(t("translation:errors.general")));

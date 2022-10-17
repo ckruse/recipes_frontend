@@ -12,9 +12,10 @@ import Select from "react-select/creatable";
 import { FormActions, FormGroup } from "../../components";
 import { CancelButton, SaveButton } from "../../components/Buttons";
 import { Input, Textarea } from "../../components/Form";
-import { TAG_CREATE_MUTATION, TAGS_QUERY } from "../../graphql/tags";
+import { TAG_MUTATION, TAGS_QUERY } from "../../graphql/tags";
+import { MutationError } from "../../handleError";
 import { useDebounce } from "../../hooks";
-import { TagCreateMutationInterface, TagsDataInterface, TRecipe } from "../../types";
+import { TagMutationInterface, TagsDataInterface, TRecipe } from "../../types";
 import { recipesPath } from "../../urls";
 
 type PropsType = {
@@ -22,12 +23,12 @@ type PropsType = {
   onSave: (recipe: ValuesInterface, helpers: FormikHelpers<ValuesInterface>) => void;
 };
 
-type OptionType = { value: number; label: string };
+type OptionType = { value: string; label: string };
 
 export interface ValuesInterface {
   name: string;
   description: string;
-  tags: { id: number; tag: string }[];
+  tags: { id: string; tag: string }[];
 }
 
 const initialValues = (recipe?: TRecipe): ValuesInterface => ({
@@ -41,7 +42,7 @@ export default function RecipesForm({ recipe, onSave }: PropsType) {
   const debouncedSearch = useDebounce(search, 200);
   const { t } = useTranslation(["recipes", "translation"]);
 
-  const [mutateTag] = useMutation<TagCreateMutationInterface>(TAG_CREATE_MUTATION);
+  const [mutateTag] = useMutation<TagMutationInterface>(TAG_MUTATION);
   const { data, loading } = useQuery<TagsDataInterface>(TAGS_QUERY, {
     variables: { search: debouncedSearch, limit: 50, offset: 0 },
     skip: !search,
@@ -54,12 +55,11 @@ export default function RecipesForm({ recipe, onSave }: PropsType) {
           if (actionMeta.action === "create-option") {
             const { data } = await mutateTag({ variables: { name: actionMeta.option.label } });
 
-            if (!data?.createTag) {
-              // TODO: handle error
-              return;
+            if (!data?.mutateTag.successful) {
+              throw new MutationError(data?.mutateTag);
             }
 
-            setFieldValue("tags", [...values.tags, { id: data.createTag.id, tag: data.createTag.tag }]);
+            setFieldValue("tags", [...values.tags, { id: data.mutateTag.result.id, tag: data.mutateTag.result.tag }]);
           } else {
             setFieldValue(
               "tags",

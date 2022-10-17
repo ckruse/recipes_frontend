@@ -2,15 +2,16 @@ import { ApolloClient, NormalizedCacheObject } from "@apollo/client";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import { REFRESH_MUTATION } from "../graphql/session";
+import { MutationError } from "../handleError";
 import { AppThunk, RootState } from "../store";
-import { Nullable, TUser } from "../types";
-import { IRefreshMutation } from "../types/session";
+import { IRefreshMutation, Nullable, TUser } from "../types";
 
 export interface SessionState {
   user: Nullable<TUser>;
   showLogin: boolean;
   checked: boolean;
   loading: boolean;
+  token: Nullable<string>;
   subNav: Nullable<React.ReactNode>;
 }
 
@@ -19,6 +20,7 @@ const initialState: SessionState = {
   showLogin: false,
   checked: false,
   loading: false,
+  token: null,
   subNav: null,
 };
 
@@ -36,6 +38,9 @@ export const sessionSlice = createSlice({
     setLoading(state, action: PayloadAction<boolean>) {
       state.loading = action.payload;
     },
+    setToken(state, action: PayloadAction<string | null>) {
+      state.token = action.payload;
+    },
     addSubnav(state, action: PayloadAction<React.ReactNode>) {
       state.subNav = action.payload;
     },
@@ -45,7 +50,7 @@ export const sessionSlice = createSlice({
   },
 });
 
-export const { setUser, toggleShowLogin, setLoading, addSubnav, removeSubnav } = sessionSlice.actions;
+export const { setUser, toggleShowLogin, setLoading, setToken, addSubnav, removeSubnav } = sessionSlice.actions;
 
 export const selectSession = (state: RootState) => state.session;
 
@@ -55,16 +60,13 @@ export const refreshUser =
     dispatch(setLoading(true));
 
     try {
-      const { data } = await client.mutate<IRefreshMutation>({
-        mutation: REFRESH_MUTATION,
-      });
+      const { data } = await client.mutate<IRefreshMutation>({ mutation: REFRESH_MUTATION });
 
-      if (!data?.refresh) {
-        // TODO: handle error
-        return;
+      if (!data?.refresh.successful) {
+        throw new MutationError(data?.refresh);
       }
 
-      dispatch(setUser(data.refresh));
+      dispatch(setUser(data.refresh.result.user));
     } catch (e) {
       console.error(e);
       dispatch(setUser(null));
