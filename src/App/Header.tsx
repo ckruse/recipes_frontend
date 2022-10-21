@@ -54,7 +54,7 @@ export default function Header() {
       <div className="user-menu">
         {user && (
           <Link to={showUserPath(user)}>
-            <img src={user.avatar || "/default_avatar.png"} className="user-avatar" alt={user.name || ""} />
+            <img src={user.avatar.thumb} className="user-avatar" alt={user.name || ""} />
           </Link>
         )}
 

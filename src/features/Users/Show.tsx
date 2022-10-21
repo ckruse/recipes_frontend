@@ -10,7 +10,7 @@ import { IUserData } from "../../types";
 export default function Show() {
   const { id } = useParams<"id">();
   const { t } = useTranslation(["users", "translation"]);
-  const { data } = useQuery<IUserData>(USER_GET_QUERY, { variables: { id: parseInt(id || "0", 10) } });
+  const { data } = useQuery<IUserData>(USER_GET_QUERY, { variables: { id } });
 
   useTitle(t("users:show.title", { user: data?.user.name || data?.user.email || "…" }));
 

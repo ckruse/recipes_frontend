@@ -10,7 +10,10 @@ export type TUser = {
 
   name: Nullable<string>;
 
-  avatar: Nullable<string>;
+  avatar: {
+    original: string;
+    thumb: string;
+  };
 
   insertedAt: string;
   updatedAt: string;

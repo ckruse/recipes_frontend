@@ -19,15 +19,16 @@ export default function Edit() {
   const { t } = useTranslation(["users", "translation"]);
   const navigate = useNavigate();
 
-  const { data } = useQuery<IUserData>(USER_GET_QUERY, { variables: { id: parseInt(id || "0", 10) } });
+  const { data } = useQuery<IUserData>(USER_GET_QUERY, { variables: { id } });
   const [userMutation] = useMutation<IUserMutation>(USER_MUTATION);
 
   useTitle(t("users:edit.title", { user: data?.user.name || data?.user.email || "…" }));
 
   async function onSave(values: TValues, { setSubmitting }: FormikHelpers<TValues>) {
+    console.log("values", values);
     try {
       setSubmitting(true);
-      const { data } = await userMutation({ variables: { id: parseInt(id || "0"), user: values } });
+      const { data } = await userMutation({ variables: { id, user: values } });
       setSubmitting(false);
 
       if (!data?.mutateUser.successful) {

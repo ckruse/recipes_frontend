@@ -5,7 +5,12 @@ export const USER_FRAGMENT = gql`
     id
     email
     active
-    avatar
+
+    avatar {
+      original
+      thumb
+    }
+
     name
     role
     insertedAt
@@ -61,8 +66,8 @@ export const USER_DELETE_MUTATION = gql`
 `;
 
 export const USER_MUTATION = gql`
-  mutation mutateUser($user: UserInput!) {
-    mutateUser(user: $user) {
+  mutation mutateUser($id: ID, $user: UserInput!) {
+    mutateUser(id: $id, user: $user) {
       successful
       messages {
         field
