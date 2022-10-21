@@ -15,10 +15,14 @@ import LoginModal from "./LoginModal";
 import { selectSession } from "./sessionSlice";
 
 function App() {
-  const { subNav } = useAppSelector(selectSession);
+  const { subNav, checked } = useAppSelector(selectSession);
   const { t } = useTranslation(["root"]);
 
   useTitle(t("root:title"));
+
+  if (!checked) {
+    return <Loading expand />;
+  }
 
   return (
     <Suspense fallback={<Loading expand />}>
