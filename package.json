@@ -30,6 +30,7 @@
     "@types/node": "^17.0.25",
     "@types/react": "^18.0.6",
     "@types/react-dom": "^18.0.2",
+    "apollo-absinthe-upload-link": "^1.7.0",
     "bootstrap": "^5.2.1",
     "clsx": "^1.2.1",
     "date-fns": "^2.29.3",

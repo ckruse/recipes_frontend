@@ -1,10 +1,12 @@
-import { ApolloClient, ApolloLink, HttpLink, InMemoryCache } from "@apollo/client";
+import { ApolloClient, ApolloLink, InMemoryCache } from "@apollo/client";
+
+import { createLink } from "apollo-absinthe-upload-link";
 
 import { getAuthorizationToken } from "../authorizationToken";
 
 const URI = process.env.NODE_ENV === "production" ? "https://recipes.wwwtech.de" : "http://localhost:4000";
 
-const httpLink = new HttpLink({ uri: `${URI}/graphql` });
+const httpLink = createLink({ uri: `${URI}/graphql` });
 const authMiddleware = new ApolloLink((operation, forward) => {
   const token = getAuthorizationToken();
 
