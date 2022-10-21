@@ -11,7 +11,7 @@ import { IRecipeQueryResult } from "../../types";
 export default function Show() {
   const { id } = useParams<"id">();
   const { t } = useTranslation(["recipes", "translation"]);
-  const { data } = useQuery<IRecipeQueryResult>(RECIPE_QUERY, { variables: { id: parseInt(id || "0", 10) } });
+  const { data } = useQuery<IRecipeQueryResult>(RECIPE_QUERY, { variables: { id } });
 
   useTitle(t("recipes:show.title", { name: data?.recipe.name || "…" }));
 

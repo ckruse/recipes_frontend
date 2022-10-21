@@ -19,7 +19,7 @@ export default function Edit() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const { data } = useQuery<IRecipeQueryResult>(RECIPE_QUERY, { variables: { id: parseInt(id || "0", 10) } });
+  const { data } = useQuery<IRecipeQueryResult>(RECIPE_QUERY, { variables: { id } });
 
   const [mutateRecipe] = useMutation<IRecipeMutation>(RECIPE_MUTATION);
 

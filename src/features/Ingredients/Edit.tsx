@@ -19,7 +19,7 @@ export default function Edit() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const { data } = useQuery<IIngredientQueryResult>(INGREDIENT_QUERY, { variables: { id: parseInt(id || "0", 10) } });
+  const { data } = useQuery<IIngredientQueryResult>(INGREDIENT_QUERY, { variables: { id } });
   const [mutateIngredient] = useMutation<IIngredientMutation>(INGREDIENT_MUTATION);
 
   useTitle(t("ingredients:edit.title", { name: data?.ingredient.name || "…" }));
