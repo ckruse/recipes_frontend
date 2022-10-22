@@ -34,7 +34,7 @@ export default function List() {
               <th>{t("recipes:fieldnames.name")}</th>
               <th>{t("recipes:fieldnames.inserted_at")}</th>
               <th>{t("recipes:fieldnames.updated_at")}</th>
-              <th>Tags</th>
+              <th>{t("recipes:fieldnames.tags")}</th>
               <th></th>
             </tr>
           </thead>

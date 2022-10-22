@@ -4,7 +4,8 @@
     "description": "Beschreibung",
     "tags": "Tags",
     "inserted_at": "erstellt",
-    "updated_at": "aktualisiert"
+    "updated_at": "aktualisiert",
+    "tags": "Tags"
   },
 
   "new": {
