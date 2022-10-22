@@ -28,6 +28,7 @@ type TMutationErrorResult = {
 
 export * from "./users";
 export * from "./recipes";
+export * from "./steps";
 export * from "./tags";
 export * from "./ingredients";
 export * from "./session";

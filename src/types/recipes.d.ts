@@ -1,4 +1,4 @@
-import { Nullable, TMutationResult, TTag } from ".";
+import { Nullable, TMutationResult, TTag, TStep } from ".";
 
 export type TRecipe = {
   id: string;
@@ -8,7 +8,7 @@ export type TRecipe = {
   insertedAt: string;
   updatedAt: string;
 
-  // TODO: steps: TSteps[];
+  steps: TStep[];
   tags: TTag[];
 };
 
