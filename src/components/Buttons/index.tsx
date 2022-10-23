@@ -6,3 +6,4 @@ export * from "./DeleteButton";
 export * from "./ShowButton";
 export * from "./EditButton";
 export * from "./NewButton";
+export * from "./AddButton";
