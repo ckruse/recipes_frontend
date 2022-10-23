@@ -9,7 +9,7 @@ import { MutationError } from "../../handleError";
 import { useAppDispatch, useTitle } from "../../hooks";
 import useAuthRequired from "../../hooks/useAuthRequired";
 import { IRecipeMutation } from "../../types";
-import { editRecipePath } from "../../urls";
+import { showRecipePath } from "../../urls";
 import { addErrorFlash, addSuccessFlash } from "../Flash/flashSlice";
 import Form, { ValuesInterface } from "./Form";
 
@@ -41,7 +41,7 @@ export default function New() {
       }
 
       dispatch(addSuccessFlash(t("recipes:new.success")));
-      navigate(editRecipePath(data.mutateRecipe.result));
+      navigate(showRecipePath(data.mutateRecipe.result));
     } catch (e) {
       setSubmitting(false);
       dispatch(addErrorFlash(t("translation:errors.general")));

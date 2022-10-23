@@ -4,8 +4,23 @@
     "description": "Beschreibung",
     "tags": "Tags",
     "inserted_at": "erstellt",
-    "updated_at": "aktualisiert",
-    "tags": "Tags"
+    "updated_at": "aktualisiert"
+  },
+
+  "fieldnames_step_ingredient": {
+    "unit": "Einheit",
+    "amount": "Menge",
+    "ingredient_id": "Zutat"
+  },
+
+  "units": {
+    "G": "Gramm",
+    "ML": "Milliliter",
+    "ST": "Stück",
+    "TL": "Teelöffel",
+    "EL": "Esslöffel",
+    "PR": "Prise",
+    "MS": "Messerspitze"
   },
 
   "new": {
@@ -21,7 +36,7 @@
   "form": {
     "tags_placeholder": "Tags auswählen oder hinzufügen…",
     "no_tags_found": "Keine Tags gefunden!",
-    "create_tag": "Tag „{{tag}}“ erstellen…"
+    "create_tag": "Tag „{{name}}“ erstellen…"
   },
 
   "show": {
@@ -31,5 +46,13 @@
   "list": {
     "title": "Rezepte",
     "deleted": "Das Rezept wurde erfolgreich gelöscht!"
+  },
+
+  "step_modal": {
+    "title_edit": "Schritt bearbeiten",
+    "title_new": "neuer Schritt",
+    "ingredients": "Zutaten",
+    "add_ingredient": "Zutat hinzufügen",
+    "success": "Der Schritt wurde erfolgreich gespeichert!"
   }
 }

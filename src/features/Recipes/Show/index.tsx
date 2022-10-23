@@ -4,9 +4,10 @@ import { useTranslation } from "react-i18next";
 import ReactMarkdown from "react-markdown";
 import { useParams } from "react-router-dom";
 
-import { RECIPE_QUERY } from "../../graphql/recipes";
-import { useTitle } from "../../hooks";
-import { IRecipeQueryResult } from "../../types";
+import { RECIPE_QUERY } from "../../../graphql/recipes";
+import { useTitle } from "../../../hooks";
+import { IRecipeQueryResult } from "../../../types";
+import Steps from "./Steps";
 
 export default function Show() {
   const { id } = useParams<"id">();
@@ -19,13 +20,15 @@ export default function Show() {
     <>
       <h1>{t("recipes:show.title", { name: data?.recipe.name || "…" })}</h1>
 
-      <ul>
+      <ul className="recipes-show-tags-list">
         {data?.recipe.tags.map((tag) => (
-          <li key={tag.id}>{tag.tag}</li>
+          <li key={tag.id}>{tag.name}</li>
         ))}
       </ul>
 
       <ReactMarkdown>{data?.recipe.description || ""}</ReactMarkdown>
+
+      <Steps recipe={data?.recipe} />
     </>
   );
 }

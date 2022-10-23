@@ -28,13 +28,13 @@ type OptionType = { value: string; label: string };
 export interface ValuesInterface {
   name: string;
   description: string;
-  tags: { id: string; tag: string }[];
+  tags: { id: string; name: string }[];
 }
 
 const initialValues = (recipe?: TRecipe): ValuesInterface => ({
   name: recipe?.name || "",
   description: recipe?.description || "",
-  tags: recipe?.tags.map((tag) => ({ id: tag.id, tag: tag.tag })) || [],
+  tags: recipe?.tags.map((tag) => ({ id: tag.id, name: tag.name })) || [],
 });
 
 export default function RecipesForm({ recipe, onSave }: PropsType) {
@@ -53,23 +53,23 @@ export default function RecipesForm({ recipe, onSave }: PropsType) {
       {({ values, setFieldValue }) => {
         async function onSelect(value: MultiValue<OptionType>, actionMeta: ActionMeta<OptionType>) {
           if (actionMeta.action === "create-option") {
-            const { data } = await mutateTag({ variables: { name: actionMeta.option.label } });
+            const { data } = await mutateTag({ variables: { tag: { name: actionMeta.option.label } } });
 
             if (!data?.mutateTag.successful) {
               throw new MutationError(data?.mutateTag);
             }
 
-            setFieldValue("tags", [...values.tags, { id: data.mutateTag.result.id, tag: data.mutateTag.result.tag }]);
+            setFieldValue("tags", [...values.tags, { id: data.mutateTag.result.id, name: data.mutateTag.result.name }]);
           } else {
             setFieldValue(
               "tags",
-              value.map((tag) => ({ id: tag.value, tag: tag.label }))
+              value.map((tag) => ({ id: tag.value, name: tag.label }))
             );
           }
         }
 
-        const tagValues: OptionType[] = values.tags.map((tag) => ({ value: tag.id, label: tag.tag }));
-        const options: OptionType[] = data?.tags.map((tag) => ({ value: tag.id, label: tag.tag })) || [];
+        const tagValues: OptionType[] = values.tags.map((tag) => ({ value: tag.id, label: tag.name }));
+        const options: OptionType[] = data?.tags.map((tag) => ({ value: tag.id, label: tag.name })) || [];
 
         return (
           <Form>
@@ -97,7 +97,7 @@ export default function RecipesForm({ recipe, onSave }: PropsType) {
                 inputValue={search}
                 placeholder={t("recipes:form.tags_placeholder")}
                 noOptionsMessage={() => t("recipes:form.no_tags_found")}
-                formatCreateLabel={(inputValue) => t("recipes:form.create_tag", { tag: inputValue })}
+                formatCreateLabel={(inputValue) => t("recipes:form.create_tag", { name: inputValue })}
                 loadingMessage={() => t("translation:loading")}
               />
             </FormGroup>

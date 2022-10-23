@@ -47,7 +47,7 @@ export default function List() {
                 <td>{recipe.name}</td>
                 <td>{indexDate(recipe.insertedAt)}</td>
                 <td>{indexDate(recipe.updatedAt)}</td>
-                <td>{recipe.tags.map((tag) => tag.tag).join(", ")}</td>
+                <td>{recipe.tags.map((tag) => tag.name).join(", ")}</td>
                 <ActionColumn>
                   <ShowButton as={Link} to={showRecipePath(recipe)}>
                     {t("translation:show")}

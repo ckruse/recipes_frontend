@@ -11,11 +11,62 @@ export const RECIPE_FRAGMENT = gql`
 
     tags {
       id
-      tag
+      name
       insertedAt
       updatedAt
     }
   }
+`;
+
+export const STEP_FRAGMENT = gql`
+  fragment StepFragment on Step {
+    id
+    position
+    description
+
+    insertedAt
+    updatedAt
+
+    stepIngredients {
+      id
+      amount
+      unit
+
+      stepId
+      ingredientId
+
+      insertedAt
+      updatedAt
+
+      ingredient {
+        id
+        name
+      }
+    }
+  }
+`;
+
+export const RECIPE_DETAIL_FRAGMENT = gql`
+  fragment RecipeDetailFragment on Recipe {
+    id
+    name
+    description
+
+    insertedAt
+    updatedAt
+
+    steps {
+      ...StepFragment
+    }
+
+    tags {
+      id
+      name
+      insertedAt
+      updatedAt
+    }
+  }
+  ${STEP_FRAGMENT}
 `;
 
 export const RECIPES_QUERY = gql`
@@ -37,10 +88,10 @@ export const RECIPES_COUNT_QUERY = gql`
 export const RECIPE_QUERY = gql`
   query recipe($id: ID!) {
     recipe(id: $id) {
-      ...RecipeFragment
+      ...RecipeDetailFragment
     }
   }
-  ${RECIPE_FRAGMENT}
+  ${RECIPE_DETAIL_FRAGMENT}
 `;
 
 export const RECIPE_MUTATION = gql`
@@ -59,11 +110,11 @@ export const RECIPE_MUTATION = gql`
       }
 
       result {
-        ...RecipeFragment
+        ...RecipeDetailFragment
       }
     }
   }
-  ${RECIPE_FRAGMENT}
+  ${RECIPE_DETAIL_FRAGMENT}
 `;
 
 export const RECIPE_DELETE_MUTATION = gql`
@@ -86,4 +137,27 @@ export const RECIPE_DELETE_MUTATION = gql`
       }
     }
   }
+`;
+
+export const RECIPE_STEP_MUTATION = gql`
+  mutation mutateStep($recipeId: ID!, $id: ID, $step: StepInput!) {
+    mutateStep(recipeId: $recipeId, id: $id, step: $step) {
+      successful
+      messages {
+        field
+        message
+        template
+        code
+        options {
+          key
+          value
+        }
+      }
+
+      result {
+        ...StepFragment
+      }
+    }
+  }
+  ${STEP_FRAGMENT}
 `;
