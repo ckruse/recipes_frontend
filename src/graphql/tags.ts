@@ -4,7 +4,7 @@ export const TAGS_QUERY = gql`
   query tags($limit: Int!, $offset: Int!, $search: String) {
     tags(limit: $limit, offset: $offset, search: $search) {
       id
-      tag
+      name
 
       insertedAt
       updatedAt
@@ -13,8 +13,8 @@ export const TAGS_QUERY = gql`
 `;
 
 export const TAG_MUTATION = gql`
-  mutation mutateTag($name: String!) {
-    mutateTag(name: $name) {
+  mutation mutateTag($id: ID, $tag: TagInput!) {
+    mutateTag(id: $id, tag: $tag) {
       successful
       messages {
         field
@@ -29,7 +29,7 @@ export const TAG_MUTATION = gql`
 
       result {
         id
-        tag
+        name
 
         insertedAt
         updatedAt
