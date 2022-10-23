@@ -1,7 +1,9 @@
 import { Nullable, TUser } from "../types";
+import IngredientPermissions from "./IngredientPermissions";
+import RecipePermissions from "./RecipePermissions";
 import UserPermissions from "./UserPermissions";
 
-export type TModule = "users";
+export type TModule = "users" | "recipes" | "ingredients";
 export type TAction = "create" | "list" | "show" | "edit" | "delete" | "default";
 export type PermissionBagType<T> = Record<
   TModule,
@@ -9,7 +11,9 @@ export type PermissionBagType<T> = Record<
 >;
 
 const PERMISSIONS: PermissionBagType<any> = {
-  ...UserPermissions,
+  users: UserPermissions,
+  recipes: RecipePermissions,
+  ingredients: IngredientPermissions,
 };
 
 export default function may<T>(user: Nullable<TUser>, module: TModule, action: TAction = "default", resource?: T) {
