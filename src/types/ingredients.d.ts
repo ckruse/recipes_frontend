@@ -13,6 +13,10 @@ export type TIngredient = {
   updatedAt: string;
 };
 
+export interface IIngredientsQueryResult {
+  ingredients: TIngredient[];
+}
+
 export interface IIngredientQueryResult {
   ingredient: TIngredient;
 }

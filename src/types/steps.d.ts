@@ -19,6 +19,9 @@ export type TStepIngredient = {
   insertAt: string;
   updateAt: string;
 
-  steps: TStep[];
-  ingredients: TIngredient[];
+  stepId: string;
+  ingredientId: string;
+
+  step: TStep;
+  ingredient: TIngredient;
 };

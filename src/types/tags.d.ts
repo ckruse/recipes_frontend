@@ -2,7 +2,7 @@ import { TMutationResult, TRecipe } from ".";
 
 export type TTag = {
   id: string;
-  tag: string;
+  name: string;
 
   updatedAt: string;
   insertedAt: string;
