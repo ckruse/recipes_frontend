@@ -14,6 +14,7 @@ type TProps<T> = {
   name: string;
   id?: string;
   placeholder?: string;
+  noOptionsMessage?: string;
   className: string;
   validate: boolean;
   isMulti: boolean;
@@ -25,7 +26,8 @@ type TProps<T> = {
 };
 
 export function Select<T>(props: TProps<T>) {
-  const { options, name, id, className, placeholder, validate, isMulti, isClearable, onChange } = props;
+  const { options, name, id, className, placeholder, noOptionsMessage, validate, isMulti, isClearable, onChange } =
+    props;
   const formik = useFormikContext();
   const { t } = useTranslation(["translation"]);
 
@@ -65,6 +67,7 @@ export function Select<T>(props: TProps<T>) {
   return (
     <ReactSelect
       placeholder={placeholder || t("translation:choose…")}
+      noOptionsMessage={() => noOptionsMessage || t("translation:no_options")}
       classNamePrefix="formik-react-select"
       className={klass}
       name={name}
