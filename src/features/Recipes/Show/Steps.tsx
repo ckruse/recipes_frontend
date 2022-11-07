@@ -18,7 +18,7 @@ type TProps = {
 
 export default function Steps({ recipe }: TProps) {
   const session = useAppSelector(selectSession);
-  const { t } = useTranslation(["translation", "recipes"]);
+  const { t } = useTranslation(["translation", "recipes", "ingredients"]);
   const [showModal, setShowModal] = useState<{ show: boolean; step: Nullable<TStep> }>({ show: false, step: null });
 
   if (!recipe) {
@@ -27,22 +27,26 @@ export default function Steps({ recipe }: TProps) {
 
   return (
     <>
-      <h2>Arbeitsschritte</h2>
+      <h2>{t("recipes:show.steps")}</h2>
 
       <ol className="recipes-show-steps-list">
         {_(recipe.steps)
           .sortBy("position")
-          .map((step) => (
+          .map((step, i) => (
             <li key={step.id}>
-              <ReactMarkdown>{step.description}</ReactMarkdown>
+              <h3>Schritt {i + 1}</h3>
 
-              <ul>
+              <ul className="recipes-recipe-show-steps-list-ingredients-list">
                 {step.stepIngredients.map((stepIng) => (
                   <li key={stepIng.id}>
-                    {stepIng.amount} {stepIng.unit} {stepIng.ingredient.name}
+                    {stepIng.amount} 
+                    {t(`ingredients:units.${stepIng.unit?.identifier || stepIng.ingredient.reference}`)}{" "}
+                    {stepIng.ingredient.name}
                   </li>
                 ))}
               </ul>
+
+              <ReactMarkdown>{step.description}</ReactMarkdown>
 
               {may(session.user, "recipes", "edit", recipe) && (
                 <ButtonGroup size="sm">
@@ -58,7 +62,7 @@ export default function Steps({ recipe }: TProps) {
 
       {may(session.user, "recipes", "edit", recipe) && (
         <AddButton size="sm" onClick={() => setShowModal({ step: null, show: true })}>
-          Abeitsschritt hinzufügen
+          {t("recipes:show.add_step")}
         </AddButton>
       )}
 

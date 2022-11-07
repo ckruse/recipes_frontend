@@ -1,5 +1,19 @@
 import { TMutationResult } from ".";
 
+export type TUnitIdentifier = "PCS" | "TBSP" | "TSP" | "SKOSH" | "PINCH";
+
+export type TUnit = {
+  id: string;
+  identifier: TUnitIdentifier;
+  baseValue: number;
+
+  ingredientId: string;
+  ingredient: TIngredient;
+
+  insertedAt: string;
+  updatedAt: string;
+};
+
 export type TIngredient = {
   id: string;
   name: string;
@@ -8,6 +22,8 @@ export type TIngredient = {
   carbs: number;
   fat: number;
   proteins: number;
+
+  units: TUnit[];
 
   insertedAt: string;
   updatedAt: string;

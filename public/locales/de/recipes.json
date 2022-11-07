@@ -10,17 +10,18 @@
   "fieldnames_step_ingredient": {
     "unit": "Einheit",
     "amount": "Menge",
-    "ingredient_id": "Zutat"
+    "ingredient_id": "Zutat",
+    "description": "Beschreibung"
   },
 
   "units": {
     "G": "Gramm",
     "ML": "Milliliter",
-    "ST": "Stück",
-    "TL": "Teelöffel",
-    "EL": "Esslöffel",
-    "PR": "Prise",
-    "MS": "Messerspitze"
+    "PCS": "Stück",
+    "TSP": "Teelöffel",
+    "TBLSP": "Esslöffel",
+    "SKOSH": "Prise",
+    "PINCH": "Messerspitze"
   },
 
   "new": {
@@ -40,7 +41,9 @@
   },
 
   "show": {
-    "title": "Rezept „{{name}}“"
+    "title": "Rezept „{{name}}“",
+    "steps": "Arbeitsschritte",
+    "add_step": "Abeitsschritt hinzufügen"
   },
 
   "list": {

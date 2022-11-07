@@ -35,4 +35,39 @@
 .recipes-show-steps-list {
   list-style-type: none;
   padding-left: 0;
+
+  & > li {
+    border-bottom: bs.$border-width bs.$border-style bs.$border-color;
+    padding-bottom: bs.$spacer;
+    margin-bottom: bs.$spacer;
+  }
+}
+
+.recipes-recipe-show-steps-list-ingredients-list {
+  margin-top: bs.$spacer;
+  margin-bottom: bs.$spacer;
+}
+
+.recipes-show-tags-list {
+  list-style-type: none;
+  padding-left: 0;
+
+  li {
+    display: inline-block;
+    padding: bs.$badge-padding-y 0.6em;
+    font-size: 0.9rem;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+
+    border-radius: bs.$border-radius-pill;
+
+    color: #fff;
+    background-color: #6c757d;
+  }
+
+  li + li {
+    margin-left: math.div(bs.$spacer, 2);
+  }
 }

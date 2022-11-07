@@ -28,6 +28,11 @@ export default function Edit() {
     try {
       setSubmitting(true);
 
+      values = {
+        ...values,
+        units: values.units.map((unit) => ({ ...unit, id: unit.id?.match(/^new__/) ? undefined : unit.id })),
+      };
+
       const { data: iData } = await mutateIngredient({
         variables: {
           id: data!.ingredient.id,

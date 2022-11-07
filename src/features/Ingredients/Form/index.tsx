@@ -4,11 +4,12 @@ import { Form as BsForm } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
-import { CancelButton, SaveButton } from "../../components";
-import { FormActions, FormGroup } from "../../components";
-import { Input, Select } from "../../components/Form";
-import { Nilable, TIngredient } from "../../types";
-import { ingredientsPath } from "../../urls";
+import { CancelButton, SaveButton } from "../../../components";
+import { FormActions, FormGroup } from "../../../components";
+import { Input, Select } from "../../../components/Form";
+import { Nilable, TIngredient, TUnitIdentifier } from "../../../types";
+import { ingredientsPath } from "../../../urls";
+import Units from "./Units";
 
 type TProps = {
   ingredient?: TIngredient;
@@ -22,6 +23,11 @@ export interface ValuesInterface {
   carbs: number;
   fat: number;
   proteins: number;
+  units: {
+    id: string | undefined;
+    identifier: TUnitIdentifier;
+    baseValue: number;
+  }[];
 }
 
 const initialValues = (ingredient: Nilable<TIngredient>): ValuesInterface => ({
@@ -31,6 +37,8 @@ const initialValues = (ingredient: Nilable<TIngredient>): ValuesInterface => ({
   carbs: ingredient?.carbs || 0,
   fat: ingredient?.fat || 0,
   proteins: ingredient?.proteins || 0,
+  units:
+    ingredient?.units.map((unit) => ({ id: unit.id, identifier: unit.identifier, baseValue: unit.baseValue })) || [],
 });
 
 export default function IngredientForm({ ingredient, onSave }: TProps) {
@@ -42,7 +50,7 @@ export default function IngredientForm({ ingredient, onSave }: TProps) {
 
   return (
     <Formik initialValues={initialValues(ingredient)} onSubmit={onSave}>
-      {({ isSubmitting }) => (
+      {({ isSubmitting, values }) => (
         <Form>
           <FormGroup>
             <BsForm.Label htmlFor="name">{t("ingredients:fieldnames.name")}</BsForm.Label>
@@ -73,6 +81,8 @@ export default function IngredientForm({ ingredient, onSave }: TProps) {
             <BsForm.Label htmlFor="proteins">{t("ingredients:fieldnames.proteins")}</BsForm.Label>
             <Input type="number" min={0} step={0.1} id="proteins" name="proteins" />
           </FormGroup>
+
+          <Units />
 
           <FormActions>
             <SaveButton disabled={isSubmitting} type="submit">

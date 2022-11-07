@@ -30,7 +30,13 @@ export const STEP_FRAGMENT = gql`
     stepIngredients {
       id
       amount
-      unit
+
+      unitId
+      unit {
+        id
+        identifier
+        baseValue
+      }
 
       stepId
       ingredientId
@@ -41,6 +47,13 @@ export const STEP_FRAGMENT = gql`
       ingredient {
         id
         name
+        reference
+
+        units {
+          id
+          identifier
+          baseValue
+        }
       }
     }
   }

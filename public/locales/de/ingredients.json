@@ -31,6 +31,12 @@
   },
   "units": {
     "G": "Gramm",
-    "ML": "Milliliter"
+    "ML": "Milliliter",
+
+    "PCS": "Stück",
+    "TBSP": "Esslöffel",
+    "TSP": "Teelöffel",
+    "SKOSH": "Prise",
+    "PINCH": "Messerspitze"
   }
 }

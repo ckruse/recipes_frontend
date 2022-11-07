@@ -1,10 +1,12 @@
 import { useMutation } from "@apollo/client";
 
 import { Form, Formik, FormikHelpers } from "formik";
+import { TFunction } from "i18next";
 import _ from "lodash";
 import { nanoid } from "nanoid";
 import { Form as BsForm, Modal } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
+import { OnChangeValue } from "react-select";
 
 import { AddButton, CancelButton, DeleteButton, FormGroup, SaveButton } from "../../../components";
 import { Input, Select, Textarea } from "../../../components/Form";
@@ -12,7 +14,7 @@ import { IngredientSelector } from "../../../components/Form/IngredientSelector"
 import { RECIPE_STEP_MUTATION } from "../../../graphql/recipes";
 import { MutationError } from "../../../handleError";
 import { useAppDispatch } from "../../../hooks";
-import { IRecipeStepMutation, Nullable, TRecipe, TStep } from "../../../types";
+import { IRecipeStepMutation, Nilable, Nullable, TIngredient, TRecipe, TStep } from "../../../types";
 import { addErrorFlash, addSuccessFlash } from "../../Flash/flashSlice";
 
 type TProps = {
@@ -25,8 +27,9 @@ type TProps = {
 type TIngredientRow = {
   id: string;
   amount: number;
-  unit: string;
+  unitId: Nullable<string>;
   ingredientId: string;
+  ingredient?: TIngredient;
 };
 
 type TValues = {
@@ -42,10 +45,20 @@ const initialValues = (recipe: TRecipe, step: Nullable<TStep>): TValues => ({
     step?.stepIngredients.map((stepIng) => ({
       id: stepIng.id,
       amount: stepIng.amount,
-      unit: stepIng.unit,
+      unitId: stepIng.unitId,
       ingredientId: stepIng.ingredientId,
+      ingredient: stepIng.ingredient,
     })) || [],
 });
+
+const unitOptions = (t: TFunction, si: TIngredientRow) => {
+  if (!si.ingredient) return [];
+
+  return si.ingredient.units.map((unit) => ({
+    value: unit.id,
+    label: t(`recipes:units.${unit.identifier}`),
+  }));
+};
 
 export default function StepModal({ show, step, recipe, toggle }: TProps) {
   const { t } = useTranslation(["translation", "recipes"]);
@@ -58,7 +71,7 @@ export default function StepModal({ show, step, recipe, toggle }: TProps) {
 
       const stepData = {
         ...values,
-        stepIngredients: values.stepIngredients.map((si) => {
+        stepIngredients: values.stepIngredients.map(({ ingredient, ...si }) => {
           if (si.id.match(/^new__/)) {
             return _.omit(si, ["id"]);
           }
@@ -93,7 +106,7 @@ export default function StepModal({ show, step, recipe, toggle }: TProps) {
       <Formik initialValues={initialValues(recipe, step)} onSubmit={save}>
         {({ values, setFieldValue }) => {
           function addIngredient() {
-            const newEntry: TIngredientRow = { id: `new__${nanoid()}`, amount: 0, unit: "G", ingredientId: "" };
+            const newEntry: TIngredientRow = { id: `new__${nanoid()}`, amount: 0, unitId: null, ingredientId: "" };
             setFieldValue("stepIngredients", [...values.stepIngredients, newEntry]);
           }
 
@@ -104,7 +117,16 @@ export default function StepModal({ show, step, recipe, toggle }: TProps) {
             );
           }
 
-          const unitOptions = _.map(t("recipes:units", { returnObjects: true }), (v, k) => ({ label: v, value: k }));
+          function changeIngredient(idx: number, value: OnChangeValue<{ ingredient: Nilable<TIngredient> }, false>) {
+            const ingredient = value?.ingredient;
+
+            if (!ingredient) {
+              return;
+            }
+
+            setFieldValue(`stepIngredients.${idx}.ingredientId`, ingredient.id);
+            setFieldValue(`stepIngredients.${idx}.ingredient`, ingredient);
+          }
 
           return (
             <Form>
@@ -126,8 +148,14 @@ export default function StepModal({ show, step, recipe, toggle }: TProps) {
                             {t("recipes:fieldnames_step_ingredient.ingredient_id")}
                           </BsForm.Label>
                           <IngredientSelector
+                            defaultValue={
+                              si.ingredient
+                                ? { label: si.ingredient.name, value: si.ingredient.id, ingredient: si.ingredient }
+                                : undefined
+                            }
                             id={`stepIngredients.${i}.ingredientId`}
                             name={`stepIngredients.${i}.ingredientId`}
+                            onChange={(ev) => changeIngredient(i, ev)}
                           />
                         </FormGroup>
 
@@ -145,13 +173,14 @@ export default function StepModal({ show, step, recipe, toggle }: TProps) {
                         </FormGroup>
 
                         <FormGroup>
-                          <BsForm.Label htmlFor={`stepIngredients.${i}.unit`}>
+                          <BsForm.Label htmlFor={`stepIngredients.${i}.unitId`}>
                             {t("recipes:fieldnames_step_ingredient.unit")}
                           </BsForm.Label>
                           <Select
-                            id={`stepIngredients.${i}.unit`}
-                            name={`stepIngredients.${i}.unit`}
-                            options={unitOptions}
+                            isClearable
+                            id={`stepIngredients.${i}.unitId`}
+                            name={`stepIngredients.${i}.unitId`}
+                            options={unitOptions(t, si)}
                           />
                         </FormGroup>
 
@@ -168,14 +197,16 @@ export default function StepModal({ show, step, recipe, toggle }: TProps) {
                 </fieldset>
 
                 <FormGroup>
-                  <BsForm.Label htmlFor="description">Beschreibung</BsForm.Label>
+                  <BsForm.Label htmlFor="description">
+                    {t("recipes:fieldnames_step_ingredient.description")}
+                  </BsForm.Label>
                   <Textarea name="description" id="description" />
                 </FormGroup>
               </Modal.Body>
 
               <Modal.Footer>
-                <SaveButton type="submit">speichern</SaveButton>
-                <CancelButton onClick={toggle}>abbrechen</CancelButton>
+                <SaveButton type="submit">{t("translation:save")}</SaveButton>
+                <CancelButton onClick={toggle}>{t("translation:cancel")}</CancelButton>
               </Modal.Footer>
             </Form>
           );

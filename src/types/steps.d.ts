@@ -1,4 +1,4 @@
-import { TIngredient } from "./ingredients";
+import { Nullable, TIngredient, TUnit } from ".";
 
 export type TStep = {
   id: string;
@@ -14,7 +14,8 @@ export type TStep = {
 export type TStepIngredient = {
   id: string;
   amount: number;
-  unit: string;
+  unitId: Nullable<string>;
+  unit: Nullable<TUnit>;
 
   insertAt: string;
   updateAt: string;

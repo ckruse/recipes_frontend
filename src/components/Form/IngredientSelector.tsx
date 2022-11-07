@@ -16,6 +16,7 @@ type TProps = {
   id?: string;
   name: string;
   onChange?: (value: EventType, opts: ActionMeta<OptionType>) => void;
+  defaultValue?: OptionType;
   placeholder?: string;
   noOptionsMessage?: string;
   loadingMessage?: string;
@@ -37,7 +38,7 @@ export function IngredientSelector(props: TProps) {
 
   const { data } = useQuery<IIngredientQueryResult>(INGREDIENT_QUERY, {
     variables: { id: value },
-    skip: typeof value !== "string" || !value,
+    skip: typeof value !== "string" || !value || !!props.defaultValue,
   });
 
   const [loadIngredients] = useLazyQuery<IIngredientsQueryResult>(INGREDIENTS_QUERY);
@@ -72,6 +73,8 @@ export function IngredientSelector(props: TProps) {
 
   if (typeof value !== "string" && !!value) {
     val = value;
+  } else if (props.defaultValue) {
+    val = props.defaultValue;
   } else if (data?.ingredient) {
     val = { label: data.ingredient.name, value: data.ingredient.id, ingredient: data.ingredient };
   }

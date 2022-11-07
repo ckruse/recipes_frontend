@@ -10,6 +10,15 @@ export const INGREDEINT_FRAGMENT = gql`
     fat
     proteins
 
+    units {
+      ingredientId
+      identifier
+      baseValue
+
+      insertedAt
+      updatedAt
+    }
+
     insertedAt
     updatedAt
   }
