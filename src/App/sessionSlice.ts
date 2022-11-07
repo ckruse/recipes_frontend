@@ -9,6 +9,7 @@ import { IRefreshMutation, Nullable, TUser } from "../types";
 export interface SessionState {
   user: Nullable<TUser>;
   showLogin: boolean;
+  showPasswordReset: boolean;
   checked: boolean;
   loading: boolean;
   token: Nullable<string>;
@@ -18,6 +19,7 @@ export interface SessionState {
 const initialState: SessionState = {
   user: null,
   showLogin: false,
+  showPasswordReset: false,
   checked: false,
   loading: false,
   token: null,
@@ -35,6 +37,9 @@ export const sessionSlice = createSlice({
     toggleShowLogin(state) {
       state.showLogin = !state.showLogin;
     },
+    toggleShowPasswordReset(state) {
+      state.showPasswordReset = !state.showPasswordReset;
+    },
     setLoading(state, action: PayloadAction<boolean>) {
       state.loading = action.payload;
     },
@@ -50,7 +55,8 @@ export const sessionSlice = createSlice({
   },
 });
 
-export const { setUser, toggleShowLogin, setLoading, setToken, addSubnav, removeSubnav } = sessionSlice.actions;
+export const { setUser, toggleShowLogin, toggleShowPasswordReset, setLoading, setToken, addSubnav, removeSubnav } =
+  sessionSlice.actions;
 
 export const selectSession = (state: RootState) => state.session;
 

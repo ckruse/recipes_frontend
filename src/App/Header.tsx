@@ -1,19 +1,25 @@
-import { Form, Nav, Navbar } from "react-bootstrap";
+import { Dropdown, Form, Nav, Navbar } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import Icon from "react-icons-kit";
 import { ic_grass, ic_home, ic_set_meal } from "react-icons-kit/md";
 import { Link } from "react-router-dom";
 
+import { removeAuthorizationToken } from "../authorizationToken";
 import { Button } from "../components";
 import { useAppDispatch, useAppSelector } from "../hooks";
 import { ReactComponent as Logo } from "../logo.svg";
 import { ingredientsPath, recipesPath, rootPath, showUserPath } from "../urls";
-import { selectSession, toggleShowLogin } from "./sessionSlice";
+import { selectSession, setUser, toggleShowLogin, toggleShowPasswordReset } from "./sessionSlice";
 
 export default function Header() {
   const { user } = useAppSelector(selectSession);
   const dispatch = useAppDispatch();
   const { t } = useTranslation(["root"]);
+
+  async function logout() {
+    removeAuthorizationToken();
+    dispatch(setUser(null));
+  }
 
   return (
     <Navbar bg="light" id="site-header">
@@ -52,10 +58,28 @@ export default function Header() {
       </Form>
 
       <div className="user-menu">
-        {user && (
-          <Link to={showUserPath(user)}>
-            <img src={user.avatar.thumb} className="user-avatar" alt={user.name || ""} />
-          </Link>
+        {!!user && (
+          <Dropdown align="end">
+            <Dropdown.Toggle variant="link">
+              <img src={user.avatar.thumb} className="user-avatar" alt={user.name || ""} />
+            </Dropdown.Toggle>
+
+            <Dropdown.Menu>
+              <Dropdown.Item as={Link} to={showUserPath(user)}>
+                {t("root:profile")}
+              </Dropdown.Item>
+
+              <Dropdown.Item as={Button} variant="link" onClick={() => dispatch(toggleShowPasswordReset())}>
+                {t("root:change_password")}
+              </Dropdown.Item>
+
+              <Dropdown.Divider />
+
+              <Dropdown.Item as={Button} variant="link" onClick={logout}>
+                {t("root:logout")}
+              </Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
         )}
 
         {!user && (

@@ -4,12 +4,24 @@
   "search...": "suchen…",
   "authorization_failed": "Die Autorisierung ist fehlgeschlagen, bitte melden Sie sich neu an!",
   "login": "anmelden",
+  "profile": "Profil",
+  "logout": "abmelden",
+  "change_password": "Passwort ändern",
+  "cancel": "abbrechen",
 
   "loginModal": {
     "title": "Anmeldung",
     "login": "anmelden",
     "email": "Email-Adresse",
     "password": "Passwort"
+  },
+
+  "changePasswordModal": {
+    "title": "Passwort ändern",
+    "change_password": "Passwort ändern",
+    "current_password": "bisheriges Passwort",
+    "new_password": "neues Passwort",
+    "new_password_confirm": "Bestätigung des neuen Passworts"
   },
 
   "sidebar": {

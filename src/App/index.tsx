@@ -9,6 +9,7 @@ import IngredientsInterface from "../features/Ingredients";
 import RecipesInterface from "../features/Recipes";
 import UsersInterface from "../features/Users";
 import { useAppSelector, useTitle } from "../hooks";
+import ChangePasswordModal from "./ChangePasswordModal";
 import Footer from "./Footer";
 import Header from "./Header";
 import LoginModal from "./LoginModal";
@@ -43,6 +44,7 @@ function App() {
         </Suspense>
 
         <LoginModal />
+        <ChangePasswordModal />
       </main>
 
       <Footer />
