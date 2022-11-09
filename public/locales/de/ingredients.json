@@ -1,7 +1,7 @@
 {
   "fieldnames": {
     "name": "Name",
-    "reference": "Einheit",
+    "reference": "Basis-Einheit",
     "calories": "Kalorien",
     "alc": "Alokohol",
     "carbs": "Kohlenhydrate",
@@ -24,6 +24,14 @@
   "edit": {
     "title": "Zutat „{{name}}“ bearbeiten",
     "success": "Die Zutat wurde erfolgreich aktualisiert!"
+  },
+
+  "form": {
+    "calories_in_g": "Kalorien (in Gramm)",
+    "alc_in_g": "Alokohol (in Gramm)",
+    "carbs_in_g": "Kohlenhydrate (in Gramm)",
+    "fat_in_g": "Fett (in Gramm)",
+    "proteins_in_g": "Proteine (in Gramm)"
   },
 
   "show": {

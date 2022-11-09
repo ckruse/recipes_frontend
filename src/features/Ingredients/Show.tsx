@@ -7,6 +7,7 @@ import { useParams } from "react-router-dom";
 import { INGREDIENT_QUERY } from "../../graphql/ingredients";
 import { useTitle } from "../../hooks";
 import { IIngredientQueryResult } from "../../types";
+import { formatNumber } from "../../utils/numbers";
 
 export default function Show() {
   const { id } = useParams<"id">();
@@ -23,35 +24,35 @@ export default function Show() {
         <Form.Label as={Col} md={2}>
           {t("ingredients:fieldnames.reference")}
         </Form.Label>
-        <Col>{data?.ingredient.reference}</Col>
+        <Col>{t(`ingredients:units.${data?.ingredient.reference || "G"}`)}</Col>
       </Row>
 
       <Row>
         <Form.Label as={Col} md={2}>
           {t("ingredients:fieldnames.alc")}
         </Form.Label>
-        <Col>{data?.ingredient.alc}</Col>
+        <Col>{formatNumber(data?.ingredient.alc || 0)} g</Col>
       </Row>
 
       <Row>
         <Form.Label as={Col} md={2}>
           {t("ingredients:fieldnames.carbs")}
         </Form.Label>
-        <Col>{data?.ingredient.carbs}</Col>
+        <Col>{formatNumber(data?.ingredient.carbs || 0)} g</Col>
       </Row>
 
       <Row>
         <Form.Label as={Col} md={2}>
           {t("ingredients:fieldnames.fat")}
         </Form.Label>
-        <Col>{data?.ingredient.fat}</Col>
+        <Col>{formatNumber(data?.ingredient.fat || 0)} g</Col>
       </Row>
 
       <Row>
         <Form.Label as={Col} md={2}>
           {t("ingredients:fieldnames.proteins")}
         </Form.Label>
-        <Col>{data?.ingredient.proteins}</Col>
+        <Col>{formatNumber(data?.ingredient.proteins || 0)} g</Col>
       </Row>
     </>
   );
