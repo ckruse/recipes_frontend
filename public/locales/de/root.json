@@ -7,7 +7,6 @@
   "profile": "Profil",
   "logout": "abmelden",
   "change_password": "Passwort ändern",
-  "cancel": "abbrechen",
 
   "loginModal": {
     "title": "Anmeldung",
@@ -21,7 +20,14 @@
     "change_password": "Passwort ändern",
     "current_password": "bisheriges Passwort",
     "new_password": "neues Passwort",
-    "new_password_confirm": "Bestätigung des neuen Passworts"
+    "password_required": "Bitte geben Sie das aktuelle Passwort an!",
+    "new_password_required": "Bitte geben Sie ein neues Passwort an!",
+    "not_long_enough": "Das neue Passwort muss mindestens 12 Zeichen lang sein!",
+    "new_password_confirm": "Bestätigung des neuen Passworts",
+    "passwords_not_matching": "Die Passwörter stimmen nicht überein!",
+    "new_password_confirmation_required": "Bitte bestätigen Sie das neue Passwort!",
+    "passwords_must_match": "Die Passwortbestätigung stimmt nicht mit dem neuen Passwort überein!",
+    "password_changed": "Das Passwort wurde geändert."
   },
 
   "sidebar": {

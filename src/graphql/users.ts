@@ -87,3 +87,32 @@ export const USER_MUTATION = gql`
   }
   ${USER_FRAGMENT}
 `;
+
+export const USER_PASSWORD_MUTATION = gql`
+  mutation changePassword($id: ID!, $currentPassword: String!, $password: String!, $passwordConfirmation: String!) {
+    changePassword(
+      id: $id
+      currentPassword: $currentPassword
+      password: $password
+      passwordConfirmation: $passwordConfirmation
+    ) {
+      successful
+      messages {
+        field
+        message
+        template
+        code
+        options {
+          key
+          value
+        }
+      }
+
+      result {
+        ...UserFragment
+      }
+    }
+  }
+
+  ${USER_FRAGMENT}
+`;

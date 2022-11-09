@@ -23,6 +23,10 @@ export interface IUserMutation {
   mutateUser: TMutationResult<TUser>;
 }
 
+export interface IUserPasswordMutation {
+  changePassword: TMutationResult<TUser>;
+}
+
 export interface IUserData {
   user: TUser;
 }
