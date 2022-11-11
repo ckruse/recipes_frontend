@@ -9,6 +9,7 @@ import { useAppSelector, useList } from "../../hooks";
 import { TIngredient } from "../../types";
 import { editIngredientPath, showIngredientPath } from "../../urls";
 import { calories } from "../../utils";
+import { formatIntNumberRounded } from "../../utils/numbers";
 import MetaList from "../MetaList";
 
 export default function List() {
@@ -47,8 +48,8 @@ export default function List() {
             {ingredients.map((ingredient) => (
               <tr key={ingredient.id}>
                 <td>{ingredient.name}</td>
-                <td>{ingredient.reference}</td>
-                <td>{calories(ingredient)}</td>
+                <td>{t(`ingredients:units.${ingredient.reference}`)}</td>
+                <td>{formatIntNumberRounded(calories(ingredient))} kcal</td>
                 <td>{indexDate(ingredient.insertedAt)}</td>
                 <td>{indexDate(ingredient.updatedAt)}</td>
                 <ActionColumn>

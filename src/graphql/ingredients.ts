@@ -11,6 +11,7 @@ export const INGREDEINT_FRAGMENT = gql`
     proteins
 
     units {
+      id
       ingredientId
       identifier
       baseValue
