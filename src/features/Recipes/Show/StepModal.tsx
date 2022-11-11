@@ -172,17 +172,19 @@ export default function StepModal({ show, step, recipe, toggle }: TProps) {
                           />
                         </FormGroup>
 
-                        <FormGroup>
-                          <BsForm.Label htmlFor={`stepIngredients.${i}.unitId`}>
-                            {t("recipes:fieldnames_step_ingredient.unit")}
-                          </BsForm.Label>
-                          <Select
-                            isClearable
-                            id={`stepIngredients.${i}.unitId`}
-                            name={`stepIngredients.${i}.unitId`}
-                            options={unitOptions(t, si)}
-                          />
-                        </FormGroup>
+                        {!!si.ingredient?.units.length && (
+                          <FormGroup>
+                            <BsForm.Label htmlFor={`stepIngredients.${i}.unitId`}>
+                              {t("recipes:fieldnames_step_ingredient.unit")}
+                            </BsForm.Label>
+                            <Select
+                              isClearable
+                              id={`stepIngredients.${i}.unitId`}
+                              name={`stepIngredients.${i}.unitId`}
+                              options={unitOptions(t, si)}
+                            />
+                          </FormGroup>
+                        )}
 
                         <DeleteButton size="sm" onClick={() => delIngredient(si.id)}>
                           {t("translation:delete")}
