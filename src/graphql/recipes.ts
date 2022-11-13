@@ -49,6 +49,11 @@ export const STEP_FRAGMENT = gql`
         name
         reference
 
+        alc
+        carbs
+        fat
+        proteins
+
         units {
           id
           identifier

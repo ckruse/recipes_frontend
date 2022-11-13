@@ -4,6 +4,7 @@
   "show": "anzeigen",
   "edit": "bearbeiten",
   "delete": "löschen",
+  "back": "zurück",
   "loading": "lade…",
   "successfully_deleted": "Der Eintrag wurde erfolgreich gelöscht!",
   "no_data": "keine Daten gefunden…",

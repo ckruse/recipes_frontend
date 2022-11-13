@@ -14,16 +14,6 @@
     "description": "Beschreibung"
   },
 
-  "units": {
-    "G": "Gramm",
-    "ML": "Milliliter",
-    "PCS": "Stück",
-    "TSP": "Teelöffel",
-    "TBLSP": "Esslöffel",
-    "SKOSH": "Prise",
-    "PINCH": "Messerspitze"
-  },
-
   "new": {
     "title": "neues Rezept",
     "success": "Das Rezept wurde erfolgreich angelegt!"
@@ -43,7 +33,15 @@
   "show": {
     "title": "Rezept „{{name}}“",
     "steps": "Arbeitsschritte",
-    "add_step": "Abeitsschritt hinzufügen"
+    "add_step": "Abeitsschritt hinzufügen",
+    "calories_per_portion": "Insgesamt hat dieses Gericht pro Portion ",
+    "alc": "Alkohol",
+    "carbs": "Kohlenhydrate",
+    "fat": "Fett",
+    "protein": "Protein",
+    "and_therefore": "und damit {{cal}} kcal",
+    "edit_steps": "Arbeitsschritte bearbeiten",
+    "stop_edit_steps": "Bearbeitung beenden"
   },
 
   "list": {

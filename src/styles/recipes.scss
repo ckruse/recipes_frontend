@@ -41,6 +41,12 @@
     padding-bottom: bs.$spacer;
     margin-bottom: bs.$spacer;
   }
+
+  & > li:last-of-type {
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-bottom: 0;
+  }
 }
 
 .recipes-recipe-show-steps-list-ingredients-list {
@@ -48,7 +54,7 @@
   margin-bottom: bs.$spacer;
 }
 
-.recipes-show-tags-list {
+.recipes-tags-list {
   list-style-type: none;
   padding-left: 0;
 
@@ -69,5 +75,82 @@
 
   li + li {
     margin-left: math.div(bs.$spacer, 2);
+  }
+}
+
+.recipes-show-calories-list {
+  list-style-type: none;
+  padding-left: 0;
+  display: inline;
+
+  li {
+    display: inline;
+  }
+
+  li::after {
+    content: ", ";
+  }
+
+  li:last-of-type::after {
+    content: ".";
+  }
+}
+
+.recipes-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.recipes-list-item {
+  border-bottom: bs.$border-width bs.$border-style bs.$border-color;
+  padding-bottom: bs.$spacer;
+  margin-bottom: bs.$spacer;
+
+  display: grid;
+  grid-template-areas:
+    "title created"
+    "tags tags"
+    "action action";
+  grid-template-columns: 1fr max-content;
+  column-gap: bs.$spacer;
+
+  h3 {
+    grid-area: title;
+  }
+
+  .created {
+    grid-area: created;
+  }
+
+  .recipes-list-recipe-tags {
+    grid-area: tags;
+  }
+
+  .btn-group {
+    grid-area: action;
+  }
+}
+
+.recipes-list-item:last-of-type {
+  border-bottom: none;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
+@media only screen and (min-width: bs.breakpoint-min("lg")) {
+  .recipes-list-item {
+    grid-template-areas:
+      "title created action"
+      "tags tags tags";
+    align-items: baseline;
+
+    .btn-group {
+      justify-self: end;
+    }
+
+    .tags {
+      font-size: 0.9em;
+    }
   }
 }

@@ -45,7 +45,7 @@ const initialValues = (recipe: TRecipe, step: Nullable<TStep>): TValues => ({
     step?.stepIngredients.map((stepIng) => ({
       id: stepIng.id,
       amount: stepIng.amount,
-      unitId: stepIng.unitId,
+      unitId: stepIng.unitId || "-",
       ingredientId: stepIng.ingredientId,
       ingredient: stepIng.ingredient,
     })) || [],
@@ -54,16 +54,19 @@ const initialValues = (recipe: TRecipe, step: Nullable<TStep>): TValues => ({
 const unitOptions = (t: TFunction, si: TIngredientRow) => {
   if (!si.ingredient) return [];
 
-  return si.ingredient.units.map((unit) => ({
-    value: unit.id,
-    label: t(`recipes:units.${unit.identifier}`),
-  }));
+  return [
+    { value: "-", label: t(`ingredients:units.${si.ingredient.reference}`) },
+    ...si.ingredient.units.map((unit) => ({
+      value: unit.id,
+      label: t(`ingredients:units.${unit.identifier}`),
+    })),
+  ];
 };
 
 export default function StepModal({ show, step, recipe, toggle }: TProps) {
-  const { t } = useTranslation(["translation", "recipes"]);
+  const { t } = useTranslation(["translation", "recipes", "ingredients"]);
   const dispatch = useAppDispatch();
-  const [mutateStep] = useMutation<IRecipeStepMutation>(RECIPE_STEP_MUTATION);
+  const [mutateStep] = useMutation<IRecipeStepMutation>(RECIPE_STEP_MUTATION, { refetchQueries: ["recipe"] });
 
   async function save(values: TValues, { setSubmitting }: FormikHelpers<TValues>) {
     try {
@@ -72,6 +75,11 @@ export default function StepModal({ show, step, recipe, toggle }: TProps) {
       const stepData = {
         ...values,
         stepIngredients: values.stepIngredients.map(({ ingredient, ...si }) => {
+          si = { ...si };
+          if (si.unitId === "-") {
+            si.unitId = null;
+          }
+
           if (si.id.match(/^new__/)) {
             return _.omit(si, ["id"]);
           }
@@ -172,19 +180,16 @@ export default function StepModal({ show, step, recipe, toggle }: TProps) {
                           />
                         </FormGroup>
 
-                        {!!si.ingredient?.units.length && (
-                          <FormGroup>
-                            <BsForm.Label htmlFor={`stepIngredients.${i}.unitId`}>
-                              {t("recipes:fieldnames_step_ingredient.unit")}
-                            </BsForm.Label>
-                            <Select
-                              isClearable
-                              id={`stepIngredients.${i}.unitId`}
-                              name={`stepIngredients.${i}.unitId`}
-                              options={unitOptions(t, si)}
-                            />
-                          </FormGroup>
-                        )}
+                        <FormGroup>
+                          <BsForm.Label htmlFor={`stepIngredients.${i}.unitId`}>
+                            {t("recipes:fieldnames_step_ingredient.unit")}
+                          </BsForm.Label>
+                          <Select
+                            id={`stepIngredients.${i}.unitId`}
+                            name={`stepIngredients.${i}.unitId`}
+                            options={unitOptions(t, si)}
+                          />
+                        </FormGroup>
 
                         <DeleteButton size="sm" onClick={() => delIngredient(si.id)}>
                           {t("translation:delete")}

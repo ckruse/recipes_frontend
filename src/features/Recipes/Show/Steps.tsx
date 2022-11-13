@@ -14,9 +14,11 @@ import StepModal from "./StepModal";
 
 type TProps = {
   recipe: TRecipe | undefined;
+  portions: number;
+  editMode: boolean;
 };
 
-export default function Steps({ recipe }: TProps) {
+export default function Steps({ recipe, portions, editMode }: TProps) {
   const session = useAppSelector(selectSession);
   const { t } = useTranslation(["translation", "recipes", "ingredients"]);
   const [showModal, setShowModal] = useState<{ show: boolean; step: Nullable<TStep> }>({ show: false, step: null });
@@ -39,7 +41,7 @@ export default function Steps({ recipe }: TProps) {
               <ul className="recipes-recipe-show-steps-list-ingredients-list">
                 {step.stepIngredients.map((stepIng) => (
                   <li key={stepIng.id}>
-                    {stepIng.amount} 
+                    {stepIng.amount * portions}{" "}
                     {t(`ingredients:units.${stepIng.unit?.identifier || stepIng.ingredient.reference}`)}{" "}
                     {stepIng.ingredient.name}
                   </li>
@@ -48,7 +50,7 @@ export default function Steps({ recipe }: TProps) {
 
               <ReactMarkdown>{step.description}</ReactMarkdown>
 
-              {may(session.user, "recipes", "edit", recipe) && (
+              {may(session.user, "recipes", "edit", recipe) && editMode && (
                 <ButtonGroup size="sm">
                   <EditButton onClick={() => setShowModal({ show: true, step })}>{t("translation:edit")}</EditButton>
 
@@ -60,7 +62,7 @@ export default function Steps({ recipe }: TProps) {
           .valueOf()}
       </ol>
 
-      {may(session.user, "recipes", "edit", recipe) && (
+      {may(session.user, "recipes", "edit", recipe) && editMode && (
         <AddButton size="sm" onClick={() => setShowModal({ step: null, show: true })}>
           {t("recipes:show.add_step")}
         </AddButton>
