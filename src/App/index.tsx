@@ -29,7 +29,7 @@ function App() {
     <Suspense fallback={<Loading expand />}>
       <Header />
 
-      <main className="container-fluid" id="site-content">
+      <main id="site-content">
         <Suspense fallback={<Loading />}>{subNav}</Suspense>
 
         <Flash />

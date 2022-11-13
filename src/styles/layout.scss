@@ -16,13 +16,6 @@ body,
   padding-left: bs.$container-padding-x;
   padding-right: bs.$container-padding-x;
   margin-bottom: math.div(bs.$container-padding-x, 2);
-  display: grid;
-  grid-template-columns: 1fr 1fr max-content max-content;
-  grid-gap: 1rem;
-
-  svg {
-    max-height: 2.5rem;
-  }
 
   .user-avatar {
     border-radius: 50%;
@@ -31,12 +24,22 @@ body,
 
   .navbar-brand {
     font-family: "Dancing Script", cursive;
-    font-size: 2rem;
+    font-size: 1.5rem;
     padding: 0;
+  }
+
+  .navbar-brand svg {
+    max-height: 2rem;
+    vertical-align: bottom;
+    margin-bottom: 0.5rem;
   }
 
   i {
     vertical-align: bottom;
+  }
+
+  ul li {
+    white-space: nowrap;
   }
 }
 
@@ -54,8 +57,24 @@ body,
 
 main {
   height: 100%;
-  margin-left: auto;
-  margin-right: auto;
+  padding-left: bs.$container-padding-x;
+  padding-right: bs.$container-padding-x;
+}
+
+@media only screen and (min-width: bs.breakpoint-min("lg")) {
+  #site-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr max-content max-content;
+    grid-gap: 1rem;
+
+    svg {
+      max-height: 2.5rem;
+    }
+
+    .navbar-brand {
+      font-size: 2rem;
+    }
+  }
 }
 
 .form-group {
@@ -105,4 +124,26 @@ tr.no-data {
 .pagination {
   margin-top: 2rem;
   justify-content: center;
+}
+
+.recipes-action-list {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: bs.$border-width bs.$border-style bs.$border-color;
+
+  .btn {
+    margin-right: 0.5rem;
+  }
+
+  .btn:last-child {
+    margin-right: 0;
+  }
+}
+
+@media only screen and (min-width: bs.breakpoint-min("lg")) {
+  main {
+    width: bs.breakpoint-min("lg");
+    margin-left: auto;
+    margin-right: auto;
+  }
 }

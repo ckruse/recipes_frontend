@@ -22,13 +22,12 @@ export default function Header() {
   }
 
   return (
-    <Navbar bg="light" id="site-header">
+    <Navbar bg="light" id="site-header" collapseOnSelect expand="lg">
       <Navbar.Brand as={Link} to={rootPath()}>
         <Logo /> {t("root:title")}
       </Navbar.Brand>
 
-      <Navbar.Toggle aria-controls="site-navbar" />
-      <Navbar.Collapse id="site-navbar">
+      <Navbar id="site-navbar">
         <Nav as="ul">
           <Nav.Item as="li">
             <Nav.Link as={Link} to={rootPath()}>
@@ -48,7 +47,7 @@ export default function Header() {
             </Nav.Link>
           </Nav.Item>
         </Nav>
-      </Navbar.Collapse>
+      </Navbar>
 
       <Form>
         <Form.Label className="visually-hidden" htmlFor="site-search">
