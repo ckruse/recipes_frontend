@@ -1,7 +1,7 @@
 import { TIngredient, TRecipe, TStepIngredient } from "../types";
 
 export const calories = (ingredient: TIngredient) =>
-  ingredient.alc * 7 + ingredient.carbs * 4 + ingredient.fat * 9 + ingredient.proteins * 4;
+  ingredient.alc * 7.1 + ingredient.carbs * 4.1 + ingredient.fat * 9.3 + ingredient.proteins * 4.1;
 
 export const stepUnitToGrams = (stepIngredient: TStepIngredient) => {
   if (stepIngredient.unit) {
