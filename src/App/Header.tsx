@@ -1,8 +1,10 @@
+import { FormEvent, useState } from "react";
+
 import { Dropdown, Form, Nav, Navbar } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import Icon from "react-icons-kit";
 import { ic_grass, ic_home, ic_set_meal } from "react-icons-kit/md";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { removeAuthorizationToken } from "../authorizationToken";
 import { Button } from "../components";
@@ -12,13 +14,20 @@ import { ingredientsPath, recipesPath, rootPath, showUserPath } from "../urls";
 import { selectSession, setUser, toggleShowLogin, toggleShowPasswordReset } from "./sessionSlice";
 
 export default function Header() {
+  const [search, setSearch] = useState("");
   const { user } = useAppSelector(selectSession);
   const dispatch = useAppDispatch();
   const { t } = useTranslation(["root"]);
+  const navigate = useNavigate();
 
   async function logout() {
     removeAuthorizationToken();
     dispatch(setUser(null));
+  }
+
+  function startSearch(ev: FormEvent<HTMLFormElement>) {
+    ev.preventDefault();
+    navigate(recipesPath(search));
   }
 
   return (
@@ -49,11 +58,17 @@ export default function Header() {
         </Nav>
       </Navbar>
 
-      <Form>
+      <Form onSubmit={startSearch}>
         <Form.Label className="visually-hidden" htmlFor="site-search">
           {t("root:search")}
         </Form.Label>
-        <Form.Control id="site-search" type="search" placeholder={t("root:search...")} />
+        <Form.Control
+          id="site-search"
+          type="search"
+          onChange={(ev) => setSearch(ev.target.value)}
+          value={search}
+          placeholder={t("root:search...")}
+        />
       </Form>
 
       <div className="user-menu">
