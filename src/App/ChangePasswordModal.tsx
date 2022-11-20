@@ -85,29 +85,25 @@ export default function ChangePasswordModal() {
             </Modal.Header>
 
             <Modal.Body>
-              <Form>
-                <FormGroup>
-                  <BsForm.Label htmlFor="currentPassword">
-                    {t("root:changePasswordModal.current_password")}
-                  </BsForm.Label>
-                  <Input id="currentPassword" name="currentPassword" type="password" />
-                  <ErrorMessage name="currentPassword" />
-                </FormGroup>
+              <FormGroup>
+                <BsForm.Label htmlFor="currentPassword">{t("root:changePasswordModal.current_password")}</BsForm.Label>
+                <Input id="currentPassword" name="currentPassword" type="password" />
+                <ErrorMessage name="currentPassword" />
+              </FormGroup>
 
-                <FormGroup>
-                  <BsForm.Label htmlFor="newPassword">{t("root:changePasswordModal.new_password")}</BsForm.Label>
-                  <Input name="newPassword" id="new-password" type="password" />
-                  <ErrorMessage name="newPassword" />
-                </FormGroup>
+              <FormGroup>
+                <BsForm.Label htmlFor="newPassword">{t("root:changePasswordModal.new_password")}</BsForm.Label>
+                <Input name="newPassword" id="new-password" type="password" />
+                <ErrorMessage name="newPassword" />
+              </FormGroup>
 
-                <FormGroup>
-                  <BsForm.Label htmlFor="newPasswordConfirmation">
-                    {t("root:changePasswordModal.new_password_confirm")}
-                  </BsForm.Label>
-                  <Input id="newPasswordConfirmation" name="newPasswordConfirmation" type="password" />
-                  <ErrorMessage name="newPasswordConfirmation" />
-                </FormGroup>
-              </Form>
+              <FormGroup>
+                <BsForm.Label htmlFor="newPasswordConfirmation">
+                  {t("root:changePasswordModal.new_password_confirm")}
+                </BsForm.Label>
+                <Input id="newPasswordConfirmation" name="newPasswordConfirmation" type="password" />
+                <ErrorMessage name="newPasswordConfirmation" />
+              </FormGroup>
             </Modal.Body>
 
             <Modal.Footer>
