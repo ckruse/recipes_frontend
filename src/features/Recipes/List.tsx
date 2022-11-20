@@ -8,6 +8,7 @@ import { RECIPE_DELETE_MUTATION, RECIPES_COUNT_QUERY, RECIPES_QUERY } from "../.
 import { useAppSelector, useDebouncedCallback, useList } from "../../hooks";
 import { TRecipe } from "../../types";
 import { editRecipePath, recipesPath, showRecipePath } from "../../urls";
+import { formatIntNumberRounded } from "../../utils/numbers";
 import MetaList from "../MetaList";
 import Searchbar from "./Searchbar";
 
@@ -48,7 +49,7 @@ export default function List() {
             <li className="recipes-list-item" key={recipe.id}>
               <h3>{recipe.name}</h3>
 
-              <span className="calories">{recipe.calories} kcal</span>
+              <span className="calories">{formatIntNumberRounded(recipe.calories)} kcal</span>
               <span className="created">{indexDate(recipe.insertedAt)}</span>
 
               <ul className="recipes-tags-list">
