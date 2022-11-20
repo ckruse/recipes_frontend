@@ -50,7 +50,8 @@
 
   "list": {
     "title": "Rezepte",
-    "deleted": "Das Rezept wurde erfolgreich gelöscht!"
+    "deleted": "Das Rezept wurde erfolgreich gelöscht!",
+    "calories": "{{calories}} kcal pro 100 g"
   },
 
   "step_modal": {

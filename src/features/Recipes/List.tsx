@@ -1,5 +1,5 @@
 import { ButtonGroup } from "react-bootstrap";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import { DeleteButton, EditButton, ShowButton } from "../../components";
@@ -49,7 +49,9 @@ export default function List() {
             <li className="recipes-list-item" key={recipe.id}>
               <h3>{recipe.name}</h3>
 
-              <span className="calories">{formatIntNumberRounded(recipe.calories)} kcal</span>
+              <Trans parent="span" className="calories" t={t} i18nKey="recipes:list.calories">
+                {{ calories: formatIntNumberRounded(recipe.calories) }} kcal pro 100 g
+              </Trans>
               <span className="created">{indexDate(recipe.insertedAt)}</span>
 
               <ul className="recipes-tags-list">
