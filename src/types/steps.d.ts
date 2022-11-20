@@ -3,6 +3,8 @@ import { Nullable, TIngredient, TUnit } from ".";
 export type TStep = {
   id: string;
   position: number;
+  preparationTime: number;
+  cookingTime: number;
   description: string;
 
   insertAt: string;

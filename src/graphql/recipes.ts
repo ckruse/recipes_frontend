@@ -22,6 +22,8 @@ export const STEP_FRAGMENT = gql`
   fragment StepFragment on Step {
     id
     position
+    preparationTime
+    cookingTime
     description
 
     insertedAt

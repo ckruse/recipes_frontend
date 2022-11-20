@@ -4,7 +4,7 @@ import { useQuery } from "@apollo/client";
 
 import _ from "lodash";
 import { Form } from "react-bootstrap";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import ReactMarkdown from "react-markdown";
 import { Link, useParams } from "react-router-dom";
 
@@ -45,6 +45,8 @@ export default function Show() {
   }
 
   const calories = recipeCalories(data.recipe);
+  const preparationTime = _.sumBy(data.recipe.steps, "preparationTime");
+  const cookingTime = _.sumBy(data.recipe.steps, "cookingTime");
 
   return (
     <>
@@ -108,6 +110,11 @@ export default function Show() {
             <li>{t("recipes:show.and_therefore", { cal: formatIntNumberRounded(calories.calories) })}</li>
           )}
         </ul>
+
+        <Trans parent="p" t={t} i18nKey="recipes:show.prep_and_cooking_time">
+          Die Vorbereitungszeit beträgt {{ prepTime: formatIntNumberRounded(preparationTime) }} Minuten und und die
+          Garzeit beträgt etwa {{ cookingTime: formatIntNumberRounded(cookingTime) }} Minuten.
+        </Trans>
       </div>
 
       <ReactMarkdown>{data.recipe.description || ""}</ReactMarkdown>

@@ -4,7 +4,7 @@ import { Form, Formik, FormikHelpers } from "formik";
 import { TFunction } from "i18next";
 import _ from "lodash";
 import { nanoid } from "nanoid";
-import { Form as BsForm, Modal } from "react-bootstrap";
+import { Form as BsForm, Col, Modal, Row } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { OnChangeValue } from "react-select";
 
@@ -15,6 +15,7 @@ import { RECIPE_STEP_MUTATION } from "../../../graphql/recipes";
 import { MutationError } from "../../../handleError";
 import { useAppDispatch } from "../../../hooks";
 import { IRecipeStepMutation, Nilable, Nullable, TIngredient, TRecipe, TStep } from "../../../types";
+import Flash from "../../Flash";
 import { addErrorFlash, addSuccessFlash } from "../../Flash/flashSlice";
 
 type TProps = {
@@ -34,12 +35,16 @@ type TIngredientRow = {
 
 type TValues = {
   position: number;
+  preparationTime: number;
+  cookingTime: number;
   description: string;
   stepIngredients: TIngredientRow[];
 };
 
 const initialValues = (recipe: TRecipe, step: Nullable<TStep>): TValues => ({
   position: step?.position || recipe.steps.length,
+  preparationTime: step?.preparationTime || 0,
+  cookingTime: step?.cookingTime || 0,
   description: step?.description || "",
   stepIngredients:
     step?.stepIngredients.map((stepIng) => ({
@@ -145,6 +150,31 @@ export default function StepModal({ show, step, recipe, toggle }: TProps) {
               </Modal.Header>
 
               <Modal.Body>
+                <Flash />
+
+                <Row>
+                  <Col md={6}>
+                    <FormGroup>
+                      <BsForm.Label>{t("recipes:fieldnames_step_ingredient.preparation_time")}</BsForm.Label>
+                      <Input type="number" name="preparationTime" />
+                    </FormGroup>
+                  </Col>
+
+                  <Col md={6}>
+                    <FormGroup>
+                      <BsForm.Label>{t("recipes:fieldnames_step_ingredient.cooking_time")}</BsForm.Label>
+                      <Input type="number" name="cookingTime" />
+                    </FormGroup>
+                  </Col>
+                </Row>
+
+                <FormGroup>
+                  <BsForm.Label htmlFor="description">
+                    {t("recipes:fieldnames_step_ingredient.description")}
+                  </BsForm.Label>
+                  <Textarea name="description" id="description" />
+                </FormGroup>
+
                 <fieldset>
                   <legend>{t("recipes:step_modal.ingredients")}</legend>
 
@@ -202,13 +232,6 @@ export default function StepModal({ show, step, recipe, toggle }: TProps) {
                     {t("recipes:step_modal.add_ingredient")}
                   </AddButton>
                 </fieldset>
-
-                <FormGroup>
-                  <BsForm.Label htmlFor="description">
-                    {t("recipes:fieldnames_step_ingredient.description")}
-                  </BsForm.Label>
-                  <Textarea name="description" id="description" />
-                </FormGroup>
               </Modal.Body>
 
               <Modal.Footer>

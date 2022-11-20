@@ -11,6 +11,8 @@
     "unit": "Einheit",
     "amount": "Menge",
     "ingredient_id": "Zutat",
+    "preparation_time": "Vorbereitungszeit",
+    "cooking_time": "Kochzeit",
     "description": "Beschreibung"
   },
 
@@ -42,7 +44,8 @@
     "and_therefore": "und damit {{cal}} kcal",
     "edit_steps": "Arbeitsschritte bearbeiten",
     "stop_edit_steps": "Bearbeitung beenden",
-    "import_in_bring": "in Bring! eintragen"
+    "import_in_bring": "in Bring! eintragen",
+    "prep_and_cooking_time": "Die Vorbereitungszeit beträgt {{prepTime}} Minuten und und die Garzeit beträgt etwa {{cookingTime}} Minuten."
   },
 
   "list": {
