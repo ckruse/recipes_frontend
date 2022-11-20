@@ -1,5 +1,4 @@
 import { Form, Formik, FormikHelpers } from "formik";
-import _ from "lodash";
 import { Form as BsForm } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
@@ -61,9 +60,10 @@ const validationSchema = yup.object().shape({
 export default function IngredientForm({ ingredient, onSave }: TProps) {
   const { t } = useTranslation(["ingredients", "translation"]);
 
-  const referenceOptions = _(t("ingredients:units", { returnObjects: true }))
-    .map((label, unit) => ({ label, value: unit }))
-    .valueOf();
+  const referenceOptions = [
+    { value: "G", label: t("ingredients:units.G") },
+    { value: "ML", label: t("ingredients:units.ML") },
+  ];
 
   return (
     <Formik initialValues={initialValues(ingredient)} onSubmit={onSave} validationSchema={validationSchema}>
