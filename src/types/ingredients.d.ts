@@ -27,6 +27,8 @@ export type TIngredient = {
 
   insertedAt: string;
   updatedAt: string;
+
+  calories: number;
 };
 
 export interface IIngredientsQueryResult {

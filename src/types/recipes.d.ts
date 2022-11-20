@@ -13,6 +13,8 @@ export type TRecipe = {
   steps: TStep[];
   tags: TTag[];
   owner: TUser;
+
+  calories: number;
 };
 
 export interface IRecipeQueryResult {

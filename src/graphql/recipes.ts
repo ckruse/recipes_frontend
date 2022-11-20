@@ -6,6 +6,8 @@ export const RECIPE_FRAGMENT = gql`
     name
     description
 
+    calories
+
     insertedAt
     updatedAt
 
@@ -71,6 +73,8 @@ export const RECIPE_DETAIL_FRAGMENT = gql`
     id
     name
     description
+
+    calories
 
     insertedAt
     updatedAt

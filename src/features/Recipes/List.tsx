@@ -48,6 +48,7 @@ export default function List() {
             <li className="recipes-list-item" key={recipe.id}>
               <h3>{recipe.name}</h3>
 
+              <span className="calories">{recipe.calories} kcal</span>
               <span className="created">{indexDate(recipe.insertedAt)}</span>
 
               <ul className="recipes-tags-list">
