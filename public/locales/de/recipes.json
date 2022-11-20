@@ -41,7 +41,8 @@
     "protein": "Protein",
     "and_therefore": "und damit {{cal}} kcal",
     "edit_steps": "Arbeitsschritte bearbeiten",
-    "stop_edit_steps": "Bearbeitung beenden"
+    "stop_edit_steps": "Bearbeitung beenden",
+    "import_in_bring": "in Bring! eintragen"
   },
 
   "list": {

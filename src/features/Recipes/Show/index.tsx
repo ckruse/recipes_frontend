@@ -14,7 +14,7 @@ import { RECIPE_QUERY } from "../../../graphql/recipes";
 import { useAppSelector, useTitle } from "../../../hooks";
 import may from "../../../permissions";
 import { IRecipeQueryResult, TIngredient, TUnit } from "../../../types";
-import { editRecipePath, recipesPath } from "../../../urls";
+import { bringImportUri, editRecipePath, recipesPath } from "../../../urls";
 import { recipeCalories } from "../../../utils";
 import { formatIntNumberRounded } from "../../../utils/numbers";
 import Steps from "./Steps";
@@ -76,6 +76,10 @@ export default function Show() {
           </li>
         ))}
       </ul>
+
+      <p>
+        <a href={bringImportUri(data.recipe, portions)}>{t("recipes:show.import_in_bring")}</a>
+      </p>
 
       <div>
         {t("recipes:show.calories_per_portion")}
