@@ -1,9 +1,8 @@
 @use "./variables";
 
 @use "~bootstrap/scss/bootstrap";
+@use "./fonts";
 
 @use "./layout";
 @use "./recipes";
 @use "./ingredients";
-
-@import url("https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap");
