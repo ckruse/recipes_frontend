@@ -1,0 +1,57 @@
+name: Build Release
+
+on:
+  push:
+    tags:
+      - "*"
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+
+    steps:
+      - name: Get the version
+        id: get_version
+        run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
+
+      - uses: actions/checkout@v3.1.0
+        with:
+          ref: ${{ steps.get_version.outputs.VERSION }}
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+
+      - name: Install dependencies
+        run: |
+          npm install -g yarn
+          yarn install
+
+      - name: build
+        run: yarn build
+
+      - name: create release
+        run: |
+          mv build recipes-frontend-${{ steps.get_version.outputs.VERSION }}
+          tar -czf recipes-frontend-${{ steps.get_version.outputs.VERSION }}.tgz recipes-frontend-${{ steps.get_version.outputs.VERSION }}
+
+      - name: create github release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.get_version.outputs.VERSION }}
+          release_name: Release ${{ steps.get_version.outputs.VERSION }}
+          draft: false
+          prerelease: false
+
+      - name: Upload Release Asset
+        id: upload-release-asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./recipes-frontend-${{ steps.get_version.outputs.VERSION }}.tgz
+          asset_name: recipes-frontend-${{ steps.get_version.outputs.VERSION }}.tgz
+          asset_content_type: application/gzip
