@@ -6,6 +6,12 @@ export const RECIPE_FRAGMENT = gql`
     name
     description
 
+    image {
+      thumb
+      medium
+      original
+    }
+
     calories
 
     insertedAt
@@ -73,6 +79,11 @@ export const RECIPE_DETAIL_FRAGMENT = gql`
     id
     name
     description
+    image {
+      thumb
+      medium
+      original
+    }
 
     calories
 

@@ -1,6 +1,14 @@
 @use "~bootstrap/scss/bootstrap" as bs;
 @use "sass:math";
 
+.recipes-show-image {
+  float: right;
+}
+
+.recipes-show-portions {
+  width: auto;
+}
+
 .recipes-show-step-model-ingredients-list {
   list-style-type: none;
   padding-left: 0;
@@ -109,7 +117,9 @@
 
   display: grid;
   grid-template-areas:
-    "title created"
+    "image image"
+    "title title"
+    "created calories"
     "tags tags"
     "action action";
   grid-template-columns: 1fr max-content;
@@ -130,6 +140,16 @@
   .btn-group {
     grid-area: action;
   }
+
+  .calories {
+    grid-area: calories;
+  }
+
+  .recipe-preview {
+    grid-area: image;
+    border-radius: 0.5rem;
+    width: 100%;
+  }
 }
 
 .recipes-list-item:last-of-type {
@@ -140,17 +160,30 @@
 
 @media only screen and (min-width: bs.breakpoint-min("lg")) {
   .recipes-list-item {
+    grid-template-columns: max-content 1fr max-content max-content;
+    grid-template-rows: max-content max-content 1fr;
+    gap: 0.5rem;
     grid-template-areas:
-      "title created action"
-      "tags tags tags";
+      "image title title calories"
+      "image tags tags created"
+      "image action action action";
     align-items: baseline;
+
+    h3 {
+      margin: 0;
+      padding: 0;
+    }
 
     .btn-group {
       justify-self: end;
     }
 
-    .tags {
+    .recipes-tags-list {
       font-size: 0.9em;
+    }
+
+    .recipe-preview {
+      width: 150px;
     }
   }
 }

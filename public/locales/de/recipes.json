@@ -2,6 +2,7 @@
   "fieldnames": {
     "name": "Name",
     "description": "Beschreibung",
+    "image": "Bild",
     "tags": "Tags",
     "inserted_at": "erstellt",
     "updated_at": "aktualisiert"
@@ -51,7 +52,7 @@
   "list": {
     "title": "Rezepte",
     "deleted": "Das Rezept wurde erfolgreich gelöscht!",
-    "calories": "{{calories}} kcal pro 100 g"
+    "calories": "{{calories}} kcal pro Portion"
   },
 
   "step_modal": {

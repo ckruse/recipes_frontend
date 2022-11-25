@@ -4,6 +4,11 @@ export type TRecipe = {
   id: string;
   name: string;
   description: Nullable<string>;
+  image: {
+    thumb: string;
+    medium: string;
+    original: string;
+  } | null;
 
   ownerId: string;
 

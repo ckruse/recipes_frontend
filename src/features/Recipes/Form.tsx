@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 
 import { useMutation, useQuery } from "@apollo/client";
 
@@ -28,11 +28,13 @@ type OptionType = { value: string; label: string };
 export interface ValuesInterface {
   name: string;
   description: string;
+  image: File | null;
   tags: { id: string; name: string }[];
 }
 
 const initialValues = (recipe?: TRecipe): ValuesInterface => ({
   name: recipe?.name || "",
+  image: null,
   description: recipe?.description || "",
   tags: recipe?.tags.map((tag) => ({ id: tag.id, name: tag.name })) || [],
 });
@@ -68,6 +70,11 @@ export default function RecipesForm({ recipe, onSave }: PropsType) {
           }
         }
 
+        function setImage(ev: React.ChangeEvent<HTMLInputElement>) {
+          const file = ev.target.files?.[0];
+          setFieldValue("image", file);
+        }
+
         const tagValues: OptionType[] = values.tags.map((tag) => ({ value: tag.id, label: tag.name }));
         const options: OptionType[] = data?.tags.map((tag) => ({ value: tag.id, label: tag.name })) || [];
 
@@ -76,6 +83,11 @@ export default function RecipesForm({ recipe, onSave }: PropsType) {
             <FormGroup>
               <BsForm.Label htmlFor="name">{t("recipes:fieldnames.name")}</BsForm.Label>
               <Input name="name" id="name" />
+            </FormGroup>
+
+            <FormGroup>
+              <BsForm.Label htmlFor="image">{t("recipes:fieldnames.image")}</BsForm.Label>
+              <BsForm.Control type="file" name="image" id="image" onChange={setImage} />
             </FormGroup>
 
             <FormGroup>

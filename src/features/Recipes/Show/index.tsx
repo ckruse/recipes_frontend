@@ -52,6 +52,12 @@ export default function Show() {
     <>
       <h1>{t("recipes:show.title", { name: data.recipe.name || "…" })}</h1>
 
+      {data.recipe.image && (
+        <p className="recipes-show-image">
+          <img src={data.recipe.image.medium} alt="" />
+        </p>
+      )}
+
       <ul className="recipes-tags-list">
         {data.recipe.tags.map((tag) => (
           <li key={tag.id}>{tag.name}</li>
@@ -63,6 +69,7 @@ export default function Show() {
       <FormGroup>
         <Form.Label>Anzahl Portionen</Form.Label>
         <Form.Control
+          className="recipes-show-portions"
           type="number"
           step={1}
           min={1}

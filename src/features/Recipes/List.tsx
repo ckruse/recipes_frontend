@@ -47,10 +47,12 @@ export default function List() {
         <ul className="recipes-list">
           {recipes.map((recipe) => (
             <li className="recipes-list-item" key={recipe.id}>
+              {recipe.image && <img className="recipe-preview" src={recipe.image.thumb} alt="" />}
+
               <h3>{recipe.name}</h3>
 
               <Trans parent="span" className="calories" t={t} i18nKey="recipes:list.calories">
-                {{ calories: formatIntNumberRounded(recipe.calories) }} kcal pro 100 g
+                {{ calories: formatIntNumberRounded(recipe.calories) }} kcal pro Portion
               </Trans>
               <span className="created">{indexDate(recipe.insertedAt)}</span>
 
