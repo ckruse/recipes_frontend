@@ -203,8 +203,8 @@ export default function StepModal({ show, step, recipe, toggle }: TProps) {
                           </BsForm.Label>
                           <Input
                             type="number"
-                            step={1}
-                            min={1}
+                            step={0.01}
+                            min={0.01}
                             id={`stepIngredients.${i}.amount`}
                             name={`stepIngredients.${i}.amount`}
                           />

@@ -16,7 +16,7 @@ import may from "../../../permissions";
 import { IRecipeQueryResult, TIngredient, TUnit } from "../../../types";
 import { bringImportUri, editRecipePath, recipesPath } from "../../../urls";
 import { recipeCalories } from "../../../utils";
-import { formatIntNumberRounded } from "../../../utils/numbers";
+import { formatIntNumberRounded, formatNumber } from "../../../utils/numbers";
 import Steps from "./Steps";
 
 export default function Show() {
@@ -81,7 +81,8 @@ export default function Show() {
       <ul>
         {allIngredients.map(([id, amount, unit, ingredient]) => (
           <li key={id}>
-            {amount} {t(`ingredients:units.${unit?.identifier || ingredient.reference}`)} {ingredient.name}
+            {formatNumber(amount)} {t(`ingredients:units.${unit?.identifier || ingredient.reference}`)}{" "}
+            {ingredient.name}
           </li>
         ))}
       </ul>

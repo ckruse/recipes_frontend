@@ -10,6 +10,7 @@ import { AddButton, DeleteButton, EditButton } from "../../../components";
 import { useAppSelector } from "../../../hooks";
 import may from "../../../permissions";
 import { Nullable, TRecipe, TStep } from "../../../types";
+import { formatNumber } from "../../../utils/numbers";
 import StepModal from "./StepModal";
 
 type TProps = {
@@ -41,7 +42,7 @@ export default function Steps({ recipe, portions, editMode }: TProps) {
               <ul className="recipes-recipe-show-steps-list-ingredients-list">
                 {step.stepIngredients.map((stepIng) => (
                   <li key={stepIng.id}>
-                    {stepIng.amount * portions}{" "}
+                    {formatNumber(stepIng.amount * portions)}{" "}
                     {t(`ingredients:units.${stepIng.unit?.identifier || stepIng.ingredient.reference}`)}{" "}
                     {stepIng.ingredient.name}
                   </li>
