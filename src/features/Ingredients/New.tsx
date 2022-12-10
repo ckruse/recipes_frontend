@@ -23,6 +23,12 @@ export default function New() {
   async function onSave(values: ValuesInterface, { setSubmitting }: FormikHelpers<ValuesInterface>) {
     try {
       setSubmitting(true);
+
+      values = {
+        ...values,
+        units: values.units.map((unit) => ({ ...unit, id: undefined })),
+      };
+
       const { data, errors } = await mutateIngredient({ variables: { ingredient: values } });
 
       if (!data?.createIngredient) {

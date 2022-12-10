@@ -31,7 +31,10 @@ export default function Edit() {
 
       values = {
         ...values,
-        units: values.units.map((unit) => ({ ...unit, id: unit.id?.match(/^new__/) ? undefined : unit.id })),
+        units: values.units.map((unit) => ({
+          ...unit,
+          id: typeof unit.id === "string" && unit.id.match(/^new__/) ? undefined : unit.id,
+        })),
       };
 
       const { data: iData, errors } = await mutateIngredient({
