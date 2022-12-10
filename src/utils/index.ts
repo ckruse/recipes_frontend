@@ -1,5 +1,7 @@
 import { TIngredient, TRecipe, TStepIngredient } from "../types";
 
+export const URI = process.env.NODE_ENV === "production" ? "https://recipes.wwwtech.de" : "http://localhost:8080";
+
 export const calories = (ingredient: TIngredient) =>
   ingredient.alc * 7.1 + ingredient.carbs * 4.1 + ingredient.fat * 9.3 + ingredient.proteins * 4.1;
 

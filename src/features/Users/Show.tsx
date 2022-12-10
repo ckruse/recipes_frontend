@@ -6,11 +6,12 @@ import { useParams } from "react-router-dom";
 import { USER_GET_QUERY } from "../../graphql/users";
 import { useTitle } from "../../hooks";
 import { IUserData } from "../../types";
+import { parsedInt } from "../../utils/numbers";
 
 export default function Show() {
   const { id } = useParams<"id">();
   const { t } = useTranslation(["users", "translation"]);
-  const { data } = useQuery<IUserData>(USER_GET_QUERY, { variables: { id } });
+  const { data } = useQuery<IUserData>(USER_GET_QUERY, { variables: { id: parsedInt(id) } });
 
   useTitle(t("users:show.title", { user: data?.user.name || data?.user.email || "…" }));
 

@@ -5,11 +5,12 @@ import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
 
 import { Loading } from "../../components";
-import { USER_GET_QUERY, USER_MUTATION } from "../../graphql/users";
+import { USER_GET_QUERY, USER_UPDATE_MUTATION } from "../../graphql/users";
 import { MutationError } from "../../handleError";
 import { useAppDispatch, useTitle } from "../../hooks";
-import { IUserData, IUserMutation } from "../../types";
+import { IUserData, IUserUpdateMutation } from "../../types";
 import { usersPath } from "../../urls";
+import { parsedInt } from "../../utils/numbers";
 import { addErrorFlash, addSuccessFlash } from "../Flash/flashSlice";
 import Form, { TValues } from "./Form";
 
@@ -19,20 +20,21 @@ export default function Edit() {
   const { t } = useTranslation(["users", "translation"]);
   const navigate = useNavigate();
 
-  const { data } = useQuery<IUserData>(USER_GET_QUERY, { variables: { id } });
-  const [userMutation] = useMutation<IUserMutation>(USER_MUTATION);
+  const { data } = useQuery<IUserData>(USER_GET_QUERY, { variables: { id: parsedInt(id) } });
+  const [userMutation] = useMutation<IUserUpdateMutation>(USER_UPDATE_MUTATION);
 
   useTitle(t("users:edit.title", { user: data?.user.name || data?.user.email || "…" }));
 
   async function onSave(values: TValues, { setSubmitting }: FormikHelpers<TValues>) {
-    console.log("values", values);
     try {
       setSubmitting(true);
-      const { data } = await userMutation({ variables: { id, user: values } });
+      const { data, errors } = await userMutation({ variables: { id: parsedInt(id), user: values } });
       setSubmitting(false);
 
-      if (!data?.mutateUser.successful) {
-        throw new MutationError(data?.mutateUser);
+      if (!data?.updateUser) {
+        // TODO: handle error
+        console.log(errors);
+        throw new MutationError(undefined);
       }
 
       dispatch(addSuccessFlash(t("users:edit.updated")));

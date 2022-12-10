@@ -2,7 +2,6 @@ import { ApolloClient, NormalizedCacheObject } from "@apollo/client";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import { REFRESH_MUTATION } from "../graphql/session";
-import { MutationError } from "../handleError";
 import { AppThunk, RootState } from "../store";
 import { IRefreshMutation, Nullable, TUser } from "../types";
 
@@ -62,23 +61,25 @@ export const selectSession = (state: RootState) => state.session;
 
 export const refreshUser =
   (client: ApolloClient<NormalizedCacheObject>): AppThunk =>
-  async (dispatch) => {
-    dispatch(setLoading(true));
+    async (dispatch) => {
+      dispatch(setLoading(true));
 
-    try {
-      const { data } = await client.mutate<IRefreshMutation>({ mutation: REFRESH_MUTATION });
+      try {
+        const { data } = await client.mutate<IRefreshMutation>({ mutation: REFRESH_MUTATION });
 
-      if (!data?.refresh.successful) {
-        throw new MutationError(data?.refresh);
+        if (!data?.refresh) {
+          // TODO: handle error
+          dispatch(setUser(null));
+          return;
+        }
+
+        dispatch(setUser(data.refresh));
+      } catch (e) {
+        console.error(e);
+        dispatch(setUser(null));
       }
 
-      dispatch(setUser(data.refresh.result.user));
-    } catch (e) {
-      console.error(e);
-      dispatch(setUser(null));
-    }
-
-    dispatch(setLoading(false));
-  };
+      dispatch(setLoading(false));
+    };
 
 export default sessionSlice.reducer;

@@ -1,27 +1,13 @@
-import { ApolloClient, ApolloLink, InMemoryCache } from "@apollo/client";
+import { ApolloClient, InMemoryCache } from "@apollo/client";
 
-import { createLink } from "apollo-absinthe-upload-link";
+import { createUploadLink } from "apollo-upload-client";
 
-import { getAuthorizationToken } from "../authorizationToken";
+import { URI } from "../utils";
 
-const URI = process.env.NODE_ENV === "production" ? "https://recipes.wwwtech.de" : "http://localhost:4000";
-
-const httpLink = createLink({ uri: `${URI}/graphql` });
-const authMiddleware = new ApolloLink((operation, forward) => {
-  const token = getAuthorizationToken();
-
-  operation.setContext({
-    headers: {
-      authorization: token ? `Bearer ${token}` : "",
-    },
-  });
-  return forward(operation);
-});
-
-const authLink = authMiddleware.concat(httpLink);
+const uploadLink = createUploadLink({ uri: `${URI}/graphql`, fetchOptions: { credentials: "include" } });
 
 const client = new ApolloClient({
-  link: authLink,
+  link: uploadLink,
   cache: new InMemoryCache({}),
   defaultOptions: {
     watchQuery: {

@@ -1,1 +1,1 @@
-declare module "apollo-absinthe-upload-link";
+declare module "apollo-upload-client";

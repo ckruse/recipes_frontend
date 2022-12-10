@@ -8,6 +8,7 @@ import { RECIPE_DELETE_MUTATION, RECIPES_COUNT_QUERY, RECIPES_QUERY } from "../.
 import { useAppSelector, useDebouncedCallback, useList } from "../../hooks";
 import { TRecipe } from "../../types";
 import { editRecipePath, recipesPath, showRecipePath } from "../../urls";
+import { recipeCalories, URI } from "../../utils";
 import { formatIntNumberRounded } from "../../utils/numbers";
 import MetaList from "../MetaList";
 import Searchbar from "./Searchbar";
@@ -47,12 +48,12 @@ export default function List() {
         <ul className="recipes-list">
           {recipes.map((recipe) => (
             <li className="recipes-list-item" key={recipe.id}>
-              {recipe.image && <img className="recipe-preview" src={recipe.image.thumb} alt="" />}
+              {recipe.image && <img className="recipe-preview" src={`${URI}${recipe.image.thumb}`} alt="" />}
 
               <h3>{recipe.name}</h3>
 
               <Trans parent="span" className="calories" t={t} i18nKey="recipes:list.calories">
-                {{ calories: formatIntNumberRounded(recipe.calories) }} kcal pro Portion
+                {{ calories: formatIntNumberRounded(recipeCalories(recipe).calories) }} kcal pro Portion
               </Trans>
               <span className="created">{indexDate(recipe.insertedAt)}</span>
 

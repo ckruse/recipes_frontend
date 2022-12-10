@@ -28,3 +28,14 @@ export type TStepIngredient = {
   step: TStep;
   ingredient: TIngredient;
 };
+
+export interface ICreateRecipeStepMutation {
+  createStep: TStep;
+}
+export interface IUpdateRecipeStepMutation {
+  updateStep: TStep;
+}
+
+export interface IDeleteRecipeStepMutation {
+  deleteStep: boolean;
+}

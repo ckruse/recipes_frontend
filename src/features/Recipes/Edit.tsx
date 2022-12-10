@@ -5,11 +5,12 @@ import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
 
 import { Loading } from "../../components";
-import { RECIPE_MUTATION, RECIPE_QUERY } from "../../graphql/recipes";
+import { RECIPE_QUERY, UPDATE_RECIPE_MUTATION } from "../../graphql/recipes";
 import { MutationError } from "../../handleError";
 import { useAppDispatch, useTitle } from "../../hooks";
-import { IRecipeMutation, IRecipeQueryResult } from "../../types";
+import { IRecipeQueryResult, IUpdateRecipeMutation } from "../../types";
 import { showRecipePath } from "../../urls";
+import { parsedInt } from "../../utils/numbers";
 import { addErrorFlash, addSuccessFlash } from "../Flash/flashSlice";
 import Form, { ValuesInterface } from "./Form";
 
@@ -19,9 +20,9 @@ export default function Edit() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const { data } = useQuery<IRecipeQueryResult>(RECIPE_QUERY, { variables: { id } });
+  const { data } = useQuery<IRecipeQueryResult>(RECIPE_QUERY, { variables: { id: parsedInt(id) } });
 
-  const [mutateRecipe] = useMutation<IRecipeMutation>(RECIPE_MUTATION);
+  const [mutateRecipe] = useMutation<IUpdateRecipeMutation>(UPDATE_RECIPE_MUTATION);
 
   useTitle(t("recipes:edit.title", { name: data?.recipe.name || "…" }));
 
@@ -29,7 +30,7 @@ export default function Edit() {
     try {
       setSubmitting(true);
 
-      const { data: rData } = await mutateRecipe({
+      const { data: rData, errors } = await mutateRecipe({
         variables: {
           id: data!.recipe.id,
           recipe: {
@@ -39,12 +40,14 @@ export default function Edit() {
         },
       });
 
-      if (!rData?.mutateRecipe.successful) {
-        throw new MutationError(rData?.mutateRecipe);
+      if (!rData?.updateRecipe) {
+        // TODO: handle errors
+        console.log(errors);
+        throw new MutationError(undefined);
       }
 
       dispatch(addSuccessFlash(t("recipes:edit.success")));
-      navigate(showRecipePath(rData.mutateRecipe.result));
+      navigate(showRecipePath(rData.updateRecipe));
     } catch (e) {
       setSubmitting(false);
       dispatch(addErrorFlash(t("translation:errors.general")));

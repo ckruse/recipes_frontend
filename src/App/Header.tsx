@@ -11,6 +11,7 @@ import { Button } from "../components";
 import { useAppDispatch, useAppSelector } from "../hooks";
 import { ReactComponent as Logo } from "../logo.svg";
 import { ingredientsPath, recipesPath, rootPath, showUserPath } from "../urls";
+import { URI } from "../utils";
 import { selectSession, setUser, toggleShowLogin, toggleShowPasswordReset } from "./sessionSlice";
 
 export default function Header() {
@@ -75,7 +76,11 @@ export default function Header() {
         {!!user && (
           <Dropdown align="end">
             <Dropdown.Toggle variant="link">
-              <img src={user.avatar.thumb} className="user-avatar" alt={user.name || ""} />
+              <img
+                src={user.avatar?.thumb ? `${URI}${user.avatar.thumb}` : "/default_avatar.png"}
+                className="user-avatar"
+                alt={user.name || ""}
+              />
             </Dropdown.Toggle>
 
             <Dropdown.Menu>

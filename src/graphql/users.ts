@@ -65,24 +65,19 @@ export const USER_DELETE_MUTATION = gql`
   }
 `;
 
-export const USER_MUTATION = gql`
-  mutation mutateUser($id: ID, $user: UserInput!) {
-    mutateUser(id: $id, user: $user) {
-      successful
-      messages {
-        field
-        message
-        template
-        code
-        options {
-          key
-          value
-        }
-      }
+export const USER_UPDATE_MUTATION = gql`
+  mutation updateUser($id: ID!, $user: UserInput!) {
+    updateUser(id: $id, user: $user) {
+      ...UserFragment
+    }
+  }
+  ${USER_FRAGMENT}
+`;
 
-      result {
-        ...UserFragment
-      }
+export const USER_CREATE_MUTATION = gql`
+  mutation createUser($user: UserInput!) {
+    createUser(user: $user) {
+      ...UserFragment
     }
   }
   ${USER_FRAGMENT}

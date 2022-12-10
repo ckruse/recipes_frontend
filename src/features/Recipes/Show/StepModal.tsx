@@ -11,10 +11,18 @@ import { OnChangeValue } from "react-select";
 import { AddButton, CancelButton, DeleteButton, FormGroup, SaveButton } from "../../../components";
 import { Input, Select, Textarea } from "../../../components/Form";
 import { IngredientSelector } from "../../../components/Form/IngredientSelector";
-import { RECIPE_STEP_MUTATION } from "../../../graphql/recipes";
+import { CREATE_RECIPE_STEP_MUTATION } from "../../../graphql/recipes";
 import { MutationError } from "../../../handleError";
 import { useAppDispatch } from "../../../hooks";
-import { IRecipeStepMutation, Nilable, Nullable, TIngredient, TRecipe, TStep } from "../../../types";
+import {
+  ICreateRecipeStepMutation,
+  IUpdateRecipeStepMutation,
+  Nilable,
+  Nullable,
+  TIngredient,
+  TRecipe,
+  TStep,
+} from "../../../types";
 import Flash from "../../Flash";
 import { addErrorFlash, addSuccessFlash } from "../../Flash/flashSlice";
 
@@ -71,7 +79,12 @@ const unitOptions = (t: TFunction, si: TIngredientRow) => {
 export default function StepModal({ show, step, recipe, toggle }: TProps) {
   const { t } = useTranslation(["translation", "recipes", "ingredients"]);
   const dispatch = useAppDispatch();
-  const [mutateStep] = useMutation<IRecipeStepMutation>(RECIPE_STEP_MUTATION, { refetchQueries: ["recipe"] });
+  const [createStep] = useMutation<ICreateRecipeStepMutation>(CREATE_RECIPE_STEP_MUTATION, {
+    refetchQueries: ["recipe"],
+  });
+  const [updateStep] = useMutation<IUpdateRecipeStepMutation>(CREATE_RECIPE_STEP_MUTATION, {
+    refetchQueries: ["recipe"],
+  });
 
   async function save(values: TValues, { setSubmitting }: FormikHelpers<TValues>) {
     try {
@@ -93,16 +106,33 @@ export default function StepModal({ show, step, recipe, toggle }: TProps) {
         }),
       };
 
-      const { data } = await mutateStep({
-        variables: {
-          recipeId: recipe.id,
-          id: step?.id,
-          step: stepData,
-        },
-      });
+      if (step?.id) {
+        const { data, errors } = await updateStep({
+          variables: {
+            recipeId: recipe.id,
+            id: step.id,
+            step: stepData,
+          },
+        });
 
-      if (!data?.mutateStep.successful) {
-        throw new MutationError(data?.mutateStep);
+        if (!data?.updateStep) {
+          // TODO: handle error
+          console.log(errors);
+          throw new MutationError(undefined);
+        }
+      } else {
+        const { data, errors } = await createStep({
+          variables: {
+            recipeId: recipe.id,
+            step: stepData,
+          },
+        });
+
+        if (!data?.createStep) {
+          // TODO: handle error
+          console.log(errors);
+          throw new MutationError(undefined);
+        }
       }
 
       dispatch(addSuccessFlash(t("recipes:step_modal.success")));

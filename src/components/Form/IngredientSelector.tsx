@@ -38,7 +38,7 @@ export function IngredientSelector(props: TProps) {
 
   const { data } = useQuery<IIngredientQueryResult>(INGREDIENT_QUERY, {
     variables: { id: value },
-    skip: typeof value !== "string" || !value || !!props.defaultValue,
+    skip: typeof value !== "number" || !value || !!props.defaultValue,
   });
 
   const [loadIngredients] = useLazyQuery<IIngredientsQueryResult>(INGREDIENTS_QUERY);
@@ -71,7 +71,7 @@ export function IngredientSelector(props: TProps) {
 
   let val;
 
-  if (typeof value !== "string" && !!value) {
+  if (typeof value !== "number" && !!value) {
     val = value;
   } else if (props.defaultValue) {
     val = props.defaultValue;

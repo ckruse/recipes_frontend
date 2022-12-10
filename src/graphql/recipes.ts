@@ -1,31 +1,5 @@
 import { gql } from "@apollo/client";
 
-export const RECIPE_FRAGMENT = gql`
-  fragment RecipeFragment on Recipe {
-    id
-    name
-    description
-
-    image {
-      thumb
-      medium
-      original
-    }
-
-    calories
-
-    insertedAt
-    updatedAt
-
-    tags {
-      id
-      name
-      insertedAt
-      updatedAt
-    }
-  }
-`;
-
 export const STEP_FRAGMENT = gql`
   fragment StepFragment on Step {
     id
@@ -81,11 +55,9 @@ export const RECIPE_DETAIL_FRAGMENT = gql`
     description
     image {
       thumb
-      medium
+      large
       original
     }
-
-    calories
 
     insertedAt
     updatedAt
@@ -107,17 +79,16 @@ export const RECIPE_DETAIL_FRAGMENT = gql`
 export const RECIPES_QUERY = gql`
   query recipes($search: String, $tags: [String], $limit: Int!, $offset: Int!) {
     recipes(search: $search, tags: $tags, limit: $limit, offset: $offset) {
-      ...RecipeFragment
+      ...RecipeDetailFragment
     }
   }
-  ${RECIPE_FRAGMENT}
+  ${RECIPE_DETAIL_FRAGMENT}
 `;
 
 export const RECIPES_COUNT_QUERY = gql`
   query recipes($search: String, $tags: [String]) {
     countRecipes(search: $search, tags: $tags)
   }
-  ${RECIPE_FRAGMENT}
 `;
 
 export const RECIPE_QUERY = gql`
@@ -129,24 +100,19 @@ export const RECIPE_QUERY = gql`
   ${RECIPE_DETAIL_FRAGMENT}
 `;
 
-export const RECIPE_MUTATION = gql`
-  mutation mutateRecipe($id: ID, $recipe: RecipeInput!) {
-    mutateRecipe(id: $id, recipe: $recipe) {
-      successful
-      messages {
-        field
-        message
-        template
-        code
-        options {
-          key
-          value
-        }
-      }
+export const CREATE_RECIPE_MUTATION = gql`
+  mutation createRecipe($recipe: RecipeInput!) {
+    createRecipe(recipe: $recipe) {
+      ...RecipeDetailFragment
+    }
+  }
+  ${RECIPE_DETAIL_FRAGMENT}
+`;
 
-      result {
-        ...RecipeDetailFragment
-      }
+export const UPDATE_RECIPE_MUTATION = gql`
+  mutation updateRecipe($id: ID, $recipe: RecipeInput!) {
+    updateRecipe(id: $id, recipe: $recipe) {
+      ...RecipeDetailFragment
     }
   }
   ${RECIPE_DETAIL_FRAGMENT}
@@ -154,45 +120,30 @@ export const RECIPE_MUTATION = gql`
 
 export const RECIPE_DELETE_MUTATION = gql`
   mutation deleteRecipe($id: ID!) {
-    deleteRecipe(id: $id) {
-      successful
-      messages {
-        field
-        message
-        template
-        code
-        options {
-          key
-          value
-        }
-      }
-
-      result {
-        id
-      }
-    }
+    deleteRecipe(id: $id)
   }
 `;
 
-export const RECIPE_STEP_MUTATION = gql`
-  mutation mutateStep($recipeId: ID!, $id: ID, $step: StepInput!) {
-    mutateStep(recipeId: $recipeId, id: $id, step: $step) {
-      successful
-      messages {
-        field
-        message
-        template
-        code
-        options {
-          key
-          value
-        }
-      }
-
-      result {
-        ...StepFragment
-      }
+export const CREATE_RECIPE_STEP_MUTATION = gql`
+  mutation createStep($recipeId: ID!, $step: StepInput!) {
+    createStep(recipeId: $recipeId, step: $step) {
+      ...StepFragment
     }
   }
   ${STEP_FRAGMENT}
+`;
+
+export const UPDATE_RECIPE_STEP_MUTATION = gql`
+  mutation updateStep($recipeId: ID!, $id: ID!, $step: StepInput!) {
+    updateStep(recipeId: $recipeId, id: $id, step: $step) {
+      ...StepFragment
+    }
+  }
+  ${STEP_FRAGMENT}
+`;
+
+export const DELETE_RECIPE_STEP_MUTATION = gql`
+  mutation deleteStep($id: ID!) {
+    deleteStep(id: $id)
+  }
 `;

@@ -15,8 +15,8 @@ import { useAppSelector, useTitle } from "../../../hooks";
 import may from "../../../permissions";
 import { IRecipeQueryResult, TIngredient, TUnit } from "../../../types";
 import { bringImportUri, editRecipePath, recipesPath } from "../../../urls";
-import { recipeCalories } from "../../../utils";
-import { formatIntNumberRounded, formatNumber } from "../../../utils/numbers";
+import { recipeCalories, URI } from "../../../utils";
+import { formatIntNumberRounded, formatNumber, parsedInt } from "../../../utils/numbers";
 import Steps from "./Steps";
 
 export default function Show() {
@@ -26,7 +26,7 @@ export default function Show() {
   const { id } = useParams<"id">();
   const { t } = useTranslation(["recipes", "ingredients", "translation"]);
   const { user } = useAppSelector(selectSession);
-  const { data } = useQuery<IRecipeQueryResult>(RECIPE_QUERY, { variables: { id } });
+  const { data } = useQuery<IRecipeQueryResult>(RECIPE_QUERY, { variables: { id: parsedInt(id) } });
 
   useTitle(t("recipes:show.title", { name: data?.recipe.name || "…" }));
 
@@ -54,7 +54,7 @@ export default function Show() {
 
       {data.recipe.image && (
         <p className="recipes-show-image">
-          <img src={data.recipe.image.medium} alt="" />
+          <img src={`${URI}${data.recipe.image.large}`} alt="" />
         </p>
       )}
 

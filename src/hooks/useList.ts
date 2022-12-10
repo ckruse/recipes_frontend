@@ -81,19 +81,7 @@ export function useList<T extends { id: string }>({
 
   const key = _.keys(data)[0];
 
-  const [deleteItemMutation] = useMutation(deleteMutation || DUMMY_MUTATION, {
-    update: (cache, { data }) => {
-      const item = _.values(data)[0];
-
-      if (item.successful === undefined) {
-        updateDeletion(cache, item.id, key);
-      } else {
-        if (item.result) {
-          updateDeletion(cache, item.result.id, key);
-        }
-      }
-    },
-  });
+  const [deleteItemMutation] = useMutation(deleteMutation || DUMMY_MUTATION);
 
   const items: T[] | undefined = _.values(data)[0];
   const count: number = _.values(countData)[0] || 0;
@@ -102,26 +90,31 @@ export function useList<T extends { id: string }>({
     deleteMutation === undefined
       ? undefined
       : async (item: T) => {
-          try {
-            const variables = deletionParameters
-              ? deletionParameters(item)
-              : {
-                  [deletionParameterName]: item.id,
-                };
+        try {
+          const variables = deletionParameters
+            ? deletionParameters(item)
+            : {
+              [deletionParameterName]: item.id,
+            };
 
-            const { data } = await deleteItemMutation({ variables });
-            const val = _.values(data)[0];
+          const { data, errors } = await deleteItemMutation({
+            variables,
+            update: (cache) => updateDeletion(cache, item.id, key),
+          });
+          const val = _.values(data)[0];
 
-            if (!val?.successful) {
-              throw new MutationError(val);
-            }
-
-            dispatch(addSuccessFlash(deletionMessage || t("translation:global.successfully_deleted")));
-          } catch (e) {
-            console.log(e);
-            dispatch(addErrorFlash(t("translation:errors.general")));
+          if (!val) {
+            console.log(errors);
+            // TODO: handle errors
+            throw new MutationError();
           }
-        };
+
+          dispatch(addSuccessFlash(deletionMessage || t("translation:global.successfully_deleted")));
+        } catch (e) {
+          console.log(e);
+          dispatch(addErrorFlash(t("translation:errors.general")));
+        }
+      };
 
   return { items, error, count, countError, deleteItem };
 }

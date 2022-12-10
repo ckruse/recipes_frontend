@@ -10,7 +10,7 @@ export type TUser = {
 
   name: Nullable<string>;
 
-  avatar: {
+  avatar?: {
     original: string;
     thumb: string;
   };
@@ -19,8 +19,12 @@ export type TUser = {
   updatedAt: string;
 };
 
-export interface IUserMutation {
-  mutateUser: TMutationResult<TUser>;
+export interface IUserCreateMutation {
+  createUser: TUser;
+}
+
+export interface IUserUpdateMutation {
+  updateUser: TUser;
 }
 
 export interface IUserPasswordMutation {

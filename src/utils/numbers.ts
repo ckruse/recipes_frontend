@@ -1,6 +1,7 @@
 import _ from "lodash";
 
 import i18n from "../i18n";
+import { Nilable } from "../types";
 
 const percentageFormatter: Partial<Record<string, Intl.NumberFormat>> = {
   de: new Intl.NumberFormat("de", { style: "percent", maximumFractionDigits: 2, minimumFractionDigits: 2 }),
@@ -74,4 +75,18 @@ export const formatIntNumberRounded = (value: number) => {
   if (value === 0) value = 0;
 
   return intNumberFormatter[i18n.language]!.format(value);
+};
+
+export const parsedInt = (value: Nilable<string>) => {
+  if (!value) {
+    throw new Error("Value is not defined");
+  }
+
+  const val = parseInt(value, 10);
+
+  if (isNaN(val)) {
+    throw new Error("Invalid number");
+  }
+
+  return val;
 };

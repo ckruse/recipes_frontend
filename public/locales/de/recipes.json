@@ -46,7 +46,8 @@
     "edit_steps": "Arbeitsschritte bearbeiten",
     "stop_edit_steps": "Bearbeitung beenden",
     "import_in_bring": "in Bring! eintragen",
-    "prep_and_cooking_time": "Die Vorbereitungszeit beträgt {{prepTime}} Minuten und und die Garzeit beträgt etwa {{cookingTime}} Minuten."
+    "prep_and_cooking_time": "Die Vorbereitungszeit beträgt {{prepTime}} Minuten und und die Garzeit beträgt etwa {{cookingTime}} Minuten.",
+    "step_deleted": "Arbeitsschritt gelöscht"
   },
 
   "list": {

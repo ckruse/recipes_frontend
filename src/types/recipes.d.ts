@@ -1,4 +1,4 @@
-import { Nullable, TMutationResult, TStep, TTag, TUser } from ".";
+import { Nullable, TStep, TTag, TUser } from ".";
 
 export type TRecipe = {
   id: string;
@@ -6,7 +6,7 @@ export type TRecipe = {
   description: Nullable<string>;
   image: {
     thumb: string;
-    medium: string;
+    large: string;
     original: string;
   } | null;
 
@@ -18,18 +18,16 @@ export type TRecipe = {
   steps: TStep[];
   tags: TTag[];
   owner: TUser;
-
-  calories: number;
 };
 
 export interface IRecipeQueryResult {
   recipe: TRecipe;
 }
 
-export interface IRecipeMutation {
-  mutateRecipe: TMutationResult<TRecipe>;
+export interface ICreateRecipeMutation {
+  createRecipe: TRecipe;
 }
 
-export interface IRecipeStepMutation {
-  mutateStep: TMutationResult<TStep>;
+export interface IUpdateRecipeMutation {
+  updateRecipe: TRecipe;
 }
