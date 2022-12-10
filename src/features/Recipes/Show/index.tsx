@@ -20,7 +20,7 @@ import { formatIntNumberRounded, formatNumber, parsedInt } from "../../../utils/
 import Steps from "./Steps";
 
 export default function Show() {
-  const [portions, setPortions] = useState(1);
+  const [portions, setPortions] = useState(2);
   const [editMode, setEditMode] = useState(false);
 
   const { id } = useParams<"id">();
