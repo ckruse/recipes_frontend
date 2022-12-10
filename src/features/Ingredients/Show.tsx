@@ -12,12 +12,12 @@ import may from "../../permissions";
 import { IIngredientQueryResult } from "../../types";
 import { editIngredientPath, ingredientsPath } from "../../urls";
 import { calories } from "../../utils";
-import { formatIntNumberRounded, formatNumber } from "../../utils/numbers";
+import { formatIntNumberRounded, formatNumber, parsedInt } from "../../utils/numbers";
 
 export default function Show() {
   const { id } = useParams<"id">();
   const { t } = useTranslation(["ingredients", "translation"]);
-  const { data } = useQuery<IIngredientQueryResult>(INGREDIENT_QUERY, { variables: { id } });
+  const { data } = useQuery<IIngredientQueryResult>(INGREDIENT_QUERY, { variables: { id: parsedInt(id) } });
   const { user } = useAppSelector(selectSession);
 
   useTitle(t("ingredients:show.title", { name: data?.ingredient.name || "…" }));
@@ -89,7 +89,7 @@ export default function Show() {
 
       <div className="recipes-action-list">
         {may(user, "ingredients", "edit", data.ingredient) && (
-          <EditButton variant="secondary" href={editIngredientPath(data.ingredient)}>
+          <EditButton as={Link} variant="secondary" to={editIngredientPath(data.ingredient)}>
             bearbeiten
           </EditButton>
         )}

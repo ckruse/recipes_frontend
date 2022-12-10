@@ -53,6 +53,8 @@ export const RECIPE_DETAIL_FRAGMENT = gql`
     id
     name
     description
+    ownerId
+
     image {
       thumb
       large

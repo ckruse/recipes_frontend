@@ -12,10 +12,10 @@ import Select from "react-select/creatable";
 import { FormActions, FormGroup } from "../../components";
 import { CancelButton, SaveButton } from "../../components/Buttons";
 import { Input, Textarea } from "../../components/Form";
-import { TAG_MUTATION, TAGS_QUERY } from "../../graphql/tags";
+import { TAG_CREATE_MUTATION, TAGS_QUERY } from "../../graphql/tags";
 import { MutationError } from "../../handleError";
 import { useDebounce } from "../../hooks";
-import { TagMutationInterface, TagsDataInterface, TRecipe } from "../../types";
+import { TagCreateMutationInterface, TagsDataInterface, TRecipe } from "../../types";
 import { recipesPath } from "../../urls";
 
 type PropsType = {
@@ -44,7 +44,7 @@ export default function RecipesForm({ recipe, onSave }: PropsType) {
   const debouncedSearch = useDebounce(search, 200);
   const { t } = useTranslation(["recipes", "translation"]);
 
-  const [mutateTag] = useMutation<TagMutationInterface>(TAG_MUTATION);
+  const [mutateTag] = useMutation<TagCreateMutationInterface>(TAG_CREATE_MUTATION);
   const { data, loading } = useQuery<TagsDataInterface>(TAGS_QUERY, {
     variables: { search: debouncedSearch, limit: 50, offset: 0 },
     skip: !search,
@@ -55,13 +55,14 @@ export default function RecipesForm({ recipe, onSave }: PropsType) {
       {({ values, setFieldValue }) => {
         async function onSelect(value: MultiValue<OptionType>, actionMeta: ActionMeta<OptionType>) {
           if (actionMeta.action === "create-option") {
-            const { data } = await mutateTag({ variables: { tag: { name: actionMeta.option.label } } });
+            const { data, errors } = await mutateTag({ variables: { name: actionMeta.option.label } });
 
-            if (!data?.mutateTag.successful) {
-              throw new MutationError(data?.mutateTag);
+            if (!data?.createTag) {
+              console.log(errors);
+              throw new MutationError(undefined);
             }
 
-            setFieldValue("tags", [...values.tags, { id: data.mutateTag.result.id, name: data.mutateTag.result.name }]);
+            setFieldValue("tags", [...values.tags, { id: data.createTag.id, name: data.createTag.name }]);
           } else {
             setFieldValue(
               "tags",

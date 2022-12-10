@@ -35,7 +35,7 @@ export default function Units() {
 
       <ul className="recipes-ingredient-form-units-list">
         {values.units.map((unit, i) => (
-          <li>
+          <li key={unit.id}>
             <FormGroup>
               <Form.Label htmlFor={`units.${i}.identifier`}>Einheit</Form.Label>
               <Select id={`units.${i}.identifier`} name={`units.${i}.identifier`} options={unitOptions} />

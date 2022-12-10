@@ -4,10 +4,10 @@ import { FormikHelpers } from "formik";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
-import { INGREDIENT_MUTATION } from "../../graphql/ingredients";
+import { INGREDIENT_CREATE_MUTATION } from "../../graphql/ingredients";
 import { MutationError } from "../../handleError";
 import { useAppDispatch, useTitle } from "../../hooks";
-import { IIngredientMutation } from "../../types";
+import { IIngredientCreateMutation } from "../../types";
 import { showIngredientPath } from "../../urls";
 import { addErrorFlash, addSuccessFlash } from "../Flash/flashSlice";
 import Form, { ValuesInterface } from "./Form";
@@ -16,21 +16,23 @@ export default function New() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { t } = useTranslation(["ingredients", "translation"]);
-  const [mutateIngredient] = useMutation<IIngredientMutation>(INGREDIENT_MUTATION);
+  const [mutateIngredient] = useMutation<IIngredientCreateMutation>(INGREDIENT_CREATE_MUTATION);
 
   useTitle(t("ingredients:new.title"));
 
   async function onSave(values: ValuesInterface, { setSubmitting }: FormikHelpers<ValuesInterface>) {
     try {
       setSubmitting(true);
-      const { data } = await mutateIngredient({ variables: { ingredient: values } });
+      const { data, errors } = await mutateIngredient({ variables: { ingredient: values } });
 
-      if (!data?.mutateIngredient.successful) {
-        throw new MutationError(data?.mutateIngredient);
+      if (!data?.createIngredient) {
+        // TODO: handle errors
+        console.log(errors);
+        throw new MutationError(undefined);
       }
 
       dispatch(addSuccessFlash(t("ingredients:new.success")));
-      navigate(showIngredientPath(data.mutateIngredient.result));
+      navigate(showIngredientPath(data.createIngredient));
     } catch (e) {
       setSubmitting(false);
       dispatch(addErrorFlash(t("translation:errors.general")));

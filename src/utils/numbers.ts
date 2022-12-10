@@ -4,11 +4,11 @@ import i18n from "../i18n";
 import { Nilable } from "../types";
 
 const percentageFormatter: Partial<Record<string, Intl.NumberFormat>> = {
-  de: new Intl.NumberFormat("de", { style: "percent", maximumFractionDigits: 2, minimumFractionDigits: 2 }),
+  de: new Intl.NumberFormat("de", { style: "percent", maximumFractionDigits: 2, minimumFractionDigits: 0 }),
 };
 
 const numberFormatter: Partial<Record<string, Intl.NumberFormat>> = {
-  de: new Intl.NumberFormat("de", { maximumFractionDigits: 2, minimumFractionDigits: 2 }),
+  de: new Intl.NumberFormat("de", { maximumFractionDigits: 2, minimumFractionDigits: 0 }),
 };
 
 const intNumberFormatter: Partial<Record<string, Intl.NumberFormat>> = {
@@ -20,7 +20,7 @@ export const formatPercentage = (value: number) => {
     percentageFormatter[i18n.language] = new Intl.NumberFormat(i18n.language, {
       style: "percent",
       maximumFractionDigits: 2,
-      minimumFractionDigits: 2,
+      minimumFractionDigits: 0,
     });
   }
 
@@ -35,7 +35,7 @@ export const formatNumber = (value: number) => {
   if (!numberFormatter[i18n.language]) {
     numberFormatter[i18n.language] = new Intl.NumberFormat(i18n.language, {
       maximumFractionDigits: 2,
-      minimumFractionDigits: 2,
+      minimumFractionDigits: 0,
     });
   }
 

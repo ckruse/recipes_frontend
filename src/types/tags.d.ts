@@ -1,4 +1,4 @@
-import { TMutationResult, TRecipe } from ".";
+import { TRecipe } from ".";
 
 export type TTag = {
   id: string;
@@ -14,6 +14,6 @@ export interface TagsDataInterface {
   tags: TTag[];
 }
 
-export interface TagMutationInterface {
-  mutateTag: TMutationResult<TTag>;
+export interface TagCreateMutationInterface {
+  createTag: TTag;
 }

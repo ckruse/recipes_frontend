@@ -1,5 +1,3 @@
-import { TMutationResult } from ".";
-
 export type TUnitIdentifier = "PCS" | "TBSP" | "TSP" | "SKOSH" | "PINCH";
 
 export type TUnit = {
@@ -39,6 +37,10 @@ export interface IIngredientQueryResult {
   ingredient: TIngredient;
 }
 
-export interface IIngredientMutation {
-  mutateIngredient: TMutationResult<TIngredient>;
+export interface IIngredientCreateMutation {
+  createIngredient: TIngredient;
+}
+
+export interface IIngredientUpdateMutation {
+  updateIngredient: TIngredient;
 }
