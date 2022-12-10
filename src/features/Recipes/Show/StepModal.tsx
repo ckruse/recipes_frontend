@@ -98,7 +98,7 @@ export default function StepModal({ show, step, recipe, toggle }: TProps) {
             si.unitId = null;
           }
 
-          if (si.id.match(/^new__/)) {
+          if (typeof si.id === "string" && si.id.match(/^new__/)) {
             return _.omit(si, ["id"]);
           }
 
