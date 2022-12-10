@@ -11,7 +11,7 @@ import { OnChangeValue } from "react-select";
 import { AddButton, CancelButton, DeleteButton, FormGroup, SaveButton } from "../../../components";
 import { Input, Select, Textarea } from "../../../components/Form";
 import { IngredientSelector } from "../../../components/Form/IngredientSelector";
-import { CREATE_RECIPE_STEP_MUTATION } from "../../../graphql/recipes";
+import { CREATE_RECIPE_STEP_MUTATION, UPDATE_RECIPE_STEP_MUTATION } from "../../../graphql/recipes";
 import { MutationError } from "../../../handleError";
 import { useAppDispatch } from "../../../hooks";
 import {
@@ -82,7 +82,7 @@ export default function StepModal({ show, step, recipe, toggle }: TProps) {
   const [createStep] = useMutation<ICreateRecipeStepMutation>(CREATE_RECIPE_STEP_MUTATION, {
     refetchQueries: ["recipe"],
   });
-  const [updateStep] = useMutation<IUpdateRecipeStepMutation>(CREATE_RECIPE_STEP_MUTATION, {
+  const [updateStep] = useMutation<IUpdateRecipeStepMutation>(UPDATE_RECIPE_STEP_MUTATION, {
     refetchQueries: ["recipe"],
   });
 
@@ -109,7 +109,6 @@ export default function StepModal({ show, step, recipe, toggle }: TProps) {
       if (step?.id) {
         const { data, errors } = await updateStep({
           variables: {
-            recipeId: recipe.id,
             id: step.id,
             step: stepData,
           },

@@ -136,8 +136,8 @@ export const CREATE_RECIPE_STEP_MUTATION = gql`
 `;
 
 export const UPDATE_RECIPE_STEP_MUTATION = gql`
-  mutation updateStep($recipeId: ID!, $id: ID!, $step: StepInput!) {
-    updateStep(recipeId: $recipeId, id: $id, step: $step) {
+  mutation updateStep($id: ID!, $step: StepInput!) {
+    updateStep(id: $id, step: $step) {
       ...StepFragment
     }
   }
