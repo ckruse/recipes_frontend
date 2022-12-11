@@ -12,7 +12,7 @@ import { IIngredientQueryResult, IIngredientUpdateMutation } from "../../types";
 import { showIngredientPath } from "../../urls";
 import { parsedInt } from "../../utils/numbers";
 import { addErrorFlash, addSuccessFlash } from "../Flash/flashSlice";
-import Form, { ValuesInterface } from "./Form";
+import Form, { IValues } from "./Form";
 
 export default function Edit() {
   const { id } = useParams<"id">();
@@ -25,7 +25,7 @@ export default function Edit() {
 
   useTitle(t("ingredients:edit.title", { name: data?.ingredient.name || "…" }));
 
-  async function onSave(values: ValuesInterface, { setSubmitting }: FormikHelpers<ValuesInterface>) {
+  async function onSave(values: IValues, { setSubmitting }: FormikHelpers<IValues>) {
     try {
       setSubmitting(true);
 

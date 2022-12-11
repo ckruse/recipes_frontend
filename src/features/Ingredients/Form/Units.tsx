@@ -3,13 +3,13 @@ import { nanoid } from "nanoid";
 import { Form } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 
-import { ValuesInterface } from ".";
+import { IValues } from ".";
 import { AddButton, DeleteButton, FormGroup } from "../../../components";
 import { Input, Select } from "../../../components/Form";
 
 export default function Units() {
   const { t } = useTranslation(["ingredients"]);
-  const { values, setFieldValue } = useFormikContext<ValuesInterface>();
+  const { values, setFieldValue } = useFormikContext<IValues>();
 
   function addUnit() {
     setFieldValue("units", [...values.units, { id: `new__${nanoid()}`, identifier: "", baseValue: 0 }]);

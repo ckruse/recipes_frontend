@@ -14,10 +14,10 @@ import Units from "./Units";
 
 type TProps = {
   ingredient?: TIngredient;
-  onSave: (values: ValuesInterface, helpers: FormikHelpers<ValuesInterface>) => void;
+  onSave: (values: IValues, helpers: FormikHelpers<IValues>) => void;
 };
 
-export interface ValuesInterface {
+export interface IValues {
   name: string;
   reference: "G" | "ML";
   alc: number;
@@ -25,13 +25,13 @@ export interface ValuesInterface {
   fat: number;
   proteins: number;
   units: {
-    id: string | undefined;
+    id?: string;
     identifier: TUnitIdentifier;
     baseValue: number;
   }[];
 }
 
-const initialValues = (ingredient: Nilable<TIngredient>): ValuesInterface => ({
+const initialValues = (ingredient: Nilable<TIngredient>): IValues => ({
   name: ingredient?.name || "",
   reference: ingredient?.reference || "G",
   alc: ingredient?.alc || 0,

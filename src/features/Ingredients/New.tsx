@@ -10,7 +10,7 @@ import { useAppDispatch, useTitle } from "../../hooks";
 import { IIngredientCreateMutation } from "../../types";
 import { showIngredientPath } from "../../urls";
 import { addErrorFlash, addSuccessFlash } from "../Flash/flashSlice";
-import Form, { ValuesInterface } from "./Form";
+import Form, { IValues } from "./Form";
 
 export default function New() {
   const dispatch = useAppDispatch();
@@ -20,13 +20,13 @@ export default function New() {
 
   useTitle(t("ingredients:new.title"));
 
-  async function onSave(values: ValuesInterface, { setSubmitting }: FormikHelpers<ValuesInterface>) {
+  async function onSave(values: IValues, { setSubmitting }: FormikHelpers<IValues>) {
     try {
       setSubmitting(true);
 
       values = {
         ...values,
-        units: values.units.map((unit) => ({ ...unit, id: undefined })),
+        units: values.units.map(({ id, ...unit }) => unit),
       };
 
       const { data, errors } = await mutateIngredient({ variables: { ingredient: values } });
