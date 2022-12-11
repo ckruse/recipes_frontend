@@ -149,3 +149,20 @@ export const DELETE_RECIPE_STEP_MUTATION = gql`
     deleteStep(id: $id)
   }
 `;
+
+export const MOVE_STEP_UP_MUTATION = gql`
+  mutation moveStepUp($id: ID!) {
+    moveStepUp(id: $id) {
+      ...StepFragment
+    }
+  }
+  ${STEP_FRAGMENT}
+`;
+export const MOVE_STEP_DOWN_MUTATION = gql`
+  mutation moveStepDown($id: ID!) {
+    moveStepDown(id: $id) {
+      ...StepFragment
+    }
+  }
+  ${STEP_FRAGMENT}
+`;

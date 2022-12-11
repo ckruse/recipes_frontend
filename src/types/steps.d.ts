@@ -39,3 +39,11 @@ export interface IUpdateRecipeStepMutation {
 export interface IDeleteRecipeStepMutation {
   deleteStep: boolean;
 }
+
+export interface IMoveStepUpMutation {
+  moveStepUp: TStep[];
+}
+
+export interface IMoveStepDownMutation {
+  moveStepDown: TStep[];
+}
