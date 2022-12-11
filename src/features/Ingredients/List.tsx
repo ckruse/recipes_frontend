@@ -24,14 +24,14 @@ export default function List() {
     countQuery: INGREDIENTS_COUNT_QUERY,
     deleteMutation: INGREDIENT_DELETE_MUTATION,
     variables: {
-      limit: 50,
-      offset: page * 50,
+      limit: 25,
+      offset: page * 25,
     },
     deletionMessage: t("ingredients:list.deleted"),
   });
 
   return (
-    <MetaList listKey="recipes" items={items} count={count} title={t("ingredients:list.title")}>
+    <MetaList listKey="recipes" items={items} count={count} title={t("ingredients:list.title")} perPage={25}>
       {(ingredients) => (
         <Table>
           <thead>
