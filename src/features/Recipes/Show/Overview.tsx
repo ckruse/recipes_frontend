@@ -19,9 +19,9 @@ export default function Overview({ recipe, portions, setPortions }: TProps) {
   const { t } = useTranslation(["recipes", "ingredients", "translation"]);
   const allIngredients = _(recipe.steps)
     .flatMap((step) => step.stepIngredients)
-    .map<[string, number, TUnit | null, string | null, TIngredient]>((stepIngredient) => [
+    .map<[string, number | null, TUnit | null, string | null, TIngredient]>((stepIngredient) => [
       stepIngredient.id,
-      stepIngredient.amount * (portions || 1),
+      stepIngredient.amount ? stepIngredient.amount * (portions || 1) : null,
       stepIngredient.unit,
       stepIngredient.annotation,
       stepIngredient.ingredient,
@@ -63,7 +63,11 @@ export default function Overview({ recipe, portions, setPortions }: TProps) {
       <ul className="recipes-show-overview-ingredients-list">
         {allIngredients.map(([id, amount, unit, annotation, ingredient]) => (
           <li key={id}>
-            {formatNumber(amount)} {t(`ingredients:units.${unit?.identifier || ingredient.reference}`)}{" "}
+            {!!amount && (
+              <>
+                {formatNumber(amount)} {t(`ingredients:units.${unit?.identifier || ingredient.reference}`)}{" "}
+              </>
+            )}
             {ingredient.name}
             {!!annotation && <small>{annotation}</small>}
           </li>

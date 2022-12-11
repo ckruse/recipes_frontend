@@ -2,7 +2,6 @@ import { useMutation } from "@apollo/client";
 
 import { Form, Formik, FormikHelpers } from "formik";
 import { TFunction } from "i18next";
-import _ from "lodash";
 import { nanoid } from "nanoid";
 import { Form as BsForm, Col, Modal, Row } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
@@ -35,9 +34,9 @@ type TProps = {
 
 type TIngredientRow = {
   id: string;
-  amount: number;
+  amount: Nullable<number>;
   unitId: Nullable<string>;
-  annotation: string | null;
+  annotation: Nullable<string>;
   ingredientId: string;
   ingredient?: TIngredient;
 };
@@ -95,16 +94,26 @@ export default function StepModal({ show, step, recipe, toggle }: TProps) {
       const stepData = {
         ...values,
         stepIngredients: values.stepIngredients.map(({ ingredient, ...si }) => {
-          si = { ...si };
-          if (si.unitId === "-") {
-            si.unitId = null;
+          let newSi: Partial<typeof si> = { ...si };
+          if (newSi.unitId === "-") {
+            newSi.unitId = null;
           }
 
-          if (typeof si.id === "string" && si.id.match(/^new__/)) {
-            return _.omit(si, ["id"]);
+          if (!newSi.amount) {
+            delete newSi.amount;
           }
 
-          return si;
+          if (!newSi.annotation) {
+            delete newSi.annotation;
+          }
+
+          if (typeof newSi.id === "string" && newSi.id.match(/^new__/)) {
+            delete newSi.id;
+          }
+
+          console.log(newSi);
+
+          return newSi;
         }),
       };
 

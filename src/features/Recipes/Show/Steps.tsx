@@ -105,8 +105,12 @@ export default function Steps({ recipe, portions, editMode }: TProps) {
               <ul className="recipes-recipe-show-steps-list-ingredients-list">
                 {step.stepIngredients.map((stepIng) => (
                   <li key={stepIng.id}>
-                    {formatNumber(stepIng.amount * portions)}{" "}
-                    {t(`ingredients:units.${stepIng.unit?.identifier || stepIng.ingredient.reference}`)}{" "}
+                    {!!stepIng.amount && (
+                      <>
+                        {formatNumber(stepIng.amount * portions)}{" "}
+                        {t(`ingredients:units.${stepIng.unit?.identifier || stepIng.ingredient.reference}`)}{" "}
+                      </>
+                    )}
                     {stepIng.ingredient.name}
                     {!!stepIng.annotation && <small>{stepIng.annotation}</small>}
                   </li>

@@ -15,8 +15,8 @@ export type TStep = {
 
 export type TStepIngredient = {
   id: string;
-  amount: number;
-  annotation: string | null;
+  amount: Nullable<number>;
+  annotation: Nullable<string>;
   unitId: Nullable<string>;
   unit: Nullable<TUnit>;
 
