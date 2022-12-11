@@ -11,6 +11,7 @@ i18n
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
+    returnNull: false,
     fallbackLng: "de",
     debug: process.env.NODE_ENV !== "production",
     supportedLngs: SUPPORTED_LANGUAGES,
