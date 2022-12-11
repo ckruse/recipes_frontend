@@ -39,7 +39,7 @@
     "graphql": "^16.6.0",
     "i18next": "^22.3.0",
     "i18next-browser-languagedetector": "^6.1.5",
-    "i18next-http-backend": "^1.4.1",
+    "i18next-http-backend": "^2.1.0",
     "lodash": "^4.17.21",
     "nanoid": "^4.0.0",
     "react": "^18.2.0",
