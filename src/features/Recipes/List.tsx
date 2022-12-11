@@ -48,7 +48,7 @@ export default function List() {
         <ul className="recipes-list">
           {recipes.map((recipe) => (
             <li className="recipes-list-item" key={recipe.id}>
-              {recipe.image && <img className="recipe-preview" src={`${URI}${recipe.image.thumb}`} alt="" />}
+              {!!recipe.image && <img className="recipe-preview" src={`${URI}${recipe.image.thumb}`} alt="" />}
 
               <h3>{recipe.name}</h3>
 

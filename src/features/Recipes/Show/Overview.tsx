@@ -11,11 +11,11 @@ import { formatIntNumberRounded, formatNumber } from "../../../utils/numbers";
 
 type TProps = {
   recipe: TRecipe;
-  portions: number;
-  setPortions: (portions: number) => void;
+  portions?: number;
+  setPortions?: (portions: number) => void;
 };
 
-export default function Overview({ recipe, portions, setPortions }: TProps) {
+export default function Overview({ recipe, portions = 2, setPortions }: TProps) {
   const { t } = useTranslation(["recipes", "ingredients", "translation"]);
   const allIngredients = _(recipe.steps)
     .flatMap((step) => step.stepIngredients)
@@ -48,17 +48,19 @@ export default function Overview({ recipe, portions, setPortions }: TProps) {
 
       <h2>Zutaten</h2>
 
-      <FormGroup>
-        <Form.Label>Anzahl Portionen</Form.Label>
-        <Form.Control
-          className="recipes-show-portions"
-          type="number"
-          step={1}
-          min={1}
-          value={portions}
-          onChange={(ev) => setPortions(parseInt(ev.target.value, 10))}
-        />
-      </FormGroup>
+      {!!setPortions && (
+        <FormGroup>
+          <Form.Label>Anzahl Portionen</Form.Label>
+          <Form.Control
+            className="recipes-show-portions"
+            type="number"
+            step={1}
+            min={1}
+            value={portions}
+            onChange={(ev) => setPortions(parseInt(ev.target.value, 10))}
+          />
+        </FormGroup>
+      )}
 
       <ul className="recipes-show-overview-ingredients-list">
         {allIngredients.map(([id, amount, unit, annotation, ingredient]) => (
@@ -73,6 +75,8 @@ export default function Overview({ recipe, portions, setPortions }: TProps) {
           </li>
         ))}
       </ul>
+
+      <ReactMarkdown>{recipe.description || ""}</ReactMarkdown>
 
       <p>
         <a href={bringImportUri(recipe, portions)}>{t("recipes:show.import_in_bring")}</a>
@@ -111,8 +115,6 @@ export default function Overview({ recipe, portions, setPortions }: TProps) {
           Garzeit beträgt etwa {{ cookingTime: formatIntNumberRounded(cookingTime) }} Minuten.
         </Trans>
       </div>
-
-      <ReactMarkdown>{recipe.description || ""}</ReactMarkdown>
     </>
   );
 }

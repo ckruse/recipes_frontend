@@ -103,6 +103,15 @@ export const RECIPE_QUERY = gql`
   ${RECIPE_DETAIL_FRAGMENT}
 `;
 
+export const RANDOM_RECIPE_QUERY = gql`
+  query randomRecipe {
+    randomRecipe {
+      ...RecipeDetailFragment
+    }
+  }
+  ${RECIPE_DETAIL_FRAGMENT}
+`;
+
 export const CREATE_RECIPE_MUTATION = gql`
   mutation createRecipe($recipe: RecipeInput!) {
     createRecipe(recipe: $recipe) {

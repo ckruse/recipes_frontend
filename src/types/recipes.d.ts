@@ -31,3 +31,7 @@ export interface ICreateRecipeMutation {
 export interface IUpdateRecipeMutation {
   updateRecipe: TRecipe;
 }
+
+export interface IRandomRecipeQueryResult {
+  randomRecipe: Nullable<TRecipe>;
+}
