@@ -37,6 +37,7 @@ type TIngredientRow = {
   id: string;
   amount: number;
   unitId: Nullable<string>;
+  annotation: string | null;
   ingredientId: string;
   ingredient?: TIngredient;
 };
@@ -61,6 +62,7 @@ const initialValues = (recipe: TRecipe, step: Nullable<TStep>): TValues => ({
       unitId: stepIng.unitId || "-",
       ingredientId: stepIng.ingredientId,
       ingredient: stepIng.ingredient,
+      annotation: stepIng.annotation,
     })) || [],
 });
 
@@ -148,7 +150,13 @@ export default function StepModal({ show, step, recipe, toggle }: TProps) {
       <Formik initialValues={initialValues(recipe, step)} onSubmit={save}>
         {({ values, setFieldValue }) => {
           function addIngredient() {
-            const newEntry: TIngredientRow = { id: `new__${nanoid()}`, amount: 0, unitId: null, ingredientId: "" };
+            const newEntry: TIngredientRow = {
+              id: `new__${nanoid()}`,
+              amount: 0,
+              unitId: null,
+              ingredientId: "",
+              annotation: null,
+            };
             setFieldValue("stepIngredients", [...values.stepIngredients, newEntry]);
           }
 
@@ -247,6 +255,17 @@ export default function StepModal({ show, step, recipe, toggle }: TProps) {
                             id={`stepIngredients.${i}.unitId`}
                             name={`stepIngredients.${i}.unitId`}
                             options={unitOptions(t, si)}
+                          />
+                        </FormGroup>
+
+                        <FormGroup>
+                          <BsForm.Label htmlFor={`stepIngredients.${i}.annotation`}>
+                            {t("recipes:fieldnames_step_ingredient.annotation")}
+                          </BsForm.Label>
+                          <Input
+                            type="text"
+                            id={`stepIngredients.${i}.annotation`}
+                            name={`stepIngredients.${i}.annotation`}
                           />
                         </FormGroup>
 

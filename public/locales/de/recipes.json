@@ -14,7 +14,8 @@
     "ingredient_id": "Zutat",
     "preparation_time": "Vorbereitungszeit",
     "cooking_time": "Kochzeit",
-    "description": "Beschreibung"
+    "description": "Beschreibung",
+    "annotation": "Anmerkung"
   },
 
   "new": {

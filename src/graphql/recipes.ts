@@ -14,6 +14,7 @@ export const STEP_FRAGMENT = gql`
     stepIngredients {
       id
       amount
+      annotation
 
       unitId
       unit {

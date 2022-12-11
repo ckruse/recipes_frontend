@@ -108,6 +108,7 @@ export default function Steps({ recipe, portions, editMode }: TProps) {
                     {formatNumber(stepIng.amount * portions)}{" "}
                     {t(`ingredients:units.${stepIng.unit?.identifier || stepIng.ingredient.reference}`)}{" "}
                     {stepIng.ingredient.name}
+                    {!!stepIng.annotation && <small>{stepIng.annotation}</small>}
                   </li>
                 ))}
               </ul>
