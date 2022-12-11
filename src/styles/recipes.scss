@@ -2,7 +2,10 @@
 @use "sass:math";
 
 .recipes-show-image {
-  float: right;
+  img {
+    max-width: 100%;
+    border-radius: 0.5rem;
+  }
 }
 
 .recipes-show-portions {
@@ -196,8 +199,9 @@
       width: 150px;
     }
   }
-}
 
-.recipes-show-image img {
-  border-radius: 0.5rem;
+  .recipes-show-image {
+    float: right;
+    max-width: 60%;
+  }
 }
