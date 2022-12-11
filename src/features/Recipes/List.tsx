@@ -1,3 +1,4 @@
+import _ from "lodash";
 import { ButtonGroup } from "react-bootstrap";
 import { Trans, useTranslation } from "react-i18next";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -61,9 +62,10 @@ export default function List() {
               <span className="created">{indexDate(recipe.insertedAt)}</span>
 
               <ul className="recipes-tags-list">
-                {recipe.tags.map((tag) => (
-                  <li key={tag.id}>{tag.name}</li>
-                ))}
+                {_(recipe.tags)
+                  .sortBy("name")
+                  .map((tag) => <li key={tag.id}>{tag.name}</li>)
+                  .valueOf()}
               </ul>
 
               <ButtonGroup size="sm">
