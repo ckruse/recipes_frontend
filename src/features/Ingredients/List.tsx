@@ -2,10 +2,12 @@ import { Table } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
+import { selectSession } from "../../App/sessionSlice";
 import { ActionColumn, DeleteButton, EditButton, NoDataTd, ShowButton } from "../../components";
 import { indexDate } from "../../dateUtils";
 import { INGREDIENT_DELETE_MUTATION, INGREDIENTS_COUNT_QUERY, INGREDIENTS_QUERY } from "../../graphql/ingredients";
 import { useAppSelector, useList } from "../../hooks";
+import may from "../../permissions";
 import { TIngredient } from "../../types";
 import { editIngredientPath, showIngredientPath } from "../../urls";
 import { calories } from "../../utils";
@@ -13,6 +15,7 @@ import { formatIntNumberRounded } from "../../utils/numbers";
 import MetaList from "../MetaList";
 
 export default function List() {
+  const { user } = useAppSelector(selectSession);
   const page = useAppSelector((state) => state.metaList.pages["ingredients"] || 0);
   const { t } = useTranslation(["ingredients", "translation"]);
 
@@ -56,10 +59,16 @@ export default function List() {
                   <ShowButton as={Link} to={showIngredientPath(ingredient)}>
                     {t("translation:show")}
                   </ShowButton>
-                  <EditButton as={Link} to={editIngredientPath(ingredient)}>
-                    {t("translation:edit")}
-                  </EditButton>
-                  <DeleteButton onClick={() => deleteItem(ingredient)}>{t("translation:delete")}</DeleteButton>
+
+                  {may(user, "ingredients", "edit", ingredient) && (
+                    <EditButton as={Link} to={editIngredientPath(ingredient)}>
+                      {t("translation:edit")}
+                    </EditButton>
+                  )}
+
+                  {may(user, "ingredients", "delete", ingredient) && (
+                    <DeleteButton onClick={() => deleteItem(ingredient)}>{t("translation:delete")}</DeleteButton>
+                  )}
                 </ActionColumn>
               </tr>
             ))}

@@ -2,10 +2,12 @@ import { ButtonGroup } from "react-bootstrap";
 import { Trans, useTranslation } from "react-i18next";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
+import { selectSession } from "../../App/sessionSlice";
 import { DeleteButton, ShowButton } from "../../components";
 import { indexDate } from "../../dateUtils";
 import { RECIPE_DELETE_MUTATION, RECIPES_COUNT_QUERY, RECIPES_QUERY } from "../../graphql/recipes";
 import { useAppSelector, useDebouncedCallback, useList } from "../../hooks";
+import may from "../../permissions";
 import { TRecipe } from "../../types";
 import { recipesPath, showRecipePath } from "../../urls";
 import { recipeCalories, URI } from "../../utils";
@@ -15,6 +17,7 @@ import Searchbar from "./Searchbar";
 
 export default function List() {
   const { t } = useTranslation(["recipes", "translation"]);
+  const { user } = useAppSelector(selectSession);
   const page = useAppSelector((state) => state.metaList.pages["recipes"] || 0);
   const { search: queryString } = useLocation();
   const navigate = useNavigate();
@@ -67,7 +70,9 @@ export default function List() {
                 <ShowButton as={Link} to={showRecipePath(recipe)}>
                   {t("translation:show")}
                 </ShowButton>
-                <DeleteButton onClick={() => deleteItem(recipe)}>{t("translation:delete")}</DeleteButton>
+                {may(user, "recipes", "create") && (
+                  <DeleteButton onClick={() => deleteItem(recipe)}>{t("translation:delete")}</DeleteButton>
+                )}
               </ButtonGroup>
             </li>
           ))}
