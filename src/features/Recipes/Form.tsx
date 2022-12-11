@@ -18,9 +18,11 @@ import { useDebounce } from "../../hooks";
 import { TagCreateMutationInterface, TagsDataInterface, TRecipe } from "../../types";
 import { recipesPath } from "../../urls";
 
-type PropsType = {
+type TProps = {
   recipe?: TRecipe;
   onSave: (recipe: ValuesInterface, helpers: FormikHelpers<ValuesInterface>) => void;
+  btnSize?: "sm" | "md";
+  hideCancel?: boolean;
 };
 
 type OptionType = { value: string; label: string };
@@ -39,7 +41,7 @@ const initialValues = (recipe?: TRecipe): ValuesInterface => ({
   tags: recipe?.tags.map((tag) => ({ id: tag.id, name: tag.name })) || [],
 });
 
-export default function RecipesForm({ recipe, onSave }: PropsType) {
+export default function RecipesForm({ recipe, onSave, btnSize = "md", hideCancel = false }: TProps) {
   const [search, setSearch] = useState("");
   const debouncedSearch = useDebounce(search, 200);
   const { t } = useTranslation(["recipes", "translation"]);
@@ -116,11 +118,15 @@ export default function RecipesForm({ recipe, onSave }: PropsType) {
             </FormGroup>
 
             <FormActions>
-              <SaveButton type="submit">{t("translation:save")}</SaveButton>
+              <SaveButton size={btnSize} type="submit">
+                {t("translation:save")}
+              </SaveButton>
 
-              <CancelButton as={Link} to={recipesPath()}>
-                {t("translation:cancel")}
-              </CancelButton>
+              {!hideCancel && (
+                <CancelButton size={btnSize} as={Link} to={recipesPath()}>
+                  {t("translation:cancel")}
+                </CancelButton>
+              )}
             </FormActions>
           </Form>
         );
