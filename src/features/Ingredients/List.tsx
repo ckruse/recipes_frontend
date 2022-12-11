@@ -1,37 +1,53 @@
 import { Table } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import { selectSession } from "../../App/sessionSlice";
 import { ActionColumn, DeleteButton, EditButton, NoDataTd, ShowButton } from "../../components";
 import { indexDate } from "../../dateUtils";
 import { INGREDIENT_DELETE_MUTATION, INGREDIENTS_COUNT_QUERY, INGREDIENTS_QUERY } from "../../graphql/ingredients";
-import { useAppSelector, useList } from "../../hooks";
+import { useAppSelector, useDebouncedCallback, useList } from "../../hooks";
 import may from "../../permissions";
 import { TIngredient } from "../../types";
-import { editIngredientPath, showIngredientPath } from "../../urls";
+import { editIngredientPath, ingredientsPath, showIngredientPath } from "../../urls";
 import { calories } from "../../utils";
 import { formatIntNumberRounded } from "../../utils/numbers";
 import MetaList from "../MetaList";
+import Searchbar from "./Searchbar";
 
 export default function List() {
   const { user } = useAppSelector(selectSession);
   const page = useAppSelector((state) => state.metaList.pages["ingredients"] || 0);
   const { t } = useTranslation(["ingredients", "translation"]);
+  const { search: queryString } = useLocation();
+  const navigate = useNavigate();
+  const search = (new URLSearchParams(queryString).get("search") || "").trim();
 
   const { items, count, deleteItem } = useList<TIngredient>({
     query: INGREDIENTS_QUERY,
     countQuery: INGREDIENTS_COUNT_QUERY,
     deleteMutation: INGREDIENT_DELETE_MUTATION,
     variables: {
+      search,
       limit: 25,
       offset: page * 25,
     },
     deletionMessage: t("ingredients:list.deleted"),
   });
 
+  const doSearch = useDebouncedCallback((search: string) => {
+    navigate(ingredientsPath(search));
+  }, 500);
+
   return (
-    <MetaList listKey="recipes" items={items} count={count} title={t("ingredients:list.title")} perPage={25}>
+    <MetaList
+      listKey="recipes"
+      items={items}
+      count={count}
+      title={t("ingredients:list.title")}
+      perPage={25}
+      searchBar={() => <Searchbar setSearch={doSearch} searchTerm={search} />}
+    >
       {(ingredients) => (
         <Table>
           <thead>
