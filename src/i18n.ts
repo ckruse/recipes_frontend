@@ -15,6 +15,7 @@ i18n
     fallbackLng: "de",
     debug: process.env.NODE_ENV !== "production",
     supportedLngs: SUPPORTED_LANGUAGES,
+    nonExplicitSupportedLngs: true,
     backend: {
       queryStringParams: { v: process.env.REACT_APP_VERSION || "0" },
     },

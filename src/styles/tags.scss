@@ -1,0 +1,29 @@
+@use "~bootstrap/scss/bootstrap" as bs;
+
+.tag {
+  padding: bs.$badge-padding-y 0.6em;
+  font-size: 0.9rem;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+
+  border-radius: bs.$border-radius-pill;
+
+  color: #fff;
+  background-color: #6c757d;
+
+  & a {
+    color: #fff;
+    text-decoration: none;
+  }
+}
+
+.recipes-tags-list {
+  list-style-type: none;
+
+  li {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+}

@@ -75,23 +75,12 @@
   }
 }
 
-.recipes-tags-list {
+.recipes-recipes-show-tags-list {
   list-style-type: none;
   padding-left: 0;
 
   li {
     display: inline-block;
-    padding: bs.$badge-padding-y 0.6em;
-    font-size: 0.9rem;
-    line-height: 1;
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: baseline;
-
-    border-radius: bs.$border-radius-pill;
-
-    color: #fff;
-    background-color: #6c757d;
   }
 
   li + li {
@@ -191,7 +180,7 @@
       justify-self: end;
     }
 
-    .recipes-tags-list {
+    .recipes-recipes-show-tags-list {
       font-size: 0.9em;
     }
 

@@ -1,0 +1,8 @@
+{
+  "show": {
+    "title": "Tag „{{tag}}“",
+    "no_recipes_zeor": "Es gibt keine Rezepte mit diesem Tag.",
+    "no_recipes_one": "Diesem Tag ist {{count}} Rezept zugeordnet.",
+    "no_recipes_other": "Diesem Tag sind {{count}} Rezepte zugeordnet."
+  }
+}

@@ -61,10 +61,14 @@ export default function List() {
               </Trans>
               <span className="created">{indexDate(recipe.insertedAt)}</span>
 
-              <ul className="recipes-tags-list">
+              <ul className="recipes-recipes-show-tags-list">
                 {_(recipe.tags)
                   .sortBy("name")
-                  .map((tag) => <li key={tag.id}>{tag.name}</li>)
+                  .map((tag) => (
+                    <li className="tag" key={tag.id}>
+                      {tag.name}
+                    </li>
+                  ))
                   .valueOf()}
               </ul>
 

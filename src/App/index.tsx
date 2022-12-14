@@ -8,6 +8,7 @@ import Flash from "../features/Flash";
 import IngredientsInterface from "../features/Ingredients";
 import RecipesInterface from "../features/Recipes";
 import Root from "../features/Root";
+import TagsInterface from "../features/Tags";
 import UsersInterface from "../features/Users";
 import { useAppSelector, useTitle } from "../hooks";
 import ChangePasswordModal from "./ChangePasswordModal";
@@ -40,6 +41,7 @@ function App() {
             <Route path="/recipes/*" element={<RecipesInterface />} />
             <Route path="/ingredients/*" element={<IngredientsInterface />} />
             <Route path="/users/*" element={<UsersInterface />} />
+            <Route path="/tags/*" element={<TagsInterface />} />
             <Route path="/" element={<Root />} />
           </Routes>
         </Suspense>

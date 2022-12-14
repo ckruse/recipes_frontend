@@ -40,10 +40,14 @@ export default function Overview({ recipe, portions = 2, setPortions }: TProps) 
         </p>
       )}
 
-      <ul className="recipes-tags-list">
+      <ul className="recipes-recipes-show-tags-list">
         {_(recipe.tags)
           .sortBy("name")
-          .map((tag) => <li key={tag.id}>{tag.name}</li>)
+          .map((tag) => (
+            <li className="tag" key={tag.id}>
+              {tag.name}
+            </li>
+          ))
           .valueOf()}
       </ul>
 

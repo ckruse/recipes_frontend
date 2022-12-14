@@ -3,14 +3,14 @@ import { FormEvent, useState } from "react";
 import { Dropdown, Form, Nav, Navbar } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import Icon from "react-icons-kit";
-import { ic_grass, ic_home, ic_set_meal } from "react-icons-kit/md";
+import { ic_grass, ic_home, ic_set_meal, ic_tag } from "react-icons-kit/md";
 import { Link, useNavigate } from "react-router-dom";
 
 import { removeAuthorizationToken } from "../authorizationToken";
 import { Button } from "../components";
 import { useAppDispatch, useAppSelector } from "../hooks";
 import { ReactComponent as Logo } from "../logo.svg";
-import { ingredientsPath, recipesPath, rootPath, showUserPath } from "../urls";
+import { ingredientsPath, recipesPath, rootPath, showUserPath, tagsPath } from "../urls";
 import { URI } from "../utils";
 import { selectSession, setUser, toggleShowLogin, toggleShowPasswordReset } from "./sessionSlice";
 
@@ -54,6 +54,12 @@ export default function Header() {
           <Nav.Item as="li">
             <Nav.Link as={Link} to={ingredientsPath()}>
               <Icon icon={ic_grass} size="24" /> {t("root:sidebar.ingredients")}
+            </Nav.Link>
+          </Nav.Item>
+
+          <Nav.Item as="li">
+            <Nav.Link as={Link} to={tagsPath()}>
+              <Icon icon={ic_tag} size="24" /> {t("root:sidebar.tags")}
             </Nav.Link>
           </Nav.Item>
         </Nav>
