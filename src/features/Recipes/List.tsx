@@ -54,7 +54,9 @@ export default function List() {
             <li className="recipes-list-item" key={recipe.id}>
               {!!recipe.image && <img className="recipe-preview" src={`${URI}${recipe.image.thumb}`} alt="" />}
 
-              <h3>{recipe.name}</h3>
+              <h3>
+                <Link to={showRecipePath(recipe)}>{recipe.name}</Link>
+              </h3>
 
               <Trans parent="span" className="calories" t={t} i18nKey="recipes:list.calories">
                 {{ calories: formatIntNumberRounded(recipeCalories(recipe).calories) }} kcal pro Portion

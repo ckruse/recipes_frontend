@@ -31,7 +31,9 @@ export default function Root() {
 
       {!!data?.randomRecipe && (
         <>
-          <h2>zufälliges Rezept: {data.randomRecipe.name}</h2>
+          <h2>
+            zufälliges Rezept: <Link to={showRecipePath(data.randomRecipe)}>{data.randomRecipe.name}</Link>
+          </h2>
 
           <div className="recipes-root-random-recipe">
             <Overview recipe={data.randomRecipe} />

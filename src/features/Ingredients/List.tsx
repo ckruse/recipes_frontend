@@ -66,7 +66,9 @@ export default function List() {
 
             {ingredients.map((ingredient) => (
               <tr key={ingredient.id}>
-                <td>{ingredient.name}</td>
+                <td>
+                  <Link to={showIngredientPath(ingredient)}>{ingredient.name}</Link>
+                </td>
                 <td>{t(`ingredients:units.${ingredient.reference}`)}</td>
                 <td>{formatIntNumberRounded(calories(ingredient))} kcal</td>
                 <td>{indexDate(ingredient.insertedAt)}</td>

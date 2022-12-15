@@ -47,7 +47,9 @@ export default function List() {
           <tbody>
             {users.map((user) => (
               <tr key={user.id}>
-                <td>{user.email}</td>
+                <td>
+                  <Link to={showUserPath(user)}>{user.email}</Link>
+                </td>
                 <td>{t(`users:roles.${user.role}`)}</td>
                 <td>{user.active ? t("translation:yes") : t("translation:no")}</td>
                 <td>{indexDate(user.insertedAt)}</td>
