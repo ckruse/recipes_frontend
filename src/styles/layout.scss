@@ -145,6 +145,17 @@ tr.no-data {
   }
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  a[href] {
+    color: inherit;
+  }
+}
+
 @media only screen and (min-width: bs.breakpoint-min("lg")) {
   main {
     width: bs.breakpoint-min("lg");
