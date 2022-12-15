@@ -1,10 +1,12 @@
+import { useState } from "react";
+
 import { useMutation } from "@apollo/client";
 
 import { Form, Formik, FormikHelpers } from "formik";
 import { TFunction } from "i18next";
 import { nanoid } from "nanoid";
 import { Form as BsForm, Col, Modal, Row } from "react-bootstrap";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import { OnChangeValue } from "react-select";
 
 import { AddButton, CancelButton, DeleteButton, FormGroup, SaveButton } from "../../../components";
@@ -22,6 +24,7 @@ import {
   TRecipe,
   TStep,
 } from "../../../types";
+import { parsedInt } from "../../../utils/numbers";
 import Flash from "../../Flash";
 import { addErrorFlash, addSuccessFlash } from "../../Flash/flashSlice";
 
@@ -78,6 +81,8 @@ const unitOptions = (t: TFunction, si: TIngredientRow) => {
 };
 
 export default function StepModal({ show, step, recipe, toggle }: TProps) {
+  const [portions, setPortions] = useState(1);
+
   const { t } = useTranslation(["translation", "recipes", "ingredients"]);
   const dispatch = useAppDispatch();
   const [createStep] = useMutation<ICreateRecipeStepMutation>(CREATE_RECIPE_STEP_MUTATION, {
@@ -110,6 +115,8 @@ export default function StepModal({ show, step, recipe, toggle }: TProps) {
           if (typeof newSi.id === "string" && newSi.id.match(/^new__/)) {
             delete newSi.id;
           }
+
+          newSi.amount! /= portions;
 
           return newSi;
         }),
@@ -195,6 +202,19 @@ export default function StepModal({ show, step, recipe, toggle }: TProps) {
 
               <Modal.Body>
                 <Flash />
+
+                <FormGroup>
+                  <BsForm.Label htmlFor="portions">{t("recipes:step_modal.portions")}</BsForm.Label>
+                  <BsForm.Control
+                    type="number"
+                    id="portions"
+                    value={portions}
+                    step={1}
+                    min={1}
+                    onChange={(ev) => setPortions(parsedInt(ev.target.value))}
+                  />
+                  <BsForm.Text>{t("recipes:step_modal.portions_explanation")}</BsForm.Text>
+                </FormGroup>
 
                 <Row>
                   <Col md={6}>

@@ -63,6 +63,8 @@
     "title_new": "neuer Schritt",
     "ingredients": "Zutaten",
     "add_ingredient": "Zutat hinzufügen",
-    "success": "Der Schritt wurde erfolgreich gespeichert!"
+    "success": "Der Schritt wurde erfolgreich gespeichert!",
+    "portions": "Portionen",
+    "portions_explanation": "Die Zutaten werden automatisch auf die Portionen verteilt."
   }
 }
