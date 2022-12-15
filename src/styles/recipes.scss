@@ -20,20 +20,6 @@
     border-bottom: bs.$border-width bs.$border-style bs.$border-color;
     padding-bottom: bs.$spacer;
     margin-bottom: bs.$spacer;
-
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    column-gap: bs.$spacer;
-
-    .btn {
-      align-self: end;
-      justify-self: start;
-      margin: 0.25rem 0;
-    }
-
-    .form-group {
-      margin-bottom: 0;
-    }
   }
 
   li:last-of-type {
@@ -192,5 +178,23 @@
   .recipes-show-image {
     float: right;
     max-width: 60%;
+  }
+
+  .recipes-show-step-model-ingredients-list {
+    li {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      column-gap: bs.$spacer;
+
+      .btn {
+        align-self: end;
+        justify-self: start;
+        margin: 0.25rem 0;
+      }
+
+      .form-group {
+        margin-bottom: 0;
+      }
+    }
   }
 }
