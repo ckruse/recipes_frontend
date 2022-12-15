@@ -6,7 +6,7 @@ import { Form, Formik, FormikHelpers } from "formik";
 import { TFunction } from "i18next";
 import { nanoid } from "nanoid";
 import { Form as BsForm, Col, Modal, Row } from "react-bootstrap";
-import { Trans, useTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { OnChangeValue } from "react-select";
 
 import { AddButton, CancelButton, DeleteButton, FormGroup, SaveButton } from "../../../components";
