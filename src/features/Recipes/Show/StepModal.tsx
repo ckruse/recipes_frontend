@@ -111,8 +111,6 @@ export default function StepModal({ show, step, recipe, toggle }: TProps) {
             delete newSi.id;
           }
 
-          console.log(newSi);
-
           return newSi;
         }),
       };
