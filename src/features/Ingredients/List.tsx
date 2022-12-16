@@ -41,7 +41,7 @@ export default function List() {
 
   return (
     <MetaList
-      listKey="recipes"
+      listKey="ingredients"
       items={items}
       count={count}
       title={t("ingredients:list.title")}
