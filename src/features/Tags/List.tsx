@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 import { TAG_DELETE_MUTATION, TAGS_COUNT_QUERY, TAGS_W_COUNT_QUERY } from "../../graphql/tags";
@@ -8,6 +9,7 @@ import MetaList from "../MetaList";
 
 export default function List() {
   const page = useAppSelector((state) => state.metaList.pages["tags"] || 0);
+  const { t } = useTranslation(["tags"]);
 
   const { items, count } = useList<TTag>({
     query: TAGS_W_COUNT_QUERY,
@@ -20,7 +22,7 @@ export default function List() {
   });
 
   return (
-    <MetaList listKey="tags" items={items} count={count} title="TODO: Tags">
+    <MetaList listKey="tags" items={items} count={count} title={t("tags:list.title")}>
       {(tags) => (
         <ul className="recipes-tags-list">
           {tags.map((tag) => (
