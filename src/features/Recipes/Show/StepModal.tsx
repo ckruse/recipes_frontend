@@ -163,7 +163,7 @@ export default function StepModal({ show, step, recipe, toggle }: TProps) {
       }
 
       dispatch(addSuccessFlash(t("recipes:step_modal.success")));
-      toggle();
+      resetForm();
     } catch (e) {
       console.error(e);
       dispatch(addErrorFlash(t("translation:errors.general")));
@@ -171,8 +171,13 @@ export default function StepModal({ show, step, recipe, toggle }: TProps) {
     }
   }
 
+  function resetForm() {
+    setPortions(1);
+    toggle();
+  }
+
   return (
-    <Modal onHide={toggle} show={show} size="lg">
+    <Modal show={show} size="lg" onHide={resetForm}>
       <Formik validationSchema={validationSchema(t)} initialValues={initialValues(recipe, step)} onSubmit={save}>
         {({ values, setFieldValue }) => {
           function addIngredient() {
@@ -323,7 +328,7 @@ export default function StepModal({ show, step, recipe, toggle }: TProps) {
 
               <Modal.Footer>
                 <SaveButton type="submit">{t("translation:save")}</SaveButton>
-                <CancelButton onClick={toggle}>{t("translation:cancel")}</CancelButton>
+                <CancelButton onClick={resetForm}>{t("translation:cancel")}</CancelButton>
               </Modal.Footer>
             </Form>
           );
