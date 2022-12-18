@@ -68,7 +68,6 @@ export default function RecipesForm({ recipe, onSave, btnSize = "md", hideCancel
   return (
     <Formik validationSchema={validationSchema(t)} initialValues={initialValues(recipe)} onSubmit={onSave}>
       {({ values, errors, touched, setFieldValue, setFieldTouched }) => {
-        console.log(errors, touched);
         async function onSelect(value: MultiValue<OptionType>, actionMeta: ActionMeta<OptionType>) {
           setFieldTouched("tags", true, true);
 
