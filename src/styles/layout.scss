@@ -163,3 +163,21 @@ h6 {
     margin-right: auto;
   }
 }
+
+.recipes-react-select.is-invalid > div {
+  border-color: bs.$form-feedback-invalid-color;
+
+  &:focus {
+    border-color: bs.$form-feedback-invalid-color;
+    box-shadow: 0 0 0 bs.$input-focus-width rgba(bs.$form-feedback-invalid-color, 0.25);
+  }
+}
+
+.recipes-react-select.is-valid > div {
+  border-color: bs.$form-feedback-valid-color;
+
+  &:focus {
+    border-color: bs.$form-feedback-valid-color;
+    box-shadow: 0 0 0 bs.$input-focus-width rgba(bs.$form-feedback-valid-color, 0.25);
+  }
+}

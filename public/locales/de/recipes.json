@@ -31,7 +31,9 @@
   "form": {
     "tags_placeholder": "Tags auswählen oder hinzufügen…",
     "no_tags_found": "Keine Tags gefunden!",
-    "create_tag": "Tag „{{name}}“ erstellen…"
+    "create_tag": "Tag „{{name}}“ erstellen…",
+    "name_required": "Bitte gib einen Namen ein!",
+    "max_tags": "Maximale Anzahl an Tags erreicht!"
   },
 
   "show": {
@@ -65,6 +67,9 @@
     "add_ingredient": "Zutat hinzufügen",
     "success": "Der Schritt wurde erfolgreich gespeichert!",
     "portions": "Portionen",
-    "portions_explanation": "Die Zutaten werden automatisch auf die Portionen verteilt."
+    "portions_explanation": "Die Zutaten werden automatisch auf die Portionen verteilt.",
+    "description_required": "Bitte geben Sie eine Beschreibung an!",
+    "amount_min": "Die Menge muss größer als 0 sein!",
+    "ingredient_required": "Bitte wählen Sie eine Zutat aus!"
   }
 }

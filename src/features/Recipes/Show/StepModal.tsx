@@ -8,6 +8,7 @@ import { nanoid } from "nanoid";
 import { Form as BsForm, Col, Modal, Row } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { OnChangeValue } from "react-select";
+import * as yup from "yup";
 
 import { AddButton, CancelButton, DeleteButton, FormGroup, SaveButton } from "../../../components";
 import { Input, Select, Textarea } from "../../../components/Form";
@@ -79,6 +80,17 @@ const unitOptions = (t: TFunction, si: TIngredientRow) => {
     })),
   ];
 };
+
+const validationSchema = (t: TFunction) =>
+  yup.object().shape({
+    description: yup.string().required(t("recipes:step_modal.description_required")),
+    stepIngredients: yup.array().of(
+      yup.object().shape({
+        amount: yup.number().min(0, t("recipes:step_modal.amount_min")),
+        ingredientId: yup.number().required(t("recipes:step_modal.ingredient_required")),
+      })
+    ),
+  });
 
 export default function StepModal({ show, step, recipe, toggle }: TProps) {
   const [portions, setPortions] = useState(1);
@@ -161,7 +173,7 @@ export default function StepModal({ show, step, recipe, toggle }: TProps) {
 
   return (
     <Modal onHide={toggle} show={show} size="lg">
-      <Formik initialValues={initialValues(recipe, step)} onSubmit={save}>
+      <Formik validationSchema={validationSchema} initialValues={initialValues(recipe, step)} onSubmit={save}>
         {({ values, setFieldValue }) => {
           function addIngredient() {
             const newEntry: TIngredientRow = {

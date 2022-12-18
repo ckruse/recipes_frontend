@@ -2,21 +2,27 @@ import React, { useState } from "react";
 
 import { useMutation, useQuery } from "@apollo/client";
 
+import clsx from "clsx";
 import { Form, Formik, FormikHelpers } from "formik";
+import { TFunction } from "i18next";
 import { Form as BsForm } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { ActionMeta, MultiValue } from "react-select";
 import Select from "react-select/creatable";
+import * as yup from "yup";
 
 import { FormActions, FormGroup } from "../../components";
 import { CancelButton, SaveButton } from "../../components/Buttons";
 import { Input, Textarea } from "../../components/Form";
+import ErrorMessage from "../../components/Form/ErrorMessage";
 import { TAG_CREATE_MUTATION, TAGS_QUERY } from "../../graphql/tags";
 import { MutationError } from "../../handleError";
 import { useDebounce } from "../../hooks";
 import { TagCreateMutationInterface, TagsDataInterface, TRecipe } from "../../types";
 import { recipesPath } from "../../urls";
+
+const MAX_TAGS_COUNT = 3;
 
 type TProps = {
   recipe?: TRecipe;
@@ -33,6 +39,13 @@ export interface ValuesInterface {
   image: File | null;
   tags: { id: string; name: string }[];
 }
+
+const validationSchema = (t: TFunction) =>
+  yup.object().shape({
+    name: yup.string().required(t("recipes:form.name_required")),
+    description: yup.string(),
+    tags: yup.array().max(MAX_TAGS_COUNT, t("recipes:form.max_tags")),
+  });
 
 const initialValues = (recipe?: TRecipe): ValuesInterface => ({
   name: recipe?.name || "",
@@ -53,9 +66,12 @@ export default function RecipesForm({ recipe, onSave, btnSize = "md", hideCancel
   });
 
   return (
-    <Formik initialValues={initialValues(recipe)} onSubmit={onSave}>
-      {({ values, setFieldValue }) => {
+    <Formik validationSchema={validationSchema(t)} initialValues={initialValues(recipe)} onSubmit={onSave}>
+      {({ values, errors, touched, setFieldValue, setFieldTouched }) => {
+        console.log(errors, touched);
         async function onSelect(value: MultiValue<OptionType>, actionMeta: ActionMeta<OptionType>) {
+          setFieldTouched("tags", true, true);
+
           if (actionMeta.action === "create-option") {
             const { data, errors } = await mutateTag({ variables: { name: actionMeta.option.label } });
 
@@ -64,11 +80,12 @@ export default function RecipesForm({ recipe, onSave, btnSize = "md", hideCancel
               throw new MutationError(undefined);
             }
 
-            setFieldValue("tags", [...values.tags, { id: data.createTag.id, name: data.createTag.name }]);
+            setFieldValue("tags", [...values.tags, { id: data.createTag.id, name: data.createTag.name }], true);
           } else {
             setFieldValue(
               "tags",
-              value.map((tag) => ({ id: tag.value, name: tag.label }))
+              value.map((tag) => ({ id: tag.value, name: tag.label })),
+              true
             );
           }
         }
@@ -86,6 +103,7 @@ export default function RecipesForm({ recipe, onSave, btnSize = "md", hideCancel
             <FormGroup>
               <BsForm.Label htmlFor="name">{t("recipes:fieldnames.name")}</BsForm.Label>
               <Input name="name" id="name" />
+              <ErrorMessage name="name" />
             </FormGroup>
 
             <FormGroup>
@@ -96,11 +114,16 @@ export default function RecipesForm({ recipe, onSave, btnSize = "md", hideCancel
             <FormGroup>
               <BsForm.Label htmlFor="description">{t("recipes:fieldnames.description")}</BsForm.Label>
               <Textarea name="description" id="description" />
+              <ErrorMessage name="description" />
             </FormGroup>
 
             <FormGroup>
               <BsForm.Label htmlFor="tags">{t("recipes:fieldnames.tags")}</BsForm.Label>
               <Select
+                className={clsx("recipes-react-select", {
+                  "is-invalid": errors.tags && touched.tags,
+                  "is-valid": !errors.tags && touched.tags,
+                })}
                 id="tags"
                 isClearable
                 isLoading={loading}
@@ -114,7 +137,11 @@ export default function RecipesForm({ recipe, onSave, btnSize = "md", hideCancel
                 noOptionsMessage={() => t("recipes:form.no_tags_found")}
                 formatCreateLabel={(inputValue) => t("recipes:form.create_tag", { name: inputValue })}
                 loadingMessage={() => t("translation:loading")}
+                isOptionDisabled={(option) =>
+                  tagValues.length >= MAX_TAGS_COUNT || tagValues.some((tag) => tag.value === option.value)
+                }
               />
+              <ErrorMessage name="tags" />
             </FormGroup>
 
             <FormActions>
