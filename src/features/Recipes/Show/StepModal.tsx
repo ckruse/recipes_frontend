@@ -173,7 +173,7 @@ export default function StepModal({ show, step, recipe, toggle }: TProps) {
 
   return (
     <Modal onHide={toggle} show={show} size="lg">
-      <Formik validationSchema={validationSchema} initialValues={initialValues(recipe, step)} onSubmit={save}>
+      <Formik validationSchema={validationSchema(t)} initialValues={initialValues(recipe, step)} onSubmit={save}>
         {({ values, setFieldValue }) => {
           function addIngredient() {
             const newEntry: TIngredientRow = {
