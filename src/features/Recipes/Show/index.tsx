@@ -15,7 +15,7 @@ import { IRecipeQueryResult, IUpdateRecipeMutation } from "../../../types";
 import { recipesPath } from "../../../urls";
 import { parsedInt } from "../../../utils/numbers";
 import { addSuccessFlash } from "../../Flash/flashSlice";
-import RecipeForm, { ValuesInterface } from "../Form";
+import RecipeForm, { IValues } from "../Form";
 import Overview from "./Overview";
 import Steps from "./Steps";
 
@@ -32,7 +32,7 @@ export default function Show() {
 
   useTitle(t("recipes:show.title", { name: data?.recipe.name || "…" }));
 
-  async function saveRecipe(values: ValuesInterface, { setSubmitting }: FormikHelpers<ValuesInterface>) {
+  async function saveRecipe(values: IValues, { setSubmitting }: FormikHelpers<IValues>) {
     try {
       setSubmitting(true);
 
@@ -42,6 +42,7 @@ export default function Show() {
           recipe: {
             ...values,
             tags: values.tags.map((tag) => tag.id),
+            fittingRecipes: values.fittingRecipes.map((recipe) => recipe.id),
           },
         },
       });

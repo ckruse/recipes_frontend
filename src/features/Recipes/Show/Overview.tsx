@@ -2,10 +2,11 @@ import _ from "lodash";
 import { Form } from "react-bootstrap";
 import { Trans, useTranslation } from "react-i18next";
 import ReactMarkdown from "react-markdown";
+import { Link } from "react-router-dom";
 
 import { FormGroup } from "../../../components";
 import { TIngredient, TRecipe, TUnit } from "../../../types";
-import { bringImportUri } from "../../../urls";
+import { bringImportUri, showRecipePath } from "../../../urls";
 import { recipeCalories, URI } from "../../../utils";
 import { formatIntNumberRounded, formatNumber } from "../../../utils/numbers";
 
@@ -51,11 +52,11 @@ export default function Overview({ recipe, portions = 2, setPortions }: TProps) 
           .valueOf()}
       </ul>
 
-      <h2>Zutaten</h2>
+      <h2>{t("recipes:show.ingredients")}</h2>
 
       {!!setPortions && (
         <FormGroup>
-          <Form.Label>Anzahl Portionen</Form.Label>
+          <Form.Label>{t("recipes:show.no_portions")}</Form.Label>
           <Form.Control
             className="recipes-show-portions"
             type="number"
@@ -119,6 +120,20 @@ export default function Overview({ recipe, portions = 2, setPortions }: TProps) 
           Die Vorbereitungszeit beträgt {{ prepTime: formatIntNumberRounded(preparationTime) }} Minuten und und die
           Garzeit beträgt etwa {{ cookingTime: formatIntNumberRounded(cookingTime) }} Minuten.
         </Trans>
+
+        {recipe.fittingRecipes.length > 0 && (
+          <>
+            <h2>{t("recipes:show.fitting_recipes")}</h2>
+
+            <ul>
+              {recipe.fittingRecipes.map((fittingRecipe) => (
+                <li key={fittingRecipe.id}>
+                  <Link to={showRecipePath(fittingRecipe)}>{fittingRecipe.name}</Link>
+                </li>
+              ))}
+            </ul>
+          </>
+        )}
       </div>
     </>
   );

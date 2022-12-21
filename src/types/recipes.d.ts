@@ -18,7 +18,13 @@ export type TRecipe = {
   steps: TStep[];
   tags: TTag[];
   owner: TUser;
+
+  fittingRecipes: TRecipe[];
 };
+
+export interface IRecipesQueryResult {
+  recipes: TRecipe[];
+}
 
 export interface IRecipeQueryResult {
   recipe: TRecipe;

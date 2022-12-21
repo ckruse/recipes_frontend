@@ -5,7 +5,8 @@
     "image": "Bild",
     "tags": "Tags",
     "inserted_at": "erstellt",
-    "updated_at": "aktualisiert"
+    "updated_at": "aktualisiert",
+    "fittingRecipes": "passende Rezepte"
   },
 
   "fieldnames_step_ingredient": {
@@ -51,7 +52,10 @@
     "prep_and_cooking_time": "Die Vorbereitungszeit beträgt {{prepTime}} Minuten und und die Garzeit beträgt etwa {{cookingTime}} Minuten.",
     "step_deleted": "Arbeitsschritt gelöscht",
     "move_step_down": "nach unten verschieben",
-    "move_step_up": "nach oben verschieben"
+    "move_step_up": "nach oben verschieben",
+    "ingredients": "Zutaten",
+    "no_portions": "Anzahl Portionen",
+    "fitting_recipes": "passende Rezepte"
   },
 
   "list": {

@@ -98,6 +98,22 @@ export const RECIPE_QUERY = gql`
   query recipe($id: ID!) {
     recipe(id: $id) {
       ...RecipeDetailFragment
+
+      fittingRecipes {
+        id
+        name
+        description
+        ownerId
+
+        image {
+          thumb
+          large
+          original
+        }
+
+        insertedAt
+        updatedAt
+      }
     }
   }
   ${RECIPE_DETAIL_FRAGMENT}
@@ -107,6 +123,22 @@ export const RANDOM_RECIPE_QUERY = gql`
   query randomRecipe {
     randomRecipe {
       ...RecipeDetailFragment
+
+      fittingRecipes {
+        id
+        name
+        description
+        ownerId
+
+        image {
+          thumb
+          large
+          original
+        }
+
+        insertedAt
+        updatedAt
+      }
     }
   }
   ${RECIPE_DETAIL_FRAGMENT}
@@ -116,6 +148,22 @@ export const CREATE_RECIPE_MUTATION = gql`
   mutation createRecipe($recipe: RecipeInput!) {
     createRecipe(recipe: $recipe) {
       ...RecipeDetailFragment
+
+      fittingRecipes {
+        id
+        name
+        description
+        ownerId
+
+        image {
+          thumb
+          large
+          original
+        }
+
+        insertedAt
+        updatedAt
+      }
     }
   }
   ${RECIPE_DETAIL_FRAGMENT}
@@ -125,6 +173,22 @@ export const UPDATE_RECIPE_MUTATION = gql`
   mutation updateRecipe($id: ID, $recipe: RecipeInput!) {
     updateRecipe(id: $id, recipe: $recipe) {
       ...RecipeDetailFragment
+
+      fittingRecipes {
+        id
+        name
+        description
+        ownerId
+
+        image {
+          thumb
+          large
+          original
+        }
+
+        insertedAt
+        updatedAt
+      }
     }
   }
   ${RECIPE_DETAIL_FRAGMENT}

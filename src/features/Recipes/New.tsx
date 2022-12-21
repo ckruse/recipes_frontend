@@ -11,7 +11,7 @@ import useAuthRequired from "../../hooks/useAuthRequired";
 import { ICreateRecipeMutation } from "../../types";
 import { showRecipePath } from "../../urls";
 import { addErrorFlash, addSuccessFlash } from "../Flash/flashSlice";
-import Form, { ValuesInterface } from "./Form";
+import Form, { IValues } from "./Form";
 
 export default function New() {
   const { t } = useTranslation(["recipes", "translation"]);
@@ -23,7 +23,7 @@ export default function New() {
   useTitle(t("recipes:new.title"));
   useAuthRequired();
 
-  async function onSave(recipe: ValuesInterface, { setSubmitting }: FormikHelpers<ValuesInterface>) {
+  async function onSave(recipe: IValues, { setSubmitting }: FormikHelpers<IValues>) {
     try {
       setSubmitting(true);
 
@@ -32,6 +32,7 @@ export default function New() {
           recipe: {
             ...recipe,
             tags: recipe.tags.map((tag) => tag.id),
+            fittingRecipes: recipe.fittingRecipes.map((recipe) => recipe.id),
           },
         },
       });

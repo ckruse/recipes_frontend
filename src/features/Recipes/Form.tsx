@@ -21,23 +21,25 @@ import { MutationError } from "../../handleError";
 import { useDebounce } from "../../hooks";
 import { TagCreateMutationInterface, TagsDataInterface, TRecipe } from "../../types";
 import { recipesPath } from "../../urls";
+import FittingRecipesSelector from "./FittingRecipesSelector";
 
 const MAX_TAGS_COUNT = 3;
 
 type TProps = {
   recipe?: TRecipe;
-  onSave: (recipe: ValuesInterface, helpers: FormikHelpers<ValuesInterface>) => void;
+  onSave: (recipe: IValues, helpers: FormikHelpers<IValues>) => void;
   btnSize?: "sm" | "md";
   hideCancel?: boolean;
 };
 
 type OptionType = { value: string; label: string };
 
-export interface ValuesInterface {
+export interface IValues {
   name: string;
   description: string;
   image: File | null;
   tags: { id: string; name: string }[];
+  fittingRecipes: { id: string; name: string }[];
 }
 
 const validationSchema = (t: TFunction) =>
@@ -47,11 +49,12 @@ const validationSchema = (t: TFunction) =>
     tags: yup.array().max(MAX_TAGS_COUNT, t("recipes:form.max_tags")),
   });
 
-const initialValues = (recipe?: TRecipe): ValuesInterface => ({
+const initialValues = (recipe?: TRecipe): IValues => ({
   name: recipe?.name || "",
   image: null,
   description: recipe?.description || "",
   tags: recipe?.tags.map((tag) => ({ id: tag.id, name: tag.name })) || [],
+  fittingRecipes: recipe?.fittingRecipes.map((recipe) => ({ id: recipe.id, name: recipe.name })) || [],
 });
 
 export default function RecipesForm({ recipe, onSave, btnSize = "md", hideCancel = false }: TProps) {
@@ -141,6 +144,12 @@ export default function RecipesForm({ recipe, onSave, btnSize = "md", hideCancel
                 }
               />
               <ErrorMessage name="tags" />
+            </FormGroup>
+
+            <FormGroup>
+              <BsForm.Label htmlFor="fittingRecipes">{t("recipes:fieldnames.fittingRecipes")}</BsForm.Label>
+              <FittingRecipesSelector />
+              <ErrorMessage name="fittingRecipes" />
             </FormGroup>
 
             <FormActions>
