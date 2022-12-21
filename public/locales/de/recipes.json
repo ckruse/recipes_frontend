@@ -6,7 +6,8 @@
     "tags": "Tags",
     "inserted_at": "erstellt",
     "updated_at": "aktualisiert",
-    "fittingRecipes": "passende Rezepte"
+    "fittingRecipes": "passende Rezepte",
+    "defaultServings": "Standard-Portionen"
   },
 
   "fieldnames_step_ingredient": {
@@ -35,7 +36,8 @@
     "no_tags_found": "Keine Tags gefunden!",
     "create_tag": "Tag „{{name}}“ erstellen…",
     "name_required": "Bitte gib einen Namen ein!",
-    "max_tags": "Maximale Anzahl an Tags erreicht!"
+    "max_tags": "Maximale Anzahl an Tags erreicht!",
+    "default_servings_required": "Bitte gib die Standard-Portionen ein!"
   },
 
   "show": {

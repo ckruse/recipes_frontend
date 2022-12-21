@@ -36,6 +36,7 @@ type OptionType = { value: string; label: string };
 
 export interface IValues {
   name: string;
+  defaultServings: number;
   description: string;
   image: File | null;
   tags: { id: string; name: string }[];
@@ -45,12 +46,14 @@ export interface IValues {
 const validationSchema = (t: TFunction) =>
   yup.object().shape({
     name: yup.string().required(t("recipes:form.name_required")),
+    defaultServings: yup.number().required(t("recipes:form.default_servings_required")),
     description: yup.string(),
     tags: yup.array().max(MAX_TAGS_COUNT, t("recipes:form.max_tags")),
   });
 
 const initialValues = (recipe?: TRecipe): IValues => ({
   name: recipe?.name || "",
+  defaultServings: recipe?.defaultServings || 2,
   image: null,
   description: recipe?.description || "",
   tags: recipe?.tags.map((tag) => ({ id: tag.id, name: tag.name })) || [],
@@ -106,6 +109,12 @@ export default function RecipesForm({ recipe, onSave, btnSize = "md", hideCancel
               <BsForm.Label htmlFor="name">{t("recipes:fieldnames.name")}</BsForm.Label>
               <Input name="name" id="name" />
               <ErrorMessage name="name" />
+            </FormGroup>
+
+            <FormGroup>
+              <BsForm.Label htmlFor="defaultServings">{t("recipes:fieldnames.defaultServings")}</BsForm.Label>
+              <Input type="number" name="defaultServings" id="defaultServings" />
+              <ErrorMessage name="defaultServings" />
             </FormGroup>
 
             <FormGroup>

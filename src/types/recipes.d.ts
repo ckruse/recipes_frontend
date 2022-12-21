@@ -3,6 +3,7 @@ import { Nullable, TStep, TTag, TUser } from ".";
 export type TRecipe = {
   id: string;
   name: string;
+  defaultServings: number;
   description: Nullable<string>;
   image: {
     thumb: string;

@@ -54,6 +54,7 @@ export const RECIPE_DETAIL_FRAGMENT = gql`
   fragment RecipeDetailFragment on Recipe {
     id
     name
+    defaultServings
     description
     ownerId
 

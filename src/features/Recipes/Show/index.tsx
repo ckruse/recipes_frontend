@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { useMutation, useQuery } from "@apollo/client";
 
@@ -31,6 +31,12 @@ export default function Show() {
   const [mutateRecipe] = useMutation<IUpdateRecipeMutation>(UPDATE_RECIPE_MUTATION);
 
   useTitle(t("recipes:show.title", { name: data?.recipe.name || "…" }));
+
+  useEffect(() => {
+    if (data?.recipe) {
+      setPortions(data.recipe.defaultServings);
+    }
+  }, [data]);
 
   async function saveRecipe(values: IValues, { setSubmitting }: FormikHelpers<IValues>) {
     try {
