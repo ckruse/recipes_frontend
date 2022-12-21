@@ -2,6 +2,7 @@ import { Nullable, TIngredient, TUnit } from ".";
 
 export type TStep = {
   id: string;
+  name: Nullable<string>;
   position: number;
   preparationTime: number;
   cookingTime: number;

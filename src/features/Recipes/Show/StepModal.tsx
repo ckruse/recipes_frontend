@@ -47,6 +47,7 @@ type TIngredientRow = {
 };
 
 type TValues = {
+  name: Nullable<string>;
   position: number;
   preparationTime: number;
   cookingTime: number;
@@ -55,6 +56,7 @@ type TValues = {
 };
 
 const initialValues = (recipe: TRecipe, step: Nullable<TStep>): TValues => ({
+  name: step?.name || null,
   position: step?.position || (_.maxBy(recipe.steps, "position")?.position || 0) + 1,
   preparationTime: step?.preparationTime || 0,
   cookingTime: step?.cookingTime || 0,
@@ -222,6 +224,12 @@ export default function StepModal({ show, step, recipe, toggle }: TProps) {
                 <Flash />
 
                 <FormGroup>
+                  <BsForm.Label htmlFor="name">{t("recipes:fieldnames_step_ingredient.name")}</BsForm.Label>
+                  <Input id="name" name="name" />
+                  <BsForm.Text>{t("recipes:step_modal.name_is_optional")}</BsForm.Text>
+                </FormGroup>
+
+                <FormGroup>
                   <BsForm.Label htmlFor="portions">{t("recipes:step_modal.portions")}</BsForm.Label>
                   <BsForm.Control
                     type="number"
@@ -237,15 +245,19 @@ export default function StepModal({ show, step, recipe, toggle }: TProps) {
                 <Row>
                   <Col md={6}>
                     <FormGroup>
-                      <BsForm.Label>{t("recipes:fieldnames_step_ingredient.preparation_time")}</BsForm.Label>
-                      <Input type="number" name="preparationTime" />
+                      <BsForm.Label htmlFor="preparationTime">
+                        {t("recipes:fieldnames_step_ingredient.preparation_time")}
+                      </BsForm.Label>
+                      <Input type="number" name="preparationTime" id="preparationTime" />
                     </FormGroup>
                   </Col>
 
                   <Col md={6}>
                     <FormGroup>
-                      <BsForm.Label>{t("recipes:fieldnames_step_ingredient.cooking_time")}</BsForm.Label>
-                      <Input type="number" name="cookingTime" />
+                      <BsForm.Label htmlFor="cookingTime">
+                        {t("recipes:fieldnames_step_ingredient.cooking_time")}
+                      </BsForm.Label>
+                      <Input type="number" name="cookingTime" id="cookingTime" />
                     </FormGroup>
                   </Col>
                 </Row>

@@ -100,7 +100,7 @@ export default function Steps({ recipe, portions, editMode }: TProps) {
           .sortBy("position")
           .map((step, i) => (
             <li key={step.id}>
-              <h3>Schritt {i + 1}</h3>
+              <h3>{step.name ? step.name : <>Schritt {i + 1}</>}</h3>
 
               <ul className="recipes-recipe-show-steps-list-ingredients-list">
                 {step.stepIngredients.map((stepIng) => (

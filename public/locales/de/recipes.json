@@ -10,6 +10,7 @@
   },
 
   "fieldnames_step_ingredient": {
+    "name": "Name",
     "unit": "Einheit",
     "amount": "Menge",
     "ingredient_id": "Zutat",
@@ -74,6 +75,7 @@
     "portions_explanation": "Die Zutaten werden automatisch auf die Portionen verteilt.",
     "description_required": "Bitte geben Sie eine Beschreibung an!",
     "amount_min": "Die Menge muss größer als 0 sein!",
-    "ingredient_required": "Bitte wählen Sie eine Zutat aus!"
+    "ingredient_required": "Bitte wählen Sie eine Zutat aus!",
+    "name_is_optional": "Der Name ist optional."
   }
 }

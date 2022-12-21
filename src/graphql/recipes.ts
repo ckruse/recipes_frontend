@@ -3,6 +3,7 @@ import { gql } from "@apollo/client";
 export const STEP_FRAGMENT = gql`
   fragment StepFragment on Step {
     id
+    name
     position
     preparationTime
     cookingTime
