@@ -4,6 +4,7 @@ import { useMutation } from "@apollo/client";
 
 import { Form, Formik, FormikHelpers } from "formik";
 import { TFunction } from "i18next";
+import _ from "lodash";
 import { nanoid } from "nanoid";
 import { Form as BsForm, Col, Modal, Row } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
@@ -54,7 +55,7 @@ type TValues = {
 };
 
 const initialValues = (recipe: TRecipe, step: Nullable<TStep>): TValues => ({
-  position: step?.position || recipe.steps.length,
+  position: step?.position || (_.maxBy(recipe.steps, "position")?.position || 0) + 1,
   preparationTime: step?.preparationTime || 0,
   cookingTime: step?.cookingTime || 0,
   description: step?.description || "",
