@@ -89,7 +89,7 @@ const validationSchema = (t: TFunction) =>
     description: yup.string().required(t("recipes:step_modal.description_required")),
     stepIngredients: yup.array().of(
       yup.object().shape({
-        amount: yup.number().min(0, t("recipes:step_modal.amount_min")),
+        amount: yup.number().nullable().min(0, t("recipes:step_modal.amount_min")),
         ingredientId: yup.number().required(t("recipes:step_modal.ingredient_required")),
       })
     ),
