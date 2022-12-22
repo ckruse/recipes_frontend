@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { useMutation } from "@apollo/client";
 
@@ -64,7 +64,7 @@ const initialValues = (recipe: TRecipe, step: Nullable<TStep>): TValues => ({
   stepIngredients:
     step?.stepIngredients.map((stepIng) => ({
       id: stepIng.id,
-      amount: stepIng.amount,
+      amount: stepIng.amount ? stepIng.amount * (recipe?.defaultServings || 1) : null,
       unitId: stepIng.unitId || "-",
       ingredientId: stepIng.ingredientId,
       ingredient: stepIng.ingredient,
@@ -96,7 +96,7 @@ const validationSchema = (t: TFunction) =>
   });
 
 export default function StepModal({ show, step, recipe, toggle }: TProps) {
-  const [portions, setPortions] = useState(1);
+  const [portions, setPortions] = useState(recipe.defaultServings);
 
   const { t } = useTranslation(["translation", "recipes", "ingredients"]);
   const dispatch = useAppDispatch();
@@ -175,7 +175,7 @@ export default function StepModal({ show, step, recipe, toggle }: TProps) {
   }
 
   function resetForm() {
-    setPortions(1);
+    setPortions(recipe.defaultServings);
     toggle();
   }
 
