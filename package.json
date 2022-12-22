@@ -23,13 +23,6 @@
   "dependencies": {
     "@apollo/client": "^3.7.3",
     "@reduxjs/toolkit": "^1.9.1",
-    "@testing-library/jest-dom": "^5.16.4",
-    "@testing-library/react": "^13.0.1",
-    "@testing-library/user-event": "^14.1.1",
-    "@types/jest": "^29.2.4",
-    "@types/node": "^18.11.17",
-    "@types/react": "^18.0.26",
-    "@types/react-dom": "^18.0.9",
     "apollo-upload-client": "^17.0.0",
     "bootstrap": "^5.2.3",
     "clsx": "^1.2.1",
@@ -84,6 +77,13 @@
   },
   "devDependencies": {
     "@trivago/prettier-plugin-sort-imports": "^3.3.0",
-    "prettier": "^2.8.1"
+    "prettier": "^2.8.1",
+    "@types/jest": "^29.2.4",
+    "@types/node": "^18.11.17",
+    "@types/react": "^18.0.26",
+    "@types/react-dom": "^18.0.9",
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react": "^13.0.1",
+    "@testing-library/user-event": "^14.1.1"
   }
 }
