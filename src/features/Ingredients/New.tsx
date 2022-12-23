@@ -8,7 +8,7 @@ import { INGREDIENT_CREATE_MUTATION } from "../../graphql/ingredients";
 import { MutationError } from "../../handleError";
 import { useAppDispatch, useTitle } from "../../hooks";
 import { IIngredientCreateMutation } from "../../types";
-import { showIngredientPath } from "../../urls";
+import { ingredientsPath } from "../../urls";
 import { addErrorFlash, addSuccessFlash } from "../Flash/flashSlice";
 import Form, { IValues } from "./Form";
 
@@ -38,7 +38,7 @@ export default function New() {
       }
 
       dispatch(addSuccessFlash(t("ingredients:new.success")));
-      navigate(showIngredientPath(data.createIngredient));
+      navigate(ingredientsPath());
     } catch (e) {
       setSubmitting(false);
       dispatch(addErrorFlash(t("translation:errors.general")));
