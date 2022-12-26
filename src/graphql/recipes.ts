@@ -146,6 +146,15 @@ export const RANDOM_RECIPE_QUERY = gql`
   ${RECIPE_DETAIL_FRAGMENT}
 `;
 
+export const RANDOM_RECIPES_QUERY = gql`
+  query randomRecipes($limit: Int!, $tags: [String]) {
+    randomRecipes(limit: $limit, tags: $tags) {
+      ...RecipeDetailFragment
+    }
+  }
+  ${RECIPE_DETAIL_FRAGMENT}
+`;
+
 export const CREATE_RECIPE_MUTATION = gql`
   mutation createRecipe($recipe: RecipeInput!) {
     createRecipe(recipe: $recipe) {
