@@ -1,24 +1,16 @@
-import _ from "lodash";
-import { ButtonGroup } from "react-bootstrap";
-import { Trans, useTranslation } from "react-i18next";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import { useLocation, useNavigate } from "react-router-dom";
 
-import { selectSession } from "../../App/sessionSlice";
-import { DeleteButton, ShowButton } from "../../components";
-import { indexDate } from "../../dateUtils";
 import { RECIPE_DELETE_MUTATION, RECIPES_COUNT_QUERY, RECIPES_QUERY } from "../../graphql/recipes";
 import { useAppSelector, useDebouncedCallback, useList } from "../../hooks";
-import may from "../../permissions";
 import { TRecipe } from "../../types";
-import { recipesPath, showRecipePath } from "../../urls";
-import { recipeCalories, URI } from "../../utils";
-import { formatIntNumberRounded } from "../../utils/numbers";
+import { recipesPath } from "../../urls";
 import MetaList from "../MetaList";
+import ListItem from "./ListItem";
 import Searchbar from "./Searchbar";
 
 export default function List() {
   const { t } = useTranslation(["recipes", "translation"]);
-  const { user } = useAppSelector(selectSession);
   const page = useAppSelector((state) => state.metaList.pages["recipes"] || 0);
   const { search: queryString } = useLocation();
   const navigate = useNavigate();
@@ -51,40 +43,7 @@ export default function List() {
       {(recipes) => (
         <ul className="recipes-list">
           {recipes.map((recipe) => (
-            <li className="recipes-list-item" key={recipe.id}>
-              <div className="recipe-preview">
-                {!!recipe.image && <img src={`${URI}${recipe.image.thumb}`} alt="" />}
-              </div>
-
-              <h3>
-                <Link to={showRecipePath(recipe)}>{recipe.name}</Link>
-              </h3>
-
-              <Trans parent="span" className="calories" t={t} i18nKey="recipes:list.calories">
-                {{ calories: formatIntNumberRounded(recipeCalories(recipe).calories) }} kcal pro Portion
-              </Trans>
-              <span className="created">{indexDate(recipe.insertedAt)}</span>
-
-              <ul className="recipes-recipes-show-tags-list">
-                {_(recipe.tags)
-                  .sortBy("name")
-                  .map((tag) => (
-                    <li className="tag" key={tag.id}>
-                      {tag.name}
-                    </li>
-                  ))
-                  .valueOf()}
-              </ul>
-
-              <ButtonGroup size="sm">
-                <ShowButton as={Link} to={showRecipePath(recipe)}>
-                  {t("translation:show")}
-                </ShowButton>
-                {may(user, "recipes", "create") && (
-                  <DeleteButton onClick={() => deleteItem(recipe)}>{t("translation:delete")}</DeleteButton>
-                )}
-              </ButtonGroup>
-            </li>
+            <ListItem key={recipe.id} recipe={recipe} deleteItem={deleteItem} />
           ))}
         </ul>
       )}
