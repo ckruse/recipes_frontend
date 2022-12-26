@@ -23,7 +23,7 @@ import { TagCreateMutationInterface, TagsDataInterface, TRecipe } from "../../ty
 import { recipesPath } from "../../urls";
 import FittingRecipesSelector from "./FittingRecipesSelector";
 
-const MAX_TAGS_COUNT = 3;
+const MAX_TAGS_COUNT = 5;
 
 type TProps = {
   recipe?: TRecipe;
