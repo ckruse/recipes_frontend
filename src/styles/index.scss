@@ -7,3 +7,28 @@
 @use "./recipes";
 @use "./ingredients";
 @use "./tags";
+
+.form-control.react-date-picker {
+  .react-date-picker__wrapper {
+    border: 0;
+  }
+
+  .react-date-picker__inputGroup {
+    padding: 0;
+  }
+
+  .react-date-picker__button {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .react-date-picker__button:last-of-type {
+    padding-right: 0;
+  }
+}
+
+button.nav-link {
+  padding: 0;
+  border: 0;
+  background: none;
+}

@@ -19,7 +19,7 @@ import ErrorMessage from "../../components/Form/ErrorMessage";
 import { TAG_CREATE_MUTATION, TAGS_QUERY } from "../../graphql/tags";
 import { MutationError } from "../../handleError";
 import { useDebounce } from "../../hooks";
-import { TagCreateMutationInterface, TagsDataInterface, TRecipe } from "../../types";
+import { ITagCreateMutation, ITagsData, TRecipe } from "../../types";
 import { recipesPath } from "../../urls";
 import FittingRecipesSelector from "./FittingRecipesSelector";
 
@@ -65,8 +65,8 @@ export default function RecipesForm({ recipe, onSave, btnSize = "md", hideCancel
   const debouncedSearch = useDebounce(search, 200);
   const { t } = useTranslation(["recipes", "translation"]);
 
-  const [mutateTag] = useMutation<TagCreateMutationInterface>(TAG_CREATE_MUTATION);
-  const { data, loading } = useQuery<TagsDataInterface>(TAGS_QUERY, {
+  const [mutateTag] = useMutation<ITagCreateMutation>(TAG_CREATE_MUTATION);
+  const { data, loading } = useQuery<ITagsData>(TAGS_QUERY, {
     variables: { search: debouncedSearch, limit: 50, offset: 0 },
     skip: !search,
   });

@@ -8,6 +8,7 @@ import { useAppDispatch } from ".";
 import { updateDeletion } from "../apolloClient/utils";
 import { addErrorFlash, addSuccessFlash } from "../features/Flash/flashSlice";
 import { MutationError } from "../handleError";
+import { TID } from "../types";
 
 type PropsTypeNoDelete<T> = {
   query: DocumentNode;
@@ -61,10 +62,10 @@ const DUMMY_MUTATION = gql`
   }
 `;
 
-export function useList<T extends { id: string }>(props: PropsTypeNoDelete<T>): ReturnTypeNoDelete<T>;
-export function useList<T extends { id: string }>(props: PropsTypeDelete<T>): ReturnTypeDelete<T>;
+export function useList<T extends { id: TID }>(props: PropsTypeNoDelete<T>): ReturnTypeNoDelete<T>;
+export function useList<T extends { id: TID }>(props: PropsTypeDelete<T>): ReturnTypeDelete<T>;
 
-export function useList<T extends { id: string }>({
+export function useList<T extends { id: TID }>({
   query,
   countQuery,
   variables,
@@ -90,31 +91,31 @@ export function useList<T extends { id: string }>({
     deleteMutation === undefined
       ? undefined
       : async (item: T) => {
-        try {
-          const variables = deletionParameters
-            ? deletionParameters(item)
-            : {
-              [deletionParameterName]: item.id,
-            };
+          try {
+            const variables = deletionParameters
+              ? deletionParameters(item)
+              : {
+                  [deletionParameterName]: item.id,
+                };
 
-          const { data, errors } = await deleteItemMutation({
-            variables,
-            update: (cache) => updateDeletion(cache, item.id, key),
-          });
-          const val = _.values(data)[0];
+            const { data, errors } = await deleteItemMutation({
+              variables,
+              update: (cache) => updateDeletion(cache, item.id, key),
+            });
+            const val = _.values(data)[0];
 
-          if (!val) {
-            console.log(errors);
-            // TODO: handle errors
-            throw new MutationError();
+            if (!val) {
+              console.log(errors);
+              // TODO: handle errors
+              throw new MutationError();
+            }
+
+            dispatch(addSuccessFlash(deletionMessage || t("translation:global.successfully_deleted")));
+          } catch (e) {
+            console.log(e);
+            dispatch(addErrorFlash(t("translation:errors.general")));
           }
-
-          dispatch(addSuccessFlash(deletionMessage || t("translation:global.successfully_deleted")));
-        } catch (e) {
-          console.log(e);
-          dispatch(addErrorFlash(t("translation:errors.general")));
-        }
-      };
+        };
 
   return { items, error, count, countError, deleteItem };
 }

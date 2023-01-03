@@ -6,7 +6,7 @@ import { Link, useParams } from "react-router-dom";
 import { RECIPES_COUNT_QUERY, RECIPES_QUERY } from "../../graphql/recipes";
 import { TAG_QUERY } from "../../graphql/tags";
 import { useAppSelector, useList } from "../../hooks";
-import { TagDataInterface, TRecipe } from "../../types";
+import { ITagData, TRecipe } from "../../types";
 import { showRecipePath } from "../../urls";
 import { parsedInt } from "../../utils/numbers";
 import MetaList from "../MetaList";
@@ -17,7 +17,7 @@ export default function Show() {
 
   const page = useAppSelector((state) => state.metaList.pages[`tags/${id}`] || 0);
 
-  const { data } = useQuery<TagDataInterface>(TAG_QUERY, { variables: { id: parsedInt(id) } });
+  const { data } = useQuery<ITagData>(TAG_QUERY, { variables: { id: parsedInt(id) } });
 
   const { items, count } = useList<TRecipe>({
     query: RECIPES_QUERY,

@@ -26,9 +26,12 @@ type TMutationErrorResult = {
   result: null;
 };
 
+export type TID = string | number;
+
 export * from "./users";
 export * from "./recipes";
 export * from "./steps";
 export * from "./tags";
 export * from "./ingredients";
 export * from "./session";
+export * from "./weekplan";

@@ -11,14 +11,14 @@ export type TTag = {
   recipes: TRecipe[];
 };
 
-export interface TagsDataInterface {
+export interface ITagsData {
   tags: TTag[];
 }
 
-export interface TagDataInterface {
+export interface ITagData {
   tag: TTag;
 }
 
-export interface TagCreateMutationInterface {
+export interface ITagCreateMutation {
   createTag: TTag;
 }

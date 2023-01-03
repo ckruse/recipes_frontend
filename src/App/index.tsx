@@ -10,6 +10,7 @@ import RecipesInterface from "../features/Recipes";
 import Root from "../features/Root";
 import TagsInterface from "../features/Tags";
 import UsersInterface from "../features/Users";
+import WeekplanInterface from "../features/Weekplan";
 import { useAppSelector, useTitle } from "../hooks";
 import ChangePasswordModal from "./ChangePasswordModal";
 import Footer from "./Footer";
@@ -42,6 +43,7 @@ function App() {
             <Route path="/ingredients/*" element={<IngredientsInterface />} />
             <Route path="/users/*" element={<UsersInterface />} />
             <Route path="/tags/*" element={<TagsInterface />} />
+            <Route path="/weekplan/*" element={<WeekplanInterface />} />
             <Route path="/" element={<Root />} />
           </Routes>
         </Suspense>

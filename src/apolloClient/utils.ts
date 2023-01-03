@@ -2,9 +2,9 @@ import { ApolloCache } from "@apollo/client";
 
 import _ from "lodash";
 
-import { Nilable } from "../types";
+import { Nilable, TID } from "../types";
 
-export function updateDeletion<T = any>(cache: ApolloCache<T>, id: Nilable<string>, field: string, broadcast = true) {
+export function updateDeletion<T = any>(cache: ApolloCache<T>, id: Nilable<TID>, field: string, broadcast = true) {
   if (!id) {
     return;
   }
