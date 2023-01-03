@@ -3,6 +3,7 @@ import { useMutation } from "@apollo/client";
 import { format, startOfISOWeek } from "date-fns";
 import { Form, Formik } from "formik";
 import { Modal } from "react-bootstrap";
+import { useTranslation } from "react-i18next";
 
 import { CancelButton, SaveButton } from "../../../components";
 import { CREATE_WEEKPLAN } from "../../../graphql/weekplan";
@@ -27,8 +28,11 @@ const INITIAL_VALUES: TValues = {
 export default function CreateWeekplanModal() {
   const { showWeekplanCreateModal } = useAppSelector(selectWeekplan);
   const dispatch = useAppDispatch();
+  const { t } = useTranslation(["translation", "weekplan"]);
 
-  const [createWeekplanMutation] = useMutation<ICreateWeekplanMutation>(CREATE_WEEKPLAN);
+  const [createWeekplanMutation] = useMutation<ICreateWeekplanMutation>(CREATE_WEEKPLAN, {
+    refetchQueries: ["weekplans"],
+  });
 
   function hideModal() {
     dispatch(setWeekplanCreateModal(false));
@@ -44,11 +48,11 @@ export default function CreateWeekplanModal() {
         },
       });
 
-      dispatch(addSuccessFlash("Wochenplan wurde erstellt"));
+      dispatch(addSuccessFlash(t("weekplan:create.success")));
       hideModal();
     } catch (error) {
       console.error(error);
-      dispatch(addErrorFlash("Wochenplan konnte nicht erstellt werden"));
+      dispatch(addErrorFlash(t("translation:errors.general")));
     }
   }
 
@@ -58,7 +62,7 @@ export default function CreateWeekplanModal() {
         {() => (
           <Form>
             <Modal.Header closeButton>
-              <Modal.Title>Wochenplan erstellen</Modal.Title>
+              <Modal.Title>{t("weekplan:create.title")}</Modal.Title>
             </Modal.Header>
 
             <Modal.Body>
@@ -67,11 +71,11 @@ export default function CreateWeekplanModal() {
 
             <Modal.Footer>
               <SaveButton type="submit" variant="primary">
-                erzeugen
+                {t("weekplan:create.save")}
               </SaveButton>
 
               <CancelButton type="button" variant="secondary" onClick={hideModal}>
-                abbrechen
+                {t("translation:cancel")}
               </CancelButton>
             </Modal.Footer>
           </Form>

@@ -1,0 +1,10 @@
+{
+  "create": {
+    "title": "Wochenplan erstellen",
+    "success": "Der Wochenplan wurde erfolgreich erstellt!",
+    "save": "erzeugen",
+    "week": "Woche",
+    "tags": "Tags",
+    "portions": "Portionen"
+  }
+}
