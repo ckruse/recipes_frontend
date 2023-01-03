@@ -1,26 +1,35 @@
 import { useState } from "react";
 
 import { format, startOfISOWeek } from "date-fns";
+import { Button } from "react-bootstrap";
 import DatePicker from "react-date-picker";
 import { useTranslation } from "react-i18next";
 import Icon from "react-icons-kit";
-import { ic_calendar_today } from "react-icons-kit/md";
+import { ic_calendar_today, ic_swap_horiz } from "react-icons-kit/md";
 
-import { FormGroup } from "../../components";
-import { LIST_WEEKPLAN_QUERY } from "../../graphql/weekplan";
-import { useList } from "../../hooks";
+import { DeleteButton, FormGroup } from "../../components";
+import { DELETE_WEEKPLAN, LIST_WEEKPLAN_QUERY } from "../../graphql/weekplan";
+import { useAppDispatch, useList } from "../../hooks";
 import { TWeekplanEntry } from "../../types";
 import MetaList from "../MetaList";
 import ListItem from "../Recipes/ListItem";
+import ReplaceModal from "./ReplaceModal";
+import { setReplaceModal } from "./weekplanSlice";
 
 export default function List() {
   const [week, setWeek] = useState(startOfISOWeek(new Date()));
   const { t } = useTranslation(["translation"]);
+  const dispatch = useAppDispatch();
 
-  const { items } = useList<TWeekplanEntry>({
+  const { items, deleteItem } = useList<TWeekplanEntry>({
     query: LIST_WEEKPLAN_QUERY,
+    deleteMutation: DELETE_WEEKPLAN,
     variables: { week: format(week, "yyyy-MM-dd") },
   });
+
+  function replaceRecipe(entry: TWeekplanEntry) {
+    dispatch(setReplaceModal(entry));
+  }
 
   return (
     <>
@@ -48,11 +57,24 @@ export default function List() {
             {entries.length === 0 && <li className="no-data">{t("translation:no_data")}</li>}
 
             {entries.map((entry) => (
-              <ListItem key={entry.id} recipe={entry.recipe} />
+              <ListItem
+                key={entry.id}
+                recipe={entry.recipe}
+                buttons={
+                  <>
+                    <Button variant="secondary" onClick={() => replaceRecipe(entry)}>
+                      <Icon icon={ic_swap_horiz} /> austauschen
+                    </Button>
+                    <DeleteButton onClick={() => deleteItem(entry)}>löschen</DeleteButton>
+                  </>
+                }
+              />
             ))}
           </ul>
         )}
       </MetaList>
+
+      <ReplaceModal />
     </>
   );
 }

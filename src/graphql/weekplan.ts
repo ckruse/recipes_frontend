@@ -40,3 +40,18 @@ export const CREATE_WEEKPLAN = gql`
 
   ${WEEKPLAN_FRAGMENT}
 `;
+
+export const DELETE_WEEKPLAN = gql`
+  mutation deleteWeekplan($id: ID!) {
+    deleteWeekplan(id: $id)
+  }
+`;
+
+export const REPLACE_WEEKPLAN_RECIPE = gql`
+  mutation replaceWeekplanRecipe($id: ID!, $tags: [String!]) {
+    replaceWeekplanRecipe(id: $id, tags: $tags) {
+      ...WeekplanFragment
+    }
+  }
+  ${WEEKPLAN_FRAGMENT}
+`;

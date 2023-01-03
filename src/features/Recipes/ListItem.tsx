@@ -16,9 +16,10 @@ import { formatIntNumberRounded } from "../../utils/numbers";
 type TProps = {
   recipe: TRecipe;
   deleteItem?: (recipe: TRecipe) => void;
+  buttons?: React.ReactNode;
 };
 
-export default function ListItem({ recipe, deleteItem }: TProps) {
+export default function ListItem({ recipe, deleteItem, buttons }: TProps) {
   const { t } = useTranslation(["recipes", "translation"]);
   const { user } = useAppSelector(selectSession);
 
@@ -50,6 +51,7 @@ export default function ListItem({ recipe, deleteItem }: TProps) {
         <ShowButton as={Link} to={showRecipePath(recipe)}>
           {t("translation:show")}
         </ShowButton>
+        {buttons}
         {!!deleteItem && may(user, "recipes", "create") && (
           <DeleteButton onClick={() => deleteItem(recipe)}>{t("translation:delete")}</DeleteButton>
         )}

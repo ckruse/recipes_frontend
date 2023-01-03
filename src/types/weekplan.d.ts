@@ -20,3 +20,7 @@ export interface IWeekplansQueryResult {
 export interface ICreateWeekplanMutation {
   createWeekplan: TRecipe;
 }
+
+export interface IReplaceWeekplanRecipeMutation {
+  replaceWeekplanRecipe: TRecipe;
+}
