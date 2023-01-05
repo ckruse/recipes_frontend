@@ -7,9 +7,11 @@ import { useTranslation } from "react-i18next";
 import Icon from "react-icons-kit";
 import { ic_calendar_today, ic_swap_horiz } from "react-icons-kit/md";
 
+import { selectSession } from "../../App/sessionSlice";
 import { DeleteButton, FormGroup } from "../../components";
 import { DELETE_WEEKPLAN, LIST_WEEKPLAN_QUERY } from "../../graphql/weekplan";
-import { useAppDispatch, useList } from "../../hooks";
+import { useAppDispatch, useAppSelector, useList, usePermissionFallback } from "../../hooks";
+import may from "../../permissions";
 import { TWeekplanEntry } from "../../types";
 import MetaList from "../MetaList";
 import ListItem from "../Recipes/ListItem";
@@ -17,9 +19,12 @@ import ReplaceModal from "./ReplaceModal";
 import { setReplaceModal } from "./weekplanSlice";
 
 export default function List() {
+  const { user } = useAppSelector(selectSession);
   const [week, setWeek] = useState(startOfISOWeek(new Date()));
   const { t } = useTranslation(["translation"]);
   const dispatch = useAppDispatch();
+
+  usePermissionFallback(may(user, "weekplan", "list"));
 
   const { items, deleteItem } = useList<TWeekplanEntry>({
     query: LIST_WEEKPLAN_QUERY,
