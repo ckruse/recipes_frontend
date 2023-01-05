@@ -1,4 +1,19 @@
 {
+  "subnav": {
+    "create_weekplan": "Wochenplan erzeugen"
+  },
+
+  "list": {
+    "deleted": "Der Eintrag wurde erfolgreich gelöscht.",
+    "replace": "austauschen"
+  },
+
+  "replace": {
+    "title": "Rezept austauschen",
+    "replaced": "Rezept erfolgreich ausgetauscht.",
+    "tags": "Rezept-Tags"
+  },
+
   "create": {
     "title": "Wochenplan erstellen",
     "success": "Der Wochenplan wurde erfolgreich erstellt!",

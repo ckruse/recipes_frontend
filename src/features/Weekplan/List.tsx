@@ -21,7 +21,7 @@ import { setReplaceModal } from "./weekplanSlice";
 export default function List() {
   const { user } = useAppSelector(selectSession);
   const [week, setWeek] = useState(startOfISOWeek(new Date()));
-  const { t } = useTranslation(["translation"]);
+  const { t } = useTranslation(["translation", "root"]);
   const dispatch = useAppDispatch();
 
   usePermissionFallback(may(user, "weekplan", "list"));
@@ -30,6 +30,7 @@ export default function List() {
     query: LIST_WEEKPLAN_QUERY,
     deleteMutation: DELETE_WEEKPLAN,
     variables: { week: format(week, "yyyy-MM-dd") },
+    deletionMessage: t("weekplan:list.deleted"),
   });
 
   function replaceRecipe(entry: TWeekplanEntry) {
@@ -38,7 +39,7 @@ export default function List() {
 
   return (
     <>
-      <h2>Wochenplan</h2>
+      <h2>{t("root:sidebar.weekplan")}</h2>
 
       <MetaList
         listKey="recipes/week-plan"
@@ -68,9 +69,9 @@ export default function List() {
                 buttons={
                   <>
                     <Button variant="secondary" onClick={() => replaceRecipe(entry)}>
-                      <Icon icon={ic_swap_horiz} /> austauschen
+                      <Icon icon={ic_swap_horiz} /> {t("weekplan:list.replace")}
                     </Button>
-                    <DeleteButton onClick={() => deleteItem(entry)}>löschen</DeleteButton>
+                    <DeleteButton onClick={() => deleteItem(entry)}>{t("translation:delete")}</DeleteButton>
                   </>
                 }
               />

@@ -2,6 +2,7 @@ import { useMutation } from "@apollo/client";
 
 import { Form, Formik, FormikHelpers } from "formik";
 import { Form as BsForm, Modal } from "react-bootstrap";
+import { useTranslation } from "react-i18next";
 
 import { CancelButton, FormGroup, SaveButton } from "../../components";
 import { TagSelector } from "../../components/Form";
@@ -21,6 +22,7 @@ export default function ReplaceModal() {
   const dispatch = useAppDispatch();
   const { showReplaceModal } = useAppSelector(selectWeekplan);
   const [replaceWeekplanMutation] = useMutation<IReplaceWeekplanRecipeMutation>(REPLACE_WEEKPLAN_RECIPE);
+  const { t } = useTranslation(["translation", "weekplan"]);
 
   function hideModal() {
     dispatch(setReplaceModal(null));
@@ -33,12 +35,12 @@ export default function ReplaceModal() {
         variables: { id: showReplaceModal!.id, tags: values.tags.map((tag) => tag.name) },
       });
 
-      dispatch(addSuccessFlash("Rezept erfolgreich ausgetauscht"));
+      dispatch(addSuccessFlash(t("weekplan:replace.replaced")));
       hideModal();
     } catch (error) {
       setSubmitting(false);
       console.error(error);
-      dispatch(addErrorFlash("Rezept konnte nicht ausgetauscht werden"));
+      dispatch(addErrorFlash(t("translation:errors.general")));
     }
   }
 
@@ -48,20 +50,20 @@ export default function ReplaceModal() {
         {() => (
           <Form>
             <Modal.Header closeButton>
-              <Modal.Title>Rezept austauschen</Modal.Title>
+              <Modal.Title>{t("weekplan:replace.title")}</Modal.Title>
             </Modal.Header>
 
             <Modal.Body>
               <FormGroup>
-                <BsForm.Label htmlFor="tags">Rezept-Tags</BsForm.Label>
+                <BsForm.Label htmlFor="tags">{t("weekplan:replace.tags")}</BsForm.Label>
                 <TagSelector isMulti id="tags" name="tags" />
               </FormGroup>
             </Modal.Body>
 
             <Modal.Footer>
-              <SaveButton type="submit">Speichern</SaveButton>
+              <SaveButton type="submit">{t("translation:save")}</SaveButton>
               <CancelButton type="button" onClick={hideModal}>
-                Abbrechen
+                {t("translation:cancel")}
               </CancelButton>
             </Modal.Footer>
           </Form>
