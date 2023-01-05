@@ -3,14 +3,15 @@ import { FormEvent, useState } from "react";
 import { Dropdown, Form, Nav, Navbar } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import Icon from "react-icons-kit";
-import { ic_grass, ic_home, ic_set_meal, ic_tag } from "react-icons-kit/md";
+import { ic_grass, ic_home, ic_set_meal, ic_tag, ic_view_week } from "react-icons-kit/md";
 import { Link, useNavigate } from "react-router-dom";
 
 import { removeAuthorizationToken } from "../authorizationToken";
 import { Button } from "../components";
 import { useAppDispatch, useAppSelector } from "../hooks";
 import { ReactComponent as Logo } from "../logo.svg";
-import { ingredientsPath, recipesPath, rootPath, showUserPath, tagsPath } from "../urls";
+import may from "../permissions";
+import { ingredientsPath, recipesPath, rootPath, showUserPath, tagsPath, weekplanPath } from "../urls";
 import { URI } from "../utils";
 import { selectSession, setUser, toggleShowLogin, toggleShowPasswordReset } from "./sessionSlice";
 
@@ -44,6 +45,14 @@ export default function Header() {
               <Icon icon={ic_home} size="24" /> {t("root:sidebar.home")}
             </Nav.Link>
           </Nav.Item>
+
+          {may(user, "weekplan") && (
+            <Nav.Item as="li">
+              <Nav.Link as={Link} to={weekplanPath()}>
+                <Icon icon={ic_view_week} size="24" /> {t("root:sidebar.weekplan")}
+              </Nav.Link>
+            </Nav.Item>
+          )}
 
           <Nav.Item as="li">
             <Nav.Link as={Link} to={recipesPath()}>
