@@ -38,11 +38,11 @@ type TProps = {
 };
 
 type TIngredientRow = {
-  id: string;
+  id: number | string;
   amount: Nullable<number>;
   unitId: Nullable<string>;
   annotation: Nullable<string>;
-  ingredientId: string;
+  ingredientId: number | string;
   ingredient?: TIngredient;
 };
 
@@ -194,7 +194,7 @@ export default function StepModal({ show, step, recipe, toggle }: TProps) {
             setFieldValue("stepIngredients", [...values.stepIngredients, newEntry]);
           }
 
-          function delIngredient(id: string) {
+          function delIngredient(id: number | string) {
             setFieldValue(
               "stepIngredients",
               values.stepIngredients.filter((si) => si.id !== id)

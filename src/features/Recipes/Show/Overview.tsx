@@ -5,7 +5,7 @@ import ReactMarkdown from "react-markdown";
 import { Link } from "react-router-dom";
 
 import { FormGroup } from "../../../components";
-import { TIngredient, TRecipe, TUnit } from "../../../types";
+import { TIngredient, TRecipe } from "../../../types";
 import { bringImportUri, showRecipePath } from "../../../urls";
 import { recipeCalories, URI } from "../../../utils";
 import { formatIntNumberRounded, formatNumber } from "../../../utils/numbers";
@@ -16,18 +16,36 @@ type TProps = {
   setPortions?: (portions: number) => void;
 };
 
+type TIngredientDict = Record<
+  number,
+  Record<number | string, { ingredient: TIngredient; unit: string; amount: number; annotation: string[] }>
+>;
+
 export default function Overview({ recipe, portions = 2, setPortions }: TProps) {
   const { t } = useTranslation(["recipes", "ingredients", "translation"]);
-  const allIngredients = _(recipe.steps)
+  const allIngredients: TIngredientDict = recipe.steps
     .flatMap((step) => step.stepIngredients)
-    .map<[string, number | null, TUnit | null, string | null, TIngredient]>((stepIngredient) => [
-      stepIngredient.id,
-      stepIngredient.amount ? stepIngredient.amount * (portions || 1) : null,
-      stepIngredient.unit,
-      stepIngredient.annotation,
-      stepIngredient.ingredient,
-    ])
-    .valueOf();
+    .reduce<TIngredientDict>((acc, stepIngredient) => {
+      const key = stepIngredient.unit?.identifier || stepIngredient.ingredient.reference;
+
+      acc[stepIngredient.ingredientId] ||= {};
+      acc[stepIngredient.ingredientId][key] ||= {
+        ingredient: stepIngredient.ingredient,
+        unit: key,
+        amount: 0,
+        annotation: [],
+      };
+
+      if (stepIngredient.amount) {
+        acc[stepIngredient.ingredientId][key].amount += stepIngredient.amount * (portions || 1);
+      }
+
+      if (stepIngredient.annotation) {
+        acc[stepIngredient.ingredientId][key].annotation.push(stepIngredient.annotation);
+      }
+
+      return acc;
+    }, {});
 
   const calories = recipeCalories(recipe);
   const preparationTime = _.sumBy(recipe.steps, "preparationTime");
@@ -69,17 +87,19 @@ export default function Overview({ recipe, portions = 2, setPortions }: TProps) 
       )}
 
       <ul className="recipes-show-overview-ingredients-list">
-        {allIngredients.map(([id, amount, unit, annotation, ingredient]) => (
-          <li key={id}>
-            {!!amount && (
-              <>
-                {formatNumber(amount)} {t(`ingredients:units.${unit?.identifier || ingredient.reference}`)}{" "}
-              </>
-            )}
-            {ingredient.name}
-            {!!annotation && <small>{annotation}</small>}
-          </li>
-        ))}
+        {_.map(allIngredients, (outerRow, id) =>
+          _.map(outerRow, (row, unitId) => (
+            <li key={`${id}-${unitId}`}>
+              {!!row.amount && (
+                <>
+                  {formatNumber(row.amount)} {t(`ingredients:units.${row.unit}`)}{" "}
+                </>
+              )}
+              {row.ingredient.name}
+              {!!row.annotation.length && row.annotation.map((annotation) => <small>{annotation}</small>)}
+            </li>
+          ))
+        )}
       </ul>
 
       <ReactMarkdown>{recipe.description || ""}</ReactMarkdown>

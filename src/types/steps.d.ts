@@ -1,7 +1,7 @@
 import { Nullable, TIngredient, TUnit } from ".";
 
 export type TStep = {
-  id: string;
+  id: number;
   name: Nullable<string>;
   position: number;
   preparationTime: number;
@@ -15,7 +15,7 @@ export type TStep = {
 };
 
 export type TStepIngredient = {
-  id: string;
+  id: number;
   amount: Nullable<number>;
   annotation: Nullable<string>;
   unitId: Nullable<string>;
@@ -24,8 +24,8 @@ export type TStepIngredient = {
   insertAt: string;
   updateAt: string;
 
-  stepId: string;
-  ingredientId: string;
+  stepId: number;
+  ingredientId: number;
 
   step: TStep;
   ingredient: TIngredient;
