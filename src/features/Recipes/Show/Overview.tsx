@@ -47,6 +47,13 @@ export default function Overview({ recipe, portions = 2, setPortions }: TProps) 
       return acc;
     }, {});
 
+  const sortedIngredients: [number | string, TIngredientDict[number]][] = _.map(allIngredients, (row, id) => [id, row]);
+  sortedIngredients.sort(([_id1, a], [_id2, b]) => {
+    const aName = _.values(a)[0].ingredient.name;
+    const bName = _.values(b)[0].ingredient.name;
+    return aName.localeCompare(bName);
+  });
+
   const calories = recipeCalories(recipe);
   const preparationTime = _.sumBy(recipe.steps, "preparationTime");
   const cookingTime = _.sumBy(recipe.steps, "cookingTime");
@@ -87,7 +94,7 @@ export default function Overview({ recipe, portions = 2, setPortions }: TProps) 
       )}
 
       <ul className="recipes-show-overview-ingredients-list">
-        {_.map(allIngredients, (outerRow, id) =>
+        {sortedIngredients.map(([id, outerRow]) =>
           _.map(outerRow, (row, unitId) => (
             <li key={`${id}-${unitId}`}>
               {!!row.amount && (
