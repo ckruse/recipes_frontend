@@ -1,0 +1,87 @@
+@use "~bootstrap/scss/bootstrap" as bs;
+
+.weekplan-recipes-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.weekplan-list-item {
+  border-bottom: bs.$border-width bs.$border-style bs.$border-color;
+  padding-bottom: bs.$spacer;
+  margin-bottom: bs.$spacer;
+
+  display: grid;
+  grid-template-areas:
+    "image image"
+    "title title"
+    "created calories"
+    "tags tags"
+    "action action";
+  grid-template-columns: 1fr max-content;
+  column-gap: bs.$spacer;
+
+  h3 {
+    grid-area: title;
+  }
+
+  .created {
+    grid-area: created;
+  }
+
+  .recipes-list-recipe-tags {
+    grid-area: tags;
+  }
+
+  .btn-group {
+    grid-area: action;
+  }
+
+  .calories {
+    grid-area: calories;
+  }
+
+  .recipe-preview {
+    grid-area: image;
+    border-radius: 0.5rem;
+
+    &,
+    & img {
+      width: 100%;
+    }
+
+    img {
+      border-radius: 0.5rem;
+    }
+  }
+}
+
+@media only screen and (min-width: bs.breakpoint-min("lg")) {
+  .weekplan-list-item {
+    grid-template-columns: max-content 1fr max-content max-content;
+    grid-template-rows: max-content max-content 1fr;
+    gap: 0.5rem;
+    grid-template-areas:
+      "image created created created"
+      "image title title calories"
+      "image tags tags tags"
+      "image action action action";
+    align-items: top;
+
+    h3 {
+      margin: 0;
+      padding: 0;
+    }
+
+    .btn-group {
+      justify-self: end;
+    }
+
+    .recipes-recipes-show-tags-list {
+      font-size: 0.9em;
+    }
+
+    .recipe-preview {
+      width: 150px;
+    }
+  }
+}

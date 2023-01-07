@@ -163,7 +163,7 @@
       "image title title calories"
       "image tags tags created"
       "image action action action";
-    align-items: baseline;
+    align-items: top;
 
     h3 {
       margin: 0;
@@ -172,6 +172,7 @@
 
     .btn-group {
       justify-self: end;
+      align-self: end;
     }
 
     .recipes-recipes-show-tags-list {
