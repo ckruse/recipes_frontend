@@ -42,6 +42,10 @@ body,
   ul li {
     white-space: nowrap;
   }
+
+  #site-navbar ul {
+    flex-wrap: wrap;
+  }
 }
 
 #site-footer {

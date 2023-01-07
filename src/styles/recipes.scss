@@ -121,8 +121,9 @@
     grid-area: created;
   }
 
-  .recipes-list-recipe-tags {
+  .recipes-recipes-show-tags-list {
     grid-area: tags;
+    margin-bottom: 0.25rem;
   }
 
   .btn-group {
@@ -177,6 +178,7 @@
 
     .recipes-recipes-show-tags-list {
       font-size: 0.9em;
+      margin-bottom: 0;
     }
 
     .recipe-preview {
