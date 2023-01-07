@@ -58,6 +58,11 @@ body,
 
 .sub-nav {
   margin-bottom: math.div(bs.$container-padding-x, 2);
+
+  .nav-link {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
 }
 
 main {
