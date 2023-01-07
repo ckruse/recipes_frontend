@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 import { format, startOfISOWeek } from "date-fns";
 import _ from "lodash";
 import { Button, ButtonGroup } from "react-bootstrap";
@@ -11,7 +9,7 @@ import { Link } from "react-router-dom";
 
 import { selectSession } from "../../App/sessionSlice";
 import { DeleteButton, FormGroup, ShowButton } from "../../components";
-import { dateFormat, indexDate } from "../../dateUtils";
+import { dateFormat } from "../../dateUtils";
 import { DELETE_WEEKPLAN, LIST_WEEKPLAN_QUERY } from "../../graphql/weekplan";
 import { useAppDispatch, useAppSelector, useList, usePermissionFallback } from "../../hooks";
 import may from "../../permissions";
@@ -21,11 +19,11 @@ import { recipeCalories, URI } from "../../utils";
 import { formatIntNumberRounded } from "../../utils/numbers";
 import MetaList from "../MetaList";
 import ReplaceModal from "./ReplaceModal";
-import { setReplaceModal } from "./weekplanSlice";
+import { selectWeekplan, setReplaceModal, setWeek } from "./weekplanSlice";
 
 export default function List() {
   const { user } = useAppSelector(selectSession);
-  const [week, setWeek] = useState(startOfISOWeek(new Date()));
+  const { week } = useAppSelector(selectWeekplan);
   const { t } = useTranslation(["translation", "root", "recipes"]);
   const dispatch = useAppDispatch();
 
@@ -40,6 +38,10 @@ export default function List() {
 
   function replaceRecipe(entry: TWeekplanEntry) {
     dispatch(setReplaceModal(entry));
+  }
+
+  function doSetWeek(date: Date) {
+    dispatch(setWeek(startOfISOWeek(date)));
   }
 
   return (
@@ -58,7 +60,7 @@ export default function List() {
               showWeekNumbers
               value={week}
               className="form-control"
-              onChange={(date: Date) => setWeek(startOfISOWeek(date))}
+              onChange={doSetWeek}
             />
           </FormGroup>
         )}
