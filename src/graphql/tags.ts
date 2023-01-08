@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 
 export const TAGS_QUERY = gql`
-  query tags($limit: Int!, $offset: Int!, $search: String) {
+  query tags($limit: Int, $offset: Int, $search: String) {
     tags(limit: $limit, offset: $offset, search: $search) {
       id
       name
@@ -13,7 +13,7 @@ export const TAGS_QUERY = gql`
 `;
 
 export const TAGS_W_COUNT_QUERY = gql`
-  query tags($limit: Int!, $offset: Int!, $search: String) {
+  query tags($limit: Int, $offset: Int, $search: String) {
     tags(limit: $limit, offset: $offset, search: $search) {
       id
       name
