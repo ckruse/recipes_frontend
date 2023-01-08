@@ -20,7 +20,7 @@ export default function InnerForm() {
     <>
       <FormGroup>
         <Form.Label htmlFor="week">{t("weekplan:create.week")}</Form.Label>
-        <DatePicker onChange={setWeek} name="week" id="week" />
+        <DatePicker onChange={setWeek} name="week" id="week" clearIcon={null} />
       </FormGroup>
 
       <FormGroup>
