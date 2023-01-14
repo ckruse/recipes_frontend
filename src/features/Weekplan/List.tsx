@@ -15,7 +15,7 @@ import { useAppDispatch, useAppSelector, useList, usePermissionFallback } from "
 import may from "../../permissions";
 import { TWeekplanEntry } from "../../types";
 import { showRecipePath } from "../../urls";
-import { recipeCalories, URI } from "../../utils";
+import { URI } from "../../utils";
 import { formatIntNumberRounded } from "../../utils/numbers";
 import MetaList from "../MetaList";
 import ReplaceModal from "./ReplaceModal";
@@ -80,7 +80,7 @@ export default function List() {
                 </h3>
 
                 <Trans parent="span" className="calories" t={t} i18nKey="recipes:list.calories">
-                  {{ calories: formatIntNumberRounded(recipeCalories(entry.recipe).calories) }} kcal pro Portion
+                  {{ calories: formatIntNumberRounded(entry.recipe.calories?.calories || 0) }} kcal pro Portion
                 </Trans>
                 <span className="created">{dateFormat(entry.date, "EEEE, d.M.yyyy")}</span>
 

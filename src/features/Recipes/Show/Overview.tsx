@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { FormGroup } from "../../../components";
 import { TIngredient, TRecipe } from "../../../types";
 import { bringImportUri, showRecipePath } from "../../../urls";
-import { recipeCalories, URI } from "../../../utils";
+import { URI } from "../../../utils";
 import { formatIntNumberRounded, formatNumber } from "../../../utils/numbers";
 
 type TProps = {
@@ -54,7 +54,6 @@ export default function Overview({ recipe, portions = 2, setPortions }: TProps) 
     return aName.localeCompare(bName);
   });
 
-  const calories = recipeCalories(recipe);
   const preparationTime = _.sumBy(recipe.steps, "preparationTime");
   const cookingTime = _.sumBy(recipe.steps, "cookingTime");
 
@@ -118,28 +117,28 @@ export default function Overview({ recipe, portions = 2, setPortions }: TProps) 
       <div>
         {t("recipes:show.calories_per_portion")}
         <ul className="recipes-show-calories-list">
-          {!!calories.alc && (
+          {!!recipe.calories?.alcohol && (
             <li>
-              {formatIntNumberRounded(calories.alc)} g {t("recipes:show.alc")}
+              {formatIntNumberRounded(recipe.calories.alcohol)} g {t("recipes:show.alc")}
             </li>
           )}
-          {!!calories.fat && (
+          {!!recipe.calories?.fats && (
             <li>
-              {formatIntNumberRounded(calories.fat)} g {t("recipes:show.fat")}
+              {formatIntNumberRounded(recipe.calories.fats)} g {t("recipes:show.fat")}
             </li>
           )}
-          {!!calories.carbs && (
+          {!!recipe.calories?.carbs && (
             <li>
-              {formatIntNumberRounded(calories.carbs)} g {t("recipes:show.carbs")}
+              {formatIntNumberRounded(recipe.calories.carbs)} g {t("recipes:show.carbs")}
             </li>
           )}
-          {!!calories.proteins && (
+          {!!recipe.calories?.proteins && (
             <li>
-              {formatIntNumberRounded(calories.proteins)} g {t("recipes:show.protein")}
+              {formatIntNumberRounded(recipe.calories.proteins)} g {t("recipes:show.protein")}
             </li>
           )}
-          {!!calories.calories && (
-            <li>{t("recipes:show.and_therefore", { cal: formatIntNumberRounded(calories.calories) })}</li>
+          {!!recipe.calories?.calories && (
+            <li>{t("recipes:show.and_therefore", { cal: formatIntNumberRounded(recipe.calories.calories) })}</li>
           )}
         </ul>
 

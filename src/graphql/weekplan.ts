@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 
-import { RECIPE_DETAIL_FRAGMENT } from "./recipes";
+import { RECIPE_FRAGMENT } from "./recipes";
 
 export const WEEKPLAN_FRAGMENT = gql`
   fragment WeekplanFragment on Weekplan {
@@ -14,11 +14,11 @@ export const WEEKPLAN_FRAGMENT = gql`
     updatedAt
 
     recipe {
-      ...RecipeDetailFragment
+      ...RecipeFragment
     }
   }
 
-  ${RECIPE_DETAIL_FRAGMENT}
+  ${RECIPE_FRAGMENT}
 `;
 
 export const LIST_WEEKPLAN_QUERY = gql`

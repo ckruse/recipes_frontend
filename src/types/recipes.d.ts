@@ -20,6 +20,14 @@ export type TRecipe = {
   tags: TTag[];
   owner: TUser;
 
+  calories: Nullable<{
+    carbs: number;
+    fats: number;
+    proteins: number;
+    alcohol: number;
+    calories: number;
+  }>;
+
   fittingRecipes: TRecipe[];
 };
 

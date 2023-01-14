@@ -71,6 +71,14 @@ export const RECIPE_DETAIL_FRAGMENT = gql`
       ...StepFragment
     }
 
+    calories {
+      carbs
+      fats
+      proteins
+      alcohol
+      calories
+    }
+
     tags {
       id
       name
@@ -81,13 +89,47 @@ export const RECIPE_DETAIL_FRAGMENT = gql`
   ${STEP_FRAGMENT}
 `;
 
+export const RECIPE_FRAGMENT = gql`
+  fragment RecipeFragment on Recipe {
+    id
+    name
+    defaultServings
+    description
+    ownerId
+
+    image {
+      thumb
+      large
+      original
+    }
+
+    insertedAt
+    updatedAt
+
+    calories {
+      carbs
+      fats
+      proteins
+      alcohol
+      calories
+    }
+
+    tags {
+      id
+      name
+      insertedAt
+      updatedAt
+    }
+  }
+`;
+
 export const RECIPES_QUERY = gql`
   query recipes($search: String, $tags: [String], $limit: Int!, $offset: Int!) {
     recipes(search: $search, tags: $tags, limit: $limit, offset: $offset) {
-      ...RecipeDetailFragment
+      ...RecipeFragment
     }
   }
-  ${RECIPE_DETAIL_FRAGMENT}
+  ${RECIPE_FRAGMENT}
 `;
 
 export const RECIPES_COUNT_QUERY = gql`
