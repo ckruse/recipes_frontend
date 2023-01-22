@@ -22,3 +22,7 @@ export interface ITagData {
 export interface ITagCreateMutation {
   createTag: TTag;
 }
+
+export interface ITagDeleteMutation {
+  deleteTag: boolean;
+}

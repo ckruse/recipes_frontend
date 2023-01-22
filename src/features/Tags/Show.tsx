@@ -1,23 +1,32 @@
-import { useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 
 import { Trans, useTranslation } from "react-i18next";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { selectSession } from "../../App/sessionSlice";
+import { CancelButton, DeleteButton, FormActions } from "../../components";
 
 import { RECIPES_COUNT_QUERY, RECIPES_QUERY } from "../../graphql/recipes";
-import { TAG_QUERY } from "../../graphql/tags";
-import { useAppSelector, useList } from "../../hooks";
-import { ITagData, TRecipe } from "../../types";
-import { showRecipePath } from "../../urls";
+import { TAG_QUERY, TAG_DELETE_MUTATION } from "../../graphql/tags";
+import { MutationError } from "../../handleError";
+import { useAppDispatch, useAppSelector, useList } from "../../hooks";
+import may from "../../permissions";
+import { ITagData, ITagDeleteMutation, TRecipe } from "../../types";
+import { showRecipePath, tagsPath } from "../../urls";
 import { parsedInt } from "../../utils/numbers";
+import { addErrorFlash, addSuccessFlash } from "../Flash/flashSlice";
 import MetaList from "../MetaList";
 
 export default function Show() {
   const { id } = useParams<"id">();
   const { t } = useTranslation(["tags", "translation"]);
+  const { user } = useAppSelector(selectSession);
 
   const page = useAppSelector((state) => state.metaList.pages[`tags/${id}`] || 0);
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   const { data } = useQuery<ITagData>(TAG_QUERY, { variables: { id: parsedInt(id) } });
+  const [deleteTagMutation] = useMutation<ITagDeleteMutation>(TAG_DELETE_MUTATION);;
 
   const { items, count } = useList<TRecipe>({
     query: RECIPES_QUERY,
@@ -28,6 +37,24 @@ export default function Show() {
       offset: page * 25,
     },
   });
+
+  async function deleteTag() {
+    try {
+      const { data, errors } = await deleteTagMutation({ variables: { id: parsedInt(id) } });
+
+      if (!data?.deleteTag) {
+        console.log(errors);
+        // TODO: handle error
+        throw new MutationError(undefined);
+      }
+
+      dispatch(addSuccessFlash(t("tags:show.deleted")));
+      navigate(tagsPath());
+    } catch (e) {
+      dispatch(addErrorFlash(t("translation:errors.general")));
+      console.error(e);
+    }
+  }
 
   return (
     <>
@@ -53,6 +80,14 @@ export default function Show() {
           </ul>
         )}
       </MetaList>
+
+      <FormActions>
+        <CancelButton as={Link} to={tagsPath()}>{t("translation:back")}</CancelButton>
+
+        {may(user, "tags", "delete", data?.tag) && (
+          <DeleteButton onClick={deleteTag}>{t("translation:delete")}</DeleteButton>
+        )}
+      </FormActions>
     </>
   );
 }
