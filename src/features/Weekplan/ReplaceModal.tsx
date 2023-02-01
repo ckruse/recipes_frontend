@@ -61,7 +61,7 @@ export default function ReplaceModal() {
             </Modal.Body>
 
             <Modal.Footer>
-              <SaveButton type="submit">{t("translation:save")}</SaveButton>
+              <SaveButton type="submit">{t("weekplan:replace.replace")}</SaveButton>
               <CancelButton type="button" onClick={hideModal}>
                 {t("translation:cancel")}
               </CancelButton>
