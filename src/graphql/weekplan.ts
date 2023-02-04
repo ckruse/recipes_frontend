@@ -32,8 +32,8 @@ export const LIST_WEEKPLAN_QUERY = gql`
 `;
 
 export const CREATE_WEEKPLAN = gql`
-  mutation createWeekplan($week: NaiveDate!, $tags: [String!]) {
-    createWeekplan(week: $week, tags: $tags) {
+  mutation createWeekplan($week: NaiveDate!, $tags: [String!], $portions: Int) {
+    createWeekplan(week: $week, tags: $tags, portions: $portions) {
       ...WeekplanFragment
     }
   }
