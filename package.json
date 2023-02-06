@@ -33,7 +33,7 @@
     "i18next-browser-languagedetector": "^7.0.1",
     "i18next-http-backend": "^2.1.1",
     "lodash": "^4.17.21",
-    "nanoid": "^4.0.0",
+    "nanoid": "^4.0.1",
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.0",
     "react-date-picker": "^9.2.0",
