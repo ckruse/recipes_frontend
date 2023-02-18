@@ -4,9 +4,12 @@ import { FormikHelpers } from "formik";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
+import { selectSession } from "../../App/sessionSlice";
 import { USER_CREATE_MUTATION } from "../../graphql/users";
 import { MutationError } from "../../handleError";
-import { useAppDispatch, useTitle } from "../../hooks";
+import { useAppDispatch, useAppSelector, usePermissionFallback, useTitle } from "../../hooks";
+import useAuthRequired from "../../hooks/useAuthRequired";
+import may from "../../permissions";
 import { IUserCreateMutation } from "../../types";
 import { editUserPath } from "../../urls";
 import { addErrorFlash, addSuccessFlash } from "../Flash/flashSlice";
@@ -16,8 +19,11 @@ export default function New() {
   const { t } = useTranslation(["users", "translation"]);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const { user } = useAppSelector(selectSession);
 
   useTitle(t("users:new.title"));
+  useAuthRequired();
+  usePermissionFallback(may(user, "users", "create") || !!user);
 
   const [userMutation] = useMutation<IUserCreateMutation>(USER_CREATE_MUTATION);
 

@@ -3,13 +3,15 @@ import { useMutation } from "@apollo/client";
 import { Form, Formik, FormikHelpers } from "formik";
 import { Form as BsForm, Button, Modal } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
 import { FormGroup } from "../components";
 import { Input } from "../components/Form";
 import { LOGIN_MUTATION } from "../graphql/session";
 import { useAppDispatch, useAppSelector } from "../hooks";
 import { ILoginMutation } from "../types";
-import { selectSession, setUser, toggleShowLogin } from "./sessionSlice";
+import { rootPath } from "../urls";
+import { selectSession, setShowLogin, setUser } from "./sessionSlice";
 
 type ValuesType = {
   email: string;
@@ -22,6 +24,7 @@ export default function LoginModal() {
   const { showLogin } = useAppSelector(selectSession);
   const dispatch = useAppDispatch();
   const { t } = useTranslation(["translation"]);
+  const navigate = useNavigate();
 
   const [loginMutation] = useMutation<ILoginMutation>(LOGIN_MUTATION);
 
@@ -36,14 +39,19 @@ export default function LoginModal() {
       }
 
       dispatch(setUser(data.login));
-      dispatch(toggleShowLogin());
+      dispatch(setShowLogin(false));
     } catch (e) {
       console.log(e);
     }
   }
 
+  function hide() {
+    dispatch(setShowLogin(false));
+    navigate(rootPath());
+  }
+
   return (
-    <Modal show={showLogin} onHide={() => dispatch(toggleShowLogin())}>
+    <Modal show={showLogin} onHide={hide}>
       <Formik initialValues={INITIAL_VALUE} onSubmit={login}>
         {({ isSubmitting }) => (
           <Form>
@@ -66,7 +74,7 @@ export default function LoginModal() {
                 {t("root:loginModal.login")}
               </Button>
 
-              <Button disabled={isSubmitting} variant="secondary" onClick={() => dispatch(toggleShowLogin())}>
+              <Button disabled={isSubmitting} variant="secondary" onClick={hide}>
                 {t("translation:cancel")}
               </Button>
             </Modal.Footer>

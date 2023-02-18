@@ -33,8 +33,8 @@ export const sessionSlice = createSlice({
       state.user = action.payload as unknown as TUser;
       state.checked = true;
     },
-    toggleShowLogin(state) {
-      state.showLogin = !state.showLogin;
+    setShowLogin(state, action: PayloadAction<boolean>) {
+      state.showLogin = action.payload;
     },
     toggleShowPasswordReset(state) {
       state.showPasswordReset = !state.showPasswordReset;
@@ -54,32 +54,32 @@ export const sessionSlice = createSlice({
   },
 });
 
-export const { setUser, toggleShowLogin, toggleShowPasswordReset, setLoading, setToken, addSubnav, removeSubnav } =
+export const { setUser, setShowLogin, toggleShowPasswordReset, setLoading, setToken, addSubnav, removeSubnav } =
   sessionSlice.actions;
 
 export const selectSession = (state: RootState) => state.session;
 
 export const refreshUser =
   (client: ApolloClient<NormalizedCacheObject>): AppThunk =>
-    async (dispatch) => {
-      dispatch(setLoading(true));
+  async (dispatch) => {
+    dispatch(setLoading(true));
 
-      try {
-        const { data } = await client.mutate<IRefreshMutation>({ mutation: REFRESH_MUTATION });
+    try {
+      const { data } = await client.mutate<IRefreshMutation>({ mutation: REFRESH_MUTATION });
 
-        if (!data?.refresh) {
-          // TODO: handle error
-          dispatch(setUser(null));
-          return;
-        }
-
-        dispatch(setUser(data.refresh));
-      } catch (e) {
-        console.error(e);
+      if (!data?.refresh) {
+        // TODO: handle error
         dispatch(setUser(null));
+        return;
       }
 
-      dispatch(setLoading(false));
-    };
+      dispatch(setUser(data.refresh));
+    } catch (e) {
+      console.error(e);
+      dispatch(setUser(null));
+    }
+
+    dispatch(setLoading(false));
+  };
 
 export default sessionSlice.reducer;

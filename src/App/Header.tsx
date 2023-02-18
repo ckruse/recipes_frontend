@@ -13,7 +13,7 @@ import { ReactComponent as Logo } from "../logo.svg";
 import may from "../permissions";
 import { ingredientsPath, recipesPath, rootPath, showUserPath, tagsPath, weekplanPath } from "../urls";
 import { URI } from "../utils";
-import { selectSession, setUser, toggleShowLogin, toggleShowPasswordReset } from "./sessionSlice";
+import { selectSession, setShowLogin, setUser, toggleShowPasswordReset } from "./sessionSlice";
 
 export default function Header() {
   const [search, setSearch] = useState("");
@@ -117,7 +117,7 @@ export default function Header() {
         )}
 
         {!user && (
-          <Button variant="outline-primary" onClick={() => dispatch(toggleShowLogin())}>
+          <Button variant="outline-primary" onClick={() => dispatch(setShowLogin(true))}>
             {t("root:login")}
           </Button>
         )}

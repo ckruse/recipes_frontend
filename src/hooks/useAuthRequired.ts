@@ -1,16 +1,16 @@
 import { useEffect } from "react";
 
-import { useDispatch, useSelector } from "react-redux";
-
-import { selectSession, toggleShowLogin } from "../App/sessionSlice";
+import { useAppDispatch, useAppSelector } from ".";
+import { selectSession, setShowLogin } from "../App/sessionSlice";
 
 export default function useAuthRequired() {
-  const { user, checked } = useSelector(selectSession);
-  const dispatch = useDispatch();
+  const { user, checked } = useAppSelector(selectSession);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     if (!user && checked) {
-      dispatch(toggleShowLogin());
+      console.log("not logged in");
+      dispatch(setShowLogin(true));
     }
   }, [user, checked, dispatch]);
 }
