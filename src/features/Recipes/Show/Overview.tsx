@@ -142,10 +142,24 @@ export default function Overview({ recipe, portions = 2, setPortions }: TProps) 
           )}
         </ul>
 
-        <Trans parent="p" t={t} i18nKey="recipes:show.prep_and_cooking_time">
-          Die Vorbereitungszeit beträgt {{ prepTime: formatIntNumberRounded(preparationTime) }} Minuten und und die
-          Garzeit beträgt etwa {{ cookingTime: formatIntNumberRounded(cookingTime) }} Minuten.
-        </Trans>
+        {preparationTime > 0 && cookingTime > 0 && (
+          <Trans parent="p" t={t} i18nKey="recipes:show.prep_and_cooking_time">
+            Die Vorbereitungszeit beträgt {{ prepTime: formatIntNumberRounded(preparationTime) }} Minuten und und die
+            Garzeit beträgt etwa {{ cookingTime: formatIntNumberRounded(cookingTime) }} Minuten.
+          </Trans>
+        )}
+
+        {preparationTime > 0 && cookingTime <= 0 && (
+          <Trans parent="p" i18nKey="recipes:show.prep_time">
+            Die Vorbereitungszeit beträgt {{ prepTime: formatIntNumberRounded(preparationTime) }} Minuten.
+          </Trans>
+        )}
+
+        {preparationTime <= 0 && cookingTime > 0 && (
+          <Trans parent="p" i18nKey="recipes:show.cooking_time">
+            Die Garzeit beträgt etwa {{ cookingTime: formatIntNumberRounded(cookingTime) }} Minuten.
+          </Trans>
+        )}
 
         {recipe.fittingRecipes.length > 0 && (
           <>
