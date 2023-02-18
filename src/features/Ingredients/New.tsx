@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { INGREDIENT_CREATE_MUTATION } from "../../graphql/ingredients";
 import { MutationError } from "../../handleError";
 import { useAppDispatch, useTitle } from "../../hooks";
+import useAuthRequired from "../../hooks/useAuthRequired";
 import { IIngredientCreateMutation } from "../../types";
 import { ingredientsPath } from "../../urls";
 import { addErrorFlash, addSuccessFlash } from "../Flash/flashSlice";
@@ -19,6 +20,7 @@ export default function New() {
   const [mutateIngredient] = useMutation<IIngredientCreateMutation>(INGREDIENT_CREATE_MUTATION);
 
   useTitle(t("ingredients:new.title"));
+  useAuthRequired();
 
   async function onSave(values: IValues, { setSubmitting }: FormikHelpers<IValues>) {
     try {
