@@ -2,11 +2,11 @@ import { useMutation, useQuery } from "@apollo/client";
 
 import { Trans, useTranslation } from "react-i18next";
 import { Link, useNavigate, useParams } from "react-router-dom";
+
 import { selectSession } from "../../App/sessionSlice";
 import { CancelButton, DeleteButton, FormActions } from "../../components";
-
 import { RECIPES_COUNT_QUERY, RECIPES_QUERY } from "../../graphql/recipes";
-import { TAG_QUERY, TAG_DELETE_MUTATION } from "../../graphql/tags";
+import { TAG_DELETE_MUTATION, TAG_QUERY } from "../../graphql/tags";
 import { MutationError } from "../../handleError";
 import { useAppDispatch, useAppSelector, useList } from "../../hooks";
 import may from "../../permissions";
@@ -20,13 +20,14 @@ export default function Show() {
   const { id } = useParams<"id">();
   const { t } = useTranslation(["tags", "translation"]);
   const { user } = useAppSelector(selectSession);
+  const pageId = `tags/${id}`;
 
-  const page = useAppSelector((state) => state.metaList.pages[`tags/${id}`] || 0);
+  const page = useAppSelector((state) => state.metaList.pages[pageId] || 0);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   const { data } = useQuery<ITagData>(TAG_QUERY, { variables: { id: parsedInt(id) } });
-  const [deleteTagMutation] = useMutation<ITagDeleteMutation>(TAG_DELETE_MUTATION);;
+  const [deleteTagMutation] = useMutation<ITagDeleteMutation>(TAG_DELETE_MUTATION);
 
   const { items, count } = useList<TRecipe>({
     query: RECIPES_QUERY,
@@ -65,7 +66,7 @@ export default function Show() {
       </Trans>
 
       <MetaList
-        listKey="recipes"
+        listKey={pageId}
         items={items}
         count={count}
         title={t("tags:show.title", { tag: data?.tag.name || "…" })}
@@ -82,7 +83,9 @@ export default function Show() {
       </MetaList>
 
       <FormActions>
-        <CancelButton as={Link} to={tagsPath()}>{t("translation:back")}</CancelButton>
+        <CancelButton as={Link} to={tagsPath()}>
+          {t("translation:back")}
+        </CancelButton>
 
         {may(user, "tags", "delete", data?.tag) && (
           <DeleteButton onClick={deleteTag}>{t("translation:delete")}</DeleteButton>
