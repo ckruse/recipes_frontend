@@ -44,7 +44,7 @@ export interface IValues {
 }
 
 const validationSchema = (t: TFunction) =>
-  yup.object().shape({
+  yup.object({
     name: yup.string().required(t("recipes:form.name_required")),
     defaultServings: yup.number().required(t("recipes:form.default_servings_required")),
     description: yup.string(),

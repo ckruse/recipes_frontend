@@ -85,10 +85,10 @@ const unitOptions = (t: TFunction, si: TIngredientRow) => {
 };
 
 const validationSchema = (t: TFunction) =>
-  yup.object().shape({
+  yup.object({
     description: yup.string().required(t("recipes:step_modal.description_required")),
     stepIngredients: yup.array().of(
-      yup.object().shape({
+      yup.object({
         amount: yup.number().nullable().min(0, t("recipes:step_modal.amount_min")),
         ingredientId: yup.number().required(t("recipes:step_modal.ingredient_required")),
       })

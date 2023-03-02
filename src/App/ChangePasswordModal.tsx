@@ -17,7 +17,7 @@ import { IUserPasswordMutation } from "../types";
 import { selectSession, toggleShowPasswordReset } from "./sessionSlice";
 
 const validationSchema = (t: TFunction) =>
-  yup.object().shape({
+  yup.object({
     currentPassword: yup.string().required(t("root:changePasswordModal.password_required")),
     newPassword: yup
       .string()

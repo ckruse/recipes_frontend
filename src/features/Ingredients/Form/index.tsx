@@ -42,7 +42,7 @@ const initialValues = (ingredient: Nilable<TIngredient>): IValues => ({
     ingredient?.units.map((unit) => ({ id: unit.id, identifier: unit.identifier, baseValue: unit.baseValue })) || [],
 });
 
-const validationSchema = yup.object().shape({
+const validationSchema = yup.object({
   name: yup.string().required("Bitte geben Sie einen Namen ein!"),
   reference: yup.string().required("Bitte geben Sie eine Einheit an!"),
   alc: yup.number().required("Bitte geben Sie einen Alkoholgehalt an!"),
@@ -50,7 +50,7 @@ const validationSchema = yup.object().shape({
   fat: yup.number().required("Bitte geben Sie einen Fettgehalt an!"),
   proteins: yup.number().required("Bitte geben Sie einen Proteingehalt an!"),
   // units: yup.array().of(
-  //   yup.object().shape({
+  //   yup.object({
   //     identifier: yup.string().required(),
   //     baseValue: yup.number().required(),
   //   })
