@@ -55,3 +55,12 @@ export const REPLACE_WEEKPLAN_RECIPE = gql`
   }
   ${WEEKPLAN_FRAGMENT}
 `;
+
+export const REPLACE_WEEKPLAN_RECIPE_WITH_RECIPE = gql`
+  mutation replaceWeekplanRecipeWithRecipe($id: ID!, $recipeId: ID!) {
+    replaceWeekplanRecipeWithRecipe(id: $id, recipeId: $recipeId) {
+      ...WeekplanFragment
+    }
+  }
+  ${WEEKPLAN_FRAGMENT}
+`;

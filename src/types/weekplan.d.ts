@@ -24,3 +24,7 @@ export interface ICreateWeekplanMutation {
 export interface IReplaceWeekplanRecipeMutation {
   replaceWeekplanRecipe: TRecipe;
 }
+
+export interface IReplaceWeekplanRecipeWithRecipeMutation {
+  replaceWeekplanRecipeWithRecipe: TRecipe;
+}

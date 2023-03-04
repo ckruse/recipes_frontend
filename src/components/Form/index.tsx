@@ -4,3 +4,4 @@ export * from "./Select";
 export * from "./Check";
 export * from "./DatePicker";
 export * from "./TagSelector";
+export * from "./RecipeSelector";
