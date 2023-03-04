@@ -78,11 +78,11 @@ export default function ReplaceModal() {
 
             <Modal.Body>
               <FormGroup>
-                <BsForm.Label htmlFor="recipe">Rezept</BsForm.Label>
+                <BsForm.Label htmlFor="recipe">{t("weekplan:replace.recipe")}</BsForm.Label>
                 <RecipeSelector isClearable id="recipe" name="recipe" />
               </FormGroup>
 
-              <p>oder…</p>
+              <p>{t("translation:or")}</p>
 
               <FormGroup>
                 <BsForm.Label htmlFor="tags">{t("weekplan:replace.tags")}</BsForm.Label>

@@ -8,5 +8,8 @@
     "no_recipes_one": "Diesem Tag ist {{count}} Rezept zugeordnet.",
     "no_recipes_other": "Diesem Tag sind {{count}} Rezepte zugeordnet.",
     "deleted": "Das Tag wurde erfolgreich gelöscht!"
+  },
+  "selector": {
+    "choose_tag": "Tag auswählen…"
   }
 }

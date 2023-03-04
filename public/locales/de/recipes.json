@@ -81,5 +81,9 @@
     "amount_min": "Die Menge muss größer als 0 sein!",
     "ingredient_required": "Bitte wählen Sie eine Zutat aus!",
     "name_is_optional": "Der Name ist optional."
+  },
+
+  "selector": {
+    "choose_recipe": "Rezept auswählen…"
   }
 }

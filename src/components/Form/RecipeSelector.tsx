@@ -2,6 +2,7 @@ import { useLazyQuery } from "@apollo/client";
 
 import { getIn, useFormikContext } from "formik";
 import _ from "lodash";
+import { useTranslation } from "react-i18next";
 import { ActionMeta, GroupBase, OnChangeValue, OptionsOrGroups } from "react-select";
 import { MultiValue, SingleValue } from "react-select";
 import Select, { AsyncProps } from "react-select/async";
@@ -32,6 +33,7 @@ export function RecipeSelector<IsMulti extends boolean>(props: TProps<TOption, I
   const { values, handleBlur, setFieldValue } = useFormikContext();
   const [loadTags] = useLazyQuery<IRecipesQueryResult>(RECIPES_QUERY);
   const value: TRecipe[] = getIn(values, props.name);
+  const { t } = useTranslation(["recipes"]);
 
   const loadOptions: TLoadOptions = async (inputValue, callback) => {
     const { data } = await loadTags({ variables: { search: inputValue, limit: 15, offset: 0 } });
@@ -61,7 +63,7 @@ export function RecipeSelector<IsMulti extends boolean>(props: TProps<TOption, I
 
   return (
     <Select
-      placeholder="Rezept auswählen…"
+      placeholder={t("recipes:selector.choose_recipe")}
       loadOptions={loadOptions}
       onChange={handleChange}
       onBlur={handleBlur}

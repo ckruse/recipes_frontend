@@ -12,7 +12,8 @@
     "title": "Rezept austauschen",
     "replaced": "Rezept erfolgreich ausgetauscht.",
     "tags": "Rezept-Tags",
-    "replace": "austauschen"
+    "replace": "austauschen",
+    "recipe": "Rezept"
   },
 
   "create": {

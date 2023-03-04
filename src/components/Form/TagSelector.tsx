@@ -2,6 +2,7 @@ import { useLazyQuery } from "@apollo/client";
 
 import { getIn, useFormikContext } from "formik";
 import _ from "lodash";
+import { useTranslation } from "react-i18next";
 import { ActionMeta, GroupBase, OnChangeValue, OptionsOrGroups } from "react-select";
 import { MultiValue, SingleValue } from "react-select";
 import Select, { AsyncProps } from "react-select/async";
@@ -32,6 +33,7 @@ export function TagSelector<IsMulti extends boolean>(props: TProps<TOption, IsMu
   const { values, handleBlur, setFieldValue } = useFormikContext();
   const [loadTags] = useLazyQuery<ITagsData>(TAGS_QUERY);
   const value: TTag[] = getIn(values, props.name);
+  const { t } = useTranslation(["tags"]);
 
   const loadOptions: TLoadOptions = async (inputValue, callback) => {
     const { data } = await loadTags({ variables: { search: inputValue, limit: 15, offset: 0 } });
@@ -61,7 +63,7 @@ export function TagSelector<IsMulti extends boolean>(props: TProps<TOption, IsMu
 
   return (
     <Select
-      placeholder="Tag auswählen…"
+      placeholder={t("tags:selector.choose_tag")}
       loadOptions={loadOptions}
       onChange={handleChange}
       onBlur={handleBlur}
