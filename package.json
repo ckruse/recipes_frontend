@@ -40,7 +40,7 @@
     "react-dom": "^18.2.0",
     "react-i18next": "^12.2.0",
     "react-icons-kit": "^2.0.0",
-    "react-markdown": "^8.0.5",
+    "react-markdown": "^8.0.6",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.9.0",
     "react-scripts": "5.0.1",
