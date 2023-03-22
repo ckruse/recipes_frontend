@@ -7,3 +7,4 @@ export * from "./ShowButton";
 export * from "./EditButton";
 export * from "./NewButton";
 export * from "./AddButton";
+export * from "./DownloadButton";

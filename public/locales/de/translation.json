@@ -13,6 +13,7 @@
   "yes": "ja",
   "no": "nein",
   "or": "oder",
+  "export": "exportieren",
 
   "errors": {
     "general": "Oops! Ein Fehler ist aufgetreten.",
@@ -35,5 +36,15 @@
     "range_same_month_stop_format": "d.M.yyyy",
     "range_start_format": "d.M.yyyy",
     "range_stop_format": "d.M.yyyy"
+  },
+
+  "weekdays": {
+    "monday": "Montag",
+    "tuesday": "Dienstag",
+    "wednesday": "Mittwoch",
+    "thursday": "Donnerstag",
+    "friday": "Freitag",
+    "saturday": "Samstag",
+    "sunday": "Sonntag"
   }
 }

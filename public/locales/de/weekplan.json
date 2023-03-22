@@ -23,5 +23,10 @@
     "week": "Woche",
     "tags": "Tags",
     "portions": "Portionen"
+  },
+
+  "bring_modal": {
+    "title": "Zu Bring! exportieren",
+    "select_days": "Welche Wochentage sollen exportiert werden?"
   }
 }

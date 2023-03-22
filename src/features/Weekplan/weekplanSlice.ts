@@ -9,12 +9,14 @@ export interface IWeekplanReducerState {
   week: Date;
   showWeekplanCreateModal: boolean;
   showReplaceModal: Nullable<TWeekplanEntry>;
+  showBringModal: boolean;
 }
 
 const initialState: IWeekplanReducerState = {
   week: startOfISOWeek(new Date()),
   showWeekplanCreateModal: false,
   showReplaceModal: null,
+  showBringModal: false,
 };
 
 export const weekplanSlice = createSlice({
@@ -32,10 +34,14 @@ export const weekplanSlice = createSlice({
     setWeek(state, action: PayloadAction<Date>) {
       state.week = action.payload;
     },
+
+    setShowBringModal(state, action: PayloadAction<boolean>) {
+      state.showBringModal = action.payload;
+    },
   },
 });
 
-export const { setWeekplanCreateModal, setReplaceModal, setWeek } = weekplanSlice.actions;
+export const { setWeekplanCreateModal, setReplaceModal, setWeek, setShowBringModal } = weekplanSlice.actions;
 
 export const selectWeekplan = (state: RootState) => state.weekplan;
 
