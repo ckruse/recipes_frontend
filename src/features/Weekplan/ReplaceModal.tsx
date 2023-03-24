@@ -23,7 +23,7 @@ type TValues = {
   recipe: Nullable<TRecipe>;
 };
 
-const INITIAL_VALUES: TValues = { tags: [], recipe: null };
+const INITIAL_VALUES: TValues = { tags: [{ id: "20", name: "hauptspeise" } as TTag], recipe: null };
 
 export default function ReplaceModal() {
   const dispatch = useAppDispatch();

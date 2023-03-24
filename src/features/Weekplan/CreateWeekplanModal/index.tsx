@@ -22,7 +22,7 @@ export type TValues = {
 const INITIAL_VALUES: TValues = {
   week: startOfISOWeek(new Date()),
   portions: 2,
-  tags: [],
+  tags: [{ id: "20", name: "hauptspeise" } as TTag],
 };
 
 export default function CreateWeekplanModal() {
