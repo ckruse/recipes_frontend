@@ -6,21 +6,26 @@ import { useTranslation } from "react-i18next";
 import { TValues } from ".";
 import { FormGroup } from "../../../components";
 import { DatePicker, Input, TagSelector } from "../../../components/Form";
+import { useAppDispatch } from "../../../hooks";
+import { setWeek } from "../weekplanSlice";
 
 export default function InnerForm() {
+  const dispatch = useAppDispatch();
   const { setFieldValue, setFieldTouched } = useFormikContext<TValues>();
   const { t } = useTranslation(["weekplan"]);
 
-  function setWeek(value: Date) {
-    setFieldValue("week", startOfISOWeek(value));
+  function setWeekValue(value: Date) {
+    value = startOfISOWeek(value);
+    setFieldValue("week", value);
     setFieldTouched("week", true);
+    dispatch(setWeek(value));
   }
 
   return (
     <>
       <FormGroup>
         <Form.Label htmlFor="week">{t("weekplan:create.week")}</Form.Label>
-        <DatePicker onChange={setWeek} name="week" id="week" clearIcon={null} />
+        <DatePicker onChange={setWeekValue} name="week" id="week" clearIcon={null} />
       </FormGroup>
 
       <FormGroup>

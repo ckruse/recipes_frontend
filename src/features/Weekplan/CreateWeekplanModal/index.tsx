@@ -26,6 +26,7 @@ const INITIAL_VALUES: TValues = {
 };
 
 export default function CreateWeekplanModal() {
+  const { week } = useAppSelector(selectWeekplan);
   const { showWeekplanCreateModal } = useAppSelector(selectWeekplan);
   const dispatch = useAppDispatch();
   const { t } = useTranslation(["translation", "weekplan"]);
@@ -58,7 +59,7 @@ export default function CreateWeekplanModal() {
 
   return (
     <Modal show={showWeekplanCreateModal} onHide={hideModal}>
-      <Formik initialValues={INITIAL_VALUES} onSubmit={handleSubmit}>
+      <Formik initialValues={{ ...INITIAL_VALUES, week }} onSubmit={handleSubmit}>
         {() => (
           <Form>
             <Modal.Header closeButton>
