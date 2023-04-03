@@ -1,6 +1,6 @@
 import { useMutation } from "@apollo/client";
 
-import { format, startOfISOWeek } from "date-fns";
+import { format, getDay, startOfISOWeek } from "date-fns";
 import { Form, Formik } from "formik";
 import { Modal } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
@@ -17,12 +17,14 @@ export type TValues = {
   week: Date;
   portions: number;
   tags: TTag[];
+  days: number[];
 };
 
 const INITIAL_VALUES: TValues = {
   week: startOfISOWeek(new Date()),
   portions: 2,
   tags: [{ id: "20", name: "hauptspeise" } as TTag],
+  days: [0, 5, 6].includes(getDay(new Date())) ? [5, 6] : [1, 2, 3],
 };
 
 export default function CreateWeekplanModal() {
@@ -46,6 +48,7 @@ export default function CreateWeekplanModal() {
           week: format(values.week, "yyyy-MM-dd"),
           portions: values.portions,
           tags: values.tags.map((tag) => tag.name),
+          days: values.days,
         },
       });
 
