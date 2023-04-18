@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.7.12",
-    "@reduxjs/toolkit": "^1.9.4",
+    "@reduxjs/toolkit": "^1.9.5",
     "apollo-upload-client": "^17.0.0",
     "bootstrap": "^5.2.3",
     "clsx": "^1.2.1",
