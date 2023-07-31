@@ -8132,10 +8132,10 @@ react-calendar@^4.6.0:
     prop-types "^15.6.0"
     tiny-warning "^1.0.0"
 
-react-date-picker@^10.4.1:
-  version "10.4.1"
-  resolved "https://registry.yarnpkg.com/react-date-picker/-/react-date-picker-10.4.1.tgz#9b0da3802fca5eb87294c6486686bd13ea2d72f0"
-  integrity sha512-Tv6LKQjgPtPXloGiKYdAYxLRz1vMF5cNfaBgjkbLXBABrHKUt6ZAlH/z+Y01YlJdNybxv2edtLHix7rTpLOY4g==
+react-date-picker@^10.5.0:
+  version "10.5.0"
+  resolved "https://registry.yarnpkg.com/react-date-picker/-/react-date-picker-10.5.0.tgz#a3204d6c68eb04d2ea5e97ee26b5ba5983b4f32b"
+  integrity sha512-A0LsM7M9iaOj+ALFOum5xdKlE6GdmKQKrctKJiOrU9lAeX+adkBqjHMZItYiO2OmWoHhRQm8iGVJCMA2SV8+IA==
   dependencies:
     "@wojtekmaj/date-utils" "^1.1.3"
     clsx "^2.0.0"
