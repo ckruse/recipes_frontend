@@ -4,6 +4,9 @@ import DPicker, { DatePickerProps } from "react-date-picker";
 import Icon from "react-icons-kit";
 import { ic_calendar_today, ic_clear } from "react-icons-kit/md";
 
+type ValuePiece = Date | null;
+type Value = ValuePiece | [ValuePiece, ValuePiece];
+
 type TProps = DatePickerProps & {
   id?: string;
   name: string;
@@ -14,9 +17,11 @@ export function DatePicker(props: TProps) {
   const { values, setFieldValue, setFieldTouched } = useFormikContext();
   const value = getIn(values, props.name);
 
-  function handleChange(date: Date) {
-    setFieldValue(props.name, date);
-    setFieldTouched(props.name, true);
+  function handleChange(date: Value) {
+    if (date && !Array.isArray(date)) {
+      setFieldValue(props.name, date);
+      setFieldTouched(props.name, true);
+    }
   }
 
   return (

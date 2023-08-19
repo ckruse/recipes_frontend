@@ -21,6 +21,9 @@ import MetaList from "../MetaList";
 import ReplaceModal from "./ReplaceModal";
 import { selectWeekplan, setReplaceModal, setWeek } from "./weekplanSlice";
 
+type ValuePiece = Date | null;
+type Value = ValuePiece | [ValuePiece, ValuePiece];
+
 export default function List() {
   const { user } = useAppSelector(selectSession);
   const { week } = useAppSelector(selectWeekplan);
@@ -40,8 +43,10 @@ export default function List() {
     dispatch(setReplaceModal(entry));
   }
 
-  function doSetWeek(date: Date) {
-    dispatch(setWeek(startOfISOWeek(date)));
+  function doSetWeek(date: Value) {
+    if (date && !Array.isArray(date)) {
+      dispatch(setWeek(startOfISOWeek(date)));
+    }
   }
 
   return (
@@ -85,7 +90,7 @@ export default function List() {
                 <span className="created">{dateFormat(entry.date, "EEEE, d.M.yyyy")}</span>
 
                 <ul className="recipes-recipes-show-tags-list">
-                  {_(entry.recipe.tags)
+                  {_(entry.recipe.tags.slice())
                     .sortBy("name")
                     .map((tag) => (
                       <li className="tag" key={tag.id}>

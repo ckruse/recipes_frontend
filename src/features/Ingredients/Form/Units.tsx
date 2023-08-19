@@ -18,14 +18,14 @@ export default function Units() {
   function removeUnit(id: string) {
     setFieldValue(
       "units",
-      values.units.filter((unit) => unit.id !== id)
+      values.units.filter((unit) => unit.id !== id),
     );
   }
 
   const unitOptions = Object.entries(t(`ingredients:units`, { returnObjects: true }))
     .filter(([identifier, _]) => !["G", "ML"].includes(identifier))
     .map(([identifier, label]) => ({
-      label,
+      label: label as string,
       value: identifier,
     }));
 

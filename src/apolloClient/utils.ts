@@ -11,7 +11,7 @@ export function updateDeletion<T = any>(cache: ApolloCache<T>, id: Nilable<TID>,
 
   cache.modify({
     fields: {
-      [field]: (list, { readField }) => {
+      [field]: (list: any, { readField }) => {
         return _.filter(list, (obj) => readField("id", obj) !== id);
       },
     },
@@ -29,7 +29,7 @@ export function updateMutationList(
   cache: ApolloCache<any>,
   object: Nilable<IdInterface>,
   field: string,
-  broadcast = true
+  broadcast = true,
 ) {
   if (!object?.id) {
     return;
@@ -37,7 +37,7 @@ export function updateMutationList(
 
   cache.modify({
     fields: {
-      [field]: (list, { readField }) => {
+      [field]: (list: any, { readField }) => {
         const idx = _.findIndex<any>(list, (obj) => readField("id", obj) === object.id);
 
         if (idx === -1) {

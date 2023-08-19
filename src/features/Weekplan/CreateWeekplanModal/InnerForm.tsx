@@ -9,16 +9,21 @@ import { DatePicker, Input, TagSelector } from "../../../components/Form";
 import { useAppDispatch } from "../../../hooks";
 import { setWeek } from "../weekplanSlice";
 
+type ValuePiece = Date | null;
+type Value = ValuePiece | [ValuePiece, ValuePiece];
+
 export default function InnerForm() {
   const dispatch = useAppDispatch();
   const { setFieldValue, setFieldTouched, values } = useFormikContext<TValues>();
   const { t } = useTranslation(["weekplan"]);
 
-  function setWeekValue(value: Date) {
-    value = startOfISOWeek(value);
-    setFieldValue("week", value);
-    setFieldTouched("week", true);
-    dispatch(setWeek(value));
+  function setWeekValue(value: Value) {
+    if (value && !Array.isArray(value)) {
+      value = startOfISOWeek(value);
+      setFieldValue("week", value);
+      setFieldTouched("week", true);
+      dispatch(setWeek(value));
+    }
   }
 
   function toggleDay(event: React.ChangeEvent<HTMLInputElement>) {
@@ -27,7 +32,7 @@ export default function InnerForm() {
     if (values.days.includes(day)) {
       setFieldValue(
         "days",
-        values.days.filter((d) => d !== day)
+        values.days.filter((d) => d !== day),
       );
     } else {
       setFieldValue("days", [...values.days, day]);
