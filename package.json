@@ -48,7 +48,7 @@
     "react-textarea-autosize": "^8.5.3",
     "redux-thunk": "^3.1.0",
     "sass": "^1.72.0",
-    "typescript": "^5.4.2",
+    "typescript": "^5.4.3",
     "web-vitals": "^3.5.2",
     "yup": "^1.4.0"
   },
