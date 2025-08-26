@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import { TAG_DELETE_MUTATION, TAGS_W_COUNT_QUERY } from "../../graphql/tags";
 import { useList, useTitle } from "../../hooks";
-import { TTag } from "../../types";
+import type { TTag } from "../../types";
 import { showTagPath } from "../../urls";
 
 export default function List() {

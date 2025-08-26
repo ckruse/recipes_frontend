@@ -1,6 +1,5 @@
 import { useMutation } from "@apollo/client";
-
-import { Form, Formik, FormikHelpers } from "formik";
+import { Form, Formik, type FormikHelpers } from "formik";
 import { Form as BsForm, Modal } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 
@@ -8,7 +7,7 @@ import { CancelButton, FormGroup, SaveButton } from "../../components";
 import { RecipeSelector, TagSelector } from "../../components/Form";
 import { REPLACE_WEEKPLAN_RECIPE, REPLACE_WEEKPLAN_RECIPE_WITH_RECIPE } from "../../graphql/weekplan";
 import { useAppDispatch, useAppSelector } from "../../hooks";
-import {
+import type {
   IReplaceWeekplanRecipeMutation,
   IReplaceWeekplanRecipeWithRecipeMutation,
   Nullable,
@@ -30,7 +29,7 @@ export default function ReplaceModal() {
   const { showReplaceModal } = useAppSelector(selectWeekplan);
   const [replaceWeekplanMutation] = useMutation<IReplaceWeekplanRecipeMutation>(REPLACE_WEEKPLAN_RECIPE);
   const [replaceWeekplanWithRecipeMutation] = useMutation<IReplaceWeekplanRecipeWithRecipeMutation>(
-    REPLACE_WEEKPLAN_RECIPE_WITH_RECIPE
+    REPLACE_WEEKPLAN_RECIPE_WITH_RECIPE,
   );
   const { t } = useTranslation(["translation", "weekplan"]);
 

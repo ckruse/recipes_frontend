@@ -1,6 +1,6 @@
 import { ChangeEvent } from "react";
 
-import { Form, Formik, FormikHelpers } from "formik";
+import { Form, Formik, type FormikHelpers } from "formik";
 import _ from "lodash";
 import { Form as BsForm } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 
 import { CancelButton, FormActions, FormGroup, SaveButton } from "../../components";
 import { Check, Input, Select } from "../../components/Form";
-import { Nilable, TUser, TUserRole } from "../../types";
+import type { Nilable, TUser, TUserRole } from "../../types";
 import { usersPath } from "../../urls";
 
 export type TValues = {

@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { useMutation, useQuery } from "@apollo/client";
-
-import { FormikHelpers } from "formik";
+import { type FormikHelpers } from "formik";
 import { useTranslation } from "react-i18next";
 import { Link, useParams } from "react-router-dom";
 
@@ -11,11 +10,11 @@ import { CancelButton, EditButton, Loading } from "../../../components";
 import { RECIPE_QUERY, UPDATE_RECIPE_MUTATION } from "../../../graphql/recipes";
 import { useAppDispatch, useAppSelector, useTitle } from "../../../hooks";
 import may from "../../../permissions";
-import { IRecipeQueryResult, IUpdateRecipeMutation } from "../../../types";
+import type { IRecipeQueryResult, IUpdateRecipeMutation } from "../../../types";
 import { recipesPath } from "../../../urls";
 import { parsedInt } from "../../../utils/numbers";
 import { addSuccessFlash } from "../../Flash/flashSlice";
-import RecipeForm, { IValues } from "../Form";
+import RecipeForm, { type IValues } from "../Form";
 import Overview from "./Overview";
 import Steps from "./Steps";
 
@@ -60,7 +59,7 @@ export default function Show() {
       }
 
       dispatch(addSuccessFlash(t("recipes:edit.success")));
-    } catch (error) {
+    } catch (_error) {
       setSubmitting(false);
     }
   }

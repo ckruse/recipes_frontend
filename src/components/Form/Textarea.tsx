@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import { getIn, useFormikContext } from "formik";
 import _ from "lodash";
-import TextareaAutosize, { TextareaAutosizeProps } from "react-textarea-autosize";
+import TextareaAutosize, { type TextareaAutosizeProps } from "react-textarea-autosize";
 
 import { fieldInvalid, fieldValid } from "./utils";
 

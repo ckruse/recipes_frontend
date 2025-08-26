@@ -5,7 +5,7 @@ import ReactMarkdown from "react-markdown";
 import { Link } from "react-router-dom";
 
 import { FormGroup } from "../../../components";
-import { TIngredient, TRecipe } from "../../../types";
+import type { TIngredient, TRecipe } from "../../../types";
 import { bringImportUri, showRecipePath } from "../../../urls";
 import { URI } from "../../../utils";
 import { formatIntNumberRounded, formatNumber } from "../../../utils/numbers";
@@ -104,7 +104,7 @@ export default function Overview({ recipe, portions = 2, setPortions }: TProps) 
               {row.ingredient.name}
               {!!row.annotation.length && row.annotation.map((annotation) => <small>{annotation}</small>)}
             </li>
-          ))
+          )),
         )}
       </ul>
 

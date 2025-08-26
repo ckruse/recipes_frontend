@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import { getIn, useFormikContext } from "formik";
-import DPicker, { DatePickerProps } from "react-date-picker";
+import DPicker, { type DatePickerProps } from "react-date-picker";
 import Icon from "react-icons-kit";
 import { ic_calendar_today, ic_clear } from "react-icons-kit/md";
 

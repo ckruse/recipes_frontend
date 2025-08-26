@@ -2,8 +2,8 @@ import { PermissionBagType } from ".";
 import { TUser } from "../types";
 
 const UserPermissions: PermissionBagType<TUser>["users"] = {
-  list: (user, resource) => user?.role === "ROOT",
-  create: (user, resource) => user?.role === "ROOT",
+  list: (user, _resource) => user?.role === "ROOT",
+  create: (user, _resource) => user?.role === "ROOT",
   default: (user, resource) => user?.role === "ROOT" || user?.id === resource.id,
 };
 

@@ -1,4 +1,4 @@
-import { Nilable, TMutationResult } from "./types";
+import type { Nilable, TMutationResult } from "./types";
 
 export class MutationError extends Error {
   result: Nilable<TMutationResult>;

@@ -1,4 +1,4 @@
-import { TUser } from "../types";
+import type { TUser } from "../types";
 
 export const usersPath = () => "/users";
 export const newUserPath = () => "/users/new";

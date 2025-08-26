@@ -9,7 +9,7 @@ import { indexDate } from "../../dateUtils";
 import { USER_COUNT_QUERY, USER_DELETE_MUTATION, USERS_QUERY } from "../../graphql/users";
 import { useAppSelector, useList, usePermissionFallback } from "../../hooks";
 import may from "../../permissions";
-import { TUser } from "../../types";
+import type { TUser } from "../../types";
 import { editUserPath, showUserPath } from "../../urls";
 import MetaList from "../MetaList";
 

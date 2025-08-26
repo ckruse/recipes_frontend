@@ -1,5 +1,4 @@
 import { useQuery } from "@apollo/client";
-
 import { Col, Form, Row } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { Link, useParams } from "react-router-dom";
@@ -9,7 +8,7 @@ import { CancelButton, EditButton, Loading } from "../../components";
 import { INGREDIENT_QUERY } from "../../graphql/ingredients";
 import { useAppSelector, useTitle } from "../../hooks";
 import may from "../../permissions";
-import { IIngredientQueryResult } from "../../types";
+import { type IIngredientQueryResult } from "../../types";
 import { editIngredientPath, ingredientsPath } from "../../urls";
 import { calories } from "../../utils";
 import { formatIntNumberRounded, formatNumber, parsedInt } from "../../utils/numbers";

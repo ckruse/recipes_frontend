@@ -1,7 +1,7 @@
 import Alert from "react-bootstrap/Alert";
 
 import { useAppDispatch } from "../../hooks";
-import { FlashMessageType, FlashTypeType } from "../../types/flash";
+import type { FlashMessageType, FlashTypeType } from "../../types/flash";
 import { removeFlash } from "./flashSlice";
 
 type FlashProps = {

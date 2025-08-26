@@ -1,20 +1,18 @@
 import { useLazyQuery } from "@apollo/client";
-
 import { getIn, useFormikContext } from "formik";
 import _ from "lodash";
 import { useTranslation } from "react-i18next";
-import { ActionMeta, GroupBase, OnChangeValue, OptionsOrGroups } from "react-select";
-import { MultiValue, SingleValue } from "react-select";
-import Select, { AsyncProps } from "react-select/async";
+import type { ActionMeta, GroupBase, MultiValue, OnChangeValue, OptionsOrGroups, SingleValue } from "react-select";
+import Select, { type AsyncProps } from "react-select/async";
 
 import { TAGS_QUERY } from "../../graphql/tags";
-import { ITagsData, TTag } from "../../types";
+import type { ITagsData, TTag } from "../../types";
 
 type TOption = { label: string; value: string; tag: TTag };
 type TEvent<IsMulti extends boolean> = OnChangeValue<TOption, IsMulti>;
 type TLoadOptions = (
   inputValue: string,
-  callback: (options: OptionsOrGroups<TOption, GroupBase<TOption>>) => void
+  callback: (options: OptionsOrGroups<TOption, GroupBase<TOption>>) => void,
 ) => void;
 
 type TProps<Option, IsMulti extends boolean> = AsyncProps<Option, IsMulti, GroupBase<Option>> & {
@@ -43,7 +41,7 @@ export function TagSelector<IsMulti extends boolean>(props: TProps<TOption, IsMu
           label: tag.name,
           value: tag.id,
           tag,
-        }))
+        })),
       );
     }
   };
@@ -52,7 +50,7 @@ export function TagSelector<IsMulti extends boolean>(props: TProps<TOption, IsMu
     if (isMulti(value)) {
       setFieldValue(
         props.name,
-        value.map((v) => v.tag)
+        value.map((v) => v.tag),
       );
     } else {
       setFieldValue(props.name, value?.tag);

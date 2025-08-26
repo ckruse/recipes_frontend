@@ -2,7 +2,7 @@ import React from "react";
 
 import { FastField, Field, getIn, useFormikContext } from "formik";
 import _ from "lodash";
-import FormControl, { FormControlProps } from "react-bootstrap/FormControl";
+import FormControl, { type FormControlProps } from "react-bootstrap/FormControl";
 
 import { fieldInvalid, fieldValid } from "./utils";
 

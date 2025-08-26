@@ -8,7 +8,7 @@ import { indexDate } from "../../dateUtils";
 import { INGREDIENT_DELETE_MUTATION, INGREDIENTS_COUNT_QUERY, INGREDIENTS_QUERY } from "../../graphql/ingredients";
 import { useAppSelector, useDebouncedCallback, useList } from "../../hooks";
 import may from "../../permissions";
-import { TIngredient } from "../../types";
+import { type TIngredient } from "../../types";
 import { editIngredientPath, ingredientsPath, showIngredientPath } from "../../urls";
 import { calories } from "../../utils";
 import { formatIntNumberRounded } from "../../utils/numbers";

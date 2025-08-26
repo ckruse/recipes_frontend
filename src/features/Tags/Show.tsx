@@ -1,5 +1,4 @@
 import { useMutation, useQuery } from "@apollo/client";
-
 import { Trans, useTranslation } from "react-i18next";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
@@ -10,7 +9,7 @@ import { TAG_DELETE_MUTATION, TAG_QUERY } from "../../graphql/tags";
 import { MutationError } from "../../handleError";
 import { useAppDispatch, useAppSelector, useList } from "../../hooks";
 import may from "../../permissions";
-import { ITagData, ITagDeleteMutation, TRecipe } from "../../types";
+import type { ITagData, ITagDeleteMutation, TRecipe } from "../../types";
 import { showRecipePath, tagsPath } from "../../urls";
 import { parsedInt } from "../../utils/numbers";
 import { addErrorFlash, addSuccessFlash } from "../Flash/flashSlice";

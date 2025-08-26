@@ -1,6 +1,5 @@
 import { useMutation } from "@apollo/client";
-
-import { FormikHelpers } from "formik";
+import { type FormikHelpers } from "formik";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
@@ -8,10 +7,10 @@ import { INGREDIENT_CREATE_MUTATION } from "../../graphql/ingredients";
 import { MutationError } from "../../handleError";
 import { useAppDispatch, useTitle } from "../../hooks";
 import useAuthRequired from "../../hooks/useAuthRequired";
-import { IIngredientCreateMutation } from "../../types";
+import type { IIngredientCreateMutation } from "../../types";
 import { ingredientsPath } from "../../urls";
 import { addErrorFlash, addSuccessFlash } from "../Flash/flashSlice";
-import Form, { IValues } from "./Form";
+import Form, { type IValues } from "./Form";
 
 export default function New() {
   const dispatch = useAppDispatch();

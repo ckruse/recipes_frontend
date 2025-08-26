@@ -1,6 +1,5 @@
 import { useMutation, useQuery } from "@apollo/client";
-
-import { FormikHelpers } from "formik";
+import type { FormikHelpers } from "formik";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -11,11 +10,11 @@ import { MutationError } from "../../handleError";
 import { useAppDispatch, useAppSelector, usePermissionFallback, useTitle } from "../../hooks";
 import useAuthRequired from "../../hooks/useAuthRequired";
 import may from "../../permissions";
-import { IIngredientQueryResult, IIngredientUpdateMutation } from "../../types";
+import type { IIngredientQueryResult, IIngredientUpdateMutation } from "../../types";
 import { showIngredientPath } from "../../urls";
 import { parsedInt } from "../../utils/numbers";
 import { addErrorFlash, addSuccessFlash } from "../Flash/flashSlice";
-import Form, { IValues } from "./Form";
+import Form, { type IValues } from "./Form";
 
 export default function Edit() {
   const { id } = useParams<"id">();

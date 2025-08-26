@@ -33,8 +33,8 @@ export const parsedTime = (time: string | Date, reference: Date): Date => {
   try {
     return parsedDate(time);
   } catch {
-    let parsedTime = reference;
-    let [hour, minute] = time.toString().split(":");
+    const parsedTime = reference;
+    const [hour, minute] = time.toString().split(":");
     parsedTime.setHours(parseInt(hour, 10), parseInt(minute, 0));
     return parsedTime;
   }
@@ -92,7 +92,7 @@ export const dateFormat = (date: DateType, formatStr: string | undefined = undef
   format(
     parsedDate(date, local),
     formatStr || i18n.t("translation:datetime.date_format", { defaultValue: "d.M.yyyy" }),
-    { locale: getLocale() }
+    { locale: getLocale() },
   );
 export const timeFormat = (date: DateType, formatStr: string | undefined = undefined) =>
   dateFormat(date, formatStr || i18n.t("translation:datetime.time_format", { defaultValue: "H:mm" }));
@@ -100,7 +100,7 @@ export const dateTimeFormat = (date: DateType, formatStr: string | undefined = u
   dateFormat(
     date,
     formatStr || i18n.t("translation:datetime.datetime_format", { defaultValue: "d.M.yyyy H:mm" }),
-    local
+    local,
   );
 
 export const detailedDateFormat = (date: DateType) =>
@@ -108,7 +108,7 @@ export const detailedDateFormat = (date: DateType) =>
 export const detailedDateTimeFormat = (date: DateType) =>
   dateFormat(
     date,
-    i18n.t("translation:datetime.detailed_datetime_format", { defaultValue: "EEEE, d. LLLL yyyy, H:mm 'Uhr'" })
+    i18n.t("translation:datetime.detailed_datetime_format", { defaultValue: "EEEE, d. LLLL yyyy, H:mm 'Uhr'" }),
   );
 
 export const indexDate = (date: DateType, fromDate = new Date(), local = false) => {
@@ -121,7 +121,7 @@ export const indexDate = (date: DateType, fromDate = new Date(), local = false) 
     return format(
       date,
       i18n.t("translation:datetime.datetime_format_yesterday_idx", { defaultValue: "'gestern,' H:mm 'Uhr'" }),
-      { locale }
+      { locale },
     );
   }
 
@@ -149,11 +149,11 @@ export const dateRangeFormatDays = (startDate: Date | string, endDate: Date | st
     return i18n.t("translation:datetime.range", {
       start: timeFormat(
         startDate,
-        i18n.t("translation:datetime.range_same_day_start_format", { defaultValue: "H:mm" })
+        i18n.t("translation:datetime.range_same_day_start_format", { defaultValue: "H:mm" }),
       ),
       stop: dateTimeFormat(
         endDate,
-        i18n.t("translation:datetime.range_same_day_stop_format", { defaultValue: "H:mm, d.M.yyyy" })
+        i18n.t("translation:datetime.range_same_day_stop_format", { defaultValue: "H:mm, d.M.yyyy" }),
       ),
     });
   }
@@ -166,11 +166,11 @@ export const dateRangeFormatDays = (startDate: Date | string, endDate: Date | st
     return i18n.t("translation:datetime.range", {
       start: dateFormat(
         startDate,
-        i18n.t("translation:datetime.range_same_month_start_format", { defaultValue: "H:mm" })
+        i18n.t("translation:datetime.range_same_month_start_format", { defaultValue: "H:mm" }),
       ),
       stop: dateFormat(
         endDate,
-        i18n.t("translation:datetime.range_same_month_stop_format", { defaultValue: "H:mm, d.M.yyyy" })
+        i18n.t("translation:datetime.range_same_month_stop_format", { defaultValue: "H:mm, d.M.yyyy" }),
       ),
     });
   }

@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 import { RECIPE_DELETE_MUTATION, RECIPES_COUNT_QUERY, RECIPES_QUERY } from "../../graphql/recipes";
 import { useAppSelector, useDebouncedCallback, useList } from "../../hooks";
-import { TRecipe } from "../../types";
+import { type TRecipe } from "../../types";
 import { recipesPath } from "../../urls";
 import MetaList from "../MetaList";
 import ListItem from "./ListItem";

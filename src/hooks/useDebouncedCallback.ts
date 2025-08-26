@@ -2,8 +2,8 @@ import { useEffect, useRef } from "react";
 
 export function useDebouncedCallback<T extends (...args: any[]) => ReturnType<T>>(callback: T, wait = 500) {
   // track args & timeout handle between calls
-  const argsRef = useRef<Parameters<T>>();
-  const timeout = useRef<number>();
+  const argsRef = useRef<Parameters<T>>(undefined);
+  const timeout = useRef<number>(undefined);
 
   function cleanup() {
     if (timeout.current) {

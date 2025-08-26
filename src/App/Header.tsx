@@ -9,7 +9,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { removeAuthorizationToken } from "../authorizationToken";
 import { Button } from "../components";
 import { useAppDispatch, useAppSelector } from "../hooks";
-import { ReactComponent as Logo } from "../logo.svg";
+import Logo from "../logo.svg";
 import may from "../permissions";
 import { ingredientsPath, recipesPath, rootPath, showUserPath, tagsPath, weekplanPath } from "../urls";
 import { URI } from "../utils";

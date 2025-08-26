@@ -3,7 +3,7 @@ import { nanoid } from "nanoid";
 import { Form } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 
-import { IValues } from ".";
+import type { IValues } from ".";
 import { AddButton, DeleteButton, FormGroup } from "../../../components";
 import { Input, Select } from "../../../components/Form";
 

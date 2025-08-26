@@ -1,12 +1,11 @@
 import { useLazyQuery, useQuery } from "@apollo/client";
-
 import { getIn, useFormikContext } from "formik";
 import { useTranslation } from "react-i18next";
-import { ActionMeta, GroupBase, OnChangeValue, OptionsOrGroups } from "react-select";
+import type { ActionMeta, GroupBase, OnChangeValue, OptionsOrGroups } from "react-select";
 import AsyncSelect from "react-select/async";
 
 import { INGREDIENT_QUERY, INGREDIENTS_QUERY } from "../../graphql/ingredients";
-import { IIngredientQueryResult, IIngredientsQueryResult, Nilable, TIngredient } from "../../types";
+import type { IIngredientQueryResult, IIngredientsQueryResult, Nilable, TIngredient } from "../../types";
 import { fieldInvalid, fieldValid } from "./utils";
 
 type OptionType = { label: string; value: string; ingredient: Nilable<TIngredient> };
@@ -27,7 +26,7 @@ type TProps = {
 
 type LoadOptionsType = (
   inputValue: string,
-  callback: (options: OptionsOrGroups<OptionType, GroupBase<OptionType>>) => void
+  callback: (options: OptionsOrGroups<OptionType, GroupBase<OptionType>>) => void,
 ) => void;
 
 export function IngredientSelector(props: TProps) {
@@ -64,7 +63,7 @@ export function IngredientSelector(props: TProps) {
           label: ingredient.name,
           value: ingredient.id,
           ingredient,
-        }))
+        })),
       );
     }
   };

@@ -1,6 +1,5 @@
 import { useMutation } from "@apollo/client";
-
-import { FormikHelpers } from "formik";
+import { type FormikHelpers } from "formik";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
@@ -10,10 +9,10 @@ import { MutationError } from "../../handleError";
 import { useAppDispatch, useAppSelector, usePermissionFallback, useTitle } from "../../hooks";
 import useAuthRequired from "../../hooks/useAuthRequired";
 import may from "../../permissions";
-import { IUserCreateMutation } from "../../types";
+import type { IUserCreateMutation } from "../../types";
 import { editUserPath } from "../../urls";
 import { addErrorFlash, addSuccessFlash } from "../Flash/flashSlice";
-import Form, { TValues } from "./Form";
+import Form, { type TValues } from "./Form";
 
 export default function New() {
   const { t } = useTranslation(["users", "translation"]);

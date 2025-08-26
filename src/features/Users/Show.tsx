@@ -1,11 +1,10 @@
 import { useQuery } from "@apollo/client";
-
 import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
 
 import { USER_GET_QUERY } from "../../graphql/users";
 import { useTitle } from "../../hooks";
-import { IUserData } from "../../types";
+import { type IUserData } from "../../types";
 import { parsedInt } from "../../utils/numbers";
 
 export default function Show() {

@@ -1,20 +1,19 @@
 import { useLazyQuery } from "@apollo/client";
-
 import { getIn, useFormikContext } from "formik";
 import _ from "lodash";
 import { useTranslation } from "react-i18next";
-import { ActionMeta, GroupBase, OnChangeValue, OptionsOrGroups } from "react-select";
-import { MultiValue, SingleValue } from "react-select";
-import Select, { AsyncProps } from "react-select/async";
+import type { ActionMeta, GroupBase, OnChangeValue, OptionsOrGroups } from "react-select";
+import type { MultiValue, SingleValue } from "react-select";
+import Select, { type AsyncProps } from "react-select/async";
 
 import { RECIPES_QUERY } from "../../graphql/recipes";
-import { IRecipesQueryResult, TRecipe } from "../../types";
+import type { IRecipesQueryResult, TRecipe } from "../../types";
 
 type TOption = { label: string; value: string; recipe: TRecipe };
 type TEvent<IsMulti extends boolean> = OnChangeValue<TOption, IsMulti>;
 type TLoadOptions = (
   inputValue: string,
-  callback: (options: OptionsOrGroups<TOption, GroupBase<TOption>>) => void
+  callback: (options: OptionsOrGroups<TOption, GroupBase<TOption>>) => void,
 ) => void;
 
 type TProps<Option, IsMulti extends boolean> = AsyncProps<Option, IsMulti, GroupBase<Option>> & {
@@ -43,7 +42,7 @@ export function RecipeSelector<IsMulti extends boolean>(props: TProps<TOption, I
           label: recipe.name,
           value: recipe.id,
           recipe,
-        }))
+        })),
       );
     }
   };
@@ -52,7 +51,7 @@ export function RecipeSelector<IsMulti extends boolean>(props: TProps<TOption, I
     if (isMulti(value)) {
       setFieldValue(
         props.name,
-        value.map((v) => v.recipe)
+        value.map((v) => v.recipe),
       );
     } else {
       setFieldValue(props.name, value?.recipe);

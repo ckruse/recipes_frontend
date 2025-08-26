@@ -1,14 +1,13 @@
 import { useState } from "react";
 
 import { useMutation } from "@apollo/client";
-
-import { Form, Formik, FormikHelpers } from "formik";
-import { TFunction } from "i18next";
+import { Form, Formik, type FormikHelpers } from "formik";
+import { type TFunction } from "i18next";
 import _ from "lodash";
 import { nanoid } from "nanoid";
 import { Form as BsForm, Col, Modal, Row } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
-import { OnChangeValue } from "react-select";
+import { type OnChangeValue } from "react-select";
 import * as yup from "yup";
 
 import { AddButton, CancelButton, DeleteButton, FormGroup, SaveButton } from "../../../components";
@@ -17,7 +16,7 @@ import { IngredientSelector } from "../../../components/Form/IngredientSelector"
 import { CREATE_RECIPE_STEP_MUTATION, UPDATE_RECIPE_STEP_MUTATION } from "../../../graphql/recipes";
 import { MutationError } from "../../../handleError";
 import { useAppDispatch } from "../../../hooks";
-import {
+import type {
   ICreateRecipeStepMutation,
   IUpdateRecipeStepMutation,
   Nilable,
@@ -91,7 +90,7 @@ const validationSchema = (t: TFunction) =>
       yup.object({
         amount: yup.number().nullable().min(0, t("recipes:step_modal.amount_min")),
         ingredientId: yup.number().required(t("recipes:step_modal.ingredient_required")),
-      })
+      }),
     ),
   });
 
@@ -114,7 +113,7 @@ export default function StepModal({ show, step, recipe, toggle }: TProps) {
       const stepData = {
         ...values,
         stepIngredients: values.stepIngredients.map(({ ingredient, ...si }) => {
-          let newSi: Partial<typeof si> = { ...si };
+          const newSi: Partial<typeof si> = { ...si };
           if (newSi.unitId === "-") {
             newSi.unitId = null;
           }
@@ -197,7 +196,7 @@ export default function StepModal({ show, step, recipe, toggle }: TProps) {
           function delIngredient(id: number | string) {
             setFieldValue(
               "stepIngredients",
-              values.stepIngredients.filter((si) => si.id !== id)
+              values.stepIngredients.filter((si) => si.id !== id),
             );
           }
 
@@ -215,9 +214,7 @@ export default function StepModal({ show, step, recipe, toggle }: TProps) {
           return (
             <Form>
               <Modal.Header closeButton>
-                <Modal.Title>
-                  {t(!!step ? "recipes:step_modal.title_edit" : "recipes:step_modal.title_new")}
-                </Modal.Title>
+                <Modal.Title>{t(step ? "recipes:step_modal.title_edit" : "recipes:step_modal.title_new")}</Modal.Title>
               </Modal.Header>
 
               <Modal.Body>

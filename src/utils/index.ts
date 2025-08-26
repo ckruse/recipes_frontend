@@ -1,4 +1,4 @@
-import { TIngredient, TStepIngredient } from "../types";
+import type { TIngredient, TStepIngredient } from "../types";
 
 export const URI =
   process.env.NODE_ENV === "production" ? "https://recipes.wwwtech.de" : `http://${document.location.hostname}:8080`;

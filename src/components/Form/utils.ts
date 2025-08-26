@@ -3,16 +3,16 @@ import _ from "lodash";
 
 import { TOptionProp } from "./Select";
 
-export const fieldInvalid = (errors: Object, touched: Object, path: string) =>
+export const fieldInvalid = (errors: object, touched: object, path: string) =>
   !!(getIn(errors, path) && getIn(touched, path));
-export const fieldValid = (errors: Object, touched: Object, path: string) =>
+export const fieldValid = (errors: object, touched: object, path: string) =>
   !!(!getIn(errors, path) && getIn(touched, path));
 
 export const itemByValue = <T>(
   value: any,
   options: TOptionProp<T>[],
   isMulti: boolean = false,
-  fallback: boolean = false
+  fallback: boolean = false,
 ): TOptionProp<T> | undefined => {
   if (!value) {
     return undefined;

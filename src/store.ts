@@ -1,4 +1,4 @@
-import { Action, configureStore, ThunkAction } from "@reduxjs/toolkit";
+import { type Action, configureStore, type ThunkAction } from "@reduxjs/toolkit";
 
 import sessionReducer from "./App/sessionSlice";
 import flashReducer from "./features/Flash/flashSlice";

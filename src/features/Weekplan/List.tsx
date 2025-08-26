@@ -62,7 +62,6 @@ export default function List() {
             <DatePicker
               clearIcon={null}
               calendarIcon={<Icon icon={ic_calendar_today} />}
-              showWeekNumbers
               value={week}
               className="form-control"
               onChange={doSetWeek}

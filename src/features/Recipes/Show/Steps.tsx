@@ -1,7 +1,6 @@
 import { useState } from "react";
 
 import { useMutation } from "@apollo/client";
-
 import _ from "lodash";
 import { Button, ButtonGroup } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
@@ -14,7 +13,7 @@ import { AddButton, DeleteButton, EditButton } from "../../../components";
 import { DELETE_RECIPE_STEP_MUTATION, MOVE_STEP_DOWN_MUTATION, MOVE_STEP_UP_MUTATION } from "../../../graphql/recipes";
 import { useAppDispatch, useAppSelector } from "../../../hooks";
 import may from "../../../permissions";
-import {
+import type {
   IDeleteRecipeStepMutation,
   IMoveStepDownMutation,
   IMoveStepUpMutation,

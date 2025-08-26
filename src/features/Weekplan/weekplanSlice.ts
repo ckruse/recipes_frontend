@@ -1,9 +1,8 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
+import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import { startOfISOWeek } from "date-fns";
 
-import { RootState } from "../../store";
-import { Nullable, TWeekplanEntry } from "../../types";
+import type { RootState } from "../../store";
+import type { Nullable, TWeekplanEntry } from "../../types";
 
 export interface IWeekplanReducerState {
   week: Date;

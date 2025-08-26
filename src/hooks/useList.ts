@@ -1,6 +1,5 @@
 import { ApolloError, gql, useMutation, useQuery } from "@apollo/client";
-
-import { DocumentNode } from "graphql";
+import { type DocumentNode } from "graphql";
 import _ from "lodash";
 import { useTranslation } from "react-i18next";
 

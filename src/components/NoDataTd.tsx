@@ -12,7 +12,7 @@ export function NoDataTd({ data, className }: PropsInterface) {
   const { t } = useTranslation(["translation"]);
   const [ref, setRef] = useState<HTMLTableRowElement | null>(null);
 
-  if (!!data?.length) return null;
+  if (data?.length) return null;
 
   const cols = ref?.closest("table")?.querySelectorAll("thead > tr > th").length || 1;
 

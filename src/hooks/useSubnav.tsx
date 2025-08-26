@@ -3,7 +3,7 @@ import React, { useCallback, useEffect } from "react";
 import { useAppDispatch } from ".";
 import { addSubnav, removeSubnav } from "../App/sessionSlice";
 
-export function useSubnav<T extends {}>(Nav: React.ComponentType<T>, properties: T = {} as T) {
+export function useSubnav<T extends object>(Nav: React.ComponentType<T>, properties: T = {} as T) {
   const dispatch = useAppDispatch();
 
   const stableDispatch = useCallback(dispatch, [dispatch]);
@@ -18,6 +18,6 @@ export function useSubnav<T extends {}>(Nav: React.ComponentType<T>, properties:
       };
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [Nav, propertiesJson, stableDispatch]
+    [Nav, propertiesJson, stableDispatch],
   );
 }

@@ -1,4 +1,4 @@
-import { TIngredient } from "../types";
+import { type TIngredient } from "../types";
 
 export const ingredientsPath = (search?: string) =>
   "/ingredients" + (search ? `?search=${encodeURIComponent(search)}` : "");

@@ -1,20 +1,19 @@
 import { useLazyQuery } from "@apollo/client";
-
 import { useFormikContext } from "formik";
 import { useTranslation } from "react-i18next";
-import { ActionMeta, GroupBase, OnChangeValue, OptionsOrGroups } from "react-select";
+import type { GroupBase, OnChangeValue, OptionsOrGroups } from "react-select";
 import AsyncSelect from "react-select/async";
 
 import { RECIPES_QUERY } from "../../graphql/recipes";
-import { IRecipesQueryResult } from "../../types";
-import { IValues } from "./Form";
+import type { IRecipesQueryResult } from "../../types";
+import type { IValues } from "./Form";
 
 type OptionType = { label: string; value: string };
 type EventType = OnChangeValue<OptionType, true>;
 
 type LoadOptionsType = (
   inputValue: string,
-  callback: (options: OptionsOrGroups<OptionType, GroupBase<OptionType>>) => void
+  callback: (options: OptionsOrGroups<OptionType, GroupBase<OptionType>>) => void,
 ) => void;
 
 export default function FittingRecipesSelector() {
@@ -28,13 +27,13 @@ export default function FittingRecipesSelector() {
     label: recipe.name,
   }));
 
-  function handleChange(value: EventType, opts: ActionMeta<OptionType>) {
+  function handleChange(value: EventType) {
     setFieldTouched("fittingRecipes", true, false);
 
     setFieldValue(
       "fittingRecipes",
       value.map((v) => ({ id: v.value, name: v.label })),
-      true
+      true,
     );
   }
 
@@ -49,7 +48,7 @@ export default function FittingRecipesSelector() {
         data.recipes.map((recipe) => ({
           label: recipe.name,
           value: recipe.id,
-        }))
+        })),
       );
     }
   };

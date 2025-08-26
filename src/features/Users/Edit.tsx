@@ -1,5 +1,4 @@
 import { useMutation, useQuery } from "@apollo/client";
-
 import { FormikHelpers } from "formik";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
@@ -11,11 +10,11 @@ import { MutationError } from "../../handleError";
 import { useAppDispatch, useAppSelector, usePermissionFallback, useTitle } from "../../hooks";
 import useAuthRequired from "../../hooks/useAuthRequired";
 import may from "../../permissions";
-import { IUserData, IUserUpdateMutation } from "../../types";
+import type { IUserData, IUserUpdateMutation } from "../../types";
 import { usersPath } from "../../urls";
 import { parsedInt } from "../../utils/numbers";
 import { addErrorFlash, addSuccessFlash } from "../Flash/flashSlice";
-import Form, { TValues } from "./Form";
+import Form, { type TValues } from "./Form";
 
 export default function Edit() {
   const { id } = useParams<"id">();

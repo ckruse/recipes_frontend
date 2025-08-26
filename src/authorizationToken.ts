@@ -1,4 +1,4 @@
-import { Nilable } from "./types";
+import type { Nilable } from "./types";
 
 export function setAuthorizationToken(token: string) {
   localStorage.setItem("recipesToken", token);

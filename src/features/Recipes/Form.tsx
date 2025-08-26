@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 
 import { useMutation, useQuery } from "@apollo/client";
-
 import clsx from "clsx";
-import { Form, Formik, FormikHelpers } from "formik";
-import { TFunction } from "i18next";
+import { Form, Formik, type FormikHelpers } from "formik";
+import { type TFunction } from "i18next";
 import { Form as BsForm } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-import { ActionMeta, MultiValue } from "react-select";
+import type { ActionMeta, MultiValue } from "react-select";
 import Select from "react-select/creatable";
 import * as yup from "yup";
 
@@ -19,7 +18,7 @@ import ErrorMessage from "../../components/Form/ErrorMessage";
 import { TAG_CREATE_MUTATION, TAGS_QUERY } from "../../graphql/tags";
 import { MutationError } from "../../handleError";
 import { useDebounce } from "../../hooks";
-import { ITagCreateMutation, ITagsData, TRecipe } from "../../types";
+import type { ITagCreateMutation, ITagsData, TRecipe } from "../../types";
 import { recipesPath } from "../../urls";
 import FittingRecipesSelector from "./FittingRecipesSelector";
 
@@ -90,7 +89,7 @@ export default function RecipesForm({ recipe, onSave, btnSize = "md", hideCancel
             setFieldValue(
               "tags",
               value.map((tag) => ({ id: tag.value, name: tag.label })),
-              true
+              true,
             );
           }
         }

@@ -1,5 +1,5 @@
 import { dateFormat } from "../dateUtils";
-import { TUser } from "../types";
+import { type TUser } from "../types";
 
 export const weekplanPath = () => "/weekplan";
 

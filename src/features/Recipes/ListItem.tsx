@@ -8,7 +8,7 @@ import { DeleteButton, ShowButton } from "../../components";
 import { indexDate } from "../../dateUtils";
 import { useAppSelector } from "../../hooks";
 import may from "../../permissions";
-import { TRecipe } from "../../types";
+import type { TRecipe } from "../../types";
 import { showRecipePath } from "../../urls";
 import { URI } from "../../utils";
 import { formatIntNumberRounded } from "../../utils/numbers";

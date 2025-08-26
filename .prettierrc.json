@@ -1,0 +1,9 @@
+{
+  "printWidth": 120,
+  "plugins": ["@trivago/prettier-plugin-sort-imports"],
+  "importOrder": ["\\.s?css$", "^react$", "<THIRD_PARTY_MODULES>", "^@(urls|graphql)", "^@/", "^[./]"],
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true,
+  "importOrderCaseInsensitive": true,
+  "importOrderParserPlugins": ["jsx", "typescript", "classProperties"]
+}

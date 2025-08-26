@@ -1,6 +1,6 @@
 import { getIn, useFormikContext } from "formik";
 import { useTranslation } from "react-i18next";
-import ReactSelect, { ActionMeta, MultiValue, OnChangeValue, SingleValue } from "react-select";
+import ReactSelect, { type ActionMeta, type MultiValue, type OnChangeValue, type SingleValue } from "react-select";
 
 import { fieldInvalid, fieldValid, itemByValue } from "./utils";
 
@@ -21,7 +21,7 @@ type TProps<T> = {
   isClearable: boolean;
   onChange?: (
     value: SingleValue<TOptionProp<T>> | MultiValue<TOptionProp<T>>,
-    actionMeta: ActionMeta<TOptionProp<T>>
+    actionMeta: ActionMeta<TOptionProp<T>>,
   ) => void;
 };
 
@@ -33,7 +33,7 @@ export function Select<T>(props: TProps<T>) {
 
   function handleChange(
     ev: OnChangeValue<TOptionProp<T>, false> | OnChangeValue<TOptionProp<T>, true>,
-    opts: ActionMeta<TOptionProp<T>>
+    opts: ActionMeta<TOptionProp<T>>,
   ) {
     let value;
 
