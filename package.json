@@ -21,7 +21,7 @@
     "react-bootstrap": "^2.10.10",
     "react-date-picker": "^11.0.0",
     "react-dom": "^19.1.0",
-    "react-i18next": "^15.6.0",
+    "react-i18next": "^15.7.3",
     "react-icons-kit": "^2.0.0",
     "react-markdown": "^10.1.0",
     "react-redux": "^9.2.0",
