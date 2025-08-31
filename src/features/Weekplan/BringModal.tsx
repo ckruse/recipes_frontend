@@ -4,10 +4,11 @@ import { getDay } from "date-fns";
 import { Form, Modal } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 
-import { selectSession } from "../../App/sessionSlice";
-import { CancelButton, DownloadButton, FormGroup } from "../../components";
-import { useAppDispatch, useAppSelector } from "../../hooks";
-import { weekplanBringImportUri } from "../../urls";
+import { selectSession } from "@/App/sessionSlice";
+import { CancelButton, DownloadButton, FormGroup } from "@/components";
+import { useAppDispatch, useAppSelector } from "@/hooks";
+import { weekplanBringImportUri } from "@/urls";
+
 import { selectWeekplan, setShowBringModal } from "./weekplanSlice";
 
 const defaultDays = [0, 5, 6].includes(getDay(new Date())) ? [4, 5, 6] : [0, 1, 2, 3];

@@ -1,8 +1,6 @@
-import { Nullable, TMutationResult } from ".";
+type TUserRole = "ROOT" | "USER";
 
-export type TUserRole = "ROOT" | "USER";
-
-export type TUser = {
+type TUser = {
   id: string;
   email: string;
   active: boolean;
@@ -19,18 +17,18 @@ export type TUser = {
   updatedAt: string;
 };
 
-export interface IUserCreateMutation {
+interface IUserCreateMutation {
   createUser: TUser;
 }
 
-export interface IUserUpdateMutation {
+interface IUserUpdateMutation {
   updateUser: TUser;
 }
 
-export interface IUserPasswordMutation {
-  changePassword: TMutationResult<TUser>;
+interface IUserPasswordMutation {
+  changePassword: TUser;
 }
 
-export interface IUserData {
+interface IUserData {
   user: TUser;
 }

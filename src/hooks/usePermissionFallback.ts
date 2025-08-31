@@ -3,9 +3,10 @@ import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
+import { addErrorFlash } from "@/features/Flash/flashSlice";
+import { rootPath } from "@/urls";
+
 import { useAppDispatch } from ".";
-import { addErrorFlash } from "../features/Flash/flashSlice";
-import { rootPath } from "../urls";
 
 export function usePermissionFallback(allowed: boolean) {
   const navigate = useNavigate();
@@ -20,6 +21,6 @@ export function usePermissionFallback(allowed: boolean) {
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [allowed]
+    [allowed],
   );
 }

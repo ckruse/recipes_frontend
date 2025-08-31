@@ -1,6 +1,4 @@
-import { TRecipe } from ".";
-
-export type TWeekplanEntry = {
+type TWeekplanEntry = {
   id: number;
   userId: number;
   recipeId: number;
@@ -13,18 +11,18 @@ export type TWeekplanEntry = {
   recipe: TRecipe;
 };
 
-export interface IWeekplansQueryResult {
+interface IWeekplansQueryResult {
   weekplans: TWeekplanEntry[];
 }
 
-export interface ICreateWeekplanMutation {
+interface ICreateWeekplanMutation {
   createWeekplan: TRecipe;
 }
 
-export interface IReplaceWeekplanRecipeMutation {
+interface IReplaceWeekplanRecipeMutation {
   replaceWeekplanRecipe: TRecipe;
 }
 
-export interface IReplaceWeekplanRecipeWithRecipeMutation {
+interface IReplaceWeekplanRecipeWithRecipeMutation {
   replaceWeekplanRecipeWithRecipe: TRecipe;
 }

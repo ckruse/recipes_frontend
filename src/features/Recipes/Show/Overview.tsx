@@ -4,11 +4,10 @@ import { Trans, useTranslation } from "react-i18next";
 import ReactMarkdown from "react-markdown";
 import { Link } from "react-router-dom";
 
-import { FormGroup } from "../../../components";
-import type { TIngredient, TRecipe } from "../../../types";
-import { bringImportUri, showRecipePath } from "../../../urls";
-import { URI } from "../../../utils";
-import { formatIntNumberRounded, formatNumber } from "../../../utils/numbers";
+import { FormGroup } from "@/components";
+import { bringImportUri, showRecipePath } from "@/urls";
+import { URI } from "@/utils";
+import { formatIntNumberRounded, formatNumber } from "@/utils/numbers";
 
 type TProps = {
   recipe: TRecipe;

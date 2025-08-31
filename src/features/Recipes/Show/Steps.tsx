@@ -8,21 +8,15 @@ import Icon from "react-icons-kit";
 import { ic_keyboard_arrow_down, ic_keyboard_arrow_up } from "react-icons-kit/md";
 import ReactMarkdown from "react-markdown";
 
-import { selectSession } from "../../../App/sessionSlice";
-import { AddButton, DeleteButton, EditButton } from "../../../components";
-import { DELETE_RECIPE_STEP_MUTATION, MOVE_STEP_DOWN_MUTATION, MOVE_STEP_UP_MUTATION } from "../../../graphql/recipes";
-import { useAppDispatch, useAppSelector } from "../../../hooks";
-import may from "../../../permissions";
-import type {
-  IDeleteRecipeStepMutation,
-  IMoveStepDownMutation,
-  IMoveStepUpMutation,
-  Nullable,
-  TRecipe,
-  TStep,
-} from "../../../types";
-import { formatNumber } from "../../../utils/numbers";
-import { addErrorFlash, addSuccessFlash } from "../../Flash/flashSlice";
+import { DELETE_RECIPE_STEP_MUTATION, MOVE_STEP_DOWN_MUTATION, MOVE_STEP_UP_MUTATION } from "@graphql/recipes";
+
+import { selectSession } from "@/App/sessionSlice";
+import { AddButton, DeleteButton, EditButton } from "@/components";
+import { addErrorFlash, addSuccessFlash } from "@/features/Flash/flashSlice";
+import { useAppDispatch, useAppSelector } from "@/hooks";
+import may from "@/permissions";
+import { formatNumber } from "@/utils/numbers";
+
 import StepModal from "./StepModal";
 
 type TProps = {

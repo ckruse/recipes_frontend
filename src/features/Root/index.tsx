@@ -2,11 +2,11 @@ import { useQuery } from "@apollo/client";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
-import { RANDOM_RECIPE_QUERY } from "../../graphql/recipes";
-import { useTitle } from "../../hooks";
-import type { IRandomRecipeQueryResult } from "../../types";
-import { showRecipePath } from "../../urls";
-import Overview from "../Recipes/Show/Overview";
+import { RANDOM_RECIPE_QUERY } from "@graphql/recipes";
+
+import Overview from "@/features/Recipes/Show/Overview";
+import { useTitle } from "@/hooks";
+import { showRecipePath } from "@/urls";
 
 export default function Root() {
   const { t } = useTranslation(["root"]);

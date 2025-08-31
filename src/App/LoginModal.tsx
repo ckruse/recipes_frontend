@@ -1,5 +1,4 @@
 import { useMutation } from "@apollo/client";
-
 import { Form, Formik, FormikHelpers } from "formik";
 import { Form as BsForm, Button, Modal } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
@@ -9,7 +8,6 @@ import { FormGroup } from "../components";
 import { Input } from "../components/Form";
 import { LOGIN_MUTATION } from "../graphql/session";
 import { useAppDispatch, useAppSelector } from "../hooks";
-import { ILoginMutation } from "../types";
 import { rootPath } from "../urls";
 import { selectSession, setShowLogin, setUser } from "./sessionSlice";
 

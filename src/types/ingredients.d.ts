@@ -1,6 +1,6 @@
-export type TUnitIdentifier = "PCS" | "TBSP" | "TSP" | "SKOSH" | "PINCH";
+type TUnitIdentifier = "PCS" | "TBSP" | "TSP" | "SKOSH" | "PINCH";
 
-export type TUnit = {
+type TUnit = {
   id: string;
   identifier: TUnitIdentifier;
   baseValue: number;
@@ -12,7 +12,7 @@ export type TUnit = {
   updatedAt: string;
 };
 
-export type TIngredient = {
+type TIngredient = {
   id: string;
   name: string;
   reference: "G" | "ML";
@@ -29,18 +29,18 @@ export type TIngredient = {
   calories: number;
 };
 
-export interface IIngredientsQueryResult {
+interface IIngredientsQueryResult {
   ingredients: TIngredient[];
 }
 
-export interface IIngredientQueryResult {
+interface IIngredientQueryResult {
   ingredient: TIngredient;
 }
 
-export interface IIngredientCreateMutation {
+interface IIngredientCreateMutation {
   createIngredient: TIngredient;
 }
 
-export interface IIngredientUpdateMutation {
+interface IIngredientUpdateMutation {
   updateIngredient: TIngredient;
 }

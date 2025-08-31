@@ -1,10 +1,10 @@
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
-import { TAG_DELETE_MUTATION, TAGS_W_COUNT_QUERY } from "../../graphql/tags";
-import { useList, useTitle } from "../../hooks";
-import type { TTag } from "../../types";
-import { showTagPath } from "../../urls";
+import { TAG_DELETE_MUTATION, TAGS_W_COUNT_QUERY } from "@graphql/tags";
+
+import { useList, useTitle } from "@/hooks";
+import { showTagPath } from "@/urls";
 
 export default function List() {
   const { t } = useTranslation(["tags"]);

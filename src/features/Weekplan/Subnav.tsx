@@ -3,10 +3,11 @@ import { useTranslation } from "react-i18next";
 import Icon from "react-icons-kit";
 import { ic_create } from "react-icons-kit/md";
 
-import { selectSession } from "../../App/sessionSlice";
-import SubNav from "../../components/SubNav";
-import { useAppDispatch, useAppSelector } from "../../hooks";
-import may from "../../permissions";
+import { selectSession } from "@/App/sessionSlice";
+import SubNav from "@/components/SubNav";
+import { useAppDispatch, useAppSelector } from "@/hooks";
+import may from "@/permissions";
+
 import BringModal from "./BringModal";
 import CreateWeekplanModal from "./CreateWeekplanModal";
 import { setShowBringModal, setWeekplanCreateModal } from "./weekplanSlice";

@@ -6,13 +6,14 @@ import Icon from "react-icons-kit";
 import { ic_grass, ic_home, ic_set_meal, ic_tag, ic_view_week } from "react-icons-kit/md";
 import { Link, useNavigate } from "react-router-dom";
 
-import { removeAuthorizationToken } from "../authorizationToken";
-import { Button } from "../components";
-import { useAppDispatch, useAppSelector } from "../hooks";
-import Logo from "../logo.svg";
-import may from "../permissions";
-import { ingredientsPath, recipesPath, rootPath, showUserPath, tagsPath, weekplanPath } from "../urls";
-import { URI } from "../utils";
+import { removeAuthorizationToken } from "@/authorizationToken";
+import { Button } from "@/components";
+import { useAppDispatch, useAppSelector } from "@/hooks";
+import Logo from "@/logo.svg";
+import may from "@/permissions";
+import { ingredientsPath, recipesPath, rootPath, showUserPath, tagsPath, weekplanPath } from "@/urls";
+import { URI } from "@/utils";
+
 import { selectSession, setShowLogin, setUser, toggleShowPasswordReset } from "./sessionSlice";
 
 export default function Header() {

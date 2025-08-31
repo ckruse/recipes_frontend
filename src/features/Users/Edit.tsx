@@ -1,19 +1,20 @@
 import { useMutation, useQuery } from "@apollo/client";
-import { FormikHelpers } from "formik";
+import { type FormikHelpers } from "formik";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
 
-import { selectSession } from "../../App/sessionSlice";
-import { Loading } from "../../components";
-import { USER_GET_QUERY, USER_UPDATE_MUTATION } from "../../graphql/users";
-import { MutationError } from "../../handleError";
-import { useAppDispatch, useAppSelector, usePermissionFallback, useTitle } from "../../hooks";
-import useAuthRequired from "../../hooks/useAuthRequired";
-import may from "../../permissions";
-import type { IUserData, IUserUpdateMutation } from "../../types";
-import { usersPath } from "../../urls";
-import { parsedInt } from "../../utils/numbers";
-import { addErrorFlash, addSuccessFlash } from "../Flash/flashSlice";
+import { USER_GET_QUERY, USER_UPDATE_MUTATION } from "@graphql/users";
+
+import { selectSession } from "@/App/sessionSlice";
+import { Loading } from "@/components";
+import { addErrorFlash, addSuccessFlash } from "@/features/Flash/flashSlice";
+import { MutationError } from "@/handleError";
+import { useAppDispatch, useAppSelector, usePermissionFallback, useTitle } from "@/hooks";
+import useAuthRequired from "@/hooks/useAuthRequired";
+import may from "@/permissions";
+import { usersPath } from "@/urls";
+import { parsedInt } from "@/utils/numbers";
+
 import Form, { type TValues } from "./Form";
 
 export default function Edit() {
@@ -39,7 +40,7 @@ export default function Edit() {
       if (!data?.updateUser) {
         // TODO: handle error
         console.log(errors);
-        throw new MutationError(undefined);
+        throw new MutationError();
       }
 
       dispatch(addSuccessFlash(t("users:edit.updated")));

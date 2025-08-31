@@ -3,10 +3,11 @@ import { useFormikContext } from "formik";
 import { Form } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 
+import { FormGroup } from "@/components";
+import { DatePicker, Input, TagSelector } from "@/components/Form";
+import { useAppDispatch } from "@/hooks";
+
 import type { TValues } from ".";
-import { FormGroup } from "../../../components";
-import { DatePicker, Input, TagSelector } from "../../../components/Form";
-import { useAppDispatch } from "../../../hooks";
 import { setWeek } from "../weekplanSlice";
 
 type ValuePiece = Date | null;

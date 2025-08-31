@@ -7,17 +7,18 @@ import Icon from "react-icons-kit";
 import { ic_calendar_today, ic_swap_horiz } from "react-icons-kit/md";
 import { Link } from "react-router-dom";
 
-import { selectSession } from "../../App/sessionSlice";
-import { DeleteButton, FormGroup, ShowButton } from "../../components";
-import { dateFormat } from "../../dateUtils";
-import { DELETE_WEEKPLAN, LIST_WEEKPLAN_QUERY } from "../../graphql/weekplan";
-import { useAppDispatch, useAppSelector, useList, usePermissionFallback } from "../../hooks";
-import may from "../../permissions";
-import { TWeekplanEntry } from "../../types";
-import { showRecipePath } from "../../urls";
-import { URI } from "../../utils";
-import { formatIntNumberRounded } from "../../utils/numbers";
-import MetaList from "../MetaList";
+import { DELETE_WEEKPLAN, LIST_WEEKPLAN_QUERY } from "@graphql/weekplan";
+
+import { selectSession } from "@/App/sessionSlice";
+import { DeleteButton, FormGroup, ShowButton } from "@/components";
+import { dateFormat } from "@/dateUtils";
+import MetaList from "@/features/MetaList";
+import { useAppDispatch, useAppSelector, useList, usePermissionFallback } from "@/hooks";
+import may from "@/permissions";
+import { showRecipePath } from "@/urls";
+import { URI } from "@/utils";
+import { formatIntNumberRounded } from "@/utils/numbers";
+
 import ReplaceModal from "./ReplaceModal";
 import { selectWeekplan, setReplaceModal, setWeek } from "./weekplanSlice";
 

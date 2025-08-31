@@ -4,8 +4,8 @@ import { useTranslation } from "react-i18next";
 import type { ActionMeta, GroupBase, OnChangeValue, OptionsOrGroups } from "react-select";
 import AsyncSelect from "react-select/async";
 
-import { INGREDIENT_QUERY, INGREDIENTS_QUERY } from "../../graphql/ingredients";
-import type { IIngredientQueryResult, IIngredientsQueryResult, Nilable, TIngredient } from "../../types";
+import { INGREDIENT_QUERY, INGREDIENTS_QUERY } from "@graphql/ingredients";
+
 import { fieldInvalid, fieldValid } from "./utils";
 
 type OptionType = { label: string; value: string; ingredient: Nilable<TIngredient> };

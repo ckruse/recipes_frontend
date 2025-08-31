@@ -2,18 +2,18 @@ import { useMutation, useQuery } from "@apollo/client";
 import { Trans, useTranslation } from "react-i18next";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
-import { selectSession } from "../../App/sessionSlice";
-import { CancelButton, DeleteButton, FormActions } from "../../components";
-import { RECIPES_COUNT_QUERY, RECIPES_QUERY } from "../../graphql/recipes";
-import { TAG_DELETE_MUTATION, TAG_QUERY } from "../../graphql/tags";
-import { MutationError } from "../../handleError";
-import { useAppDispatch, useAppSelector, useList } from "../../hooks";
-import may from "../../permissions";
-import type { ITagData, ITagDeleteMutation, TRecipe } from "../../types";
-import { showRecipePath, tagsPath } from "../../urls";
-import { parsedInt } from "../../utils/numbers";
-import { addErrorFlash, addSuccessFlash } from "../Flash/flashSlice";
-import MetaList from "../MetaList";
+import { RECIPES_COUNT_QUERY, RECIPES_QUERY } from "@graphql/recipes";
+import { TAG_DELETE_MUTATION, TAG_QUERY } from "@graphql/tags";
+
+import { selectSession } from "@/App/sessionSlice";
+import { CancelButton, DeleteButton, FormActions } from "@/components";
+import { addErrorFlash, addSuccessFlash } from "@/features/Flash/flashSlice";
+import MetaList from "@/features/MetaList";
+import { MutationError } from "@/handleError";
+import { useAppDispatch, useAppSelector, useList } from "@/hooks";
+import may from "@/permissions";
+import { showRecipePath, tagsPath } from "@/urls";
+import { parsedInt } from "@/utils/numbers";
 
 export default function Show() {
   const { id } = useParams<"id">();
@@ -45,7 +45,7 @@ export default function Show() {
       if (!data?.deleteTag) {
         console.log(errors);
         // TODO: handle error
-        throw new MutationError(undefined);
+        throw new MutationError();
       }
 
       dispatch(addSuccessFlash(t("tags:show.deleted")));

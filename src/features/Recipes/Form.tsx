@@ -11,15 +11,16 @@ import type { ActionMeta, MultiValue } from "react-select";
 import Select from "react-select/creatable";
 import * as yup from "yup";
 
-import { FormActions, FormGroup } from "../../components";
-import { CancelButton, SaveButton } from "../../components/Buttons";
-import { Input, Textarea } from "../../components/Form";
-import ErrorMessage from "../../components/Form/ErrorMessage";
-import { TAG_CREATE_MUTATION, TAGS_QUERY } from "../../graphql/tags";
-import { MutationError } from "../../handleError";
-import { useDebounce } from "../../hooks";
-import type { ITagCreateMutation, ITagsData, TRecipe } from "../../types";
-import { recipesPath } from "../../urls";
+import { TAG_CREATE_MUTATION, TAGS_QUERY } from "@graphql/tags";
+
+import { FormActions, FormGroup } from "@/components";
+import { CancelButton, SaveButton } from "@/components/Buttons";
+import { Input, Textarea } from "@/components/Form";
+import ErrorMessage from "@/components/Form/ErrorMessage";
+import { MutationError } from "@/handleError";
+import { useDebounce } from "@/hooks";
+import { recipesPath } from "@/urls";
+
 import FittingRecipesSelector from "./FittingRecipesSelector";
 
 const MAX_TAGS_COUNT = 5;
@@ -81,7 +82,7 @@ export default function RecipesForm({ recipe, onSave, btnSize = "md", hideCancel
 
             if (!data?.createTag) {
               console.log(errors);
-              throw new MutationError(undefined);
+              throw new MutationError();
             }
 
             setFieldValue("tags", [...values.tags, { id: data.createTag.id, name: data.createTag.name }], true);

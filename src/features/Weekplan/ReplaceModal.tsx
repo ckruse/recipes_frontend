@@ -3,18 +3,13 @@ import { Form, Formik, type FormikHelpers } from "formik";
 import { Form as BsForm, Modal } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 
-import { CancelButton, FormGroup, SaveButton } from "../../components";
-import { RecipeSelector, TagSelector } from "../../components/Form";
-import { REPLACE_WEEKPLAN_RECIPE, REPLACE_WEEKPLAN_RECIPE_WITH_RECIPE } from "../../graphql/weekplan";
-import { useAppDispatch, useAppSelector } from "../../hooks";
-import type {
-  IReplaceWeekplanRecipeMutation,
-  IReplaceWeekplanRecipeWithRecipeMutation,
-  Nullable,
-  TRecipe,
-  TTag,
-} from "../../types";
-import { addErrorFlash, addSuccessFlash } from "../Flash/flashSlice";
+import { REPLACE_WEEKPLAN_RECIPE, REPLACE_WEEKPLAN_RECIPE_WITH_RECIPE } from "@graphql/weekplan";
+
+import { CancelButton, FormGroup, SaveButton } from "@/components";
+import { RecipeSelector, TagSelector } from "@/components/Form";
+import { addErrorFlash, addSuccessFlash } from "@/features/Flash/flashSlice";
+import { useAppDispatch, useAppSelector } from "@/hooks";
+
 import { selectWeekplan, setReplaceModal } from "./weekplanSlice";
 
 type TValues = {

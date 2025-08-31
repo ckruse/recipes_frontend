@@ -1,5 +1,3 @@
-import type { TRecipe } from "../types";
-
 export const recipesPath = (search?: string) => "/recipes" + (search ? `?search=${encodeURIComponent(search)}` : "");
 export const newRecipePath = () => "/recipes/new";
 export const showRecipePath = (recipe: TRecipe) => `/recipes/${recipe.id}`;

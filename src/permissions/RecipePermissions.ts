@@ -1,5 +1,4 @@
-import { PermissionBagType } from ".";
-import { TRecipe } from "../types";
+import { type PermissionBagType } from ".";
 
 const RecipePermissions: PermissionBagType<TRecipe>["recipes"] = {
   default: (_user, _resource) => true,

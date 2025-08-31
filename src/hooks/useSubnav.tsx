@@ -1,7 +1,8 @@
 import React, { useCallback, useEffect } from "react";
 
+import { addSubnav, removeSubnav } from "@/App/sessionSlice";
+
 import { useAppDispatch } from ".";
-import { addSubnav, removeSubnav } from "../App/sessionSlice";
 
 export function useSubnav<T extends object>(Nav: React.ComponentType<T>, properties: T = {} as T) {
   const dispatch = useAppDispatch();

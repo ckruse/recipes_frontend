@@ -15,7 +15,6 @@
     "jsx": "react-jsx",
     "paths": {
       "react": ["./node_modules/@types/react"],
-      "@urls/*": ["./src/urls/*"],
       "@graphql/*": ["./src/graphql/*"],
       "@/*": ["./src/*"]
     },

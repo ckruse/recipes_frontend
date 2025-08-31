@@ -1,4 +1,5 @@
-import { useAppSelector } from "../../hooks";
+import { useAppSelector } from "@/hooks";
+
 import FlashMessage from "./FlashMessage";
 import { selectFlash } from "./flashSlice";
 

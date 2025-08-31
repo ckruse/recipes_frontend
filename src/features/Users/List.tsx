@@ -3,15 +3,15 @@ import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
-import { selectSession } from "../../App/sessionSlice";
-import { ActionColumn, DeleteButton, EditButton, ShowButton } from "../../components";
-import { indexDate } from "../../dateUtils";
-import { USER_COUNT_QUERY, USER_DELETE_MUTATION, USERS_QUERY } from "../../graphql/users";
-import { useAppSelector, useList, usePermissionFallback } from "../../hooks";
-import may from "../../permissions";
-import type { TUser } from "../../types";
-import { editUserPath, showUserPath } from "../../urls";
-import MetaList from "../MetaList";
+import { USER_COUNT_QUERY, USER_DELETE_MUTATION, USERS_QUERY } from "@graphql/users";
+
+import { selectSession } from "@/App/sessionSlice";
+import { ActionColumn, DeleteButton, EditButton, ShowButton } from "@/components";
+import { indexDate } from "@/dateUtils";
+import MetaList from "@/features/MetaList";
+import { useAppSelector, useList, usePermissionFallback } from "@/hooks";
+import may from "@/permissions";
+import { editUserPath, showUserPath } from "@/urls";
 
 export default function List() {
   const { user: currentUser } = useSelector(selectSession);

@@ -1,7 +1,7 @@
 import Icon from "react-icons-kit";
 import { ic_edit } from "react-icons-kit/md";
 
-import { Button, ButtonProps } from "./Button";
+import { Button, type ButtonProps } from "./Button";
 
 export const EditButton = ({ children, ...props }: ButtonProps) => (
   <Button variant="secondary" {...props}>

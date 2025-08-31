@@ -4,11 +4,11 @@ import Icon from "react-icons-kit";
 import { ic_create } from "react-icons-kit/md";
 import { Link, useLocation } from "react-router-dom";
 
-import { selectSession } from "../../App/sessionSlice";
-import SubNav from "../../components/SubNav";
-import { useAppSelector } from "../../hooks";
-import may from "../../permissions";
-import { newRecipePath } from "../../urls";
+import { selectSession } from "@/App/sessionSlice";
+import SubNav from "@/components/SubNav";
+import { useAppSelector } from "@/hooks";
+import may from "@/permissions";
+import { newRecipePath } from "@/urls";
 
 export default function RecipesSubNav() {
   const { user } = useAppSelector(selectSession);

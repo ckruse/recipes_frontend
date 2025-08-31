@@ -3,17 +3,17 @@ import type { FormikHelpers } from "formik";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
 
-import { selectSession } from "../../App/sessionSlice";
-import { Loading } from "../../components";
-import { INGREDIENT_QUERY, INGREDIENT_UPDATE_MUTATION } from "../../graphql/ingredients";
-import { MutationError } from "../../handleError";
-import { useAppDispatch, useAppSelector, usePermissionFallback, useTitle } from "../../hooks";
-import useAuthRequired from "../../hooks/useAuthRequired";
-import may from "../../permissions";
-import type { IIngredientQueryResult, IIngredientUpdateMutation } from "../../types";
-import { showIngredientPath } from "../../urls";
-import { parsedInt } from "../../utils/numbers";
-import { addErrorFlash, addSuccessFlash } from "../Flash/flashSlice";
+import { selectSession } from "@/App/sessionSlice";
+import { Loading } from "@/components";
+import { addErrorFlash, addSuccessFlash } from "@/features/Flash/flashSlice";
+import { INGREDIENT_QUERY, INGREDIENT_UPDATE_MUTATION } from "@/graphql/ingredients";
+import { MutationError } from "@/handleError";
+import { useAppDispatch, useAppSelector, usePermissionFallback, useTitle } from "@/hooks";
+import useAuthRequired from "@/hooks/useAuthRequired";
+import may from "@/permissions";
+import { showIngredientPath } from "@/urls";
+import { parsedInt } from "@/utils/numbers";
+
 import Form, { type IValues } from "./Form";
 
 export default function Edit() {
@@ -52,7 +52,7 @@ export default function Edit() {
       if (!iData?.updateIngredient) {
         // TODO: handle errors
         console.log(errors);
-        throw new MutationError(undefined);
+        throw new MutationError();
       }
 
       dispatch(addSuccessFlash(t("ingredients:edit.success")));

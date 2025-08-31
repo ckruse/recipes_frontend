@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 
-import { useSubnav } from "../../hooks";
+import { useSubnav } from "@/hooks";
+
 import Edit from "./Edit";
 import List from "./List";
 import New from "./New";

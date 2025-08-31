@@ -1,6 +1,4 @@
-import { Nullable, TStep, TTag, TUser } from ".";
-
-export type TRecipe = {
+type TRecipe = {
   id: string;
   name: string;
   defaultServings: number;
@@ -31,22 +29,22 @@ export type TRecipe = {
   fittingRecipes: TRecipe[];
 };
 
-export interface IRecipesQueryResult {
+interface IRecipesQueryResult {
   recipes: TRecipe[];
 }
 
-export interface IRecipeQueryResult {
+interface IRecipeQueryResult {
   recipe: TRecipe;
 }
 
-export interface ICreateRecipeMutation {
+interface ICreateRecipeMutation {
   createRecipe: TRecipe;
 }
 
-export interface IUpdateRecipeMutation {
+interface IUpdateRecipeMutation {
   updateRecipe: TRecipe;
 }
 
-export interface IRandomRecipeQueryResult {
+interface IRandomRecipeQueryResult {
   randomRecipe: Nullable<TRecipe>;
 }

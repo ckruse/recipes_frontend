@@ -1,9 +1,9 @@
 import { ApolloClient, NormalizedCacheObject } from "@apollo/client";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import { REFRESH_MUTATION } from "../graphql/session";
-import { AppThunk, RootState } from "../store";
-import { IRefreshMutation, Nullable, TUser } from "../types";
+import { REFRESH_MUTATION } from "@graphql/session";
+
+import type { AppThunk, RootState } from "@/store";
 
 export interface SessionState {
   user: Nullable<TUser>;

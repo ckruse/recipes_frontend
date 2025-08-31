@@ -3,15 +3,15 @@ import { Col, Form, Row } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { Link, useParams } from "react-router-dom";
 
-import { selectSession } from "../../App/sessionSlice";
-import { CancelButton, EditButton, Loading } from "../../components";
-import { INGREDIENT_QUERY } from "../../graphql/ingredients";
-import { useAppSelector, useTitle } from "../../hooks";
-import may from "../../permissions";
-import { type IIngredientQueryResult } from "../../types";
-import { editIngredientPath, ingredientsPath } from "../../urls";
-import { calories } from "../../utils";
-import { formatIntNumberRounded, formatNumber, parsedInt } from "../../utils/numbers";
+import { INGREDIENT_QUERY } from "@graphql/ingredients";
+
+import { selectSession } from "@/App/sessionSlice";
+import { CancelButton, EditButton, Loading } from "@/components";
+import { useAppSelector, useTitle } from "@/hooks";
+import may from "@/permissions";
+import { editIngredientPath, ingredientsPath } from "@/urls";
+import { calories } from "@/utils";
+import { formatIntNumberRounded, formatNumber, parsedInt } from "@/utils/numbers";
 
 export default function Show() {
   const { id } = useParams<"id">();

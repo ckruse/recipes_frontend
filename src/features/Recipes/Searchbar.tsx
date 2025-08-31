@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import Icon from "react-icons-kit";
 import { ic_clear } from "react-icons-kit/md";
 
-import { FormGroup } from "../../components";
+import { FormGroup } from "@/components";
 
 type TProps = {
   setSearch: (search: string) => void;
@@ -33,7 +33,7 @@ export default function Searchbar({ setSearch, searchTerm }: TProps) {
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [searchTerm]
+    [searchTerm],
   );
 
   return (

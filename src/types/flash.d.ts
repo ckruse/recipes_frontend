@@ -1,8 +1,6 @@
-import { Nullable } from ".";
+type FlashTypeType = "error" | "success" | "info" | "warning";
 
-export type FlashTypeType = "error" | "success" | "info" | "warning";
-
-export type FlashMessageType = {
+type FlashMessageType = {
   id: string;
   type: FlashTypeType;
   timeout: Nullable<number>;

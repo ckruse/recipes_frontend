@@ -1,9 +1,7 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import { nanoid } from "nanoid/non-secure";
 
-import type { AppThunk, RootState } from "../../store";
-import type { Nullable } from "../../types";
-import type { FlashMessageType, FlashTypeType } from "../../types/flash";
+import type { AppThunk, RootState } from "@/store";
 
 export interface FlashState {
   messages: FlashMessageType[];

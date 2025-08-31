@@ -3,9 +3,10 @@ import { nanoid } from "nanoid";
 import { Form } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 
+import { AddButton, DeleteButton, FormGroup } from "@/components";
+import { Input, Select } from "@/components/Form";
+
 import type { IValues } from ".";
-import { AddButton, DeleteButton, FormGroup } from "../../../components";
-import { Input, Select } from "../../../components/Form";
 
 export default function Units() {
   const { t } = useTranslation(["ingredients"]);

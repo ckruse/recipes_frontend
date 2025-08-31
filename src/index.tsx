@@ -1,9 +1,8 @@
-import "./styles/index.scss";
+import "@/styles/index.scss";
 
 import React from "react";
 
 import { ApolloProvider } from "@apollo/client";
-
 import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
 import { BrowserRouter as Router } from "react-router-dom";
@@ -28,5 +27,5 @@ root.render(
         </Router>
       </ApolloProvider>
     </Provider>
-  </React.StrictMode>
+  </React.StrictMode>,
 );

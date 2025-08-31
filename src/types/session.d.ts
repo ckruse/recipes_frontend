@@ -1,9 +1,7 @@
-import { TUser } from ".";
-
-export interface ILoginMutation {
+interface ILoginMutation {
   login: TUser;
 }
 
-export interface IRefreshMutation {
+interface IRefreshMutation {
   refresh: TUser;
 }

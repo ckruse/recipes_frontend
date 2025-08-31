@@ -1,5 +1,4 @@
-import { PermissionBagType } from ".";
-import { TUser } from "../types";
+import type { PermissionBagType } from ".";
 
 const UserPermissions: PermissionBagType<TUser>["users"] = {
   list: (user, _resource) => user?.role === "ROOT",

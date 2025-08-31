@@ -1,7 +1,7 @@
 import { ApolloClient, InMemoryCache } from "@apollo/client";
 import createUploadLink from "apollo-upload-client/createUploadLink.mjs";
 
-import { URI } from "../utils";
+import { URI } from "@/utils";
 
 const uploadLink = createUploadLink({ uri: `${URI}/graphql`, fetchOptions: { credentials: "include" } });
 

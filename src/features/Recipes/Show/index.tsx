@@ -5,15 +5,16 @@ import { type FormikHelpers } from "formik";
 import { useTranslation } from "react-i18next";
 import { Link, useParams } from "react-router-dom";
 
-import { selectSession } from "../../../App/sessionSlice";
-import { CancelButton, EditButton, Loading } from "../../../components";
-import { RECIPE_QUERY, UPDATE_RECIPE_MUTATION } from "../../../graphql/recipes";
-import { useAppDispatch, useAppSelector, useTitle } from "../../../hooks";
-import may from "../../../permissions";
-import type { IRecipeQueryResult, IUpdateRecipeMutation } from "../../../types";
-import { recipesPath } from "../../../urls";
-import { parsedInt } from "../../../utils/numbers";
-import { addSuccessFlash } from "../../Flash/flashSlice";
+import { RECIPE_QUERY, UPDATE_RECIPE_MUTATION } from "@graphql/recipes";
+
+import { selectSession } from "@/App/sessionSlice";
+import { CancelButton, EditButton, Loading } from "@/components";
+import { addSuccessFlash } from "@/features/Flash/flashSlice";
+import { useAppDispatch, useAppSelector, useTitle } from "@/hooks";
+import may from "@/permissions";
+import { recipesPath } from "@/urls";
+import { parsedInt } from "@/utils/numbers";
+
 import RecipeForm, { type IValues } from "../Form";
 import Overview from "./Overview";
 import Steps from "./Steps";

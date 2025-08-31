@@ -2,7 +2,7 @@ import { Nav, Navbar } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
-import { aboutPath } from "../urls";
+import { aboutPath } from "@/urls";
 
 export default function Footer() {
   const { t } = useTranslation(["root"]);

@@ -1,7 +1,6 @@
 import _ from "lodash";
 
-import i18n from "../i18n";
-import type { Nilable } from "../types";
+import i18n from "@/i18n";
 
 const percentageFormatter: Partial<Record<string, Intl.NumberFormat>> = {
   de: new Intl.NumberFormat("de", { style: "percent", maximumFractionDigits: 2, minimumFractionDigits: 0 }),

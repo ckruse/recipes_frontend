@@ -4,8 +4,8 @@ import { useTranslation } from "react-i18next";
 import type { GroupBase, OnChangeValue, OptionsOrGroups } from "react-select";
 import AsyncSelect from "react-select/async";
 
-import { RECIPES_QUERY } from "../../graphql/recipes";
-import type { IRecipesQueryResult } from "../../types";
+import { RECIPES_QUERY } from "@graphql/recipes";
+
 import type { IValues } from "./Form";
 
 type OptionType = { label: string; value: string };

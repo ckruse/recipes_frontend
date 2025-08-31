@@ -3,15 +3,16 @@ import { type FormikHelpers } from "formik";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
-import { selectSession } from "../../App/sessionSlice";
-import { USER_CREATE_MUTATION } from "../../graphql/users";
-import { MutationError } from "../../handleError";
-import { useAppDispatch, useAppSelector, usePermissionFallback, useTitle } from "../../hooks";
-import useAuthRequired from "../../hooks/useAuthRequired";
-import may from "../../permissions";
-import type { IUserCreateMutation } from "../../types";
-import { editUserPath } from "../../urls";
-import { addErrorFlash, addSuccessFlash } from "../Flash/flashSlice";
+import { USER_CREATE_MUTATION } from "@graphql/users";
+
+import { selectSession } from "@/App/sessionSlice";
+import { addErrorFlash, addSuccessFlash } from "@/features/Flash/flashSlice";
+import { MutationError } from "@/handleError";
+import { useAppDispatch, useAppSelector, usePermissionFallback, useTitle } from "@/hooks";
+import useAuthRequired from "@/hooks/useAuthRequired";
+import may from "@/permissions";
+import { editUserPath } from "@/urls";
+
 import Form, { type TValues } from "./Form";
 
 export default function New() {
@@ -34,7 +35,7 @@ export default function New() {
       if (!data?.createUser) {
         console.log(errors);
         // TODO: handle error
-        throw new MutationError(undefined);
+        throw new MutationError();
       }
 
       dispatch(addSuccessFlash(t("users:new.created")));

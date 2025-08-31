@@ -1,5 +1,4 @@
-import { PermissionBagType } from ".";
-import { TTag } from "../types";
+import type { PermissionBagType } from ".";
 
 const TagPermissions: PermissionBagType<TTag>["tags"] = {
   default: (_user, _resource) => true,

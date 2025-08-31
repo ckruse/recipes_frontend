@@ -1,9 +1,9 @@
 import { type Action, configureStore, type ThunkAction } from "@reduxjs/toolkit";
 
-import sessionReducer from "./App/sessionSlice";
-import flashReducer from "./features/Flash/flashSlice";
-import metaListReducer from "./features/MetaList/metaListSlice";
-import weekplanReducer from "./features/Weekplan/weekplanSlice";
+import sessionReducer from "@/App/sessionSlice";
+import flashReducer from "@/features/Flash/flashSlice";
+import metaListReducer from "@/features/MetaList/metaListSlice";
+import weekplanReducer from "@/features/Weekplan/weekplanSlice";
 
 export const store = configureStore({
   middleware: (getDefaultMiddleware) => getDefaultMiddleware({ serializableCheck: false }),

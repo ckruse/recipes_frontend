@@ -5,8 +5,7 @@ import { useTranslation } from "react-i18next";
 import type { ActionMeta, GroupBase, MultiValue, OnChangeValue, OptionsOrGroups, SingleValue } from "react-select";
 import Select, { type AsyncProps } from "react-select/async";
 
-import { TAGS_QUERY } from "../../graphql/tags";
-import type { ITagsData, TTag } from "../../types";
+import { TAGS_QUERY } from "@graphql/tags";
 
 type TOption = { label: string; value: string; tag: TTag };
 type TEvent<IsMulti extends boolean> = OnChangeValue<TOption, IsMulti>;

@@ -2,17 +2,18 @@ import { Table } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
-import { selectSession } from "../../App/sessionSlice";
-import { ActionColumn, DeleteButton, EditButton, NoDataTd, ShowButton } from "../../components";
-import { indexDate } from "../../dateUtils";
-import { INGREDIENT_DELETE_MUTATION, INGREDIENTS_COUNT_QUERY, INGREDIENTS_QUERY } from "../../graphql/ingredients";
-import { useAppSelector, useDebouncedCallback, useList } from "../../hooks";
-import may from "../../permissions";
-import { type TIngredient } from "../../types";
-import { editIngredientPath, ingredientsPath, showIngredientPath } from "../../urls";
-import { calories } from "../../utils";
-import { formatIntNumberRounded } from "../../utils/numbers";
-import MetaList from "../MetaList";
+import { INGREDIENT_DELETE_MUTATION, INGREDIENTS_COUNT_QUERY, INGREDIENTS_QUERY } from "@graphql/ingredients";
+
+import { selectSession } from "@/App/sessionSlice";
+import { ActionColumn, DeleteButton, EditButton, NoDataTd, ShowButton } from "@/components";
+import { indexDate } from "@/dateUtils";
+import MetaList from "@/features/MetaList";
+import { useAppSelector, useDebouncedCallback, useList } from "@/hooks";
+import may from "@/permissions";
+import { editIngredientPath, ingredientsPath, showIngredientPath } from "@/urls";
+import { calories } from "@/utils";
+import { formatIntNumberRounded } from "@/utils/numbers";
+
 import Searchbar from "./Searchbar";
 
 export default function List() {

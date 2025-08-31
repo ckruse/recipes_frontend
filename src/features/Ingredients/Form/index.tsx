@@ -4,12 +4,12 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import * as yup from "yup";
 
-import { CancelButton, SaveButton } from "../../../components";
-import { FormActions, FormGroup } from "../../../components";
-import { Input, Select } from "../../../components/Form";
-import ErrorMessage from "../../../components/Form/ErrorMessage";
-import type { Nilable, TIngredient, TUnitIdentifier } from "../../../types";
-import { ingredientsPath } from "../../../urls";
+import { CancelButton, SaveButton } from "@/components";
+import { FormActions, FormGroup } from "@/components";
+import { Input, Select } from "@/components/Form";
+import ErrorMessage from "@/components/Form/ErrorMessage";
+import { ingredientsPath } from "@/urls";
+
 import Units from "./Units";
 
 type TProps = {

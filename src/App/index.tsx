@@ -3,15 +3,16 @@ import { Suspense } from "react";
 import { useTranslation } from "react-i18next";
 import { Route, Routes } from "react-router-dom";
 
-import { Loading } from "../components";
-import Flash from "../features/Flash";
-import IngredientsInterface from "../features/Ingredients";
-import RecipesInterface from "../features/Recipes";
-import Root from "../features/Root";
-import TagsInterface from "../features/Tags";
-import UsersInterface from "../features/Users";
-import WeekplanInterface from "../features/Weekplan";
-import { useAppSelector, useTitle } from "../hooks";
+import { Loading } from "@/components";
+import Flash from "@/features/Flash";
+import IngredientsInterface from "@/features/Ingredients";
+import RecipesInterface from "@/features/Recipes";
+import Root from "@/features/Root";
+import TagsInterface from "@/features/Tags";
+import UsersInterface from "@/features/Users";
+import WeekplanInterface from "@/features/Weekplan";
+import { useAppSelector, useTitle } from "@/hooks";
+
 import ChangePasswordModal from "./ChangePasswordModal";
 import Footer from "./Footer";
 import Header from "./Header";

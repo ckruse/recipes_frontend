@@ -13,7 +13,7 @@ import {
 } from "date-fns";
 import isString from "lodash/isString";
 
-import i18n, { supportedDateLocales } from "./i18n";
+import i18n, { supportedDateLocales } from "@/i18n";
 
 type DateType = Date | string;
 

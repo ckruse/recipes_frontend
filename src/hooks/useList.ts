@@ -3,11 +3,11 @@ import { type DocumentNode } from "graphql";
 import _ from "lodash";
 import { useTranslation } from "react-i18next";
 
+import { updateDeletion } from "@/apolloClient/utils";
+import { addErrorFlash, addSuccessFlash } from "@/features/Flash/flashSlice";
+import { MutationError } from "@/handleError";
+
 import { useAppDispatch } from ".";
-import { updateDeletion } from "../apolloClient/utils";
-import { addErrorFlash, addSuccessFlash } from "../features/Flash/flashSlice";
-import { MutationError } from "../handleError";
-import { TID } from "../types";
 
 type PropsTypeNoDelete<T> = {
   query: DocumentNode;

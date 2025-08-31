@@ -1,6 +1,4 @@
-import { Nullable, TIngredient, TUnit } from ".";
-
-export type TStep = {
+type TStep = {
   id: number;
   name: Nullable<string>;
   position: number;
@@ -14,7 +12,7 @@ export type TStep = {
   stepIngredients: TStepIngredient[];
 };
 
-export type TStepIngredient = {
+type TStepIngredient = {
   id: number;
   amount: Nullable<number>;
   annotation: Nullable<string>;
@@ -31,21 +29,21 @@ export type TStepIngredient = {
   ingredient: TIngredient;
 };
 
-export interface ICreateRecipeStepMutation {
+interface ICreateRecipeStepMutation {
   createStep: TStep;
 }
-export interface IUpdateRecipeStepMutation {
+interface IUpdateRecipeStepMutation {
   updateStep: TStep;
 }
 
-export interface IDeleteRecipeStepMutation {
+interface IDeleteRecipeStepMutation {
   deleteStep: boolean;
 }
 
-export interface IMoveStepUpMutation {
+interface IMoveStepUpMutation {
   moveStepUp: TStep[];
 }
 
-export interface IMoveStepDownMutation {
+interface IMoveStepDownMutation {
   moveStepDown: TStep[];
 }

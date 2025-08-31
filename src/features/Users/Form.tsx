@@ -1,4 +1,4 @@
-import { ChangeEvent } from "react";
+import { type ChangeEvent } from "react";
 
 import { Form, Formik, type FormikHelpers } from "formik";
 import _ from "lodash";
@@ -6,10 +6,9 @@ import { Form as BsForm } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
-import { CancelButton, FormActions, FormGroup, SaveButton } from "../../components";
-import { Check, Input, Select } from "../../components/Form";
-import type { Nilable, TUser, TUserRole } from "../../types";
-import { usersPath } from "../../urls";
+import { CancelButton, FormActions, FormGroup, SaveButton } from "@/components";
+import { Check, Input, Select } from "@/components/Form";
+import { usersPath } from "@/urls";
 
 export type TValues = {
   email: string;

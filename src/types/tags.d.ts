@@ -1,6 +1,4 @@
-import { TRecipe } from ".";
-
-export type TTag = {
+type TTag = {
   id: string;
   name: string;
   recipesCount: number;
@@ -11,18 +9,18 @@ export type TTag = {
   recipes: TRecipe[];
 };
 
-export interface ITagsData {
+interface ITagsData {
   tags: TTag[];
 }
 
-export interface ITagData {
+interface ITagData {
   tag: TTag;
 }
 
-export interface ITagCreateMutation {
+interface ITagCreateMutation {
   createTag: TTag;
 }
 
-export interface ITagDeleteMutation {
+interface ITagDeleteMutation {
   deleteTag: boolean;
 }

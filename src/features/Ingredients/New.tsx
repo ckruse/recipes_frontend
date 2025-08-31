@@ -3,13 +3,14 @@ import { type FormikHelpers } from "formik";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
-import { INGREDIENT_CREATE_MUTATION } from "../../graphql/ingredients";
-import { MutationError } from "../../handleError";
-import { useAppDispatch, useTitle } from "../../hooks";
-import useAuthRequired from "../../hooks/useAuthRequired";
-import type { IIngredientCreateMutation } from "../../types";
-import { ingredientsPath } from "../../urls";
-import { addErrorFlash, addSuccessFlash } from "../Flash/flashSlice";
+import { INGREDIENT_CREATE_MUTATION } from "@graphql/ingredients";
+
+import { addErrorFlash, addSuccessFlash } from "@/features/Flash/flashSlice";
+import { MutationError } from "@/handleError";
+import { useAppDispatch, useTitle } from "@/hooks";
+import useAuthRequired from "@/hooks/useAuthRequired";
+import { ingredientsPath } from "@/urls";
+
 import Form, { type IValues } from "./Form";
 
 export default function New() {
@@ -35,7 +36,7 @@ export default function New() {
       if (!data?.createIngredient) {
         // TODO: handle errors
         console.log(errors);
-        throw new MutationError(undefined);
+        throw new MutationError();
       }
 
       dispatch(addSuccessFlash(t("ingredients:new.success")));

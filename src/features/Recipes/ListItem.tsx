@@ -3,15 +3,14 @@ import { ButtonGroup } from "react-bootstrap";
 import { Trans, useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
-import { selectSession } from "../../App/sessionSlice";
-import { DeleteButton, ShowButton } from "../../components";
-import { indexDate } from "../../dateUtils";
-import { useAppSelector } from "../../hooks";
-import may from "../../permissions";
-import type { TRecipe } from "../../types";
-import { showRecipePath } from "../../urls";
-import { URI } from "../../utils";
-import { formatIntNumberRounded } from "../../utils/numbers";
+import { selectSession } from "@/App/sessionSlice";
+import { DeleteButton, ShowButton } from "@/components";
+import { indexDate } from "@/dateUtils";
+import { useAppSelector } from "@/hooks";
+import may from "@/permissions";
+import { showRecipePath } from "@/urls";
+import { URI } from "@/utils";
+import { formatIntNumberRounded } from "@/utils/numbers";
 
 type TProps = {
   recipe: TRecipe;

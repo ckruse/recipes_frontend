@@ -10,24 +10,16 @@ import { useTranslation } from "react-i18next";
 import { type OnChangeValue } from "react-select";
 import * as yup from "yup";
 
-import { AddButton, CancelButton, DeleteButton, FormGroup, SaveButton } from "../../../components";
-import { Input, Select, Textarea } from "../../../components/Form";
-import { IngredientSelector } from "../../../components/Form/IngredientSelector";
-import { CREATE_RECIPE_STEP_MUTATION, UPDATE_RECIPE_STEP_MUTATION } from "../../../graphql/recipes";
-import { MutationError } from "../../../handleError";
-import { useAppDispatch } from "../../../hooks";
-import type {
-  ICreateRecipeStepMutation,
-  IUpdateRecipeStepMutation,
-  Nilable,
-  Nullable,
-  TIngredient,
-  TRecipe,
-  TStep,
-} from "../../../types";
-import { parsedInt } from "../../../utils/numbers";
-import Flash from "../../Flash";
-import { addErrorFlash, addSuccessFlash } from "../../Flash/flashSlice";
+import { CREATE_RECIPE_STEP_MUTATION, UPDATE_RECIPE_STEP_MUTATION } from "@graphql/recipes";
+
+import { AddButton, CancelButton, DeleteButton, FormGroup, SaveButton } from "@/components";
+import { Input, Select, Textarea } from "@/components/Form";
+import { IngredientSelector } from "@/components/Form/IngredientSelector";
+import Flash from "@/features/Flash";
+import { addErrorFlash, addSuccessFlash } from "@/features/Flash/flashSlice";
+import { MutationError } from "@/handleError";
+import { useAppDispatch } from "@/hooks";
+import { parsedInt } from "@/utils/numbers";
 
 type TProps = {
   step: Nullable<TStep>;
@@ -147,7 +139,7 @@ export default function StepModal({ show, step, recipe, toggle }: TProps) {
         if (!data?.updateStep) {
           // TODO: handle error
           console.log(errors);
-          throw new MutationError(undefined);
+          throw new MutationError();
         }
       } else {
         const { data, errors } = await createStep({
@@ -160,7 +152,7 @@ export default function StepModal({ show, step, recipe, toggle }: TProps) {
         if (!data?.createStep) {
           // TODO: handle error
           console.log(errors);
-          throw new MutationError(undefined);
+          throw new MutationError();
         }
       }
 

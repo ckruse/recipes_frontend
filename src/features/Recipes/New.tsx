@@ -3,13 +3,14 @@ import { type FormikHelpers } from "formik";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
-import { CREATE_RECIPE_MUTATION } from "../../graphql/recipes";
-import { MutationError } from "../../handleError";
-import { useAppDispatch, useTitle } from "../../hooks";
-import useAuthRequired from "../../hooks/useAuthRequired";
-import type { ICreateRecipeMutation } from "../../types";
-import { showRecipePath } from "../../urls";
-import { addErrorFlash, addSuccessFlash } from "../Flash/flashSlice";
+import { CREATE_RECIPE_MUTATION } from "@graphql/recipes";
+
+import { addErrorFlash, addSuccessFlash } from "@/features/Flash/flashSlice";
+import { MutationError } from "@/handleError";
+import { useAppDispatch, useTitle } from "@/hooks";
+import useAuthRequired from "@/hooks/useAuthRequired";
+import { showRecipePath } from "@/urls";
+
 import Form, { type IValues } from "./Form";
 
 export default function New() {

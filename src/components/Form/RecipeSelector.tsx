@@ -6,8 +6,7 @@ import type { ActionMeta, GroupBase, OnChangeValue, OptionsOrGroups } from "reac
 import type { MultiValue, SingleValue } from "react-select";
 import Select, { type AsyncProps } from "react-select/async";
 
-import { RECIPES_QUERY } from "../../graphql/recipes";
-import type { IRecipesQueryResult, TRecipe } from "../../types";
+import { RECIPES_QUERY } from "@graphql/recipes";
 
 type TOption = { label: string; value: string; recipe: TRecipe };
 type TEvent<IsMulti extends boolean> = OnChangeValue<TOption, IsMulti>;

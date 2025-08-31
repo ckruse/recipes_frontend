@@ -1,4 +1,3 @@
-import { Nullable, TUser } from "../types";
 import IngredientPermissions from "./IngredientPermissions";
 import RecipePermissions from "./RecipePermissions";
 import TagPermissions from "./TagPermissions";
@@ -17,7 +16,7 @@ const PERMISSIONS: PermissionBagType<any> = {
   recipes: RecipePermissions,
   ingredients: IngredientPermissions,
   weekplan: WeekplanPermissions,
-  tags: TagPermissions
+  tags: TagPermissions,
 };
 
 export default function may<T>(user: Nullable<TUser>, module: TModule, action: TAction = "default", resource?: T) {

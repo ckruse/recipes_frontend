@@ -1,6 +1,6 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
-import { type RootState } from "../../store";
+import { type RootState } from "@/store";
 
 export interface MetaListState {
   pages: Record<string, number>;

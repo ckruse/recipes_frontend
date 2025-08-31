@@ -1,19 +1,19 @@
 import { useMutation } from "@apollo/client";
-
 import { Form, Formik, FormikHelpers } from "formik";
 import { TFunction } from "i18next";
 import { Form as BsForm, FormGroup, Modal } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import * as yup from "yup";
 
-import { CancelButton, SaveButton } from "../components";
-import { Input } from "../components/Form";
-import ErrorMessage from "../components/Form/ErrorMessage";
-import { addErrorFlash, addSuccessFlash } from "../features/Flash/flashSlice";
-import { USER_PASSWORD_MUTATION } from "../graphql/users";
-import { MutationError } from "../handleError";
-import { useAppDispatch, useAppSelector } from "../hooks";
-import { IUserPasswordMutation } from "../types";
+import { USER_PASSWORD_MUTATION } from "@graphql/users";
+
+import { CancelButton, SaveButton } from "@/components";
+import { Input } from "@/components/Form";
+import ErrorMessage from "@/components/Form/ErrorMessage";
+import { addErrorFlash, addSuccessFlash } from "@/features/Flash/flashSlice";
+import { MutationError } from "@/handleError";
+import { useAppDispatch, useAppSelector } from "@/hooks";
+
 import { selectSession, toggleShowPasswordReset } from "./sessionSlice";
 
 const validationSchema = (t: TFunction) =>
@@ -62,8 +62,8 @@ export default function ChangePasswordModal() {
         },
       });
 
-      if (!data?.changePassword.successful) {
-        throw new MutationError(data?.changePassword);
+      if (!data?.changePassword) {
+        throw new MutationError();
       }
 
       toggle();

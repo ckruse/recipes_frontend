@@ -1,7 +1,8 @@
 import { useEffect } from "react";
 
+import { selectSession, setShowLogin } from "@/App/sessionSlice";
+
 import { useAppDispatch, useAppSelector } from ".";
-import { selectSession, setShowLogin } from "../App/sessionSlice";
 
 export default function useAuthRequired() {
   const { user, checked } = useAppSelector(selectSession);

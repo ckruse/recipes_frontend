@@ -4,11 +4,11 @@ import { Form, Formik } from "formik";
 import { Modal } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 
-import { CancelButton, SaveButton } from "../../../components";
-import { CREATE_WEEKPLAN } from "../../../graphql/weekplan";
-import { useAppDispatch, useAppSelector } from "../../../hooks";
-import type { ICreateWeekplanMutation, TTag } from "../../../types";
-import { addErrorFlash, addSuccessFlash } from "../../Flash/flashSlice";
+import { CancelButton, SaveButton } from "@/components";
+import { addErrorFlash, addSuccessFlash } from "@/features/Flash/flashSlice";
+import { CREATE_WEEKPLAN } from "@/graphql/weekplan";
+import { useAppDispatch, useAppSelector } from "@/hooks";
+
 import { selectWeekplan, setWeekplanCreateModal } from "../weekplanSlice";
 import InnerForm from "./InnerForm";
 

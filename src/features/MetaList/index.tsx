@@ -1,7 +1,8 @@
 import React from "react";
 
-import { Loading, Pages } from "../../components";
-import { useAppDispatch, useAppSelector, useTitle } from "../../hooks";
+import { Loading, Pages } from "@/components";
+import { useAppDispatch, useAppSelector, useTitle } from "@/hooks";
+
 import { setPage } from "./metaListSlice";
 
 type PropsType<T> = {
