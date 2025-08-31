@@ -2,14 +2,13 @@ import { FormEvent, useState } from "react";
 
 import { Dropdown, Form, Nav, Navbar } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
-import Icon from "react-icons-kit";
-import { ic_grass, ic_home, ic_set_meal, ic_tag, ic_view_week } from "react-icons-kit/md";
+import { MdGrass, MdHome, MdSetMeal, MdTag, MdViewWeek } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
 
 import { removeAuthorizationToken } from "@/authorizationToken";
 import { Button } from "@/components";
 import { useAppDispatch, useAppSelector } from "@/hooks";
-import Logo from "@/logo.svg";
+import Logo from "@/logo";
 import may from "@/permissions";
 import { ingredientsPath, recipesPath, rootPath, showUserPath, tagsPath, weekplanPath } from "@/urls";
 import { URI } from "@/utils";
@@ -43,33 +42,33 @@ export default function Header() {
         <Nav as="ul">
           <Nav.Item as="li">
             <Nav.Link as={Link} to={rootPath()}>
-              <Icon icon={ic_home} size="24" /> {t("root:sidebar.home")}
+              <MdHome size={24} /> {t("root:sidebar.home")}
             </Nav.Link>
           </Nav.Item>
 
           {may(user, "weekplan") && (
             <Nav.Item as="li">
               <Nav.Link as={Link} to={weekplanPath()}>
-                <Icon icon={ic_view_week} size="24" /> {t("root:sidebar.weekplan")}
+                <MdViewWeek size={24} /> {t("root:sidebar.weekplan")}
               </Nav.Link>
             </Nav.Item>
           )}
 
           <Nav.Item as="li">
             <Nav.Link as={Link} to={recipesPath()}>
-              <Icon icon={ic_set_meal} size="24" /> {t("root:sidebar.recipes")}
+              <MdSetMeal size={24} /> {t("root:sidebar.recipes")}
             </Nav.Link>
           </Nav.Item>
 
           <Nav.Item as="li">
             <Nav.Link as={Link} to={ingredientsPath()}>
-              <Icon icon={ic_grass} size="24" /> {t("root:sidebar.ingredients")}
+              <MdGrass size={24} /> {t("root:sidebar.ingredients")}
             </Nav.Link>
           </Nav.Item>
 
           <Nav.Item as="li">
             <Nav.Link as={Link} to={tagsPath()}>
-              <Icon icon={ic_tag} size="24" /> {t("root:sidebar.tags")}
+              <MdTag size={24} /> {t("root:sidebar.tags")}
             </Nav.Link>
           </Nav.Item>
         </Nav>

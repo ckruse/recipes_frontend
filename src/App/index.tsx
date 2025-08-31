@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 
 import { useTranslation } from "react-i18next";
+import { IconContext } from "react-icons";
 import { Route, Routes } from "react-router-dom";
 
 import { Loading } from "@/components";
@@ -30,31 +31,33 @@ function App() {
   }
 
   return (
-    <Suspense fallback={<Loading expand />}>
-      <Header />
+    <IconContext.Provider value={{ className: "react-icons" }}>
+      <Suspense fallback={<Loading expand />}>
+        <Header />
 
-      <main id="site-content">
-        <Suspense fallback={<Loading />}>{subNav}</Suspense>
+        <main id="site-content">
+          <Suspense fallback={<Loading />}>{subNav}</Suspense>
 
-        <Flash />
+          <Flash />
 
-        <Suspense fallback={<Loading expand />}>
-          <Routes>
-            <Route path="/recipes/*" element={<RecipesInterface />} />
-            <Route path="/ingredients/*" element={<IngredientsInterface />} />
-            <Route path="/users/*" element={<UsersInterface />} />
-            <Route path="/tags/*" element={<TagsInterface />} />
-            <Route path="/weekplan/*" element={<WeekplanInterface />} />
-            <Route path="/" element={<Root />} />
-          </Routes>
-        </Suspense>
+          <Suspense fallback={<Loading expand />}>
+            <Routes>
+              <Route path="/recipes/*" element={<RecipesInterface />} />
+              <Route path="/ingredients/*" element={<IngredientsInterface />} />
+              <Route path="/users/*" element={<UsersInterface />} />
+              <Route path="/tags/*" element={<TagsInterface />} />
+              <Route path="/weekplan/*" element={<WeekplanInterface />} />
+              <Route path="/" element={<Root />} />
+            </Routes>
+          </Suspense>
 
-        <LoginModal />
-        <ChangePasswordModal />
-      </main>
+          <LoginModal />
+          <ChangePasswordModal />
+        </main>
 
-      <Footer />
-    </Suspense>
+        <Footer />
+      </Suspense>
+    </IconContext.Provider>
   );
 }
 

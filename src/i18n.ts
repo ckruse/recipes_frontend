@@ -13,11 +13,11 @@ i18n
   .init({
     returnNull: false,
     fallbackLng: "de",
-    debug: process.env.NODE_ENV !== "production",
+    debug: import.meta.env.MODE !== "production",
     supportedLngs: SUPPORTED_LANGUAGES,
     nonExplicitSupportedLngs: true,
     backend: {
-      queryStringParams: { v: process.env.REACT_APP_VERSION || "0" },
+      queryStringParams: { v: import.meta.env.VITE_VERSION || "0" },
     },
     load: "languageOnly",
     interpolation: {

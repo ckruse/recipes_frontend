@@ -4,11 +4,13 @@ import { Form as BsForm, Button, Modal } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
-import { FormGroup } from "../components";
-import { Input } from "../components/Form";
-import { LOGIN_MUTATION } from "../graphql/session";
-import { useAppDispatch, useAppSelector } from "../hooks";
-import { rootPath } from "../urls";
+import { setAuthorizationToken } from "@/authorizationToken";
+import { FormGroup } from "@/components";
+import { Input } from "@/components/Form";
+import { LOGIN_MUTATION } from "@/graphql/session";
+import { useAppDispatch, useAppSelector } from "@/hooks";
+import { rootPath } from "@/urls";
+
 import { selectSession, setShowLogin, setUser } from "./sessionSlice";
 
 type ValuesType = {
@@ -36,7 +38,8 @@ export default function LoginModal() {
         return;
       }
 
-      dispatch(setUser(data.login));
+      dispatch(setUser(data.login.user));
+      setAuthorizationToken(data.login.token);
       dispatch(setShowLogin(false));
     } catch (e) {
       console.log(e);

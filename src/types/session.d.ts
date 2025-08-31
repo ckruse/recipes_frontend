@@ -1,7 +1,13 @@
 interface ILoginMutation {
-  login: TUser;
+  login: {
+    user: TUser;
+    token: string;
+  };
 }
 
 interface IRefreshMutation {
-  refresh: TUser;
+  refresh: {
+    user: TUser;
+    token: string;
+  };
 }

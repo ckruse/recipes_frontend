@@ -101,7 +101,7 @@ export default function Overview({ recipe, portions = 2, setPortions }: TProps) 
                 </>
               )}
               {row.ingredient.name}
-              {!!row.annotation.length && row.annotation.map((annotation) => <small>{annotation}</small>)}
+              {!!row.annotation.length && row.annotation.map((annotation, i) => <small key={i}>{annotation}</small>)}
             </li>
           )),
         )}

@@ -7,7 +7,7 @@ import weekplanReducer from "@/features/Weekplan/weekplanSlice";
 
 export const store = configureStore({
   middleware: (getDefaultMiddleware) => getDefaultMiddleware({ serializableCheck: false }),
-  devTools: process.env.NODE_ENV !== "production",
+  devTools: import.meta.env.MODE !== "production",
   reducer: {
     session: sessionReducer,
     flash: flashReducer,

@@ -3,7 +3,7 @@ export function setAuthorizationToken(token: string) {
 }
 
 export function removeAuthorizationToken() {
-  if (process.env.NODE_ENV !== "development") {
+  if (import.meta.env.MODE !== "development") {
     localStorage.removeItem("recipesToken");
   }
 }

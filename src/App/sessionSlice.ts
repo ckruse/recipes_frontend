@@ -3,6 +3,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import { REFRESH_MUTATION } from "@graphql/session";
 
+import { setAuthorizationToken } from "@/authorizationToken";
 import type { AppThunk, RootState } from "@/store";
 
 export interface SessionState {
@@ -73,7 +74,8 @@ export const refreshUser =
         return;
       }
 
-      dispatch(setUser(data.refresh));
+      dispatch(setUser(data.refresh.user));
+      setAuthorizationToken(data.refresh.token);
     } catch (e) {
       console.error(e);
       dispatch(setUser(null));
