@@ -4,8 +4,7 @@ import { useMutation } from "@apollo/client";
 import _ from "lodash";
 import { Button, ButtonGroup } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
-import Icon from "react-icons-kit";
-import { ic_keyboard_arrow_down, ic_keyboard_arrow_up } from "react-icons-kit/md";
+import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
 import ReactMarkdown from "react-markdown";
 
 import { DELETE_RECIPE_STEP_MUTATION, MOVE_STEP_DOWN_MUTATION, MOVE_STEP_UP_MUTATION } from "@graphql/recipes";
@@ -120,13 +119,13 @@ export default function Steps({ recipe, portions, editMode }: TProps) {
 
                   {i > 0 && (
                     <Button variant="secondary" onClick={() => moveStepUp(step)}>
-                      <Icon icon={ic_keyboard_arrow_up} /> {t("recipes:show.move_step_up")}
+                      <MdKeyboardArrowUp /> {t("recipes:show.move_step_up")}
                     </Button>
                   )}
 
                   {i < recipe.steps.length - 1 && (
                     <Button variant="secondary" onClick={() => moveStepDown(step)}>
-                      <Icon icon={ic_keyboard_arrow_down} /> {t("recipes:show.move_step_down")}
+                      <MdKeyboardArrowDown /> {t("recipes:show.move_step_down")}
                     </Button>
                   )}
                 </ButtonGroup>

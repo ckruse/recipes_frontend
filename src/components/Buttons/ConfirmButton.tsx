@@ -2,8 +2,7 @@ import React, { useState } from "react";
 
 import _ from "lodash";
 import { Button, type ButtonProps } from "react-bootstrap";
-import Icon from "react-icons-kit";
-import { ic_warning } from "react-icons-kit/md";
+import { MdWarning } from "react-icons/md";
 
 type ConfirmButtonProps = ButtonProps & {
   color?: string;
@@ -28,7 +27,7 @@ export const ConfirmButton: React.FC<ConfirmButtonProps> = (props) => {
 
   const cautionText = (
     <>
-      <Icon icon={ic_warning} /> {"Sind Sie sicher?"}
+      <MdWarning /> {"Sind Sie sicher?"}
     </>
   );
 

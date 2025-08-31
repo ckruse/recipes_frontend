@@ -1,7 +1,6 @@
 import { Nav } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
-import Icon from "react-icons-kit";
-import { ic_create } from "react-icons-kit/md";
+import { MdCreate } from "react-icons/md";
 
 import { selectSession } from "@/App/sessionSlice";
 import SubNav from "@/components/SubNav";
@@ -30,7 +29,7 @@ export default function RecipesSubNav() {
       {may(user, "weekplan", "create") && (
         <Nav.Item>
           <Nav.Link as="button" onClick={showCreateModal}>
-            <Icon icon={ic_create} /> {t("weekplan:subnav.create_weekplan")}
+            <MdCreate /> {t("weekplan:subnav.create_weekplan")}
           </Nav.Link>
         </Nav.Item>
       )}

@@ -1,8 +1,7 @@
 import clsx from "clsx";
 import { getIn, useFormikContext } from "formik";
 import DPicker, { type DatePickerProps } from "react-date-picker";
-import Icon from "react-icons-kit";
-import { ic_calendar_today, ic_clear } from "react-icons-kit/md";
+import { MdCalendarToday, MdClear } from "react-icons/md";
 
 type ValuePiece = Date | null;
 type Value = ValuePiece | [ValuePiece, ValuePiece];
@@ -26,8 +25,8 @@ export function DatePicker(props: TProps) {
 
   return (
     <DPicker
-      clearIcon={<Icon icon={ic_clear} />}
-      calendarIcon={<Icon icon={ic_calendar_today} />}
+      clearIcon={<MdClear />}
+      calendarIcon={<MdCalendarToday />}
       value={value}
       onChange={handleChange}
       {...props}

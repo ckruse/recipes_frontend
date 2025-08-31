@@ -3,8 +3,7 @@ import _ from "lodash";
 import { Button, ButtonGroup } from "react-bootstrap";
 import DatePicker from "react-date-picker";
 import { Trans, useTranslation } from "react-i18next";
-import Icon from "react-icons-kit";
-import { ic_calendar_today, ic_swap_horiz } from "react-icons-kit/md";
+import { MdCalendarToday, MdSwapHoriz } from "react-icons/md";
 import { Link } from "react-router-dom";
 
 import { DELETE_WEEKPLAN, LIST_WEEKPLAN_QUERY } from "@graphql/weekplan";
@@ -62,7 +61,7 @@ export default function List() {
           <FormGroup>
             <DatePicker
               clearIcon={null}
-              calendarIcon={<Icon icon={ic_calendar_today} />}
+              calendarIcon={<MdCalendarToday />}
               value={week}
               className="form-control"
               onChange={doSetWeek}
@@ -106,7 +105,7 @@ export default function List() {
                   </ShowButton>
 
                   <Button variant="secondary" onClick={() => replaceRecipe(entry)}>
-                    <Icon icon={ic_swap_horiz} /> {t("weekplan:list.replace")}
+                    <MdSwapHoriz /> {t("weekplan:list.replace")}
                   </Button>
                   <DeleteButton onClick={() => deleteItem(entry)}>{t("translation:delete")}</DeleteButton>
                 </ButtonGroup>

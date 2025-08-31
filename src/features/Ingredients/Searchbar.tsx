@@ -2,8 +2,7 @@ import { useEffect, useState } from "react";
 
 import { Button, Form, InputGroup } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
-import Icon from "react-icons-kit";
-import { ic_clear } from "react-icons-kit/md";
+import { MdClear } from "react-icons/md";
 
 import { FormGroup } from "@/components";
 
@@ -45,7 +44,7 @@ export default function Searchbar({ setSearch, searchTerm }: TProps) {
       <InputGroup>
         <Form.Control type="search" id="recipes-search" value={value} onChange={changeTerm} />
         <Button variant="outline-secondary" onClick={clearTerm}>
-          <Icon icon={ic_clear} title={t("translation:delete")} />
+          <MdClear title={t("translation:delete")} />
         </Button>
       </InputGroup>
     </FormGroup>

@@ -1,7 +1,6 @@
 import { Nav } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
-import Icon from "react-icons-kit";
-import { ic_create } from "react-icons-kit/md";
+import { MdCreate } from "react-icons/md";
 import { Link, useLocation } from "react-router-dom";
 
 import { selectSession } from "@/App/sessionSlice";
@@ -20,7 +19,7 @@ export default function IngredientsSubnav() {
       {may(user, "ingredients", "create") && (
         <Nav.Item>
           <Nav.Link as={Link} to={newIngredientPath()} active={pathname.endsWith("/new")}>
-            <Icon icon={ic_create} /> {t("ingredients:new.title")}
+            <MdCreate /> {t("ingredients:new.title")}
           </Nav.Link>
         </Nav.Item>
       )}
