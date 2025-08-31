@@ -7,7 +7,7 @@
     "@apollo/client": "^3.13.8",
     "@reduxjs/toolkit": "^2.8.2",
     "apollo-upload-client": "^18.0.1",
-    "bootstrap": "^5.3.7",
+    "bootstrap": "^5.3.8",
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
     "formik": "^2.4.6",
