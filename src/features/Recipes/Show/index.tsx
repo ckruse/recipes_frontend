@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { useMutation, useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client/react";
 import { type FormikHelpers } from "formik";
 import { useTranslation } from "react-i18next";
 import { Link, useParams } from "react-router-dom";
@@ -42,7 +42,7 @@ export default function Show() {
     try {
       setSubmitting(true);
 
-      const { data: rData, errors } = await mutateRecipe({
+      const { data: rData, error } = await mutateRecipe({
         variables: {
           id: data!.recipe.id,
           recipe: {
@@ -55,7 +55,7 @@ export default function Show() {
 
       if (!rData?.updateRecipe) {
         // TODO: handle errors
-        console.log(errors);
+        console.log(error);
         throw new Error("Mutation failed");
       }
 

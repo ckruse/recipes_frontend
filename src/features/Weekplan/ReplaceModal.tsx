@@ -1,4 +1,4 @@
-import { useMutation } from "@apollo/client";
+import { useMutation } from "@apollo/client/react";
 import { Form, Formik, type FormikHelpers } from "formik";
 import { Form as BsForm, Modal } from "react-bootstrap";
 import { useTranslation } from "react-i18next";

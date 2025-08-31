@@ -1,7 +1,7 @@
 import { ApolloCache } from "@apollo/client";
 import _ from "lodash";
 
-export function updateDeletion<T = any>(cache: ApolloCache<T>, id: Nilable<TID>, field: string, broadcast = true) {
+export function updateDeletion(cache: ApolloCache, id: Nilable<TID>, field: string, broadcast = true) {
   if (!id) {
     return;
   }
@@ -22,12 +22,7 @@ interface IdInterface {
   [key: number]: any;
 }
 
-export function updateMutationList(
-  cache: ApolloCache<any>,
-  object: Nilable<IdInterface>,
-  field: string,
-  broadcast = true,
-) {
+export function updateMutationList(cache: ApolloCache, object: Nilable<IdInterface>, field: string, broadcast = true) {
   if (!object?.id) {
     return;
   }

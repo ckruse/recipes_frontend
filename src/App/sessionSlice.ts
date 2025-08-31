@@ -1,5 +1,5 @@
-import { ApolloClient, NormalizedCacheObject } from "@apollo/client";
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { ApolloClient } from "@apollo/client";
+import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
 import { REFRESH_MUTATION } from "@graphql/session";
 
@@ -61,7 +61,7 @@ export const { setUser, setShowLogin, toggleShowPasswordReset, setLoading, setTo
 export const selectSession = (state: RootState) => state.session;
 
 export const refreshUser =
-  (client: ApolloClient<NormalizedCacheObject>): AppThunk =>
+  (client: ApolloClient): AppThunk =>
   async (dispatch) => {
     dispatch(setLoading(true));
 

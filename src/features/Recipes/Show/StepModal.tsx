@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { useMutation } from "@apollo/client";
+import { useMutation } from "@apollo/client/react";
 import { Form, Formik, type FormikHelpers } from "formik";
 import { type TFunction } from "i18next";
 import _ from "lodash";
@@ -129,7 +129,7 @@ export default function StepModal({ show, step, recipe, toggle }: TProps) {
       };
 
       if (step?.id) {
-        const { data, errors } = await updateStep({
+        const { data, error } = await updateStep({
           variables: {
             id: step.id,
             step: stepData,
@@ -138,11 +138,11 @@ export default function StepModal({ show, step, recipe, toggle }: TProps) {
 
         if (!data?.updateStep) {
           // TODO: handle error
-          console.log(errors);
+          console.log(error);
           throw new MutationError();
         }
       } else {
-        const { data, errors } = await createStep({
+        const { data, error } = await createStep({
           variables: {
             recipeId: recipe.id,
             step: stepData,
@@ -151,7 +151,7 @@ export default function StepModal({ show, step, recipe, toggle }: TProps) {
 
         if (!data?.createStep) {
           // TODO: handle error
-          console.log(errors);
+          console.log(error);
           throw new MutationError();
         }
       }

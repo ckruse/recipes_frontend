@@ -1,4 +1,4 @@
-import { useLazyQuery } from "@apollo/client";
+import { useLazyQuery } from "@apollo/client/react";
 import { getIn, useFormikContext } from "formik";
 import _ from "lodash";
 import { useTranslation } from "react-i18next";

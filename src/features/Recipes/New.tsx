@@ -1,4 +1,4 @@
-import { useMutation } from "@apollo/client";
+import { useMutation } from "@apollo/client/react";
 import { type FormikHelpers } from "formik";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -27,7 +27,7 @@ export default function New() {
     try {
       setSubmitting(true);
 
-      const { data, errors } = await mutateRecipe({
+      const { data, error } = await mutateRecipe({
         variables: {
           recipe: {
             ...recipe,
@@ -39,7 +39,7 @@ export default function New() {
 
       if (!data?.createRecipe) {
         // TODO: handle errors
-        console.log(errors);
+        console.log(error);
         throw new MutationError();
       }
 

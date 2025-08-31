@@ -1,4 +1,4 @@
-import { useLazyQuery, useQuery } from "@apollo/client";
+import { useLazyQuery, useQuery } from "@apollo/client/react";
 import { getIn, useFormikContext } from "formik";
 import { useTranslation } from "react-i18next";
 import type { ActionMeta, GroupBase, OnChangeValue, OptionsOrGroups } from "react-select";

@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client/react";
 import { type FormikHelpers } from "formik";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
@@ -34,12 +34,12 @@ export default function Edit() {
   async function onSave(values: TValues, { setSubmitting }: FormikHelpers<TValues>) {
     try {
       setSubmitting(true);
-      const { data, errors } = await userMutation({ variables: { id: parsedInt(id), user: values } });
+      const { data, error } = await userMutation({ variables: { id: parsedInt(id), user: values } });
       setSubmitting(false);
 
       if (!data?.updateUser) {
         // TODO: handle error
-        console.log(errors);
+        console.log(error);
         throw new MutationError();
       }
 

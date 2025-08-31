@@ -1,4 +1,4 @@
-import { useMutation } from "@apollo/client";
+import { useMutation } from "@apollo/client/react";
 import { type FormikHelpers } from "formik";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -31,11 +31,11 @@ export default function New() {
         units: values.units.map(({ id, ...unit }) => unit),
       };
 
-      const { data, errors } = await mutateIngredient({ variables: { ingredient: values } });
+      const { data, error } = await mutateIngredient({ variables: { ingredient: values } });
 
       if (!data?.createIngredient) {
         // TODO: handle errors
-        console.log(errors);
+        console.log(error);
         throw new MutationError();
       }
 

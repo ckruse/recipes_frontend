@@ -1,4 +1,4 @@
-import { useQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client/react";
 import { Col, Form, Row } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { Link, useParams } from "react-router-dom";

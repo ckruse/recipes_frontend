@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { useMutation, useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client/react";
 import clsx from "clsx";
 import { Form, Formik, type FormikHelpers } from "formik";
 import { type TFunction } from "i18next";
@@ -78,10 +78,10 @@ export default function RecipesForm({ recipe, onSave, btnSize = "md", hideCancel
           setFieldTouched("tags", true, true);
 
           if (actionMeta.action === "create-option") {
-            const { data, errors } = await mutateTag({ variables: { name: actionMeta.option.label } });
+            const { data, error } = await mutateTag({ variables: { name: actionMeta.option.label } });
 
             if (!data?.createTag) {
-              console.log(errors);
+              console.log(error);
               throw new MutationError();
             }
 

@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { useMutation } from "@apollo/client";
+import { useMutation } from "@apollo/client/react";
 import _ from "lodash";
 import { Button, ButtonGroup } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
@@ -38,9 +38,9 @@ export default function Steps({ recipe, portions, editMode }: TProps) {
 
   async function deleteStep(step: TStep) {
     try {
-      const { data, errors } = await deleteStepMutation({ variables: { id: step.id } });
+      const { data, error } = await deleteStepMutation({ variables: { id: step.id } });
       if (!data?.deleteStep) {
-        console.log(errors);
+        console.log(error);
         throw new Error("delete failed");
       }
 
@@ -53,10 +53,10 @@ export default function Steps({ recipe, portions, editMode }: TProps) {
 
   async function moveStepUp(step: TStep) {
     try {
-      const { data, errors } = await moveStepUpMutation({ variables: { id: step.id } });
+      const { data, error } = await moveStepUpMutation({ variables: { id: step.id } });
       if (!data?.moveStepUp) {
         // TODO: handle errors
-        console.log(errors);
+        console.log(error);
         throw new Error("move failed");
       }
     } catch (e) {
@@ -67,10 +67,10 @@ export default function Steps({ recipe, portions, editMode }: TProps) {
 
   async function moveStepDown(step: TStep) {
     try {
-      const { data, errors } = await moveStepDownMutation({ variables: { id: step.id } });
+      const { data, error } = await moveStepDownMutation({ variables: { id: step.id } });
 
       if (!data?.moveStepDown) {
-        console.log(errors);
+        console.log(error);
         throw new Error("move failed");
       }
     } catch (e) {

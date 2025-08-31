@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client/react";
 import type { FormikHelpers } from "formik";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
@@ -42,7 +42,7 @@ export default function Edit() {
         })),
       };
 
-      const { data: iData, errors } = await mutateIngredient({
+      const { data: iData, error } = await mutateIngredient({
         variables: {
           id: data!.ingredient.id,
           ingredient: values,
@@ -51,7 +51,7 @@ export default function Edit() {
 
       if (!iData?.updateIngredient) {
         // TODO: handle errors
-        console.log(errors);
+        console.log(error);
         throw new MutationError();
       }
 

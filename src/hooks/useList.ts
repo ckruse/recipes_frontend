@@ -1,4 +1,6 @@
-import { ApolloError, gql, useMutation, useQuery } from "@apollo/client";
+import { gql } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client/react";
+import { ApolloError } from "@apollo/client/v4-migration";
 import { type DocumentNode } from "graphql";
 import _ from "lodash";
 import { useTranslation } from "react-i18next";
@@ -97,14 +99,14 @@ export function useList<T extends { id: TID }>({
                   [deletionParameterName]: item.id,
                 };
 
-            const { data, errors } = await deleteItemMutation({
+            const { data, error } = await deleteItemMutation({
               variables,
               update: (cache) => updateDeletion(cache, item.id, key),
             });
             const val = _.values(data)[0];
 
             if (!val) {
-              console.log(errors);
+              console.log(error);
               // TODO: handle errors
               throw new MutationError();
             }

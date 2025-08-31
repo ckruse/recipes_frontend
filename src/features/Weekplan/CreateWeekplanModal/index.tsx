@@ -1,4 +1,4 @@
-import { useMutation } from "@apollo/client";
+import { useMutation } from "@apollo/client/react";
 import { format, getDay, startOfISOWeek } from "date-fns";
 import { Form, Formik } from "formik";
 import { Modal } from "react-bootstrap";

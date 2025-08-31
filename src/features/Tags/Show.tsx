@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client/react";
 import { Trans, useTranslation } from "react-i18next";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
@@ -40,10 +40,10 @@ export default function Show() {
 
   async function deleteTag() {
     try {
-      const { data, errors } = await deleteTagMutation({ variables: { id: parsedInt(id) } });
+      const { data, error } = await deleteTagMutation({ variables: { id: parsedInt(id) } });
 
       if (!data?.deleteTag) {
-        console.log(errors);
+        console.log(error);
         // TODO: handle error
         throw new MutationError();
       }
