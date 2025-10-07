@@ -6,7 +6,7 @@ on:
       - "*"
 jobs:
   build:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-24.04
 
     steps:
       - name: Get the version
@@ -19,15 +19,14 @@ jobs:
 
       - uses: actions/setup-node@v3
         with:
-          node-version: "18"
+          node-version: "22"
 
       - name: Install dependencies
         run: |
-          npm install -g yarn
-          yarn install
+          npm install
 
       - name: build
-        run: yarn build
+        run: npm build
 
       - name: create release
         run: |
