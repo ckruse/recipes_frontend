@@ -1,4 +1,5 @@
 import { useQuery } from "@apollo/client/react";
+import { Button } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
@@ -13,20 +14,23 @@ export default function Root() {
 
   useTitle(t("root:title"));
 
-  const { data } = useQuery<IRandomRecipeQueryResult>(RANDOM_RECIPE_QUERY);
+  const { data, refetch } = useQuery<IRandomRecipeQueryResult>(RANDOM_RECIPE_QUERY);
+  function doRefresh() {
+    refetch();
+  }
 
   return (
     <>
       <h2>👋 Willkommen!</h2>
 
-      <p>… auf meiner Rezeptesammlung.</p>
+      <p>… auf unserer Rezeptesammlung.</p>
 
       <p>
-        Dieses Projekt ist entstanden, weil ich unzufrieden war mit existierenden Lösungen. Und ganz in DIY-Manier
-        wollte ich es besser machen.
+        Dieses Projekt ist entstanden, weil wir unzufrieden war mit existierenden Lösungen. Und ganz in DIY-Manier
+        wollten wir es besser machen.
       </p>
 
-      <p>Ob mir das gelungen ist… keine Ahnung. Ich bin zufrieden 😊</p>
+      <p>Ob uns das gelungen ist… keine Ahnung. Wir sind (fast) zufrieden 😊</p>
 
       {!!data?.randomRecipe && (
         <>
@@ -38,8 +42,12 @@ export default function Root() {
             <Overview recipe={data.randomRecipe} />
           </div>
 
-          <p>
+          <p className="home-random-recipe-links">
             <Link to={showRecipePath(data.randomRecipe)}>Rezept anzeigen</Link>
+
+            <Button onClick={doRefresh} variant="link">
+              anderes Rezept laden
+            </Button>
           </p>
         </>
       )}

@@ -40,3 +40,14 @@ button.nav-link {
 .nav-button {
   margin-left: 0.5rem;
 }
+
+.home-random-recipe-links {
+  display: flex;
+  column-gap: 0.25em;
+
+  .btn.btn-link {
+    padding: 0;
+    margin: 0;
+    line-height: 1;
+  }
+}
