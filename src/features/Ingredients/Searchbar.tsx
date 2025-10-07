@@ -25,15 +25,11 @@ export default function Searchbar({ setSearch, searchTerm }: TProps) {
     setSearch("");
   }
 
-  useEffect(
-    () => {
-      if (searchTerm !== value) {
-        setValue(searchTerm);
-      }
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [searchTerm],
-  );
+  useEffect(() => {
+    if (searchTerm !== value) {
+      setValue(searchTerm);
+    }
+  }, [searchTerm]);
 
   return (
     <FormGroup>

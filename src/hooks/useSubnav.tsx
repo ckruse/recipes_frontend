@@ -10,15 +10,11 @@ export function useSubnav<T extends object>(Nav: React.ComponentType<T>, propert
   const stableDispatch = useCallback(dispatch, [dispatch]);
   const propertiesJson = JSON.stringify(properties);
 
-  useEffect(
-    () => {
-      stableDispatch(addSubnav(<Nav {...properties} />));
+  useEffect(() => {
+    stableDispatch(addSubnav(<Nav {...properties} />));
 
-      return () => {
-        stableDispatch(removeSubnav());
-      };
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [Nav, propertiesJson, stableDispatch],
-  );
+    return () => {
+      stableDispatch(removeSubnav());
+    };
+  }, [Nav, propertiesJson, stableDispatch]);
 }

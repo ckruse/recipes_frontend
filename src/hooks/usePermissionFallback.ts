@@ -13,14 +13,10 @@ export function usePermissionFallback(allowed: boolean) {
   const dispatch = useAppDispatch();
   const { t } = useTranslation(["translation"]);
 
-  useEffect(
-    () => {
-      if (!allowed) {
-        navigate(rootPath());
-        dispatch(addErrorFlash(t("translation:errors.permission")));
-      }
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [allowed],
-  );
+  useEffect(() => {
+    if (!allowed) {
+      navigate(rootPath());
+      dispatch(addErrorFlash(t("translation:errors.permission")));
+    }
+  }, [allowed]);
 }
